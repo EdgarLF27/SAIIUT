@@ -1,0 +1,15 @@
+{
+  "name": "SAIIUT",
+  "version": "1.0.0",
+  "main": "main.js","scripts": {
+  "start": "npx electron .",
+  "package-win": "electron-packager . SAIIUT --platform=win32 --arch=x64 --out=dist --overwrite"
+},
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "electron": "^28.0.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^17.1.1"
+  }
+}
