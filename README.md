@@ -38,14 +38,15 @@ Build the Electron app from the Dockerfile
 
 Start all services defined in docker-compose.yml (including the app and MySQL database)**
 
-6. # ** 🧱 Tech Stack
-Electron
+6. #  🧱 Tech Stack
+** Electron
 
 Node.js
 
 MySQL
 
 Docker / Docker Compose
+**
 
 
 
