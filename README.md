@@ -1,22 +1,21 @@
 # SAIIUT
-📚 Integrated School System – Desktop App with API This is an integrative project developed by 3rd-term software engineering students.
-# SAIIUT - Electron App
 
-This is a desktop app built with Electron.
+📚 **Integrated School System – Desktop App with API**  
+This is an integrative project developed by 3rd-term software engineering students.
 
-## 🚀 Setup
+---
 
-1. Clone the repository
-2. Run `npm install`
-3. Start with `npm start`
+## 🖥️ SAIIUT - Electron App
 
-## 🧱 Tech Stack
+A desktop application built with **Electron**, using **Node.js** and **MySQL**, designed to manage school-related operations.
 
-- Electron
-- MySQL
-- Node.js
+---
 
-## 🧾 Notes
+## 🚀 Setup (Manual)  
+1. **Clone the repository**
 
-- `node_modules` is excluded from the repo.
-- If you see errors, run `npm install` again
+```bash
+git clone https://github.com/EdgarLF27/SAIIUT.git
+cd SAIIUT/app
+
+
