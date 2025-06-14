@@ -11,11 +11,16 @@ A desktop application built with **Electron**, using **Node.js** and **MySQL**, 
 
 ---
 
-## 🚀 Setup (Manual)  
+## 🚀 Setup with Docker (Manual)  
 1. **Clone the repository**
 
-```javascript
+```bash
 git clone https://github.com/EdgarLF27/SAIIUT.git
 cd SAIIUT/app
+
+2. **Download Docker**
+
+Is necesarry to have Docker because the app use MySQL to store data.
+'npm install'
 
 
