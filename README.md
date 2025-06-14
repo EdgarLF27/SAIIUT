@@ -14,7 +14,6 @@ A desktop application built with **Electron**, using **Node.js** and **MySQL**, 
 ## 🚀 Setup (Manual)  
 1. **Clone the repository**
 
-```bash
 git clone https://github.com/EdgarLF27/SAIIUT.git
 cd SAIIUT/app
 
