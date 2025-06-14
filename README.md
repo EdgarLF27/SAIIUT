@@ -19,4 +19,4 @@ This is a desktop app built with Electron.
 ## 🧾 Notes
 
 - `node_modules` is excluded from the repo.
-- If you see errors, run `npm install` again.
+- If you see errors, run `npm install` again
