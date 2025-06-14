@@ -22,3 +22,33 @@ cd SAIIUT/app
 
 Is necesarry to have Docker because the app use MySQL to store data.
 [Download Docker](https://www.docker.com/get-started/)
+
+3. **Open Docker and run the following command**
+
+4. **Go to the project folder**
+
+5. **Run the following commands**
+```bash
+docker-compose up --build
+npm install
+```
+**This will:
+
+Build the Electron app from the Dockerfile
+
+Start all services defined in docker-compose.yml (including the app and MySQL database)**
+
+6. # ** 🧱 Tech Stack
+Electron
+
+Node.js
+
+MySQL
+
+Docker / Docker Compose
+
+
+
+
+
+
