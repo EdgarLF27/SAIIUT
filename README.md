@@ -21,6 +21,4 @@ cd SAIIUT/app
 2. **Download Docker**
 
 Is necesarry to have Docker because the app use MySQL to store data.
-`npm install`
-
-
+[Download Docker](https://www.docker.com/get-started/)
