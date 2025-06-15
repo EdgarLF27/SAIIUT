@@ -18,14 +18,17 @@ This is an integrative project developed by 3rd-term software engineering studen
 git clone https://github.com/EdgarLF27/SAIIUT.git
 cd SAIIUT/app
 ```
+---
 2. **Download Docker**
 
 **Is necesarry to have Docker because the app use MySQL to store data.**
 [Download Docker](https://www.docker.com/get-started/)
 
+---
 3. **Open Docker and run the following command**
 
 4. **Go to the project folder**
+---
 
 5. **Run the following commands**
 ```bash
@@ -38,6 +41,7 @@ npm install
 
 **Start all services defined in docker-compose.yml (including the app and MySQL database)**
 
+--- 
 6. # 🧱 Tech Stack
 **Electron**
 
@@ -48,8 +52,7 @@ npm install
 **Docker / Docker Compose**
 
 7. # Notes
---- 
-
-
-
+- node_modules is excluded from the repository
+- If you see errors during development, try running npm install again.
+- Use .env for your environment variables if needed but exclude it from repository
 
