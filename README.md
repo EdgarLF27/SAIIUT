@@ -7,7 +7,7 @@ This is an integrative project developed by 3rd-term software engineering studen
 
 ## 🖥️ SAIIUT - Electron App
 
-A desktop application built with **Electron**, using **Node.js** and **MySQL**, designed to manage school-related operations.
+**A desktop application built with **Electron**, using **Node.js** and **MySQL**, designed to manage school-related operations.**
 
 ---
 
@@ -20,7 +20,7 @@ cd SAIIUT/app
 ```
 2. **Download Docker**
 
-Is necesarry to have Docker because the app use MySQL to store data.
+**Is necesarry to have Docker because the app use MySQL to store data.**
 [Download Docker](https://www.docker.com/get-started/)
 
 3. **Open Docker and run the following command**
@@ -32,23 +32,23 @@ Is necesarry to have Docker because the app use MySQL to store data.
 docker-compose up --build
 npm install
 ```
-**This will:
+**This will:**
 
-Build the Electron app from the Dockerfile
+**Build the Electron app from the Dockerfile**
 
-Start all services defined in docker-compose.yml (including the app and MySQL database)**
+**Start all services defined in docker-compose.yml (including the app and MySQL database)**
 
-6. #  🧱 Tech Stack
-** Electron
+6. # 🧱 Tech Stack
+**Electron**
 
-Node.js
+**Node.js**
 
-MySQL
+**MySQL**
 
-Docker / Docker Compose
-**
+**Docker / Docker Compose**
 
-
+7. # Notes
+--- 
 
 
 
