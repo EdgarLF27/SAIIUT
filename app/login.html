@@ -26,16 +26,38 @@
         <!-- Formulario -->
         <form class="space-y-4">
             <!-- Campo de entrada -->
-            <div class="flex-col space-y-4">
-                <input 
-                    type="text" 
-                    placeholder="Matricula..." 
-                    class="flex-2 px-4 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <input 
-                    type="text" 
-                    placeholder="Contraseña..." 
-                    class="flex-2 px-4 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
+<div class="flex-col space-y-4">
+    <!-- Campo de usuario con icono -->
+    <div class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
+        <div class="pl-3">
+            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+            </svg>
+        </div>
+    <!-- Campo de contraseña -->
+    <input
+        type="password" 
+        placeholder="Usuario..." 
+        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
+    </div>
+    <!-- Campo de contraseña con icono -->
+    <div class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
+        <div class="pl-3">
+            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
+            </svg>
+        </div>
+    <!-- Campo de contraseña -->
+    <input
+        type="password" 
+        placeholder="Contraseña..." 
+        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
+    </div>
+    <!-- Enlace de recuperación (sin cambios) -->
+    <p class="text-center text-sm">
+        <a class="text-gray-800">¿Olvidaste tu contraseña?</a> <a href="" class="text-blue-600 hover:underline cursor-pointer">Recuperala aquí</a>
+    </p>
+</div>
             <!-- Botón de entrada -->
             <button 
                 type="submit" 
@@ -43,13 +65,6 @@
                 Entrar
             </button>
         </form>
-        
-        <!-- Enlace para nuevos usuarios -->
-        <div class="mt-6 text-center">
-            <a class="text-gray-800 text-sm">
-                Si eres un nuevo usuario, ve a servicios escolares para tu registro...
-            </a>
-        </div>
     </div>
 </body>
 </html>
