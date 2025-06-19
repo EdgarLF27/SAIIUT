@@ -1,11 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>SAIIUT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
   </head>
-  <body>
-    <h1>¡Hola desde Electron!</h1>
-    <p>Tu app está corriendo 🟢</p>
+  <body class="text-[#2D3E34]">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-[#2D3E34] text-white flex flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+        <img src="images/logo.png" alt="Mi logo" class="mx-auto" style="width: 200px;" />
+
+          </div>
+          <nav class="space-y-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              🏠 <span class="font-medium">Inicio</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              📊 <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              💬 <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              ⚙️ <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+        <div class="text-xs mt-12">
+          <p class="mb-1 font-semibold">Contáctanos</p>
+          <p>📞 +52 (247) 47-25-300</p>
+          <p>📧 contacto@uttlaxcala.edu.mx</p>
+          <button class="mt-3 border border-white px-3 py-1 rounded hover:bg-white hover:text-[#2D3E34] text-sm transition-all">
+            Contactar al desarrollador
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 p-10 relative">
+        <!-- Encabezado -->
+        <div class="flex justify-between items-center mb-10">
+          <h2 class="text-3xl font-bold">Bienvenido, Edgar 👋</h2>
+          <div class="flex gap-4 text-2xl cursor-pointer">
+            <span class="hover:text-[#F4A300] transition">🔔</span>
+            <span class="hover:text-[#F4A300] transition">👤</span>
+          </div>
+        </div>
+
+        <!-- Grid de tarjetas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Rendimiento académico -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
+            <h3 class="text-xl font-semibold mb-4">📈 Rendimiento académico</h3>
+            <div class="h-48 bg-gradient-to-r from-[#d3e4dc] to-[#f0f4f3] rounded-xl flex items-center justify-center text-[#999] text-sm">
+              (Gráfica en desarrollo)
+            </div>
+          </div>
+
+          <!-- Notificaciones -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
+            <h3 class="text-xl font-semibold mb-4">📢 Notificaciones recientes</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-[#F4A300]">●</span>
+                <span><strong>Ruth Cervantes</strong> subió calificación de Inglés III</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#F4A300]">●</span>
+                <span><strong>Diana Lizeth</strong> subió calificación de Tópicos de Software</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#F4A300]">●</span>
+                <span>📅 Evaluación parcial próxima</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 border-t pt-6 text-sm flex flex-col md:flex-row justify-between items-center text-[#2D3E34] gap-6">
+          <div class="flex items-center gap-2">⚙️⚡ Universidad Tecnológica de Tlaxcala</div>
+          <div class="flex gap-4 text-xl">
+            <a href="#" class="hover:text-[#F4A300]">📘</a>
+            <a href="#" class="hover:text-[#F4A300]">🐦</a>
+            <a href="#" class="hover:text-[#F4A300]">🌐</a>
+          </div>
+          <div class="flex items-center gap-2">📍 <span>Ubicación</span></div>
+        </footer>
+      </main>
+    </div>
   </body>
 </html>
