@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen">
+    <div class="flex flex-1">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Bienvenido, Edgar</h2>
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+
+        <!-- Tabla de calificaciones y reprobadas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
+          <!-- Tabla de calificaciones -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] overflow-auto w-[800px]">
+            <h3 class="text-xl font-semibold mb-4">Calificaciones por Parcial</h3>
+
+            <label for="cuatrimestre" class="block mb-2 font-medium">Selecciona el cuatrimestre que deseas visualizar</label>
+            <select id="cuatrimestre" class="mb-4 p-2 border border-gray-300 rounded-lg w-full">
+              <option>Primero</option>
+              <option>Segundo</option>
+              <option>Tercero</option>
+              <option>Cuarto</option>
+              <option>Quinto</option>
+              <option>sexto</option>
+              <option>Séptimo</option>
+              <option>Octavo</option>
+              <option>Noveno</option>
+              <option>Décimo</option>
+            </select>
+
+            <table class="w-full text-sm text-left border border-gray-300">
+              <thead class="bg-[#2D3E34] text-white">
+                <tr>
+                  <th class="p-2 border">Materia</th>
+                  <th class="p-2 border">P1</th>
+                  <th class="p-2 border">P2</th>
+                  <th class="p-2 border">P3</th>
+                  <th class="p-2 border">P4</th>
+                  <th class="p-2 border">Cf</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white border-b">
+                  <td class="p-2 border">Programación Orientada a Objetos</td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Asignaturas Reprobadas -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] w-[300px] ml-auto">
+            <h3 class="text-xl font-semibold mb-4">Asignaturas Reprobadas</h3>
+            <div class="border border-gray-300 rounded-lg p-4 min-h-[100px]">
+              <ul class="space-y-2 text-gray-700">
+                <li>Inglés</li>
+                <li>Matemáticas</li>
+                <li>Programación Orientada a Objetos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
