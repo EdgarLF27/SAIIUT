@@ -3,14 +3,14 @@ const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     webPreferences: {
       contextIsolation: true
     }
   });
 
-  win.loadFile('PlantillaWeb/index.html');
+  win.loadFile('login.html');
 }
 
 app.whenReady().then(() => {
