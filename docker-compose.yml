@@ -1,10 +1,28 @@
 services:
-  electron-app:
-    build: .
+  frontend:
+    build:
+      context: app/frontend
     volumes:
-      - ./app:/app
+      - ./app/frontend:/app
     working_dir: /app
     command: npm start
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: app/backend
+    volumes:
+      - ./app/backend:/app
+    working_dir: /app
+    command: python main.py
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=saiiut-mysql
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=saiiut_db
     depends_on:
       - saiiut-mysql
 
@@ -12,7 +30,21 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: noobmaster27
+      MYSQL_USER: ed123
+      MYSQL_PASSWORD: noobmaster27
       MYSQL_DATABASE: saiiut_db
     ports:
       - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: saiiut-mysql
+    depends_on:
+      - saiiut-mysql
