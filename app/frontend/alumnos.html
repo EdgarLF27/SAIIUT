@@ -54,7 +54,7 @@
           respuestaDiv.textContent = "Enviando...";
 
           try {
-            const res = await fetch("http://localhost:5000/insertar_alumno", {
+            const res = await fetch("http://localhost:5000/alumnos/insertar", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
