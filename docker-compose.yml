@@ -15,7 +15,7 @@ services:
     volumes:
       - ./app/backend:/app
     working_dir: /app
-    command: python endpoint_test.py
+    command: python app.py
     ports:
       - "5000:5000"
     environment:
