@@ -1,22 +1,58 @@
 # SAIIUT
-📚 Integrated School System – Desktop App with API This is an integrative project developed by 3rd-term software engineering students.
-# SAIIUT - Electron App
 
-This is a desktop app built with Electron.
+📚 **Integrated School System – Desktop App with API**  
+This is an integrative project developed by 3rd-term software engineering students.
 
-## 🚀 Setup
+---
 
-1. Clone the repository
-2. Run `npm install`
-3. Start with `npm start`
+## 🖥️ SAIIUT - Electron App
 
-## 🧱 Tech Stack
+**A desktop application built with **Electron**, using **Node.js** and **MySQL**, designed to manage school-related operations.**
 
-- Electron
-- MySQL
-- Node.js
+---
 
-## 🧾 Notes
+## 🚀 Setup with Docker (Manual)  
+1. **Clone the repository**
 
-- `node_modules` is excluded from the repo.
-- If you see errors, run `npm install` again.
+```bash
+git clone https://github.com/EdgarLF27/SAIIUT.git
+cd SAIIUT/app
+```
+---
+2. **Download Docker**
+
+**Is necesarry to have Docker because the app use MySQL to store data.**
+[Download Docker](https://www.docker.com/get-started/)
+
+---
+3. **Open Docker and run the following command**
+
+4. **Go to the project folder**
+---
+
+5. **Run the following commands**
+```bash
+docker-compose up --build
+npm install
+```
+**This will:**
+
+**Build the Electron app from the Dockerfile**
+
+**Start all services defined in docker-compose.yml (including the app and MySQL database)**
+
+--- 
+6. # 🧱 Tech Stack
+**Electron**
+
+**Node.js**
+
+**MySQL**
+
+**Docker / Docker Compose**
+
+7. # Notes
+- node_modules is excluded from the repository
+- If you see errors during development, try running npm install again.
+- Use .env for your environment variables if needed but exclude it from repository
+

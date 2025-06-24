@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insertar Alumno</title>
+  </head>
+  <body>
+    <h1>Insertar Alumno</h1>
+    <form id="alumnoForm">
+      <input type="text" name="nombre" placeholder="Nombre" required /><br />
+      <input
+        type="text"
+        name="ap_P"
+        placeholder="Apellido Paterno"
+        required
+      /><br />
+      <input
+        type="text"
+        name="ap_M"
+        placeholder="Apellido Materno"
+        required
+      /><br />
+      <input type="text" name="matricula" placeholder="Matrícula" required /><br />
+      <input type="number" name="telefono" placeholder="Teléfono" required /><br />
+      <input type="email" name="email" placeholder="Email" required /><br />
+      <input type="text" name="carrera" placeholder="Carrera" required /><br />
+      <input type="text" name="grado" placeholder="Grado" required /><br />
+      <input type="text" name="grupo" placeholder="Grupo" required /><br />
+      <input type="text" name="sexo" placeholder="Sexo" required /><br />
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="respuesta"></div>
+
+    <script>
+      document
+        .getElementById("alumnoForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const form = e.target;
+          const data = {
+            nombre: form.nombre.value,
+            ap_P: form.ap_P.value,
+            ap_M: form.ap_M.value,
+            matricula: form.matricula.value,
+            telefono: Number(form.telefono.value),
+            email: form.email.value,
+            carrera: form.carrera.value,
+            grado: form.grado.value,
+            grupo: form.grupo.value,
+            sexo: form.sexo.value,
+          };
+
+          const respuestaDiv = document.getElementById("respuesta");
+          respuestaDiv.textContent = "Enviando...";
+
+          try {
+            const res = await fetch("http://localhost:5000/alumnos/insertar", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            respuestaDiv.textContent = result.mensaje || result.error;
+          } catch (err) {
+            respuestaDiv.textContent = "Error de conexión con el backend";
+          }
+        });
+    </script>
+  </body>
+</html>

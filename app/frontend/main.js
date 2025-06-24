@@ -10,7 +10,7 @@ function createWindow() {
     }
   });
 
-  win.loadFile('PlantillaWeb/index.html');
+  win.loadFile('index.html');
 }
 
 app.whenReady().then(() => {

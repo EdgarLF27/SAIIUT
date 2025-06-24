@@ -1,4 +1,3 @@
-# Imagen base con Node
 FROM node:18
 
 # Instala librerías necesarias para Electron
@@ -16,19 +15,19 @@ RUN apt-get update && apt-get install -y \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libatk1.0-0 \
-    libnss3 \
     libx11-6 \
     xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-# Crea directorio de trabajo
 WORKDIR /app
 
-# Copia todo el proyecto
-COPY ./app/ .
+# Copia primero los archivos de dependencias
+COPY package*.json ./
 
 # Instala dependencias
 RUN npm install
 
-# Comando por defecto para ejecutar la app
+# Copia el resto del código
+COPY . .
+
 CMD ["npm", "start"]
