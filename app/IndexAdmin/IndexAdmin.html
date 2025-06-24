@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -7,7 +6,7 @@
     <title>SAIIUT Dashboard</title>
 
     <!-- Tailwind y fuentes -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
     <!-- Font Awesome para íconos -->
@@ -32,22 +31,30 @@
       <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
         <div>
           <div class="mb-12 text-center">
-            <img src="images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
           </div>
           <nav class="space-y-4">
             <a href="index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
-            <a href="Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chart-line w-5 h-5 text-white"></i>
               <span class="font-medium">Calificaciones</span>
             </a>
-            <a href="Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
               <span class="font-medium">Tutorías</span>
             </a>
-            <a href="Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
             </a>
@@ -60,49 +67,13 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Bienvenido, Edgar</h2>
+            <h2 class="text-3xl font-bold">Bienvenido, Admin</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
             </div>
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
-        </div>
-
-        <!-- Tarjeta del Tutor -->
-        <div class="glass px-10 py-8 rounded-3xl shadow-lg border border-[#E0E0E0] mt-2 max-w-3xl mx-auto w-full flex flex-col items-center gap-4">
-          <h2 class="text-2xl font-bold">Tu tutor es:</h2>
-
-          <div class="w-32 h-32 rounded-full bg-black flex items-center justify-center text-5xl text-white">
-            <i class="fas fa-user"></i>
-          </div>
-          <p class="italic text-sm text-gray-600">Foto del tutor</p>
-
-          <p class="text-lg font-semibold flex items-center gap-2">
-            <i class="fas fa-child text-[#F4A300]"></i> Diana Lizeth
-          </p>
-
-          <hr class="w-full border border-gray-300" />
-
-          <h3 class="text-xl font-semibold">Contáctal@</h3>
-
-          <div class="flex flex-wrap justify-center gap-6 text-[#2D3E34]">
-            <div class="flex items-center gap-2">
-              <i class="fas fa-at"></i>
-              <a href="mailto:correo.tutor@uttlax.edu.mx" class="text-blue-600 underline">correo.tutor@uttlax.edu.mx</a>
-            </div>
-            <div class="flex items-center gap-2">
-              <i class="fas fa-phone"></i>
-              <a href="tel:1234567890" class="text-blue-600 underline">1234567890</a>
-            </div>
-          </div>
-
-          <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
-            <button class="border border-black px-4 py-1 rounded shadow hover:bg-gray-100 transition">
-              Déjale un mensaje
-            </button>
-            <p class="text-sm">3/3 Alertas restantes este mes</p>
-          </div>
         </div>
 
         <!-- Footer -->
