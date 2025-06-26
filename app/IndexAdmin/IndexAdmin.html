@@ -16,7 +16,6 @@
       body {
         font-family: 'IBM Plex Sans', sans-serif;
         background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
-        overflow-x: hidden; /* Evita barra horizontal */
       }
       .glass {
         background: rgba(255, 255, 255, 0.7);
@@ -26,8 +25,8 @@
     </style>
   </head>
 
-  <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
-    <div class="flex flex-1 w-full">
+  <body class="text-[#2D3E34] flex flex-col min-h-screen">
+    <div class="flex flex-1">
       <!-- Sidebar -->
       <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
         <div>
@@ -51,8 +50,11 @@
               <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
               <span class="font-medium">Usuarios</span>
             </a>
-          
-            <a href="../IndexAdmin/CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
             </a>
@@ -61,11 +63,11 @@
       </aside>
 
       <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Registro Alumnos y Docentes</h2> 
+            <h2 class="text-3xl font-bold">Bienvenido, Admin</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -73,7 +75,6 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
-
         <!-- Contenido principal -->
         <div class="flex w-full gap-6 justify-center items-center flex-1">
           <!-- Sección de imagen (70%) -->
@@ -92,6 +93,7 @@
             </ul>
           </div>
         </div>
+
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
