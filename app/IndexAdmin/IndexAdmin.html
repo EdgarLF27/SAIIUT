@@ -39,11 +39,11 @@
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
-            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAdmin/RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
               <span class="font-medium">Registros</span>
             </a>
-            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAdmin/CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chart-line w-5 h-5 text-white"></i>
               <span class="font-medium">Calificaciones</span>
             </a>
@@ -66,6 +66,7 @@
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
             <h2 class="text-3xl font-bold">Registro Alumnos y Docentes</h2> 
+
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -73,140 +74,25 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
-
-        <!-- Formulario de Registro -->
-        <div class="w-full max-w-5xl mx-auto flex flex-col items-center">
-          <!-- Tabs -->
-          <div class="flex gap-8 mb-8">
-            <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
-              Alumnado
-            </button>
-            <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
-              Docente
-            </button>
+        <!-- Contenido principal -->
+        <div class="flex w-full gap-6 justify-center items-center flex-1">
+          <!-- Sección de imagen (70%) -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
+            <!-- Aquí va tu imagen -->
+            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
           </div>
-          <div class="relative w-full min-h-[340px]">
-            <!-- Formulario Alumnado -->
-            <form id="form-alumnado" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6"
-              style="z-index:2;">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label class="block font-semibold mb-1">Nombre:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Materno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Matrícula:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Teléfono:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Correo:</label>
-                  <input type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Carrera:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grado:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Sexo:</label>
-                  <select class="border border-gray-300 rounded px-3 py-1 w-full">
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                    <option>Otro</option>
-                  </select>
-                </div>
-              </div>
-              <div class="flex justify-end mt-8">
-                <button type="submit" class="border border-[#2D3E34] px-8 py-2 rounded hover:bg-[#2D3E34] hover:text-white transition font-semibold">Guardar</button>
-              </div>
-            </form>
-            <!-- Formulario Docente -->
-            <form id="form-docente" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
-              style="z-index:1;">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label class="block font-semibold mb-1">Nombre:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Materno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Correo:</label>
-                  <input type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grado:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grupo:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-              </div>
-              <div class="flex justify-end mt-8">
-                <button type="submit" class="border border-[#2D3E34] px-8 py-2 rounded hover:bg-[#2D3E34] hover:text-white transition font-semibold">Guardar</button>
-              </div>
-            </form>
+          <!-- Barra de notificaciones (30%) -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
+            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
+            <ul class="space-y-3 overflow-y-auto flex-1">
+              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
+          No hay notificaciones nuevas.
+              </li>
+              <!-- Más notificaciones aquí -->
+            </ul>
           </div>
         </div>
-        <script>
-          // Simple tab/slide logic
-          const tabAlumnado = document.getElementById('tab-alumnado');
-          const tabDocente = document.getElementById('tab-docente');
-          const formAlumnado = document.getElementById('form-alumnado');
-          const formDocente = document.getElementById('form-docente');
 
-          tabAlumnado.addEventListener('click', () => {
-            tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
-            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.add('text-gray-400', 'border-transparent');
-
-            formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.classList.add('translate-x-0', 'opacity-100');
-            formAlumnado.style.zIndex = 2;
-
-            formDocente.classList.remove('translate-x-0', 'opacity-100');
-            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.style.zIndex = 1;
-          });
-
-          tabDocente.addEventListener('click', () => {
-            tabDocente.classList.add('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.remove('text-gray-400', 'border-transparent');
-            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
-
-            formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.classList.add('translate-x-0', 'opacity-100');
-            formDocente.style.zIndex = 2;
-
-            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
-            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.style.zIndex = 1;
-          });
-        </script>
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">

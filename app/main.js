@@ -10,7 +10,7 @@ function createWindow() {
     }
   });
 
-  win.loadFile('login.html');
+  win.loadFile('IndexAdmin/IndexAdmin.html');
 }
 
 app.whenReady().then(() => {
