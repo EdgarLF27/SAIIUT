@@ -6,7 +6,7 @@
     <title>SAIIUT Dashboard</title>
 
     <!-- Tailwind y fuentes -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
     <!-- Font Awesome para íconos -->
@@ -34,19 +34,19 @@
             <img src="images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
           </div>
           <nav class="space-y-4">
-            <a href="index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAlumno/index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
-            <a href="Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAlumno/Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chart-line w-5 h-5 text-white"></i>
               <span class="font-medium">Calificaciones</span>
             </a>
-            <a href="Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAlumno/Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
               <span class="font-medium">Tutorías</span>
             </a>
-            <a href="Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../IndexAlumno/Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
             </a>
@@ -59,7 +59,7 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">¡Bienvenido, Edgar!</h2> 
+            <h2 class="text-3xl font-bold">¡Bienvenido, Edgar!</h2>
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -68,33 +68,60 @@
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
 
-        <!-- Grid de tarjetas -->
+        <!-- Tabla de calificaciones y reprobadas -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
-          <!-- Rendimiento académico -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
-            <h3 class="text-xl font-semibold mb-4">Rendimiento académico</h3>
-            <div class="h-48 bg-gradient-to-r from-[#d3e4dc] to-[#f0f4f3] rounded-xl flex items-center justify-center text-[#999] text-sm">
-              (Gráfica en desarrollo)
-            </div>
+          <!-- Tabla de calificaciones -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] overflow-auto w-[800px]">
+            <h3 class="text-xl font-semibold mb-4">Calificaciones por Parcial</h3>
+
+            <label for="cuatrimestre" class="block mb-2 font-medium">Selecciona el cuatrimestre que deseas visualizar</label>
+            <select id="cuatrimestre" class="mb-4 p-2 border border-gray-300 rounded-lg w-full">
+              <option>Primero</option>
+              <option>Segundo</option>
+              <option>Tercero</option>
+              <option>Cuarto</option>
+              <option>Quinto</option>
+              <option>sexto</option>
+              <option>Séptimo</option>
+              <option>Octavo</option>
+              <option>Noveno</option>
+              <option>Décimo</option>
+            </select>
+
+            <table class="w-full text-sm text-left border border-gray-300">
+              <thead class="bg-[#2D3E34] text-white">
+                <tr>
+                  <th class="p-2 border">Materia</th>
+                  <th class="p-2 border">P1</th>
+                  <th class="p-2 border">P2</th>
+                  <th class="p-2 border">P3</th>
+                  <th class="p-2 border">P4</th>
+                  <th class="p-2 border">Cf</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white border-b">
+                  <td class="p-2 border">Programación Orientada a Objetos</td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                  <td class="p-2 border"></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <!-- Notificaciones -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones recientes</h3>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span><strong>Ruth Cervantes</strong> subió calificación de Inglés III</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span><strong>Diana Lizeth</strong> subió calificación de Tópicos de Software</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span>Evaluación parcial próxima</span>
-              </li>
-            </ul>
+          <!-- Asignaturas Reprobadas -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] w-[300px] ml-auto">
+            <h3 class="text-xl font-semibold mb-4">Asignaturas Reprobadas</h3>
+            <div class="border border-gray-300 rounded-lg p-4 min-h-[100px]">
+              <ul class="space-y-2 text-gray-700">
+                <li>Inglés</li>
+                <li>Matemáticas</li>
+                <li>Programación Orientada a Objetos</li>
+              </ul>
+            </div>
           </div>
         </div>
 
