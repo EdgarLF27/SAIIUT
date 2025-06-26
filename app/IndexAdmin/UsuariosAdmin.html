@@ -51,7 +51,10 @@
               <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
               <span class="font-medium">Usuarios</span>
             </a>
-          
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
             <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
@@ -65,7 +68,7 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Registro Alumnos y Docentes</h2> 
+            <h2 class="text-3xl font-bold">Edición de usuarios</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -74,7 +77,7 @@
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
 
-        <!-- Formulario de Registro -->
+        <!-- Contenedor de Tabs y tablas -->
         <div class="w-full max-w-5xl mx-auto flex flex-col items-center">
           <!-- Tabs -->
           <div class="flex gap-8 mb-8">
@@ -85,91 +88,111 @@
               Docente
             </button>
           </div>
+
+          <!-- Contenido dinámico según tab -->
           <div class="relative w-full min-h-[340px]">
-            <!-- Formulario Alumnado -->
-            <form id="form-alumnado" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6"
-              style="z-index:2;">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label class="block font-semibold mb-1">Nombre:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Materno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Matrícula:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Teléfono:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Correo:</label>
-                  <input type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Carrera:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grado:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Sexo:</label>
-                  <select class="border border-gray-300 rounded px-3 py-1 w-full">
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                    <option>Otro</option>
-                  </select>
-                </div>
+            <!-- Sección Alumnado -->
+            <div id="form-alumnado" class="absolute inset-0 transition-all duration-500 transform translate-x-0 opacity-100 z-10">
+             <!-- Buscador centrado con lupa -->
+<div class="w-full flex justify-center mb-6">
+  <div class="relative w-full md:w-1/2">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+      <i class="fas fa-search"></i>
+    </span>
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+    />
+  </div>
+</div>
+
+              <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <table class="min-w-full">
+                  <thead class="bg-[#2D3E34] text-white">
+                    <tr>
+                      <th class="py-3 px-4 text-left">Nombre</th>
+                      <th class="py-3 px-4 text-left">Apellido</th>
+                      <th class="py-3 px-4 text-left">Carrera</th>
+                      <th class="py-3 px-4 text-left">Teléfono</th>
+                      <th class="py-3 px-4 text-left">Matrícula</th>
+                      <th class="py-3 px-4 text-left">Correo</th>
+                      <th class="py-3 px-4 text-left">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-[#2D3E34]">
+                    <tr class="border-b hover:bg-gray-100">
+                      <td class="py-3 px-4">Juan</td>
+                      <td class="py-3 px-4">Pérez</td>
+                      <td class="py-3 px-4">Ingeniería</td>
+                      <td class="py-3 px-4">555-123-4567</td>
+                      <td class="py-3 px-4">A12345</td>
+                      <td class="py-3 px-4">juan.perez@uttlaxcala.edu.mx</td>
+                      <td class="py-3 px-4 flex gap-3">
+                        <td class="py-3 px-4 flex gap-3">
+                     <button class="hover:text-[#F4A300]"><i class="fas fa-edit"></i></button>
+                              <button class="hover:text-[#F4A300]"><i class="fas fa-trash-alt"></i></button>
+                                  </td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="flex justify-end mt-8">
-                <button type="submit" class="border border-[#2D3E34] px-8 py-2 rounded hover:bg-[#2D3E34] hover:text-white transition font-semibold">Guardar</button>
+            </div>
+
+            <!-- Sección Docente -->
+            <div id="form-docente" class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
+             <!-- Buscador centrado con lupa -->
+<div class="w-full flex justify-center mb-6">
+  <div class="relative w-full md:w-1/2">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+      <i class="fas fa-search"></i>
+    </span>
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+    />
+  </div>
+</div>
+
+              <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <table class="min-w-full">
+                  <thead class="bg-[#2D3E34] text-white">
+                    <tr>
+                      <th class="py-3 px-4 text-left">Nombre</th>
+                      <th class="py-3 px-4 text-left">Apellido</th>
+                      <th class="py-3 px-4 text-left">Carrera</th>
+                      <th class="py-3 px-4 text-left">Teléfono</th>
+                      <th class="py-3 px-4 text-left">No. Empleado</th>
+                      <th class="py-3 px-4 text-left">Correo</th>
+                      <th class="py-3 px-4 text-left">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-[#2D3E34]">
+                    <tr class="border-b hover:bg-gray-100">
+                      <td class="py-3 px-4">María</td>
+                      <td class="py-3 px-4">López</td>
+                      <td class="py-3 px-4">Administración</td>
+                      <td class="py-3 px-4">555-987-6543</td>
+                      <td class="py-3 px-4">E67890</td>
+                      <td class="py-3 px-4">maria.lopez@uttlaxcala.edu.mx</td>
+                      <td class="py-3 px-4 flex gap-3">
+                       <td class="py-3 px-4 flex gap-3">
+  <button class="hover:text-[#F4A300]"><i class="fas fa-edit"></i></button>
+  <button class="hover:text-[#F4A300]"><i class="fas fa-trash-alt"></i></button>
+</td>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </form>
-            <!-- Formulario Docente -->
-            <form id="form-docente" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
-              style="z-index:1;">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label class="block font-semibold mb-1">Nombre:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Apellido Materno:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Correo:</label>
-                  <input type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grado:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-                <div>
-                  <label class="block font-semibold mb-1">Grupo:</label>
-                  <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
-                </div>
-              </div>
-              <div class="flex justify-end mt-8">
-                <button type="submit" class="border border-[#2D3E34] px-8 py-2 rounded hover:bg-[#2D3E34] hover:text-white transition font-semibold">Guardar</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
+
+        <!-- Script para tabs -->
         <script>
           // Simple tab/slide logic
           const tabAlumnado = document.getElementById('tab-alumnado');
@@ -230,10 +253,7 @@
           <!-- Ubicación -->
           <div class="flex flex-col items-start md:items-center w-full md:w-auto">
             <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
-              <i class="fas fa-map-marker-alt"></i>
-              <span class="ml-2 text-base">Ver en Google Maps</span>
-            </a>
+            <p>Circuito de las Artes No. 104, Fracc. Universidades, Tlaxcala, Tlax., México</p>
           </div>
         </footer>
       </main>
