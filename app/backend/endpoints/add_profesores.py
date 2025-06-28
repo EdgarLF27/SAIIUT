@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 import pymysql
 
+#Clase profesores_bp
 profesores_bp = Blueprint('profesores', __name__)
 
 # Configuración de la base de datos (ajusta según tu entorno)

@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
 import pymysql
 
+# Clase admins_bp
 admins_bp = Blueprint('admins', __name__)
 
-# Configuración de la base de datos (ajusta según tu entorno)
+# Configuración de la base de datos (objeto/diccionario)
 db_config = {
     "host": "bfg8xigctazr1joepgzb-mysql.services.clever-cloud.com",
     "user": "uirpd1wa5zkjpk90",
@@ -12,6 +13,7 @@ db_config = {
 }
 
 @admins_bp.route("/insertar", methods=["POST"])
+#Función para ejecutar la consulta SQL para insertar un administraodor
 def insertar_admin():
     data = request.json
     try:
