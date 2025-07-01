@@ -1,4 +1,5 @@
 flask
 pymysql
-cryptography
 flask-cors
+cryptography
+python-dotenv
