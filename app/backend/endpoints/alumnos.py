@@ -76,7 +76,7 @@ def delete_alumno(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("DELETE FROM alumnos WHERE id = %s", (id,))
+            cursor.execute("DELETE FROM alumnos WHERE id_alumno = %s", (id,))
             conn.commit()
         conn.close()
         return jsonify({'result': 'Alumno eliminado'}), 200
