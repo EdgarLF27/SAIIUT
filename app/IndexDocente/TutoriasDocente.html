@@ -62,23 +62,51 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
-        <!-- Contenido principal -->
-        <div class="flex w-full gap-6 justify-center items-center flex-1">
-          <!-- Sección de imagen (70%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
-            <!-- Aquí va tu imagen -->
-            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
+       
+<!-- Buscador y filtros -->
+        <div class="bg-white p-4 rounded-xl shadow flex flex-col gap-4">
+          <input type="text" placeholder="Buscar grupos tutorados por carrera, grupo o cuatrimestre." class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-[#F4A300] w-full" />
+          <div class="flex flex-wrap gap-4">
+            <button class="border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:text-[#F4A300]">
+              Carrera <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:text-[#F4A300]">
+              Grupos <i class="fas fa-chevron-down"></i>
+            </button>
+            <button class="border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:text-[#F4A300]">
+              Cuatrimestres <i class="fas fa-chevron-down"></i>
+            </button>
           </div>
-          <!-- Barra de notificaciones (30%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
-            <ul class="space-y-3 overflow-y-auto flex-1">
-              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
-          No hay notificaciones nuevas.
-              </li>
-              <!-- Más notificaciones aquí -->
-            </ul>
-          </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="overflow-x-auto rounded-xl shadow bg-white">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Carrera</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Grupo</th>
+                <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Cuatrimestre</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">TIDSM</td>
+                <td class="px-6 py-4 whitespace-nowrap">A</td>
+                <td class="px-6 py-4 whitespace-nowrap">3</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">Redes</td>
+                <td class="px-6 py-4 whitespace-nowrap">B</td>
+                <td class="px-6 py-4 whitespace-nowrap">2</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">Entornos</td>
+                <td class="px-6 py-4 whitespace-nowrap">C</td>
+                <td class="px-6 py-4 whitespace-nowrap">4</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
 
