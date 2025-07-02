@@ -23,7 +23,7 @@ def buscar_profesor(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "SELECT * FROM profesores WHERE id=%s"
+            sql = "SELECT nombre, ap_P, ap_M, no_empleado, telefono, email, sexo FROM profesores WHERE id_profesor=%s"
             cursor.execute(sql, (id,))
             profesor = cursor.fetchone()
         conn.close()
@@ -40,8 +40,19 @@ def insertar_profesor():
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "INSERT INTO profesores (nombre, correo, especialidad) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (data['nombre'], data['correo'], data['especialidad']))
+            sql = """
+                INSERT INTO profesores (nombre, ap_P, ap_M, no_empleado, telefono, email, sexo)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (
+                data['nombre'],
+                data['ap_P'],
+                data['ap_M'],
+                data['no_empleado'],
+                data['telefono'],
+                data['email'],
+                data['sexo']
+            ))
             conn.commit()
             profesor_id = cursor.lastrowid
         conn.close()
@@ -56,8 +67,21 @@ def editar_profesor(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "UPDATE profesores SET nombre=%s, correo=%s, especialidad=%s WHERE id=%s"
-            cursor.execute(sql, (data['nombre'], data['correo'], data['especialidad'], id))
+            sql = """
+                UPDATE profesores 
+                SET nombre=%s, ap_P=%s, ap_M=%s, no_empleado=%s, telefono=%s, email=%s, sexo=%s
+                WHERE id_profesor=%s
+            """
+            cursor.execute(sql, (
+                data['nombre'],
+                data['ap_P'],
+                data['ap_M'],
+                data['no_empleado'],
+                data['telefono'],
+                data['email'],
+                data['sexo'],
+                id
+            ))
             conn.commit()
             if cursor.rowcount == 0:
                 conn.close()
@@ -74,7 +98,7 @@ def eliminar_profesor(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "DELETE FROM profesores WHERE id=%s"
+            sql = "DELETE FROM profesores WHERE id_profesor=%s"
             cursor.execute(sql, (id,))
             conn.commit()
             if cursor.rowcount == 0:
