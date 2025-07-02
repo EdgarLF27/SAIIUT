@@ -12,5 +12,4 @@ app.register_blueprint(profesores_bp, url_prefix='/profesores')
 app.register_blueprint(admins_bp, url_prefix='/admins')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000 ,debug =True)
-    
+    app.run(host='0.0.0.0', port=5000, debug =True)

@@ -40,10 +40,10 @@ def create_alumno_completo():
         conn = get_db_connection()
         with conn.cursor() as cursor:
             sql = """
-            INSERT INTO alumnos (nombre, ap_P, ap_M, matricula, telefono, email, carrera, grado, grupo, sexo, id_carrera)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO alumnos (nombre, ap_P, ap_M, matricula, telefono, email, carrera, grado, grupo, sexo)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo'], data['id_carrera']))
+            cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo']))
             conn.commit()
             alumno_id = cursor.lastrowid
         conn.close()
@@ -52,7 +52,7 @@ def create_alumno_completo():
         return jsonify({'error': str(e)}), 500
 
 # Actualizar un alumno 
-@alumnos_bp.route('/actualizar/<int:id>', methods=['PUT'])
+@alumnos_bp.route('/editar/<int:id>', methods=['PUT'])
 def update_alumno_completo(id):
     data = request.get_json()
     try:

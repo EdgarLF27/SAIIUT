@@ -63,7 +63,7 @@ def create_admin():
         return jsonify({'error': str(e)}), 500
 
 # Actualizar un admin
-@admins_bp.route('/actualizar/<int:id>', methods=['PUT'])
+@admins_bp.route('/editar/<int:id>', methods=['PUT'])
 def update_admin(id):
     data = request.get_json()
     try:
