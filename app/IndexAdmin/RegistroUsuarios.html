@@ -221,11 +221,13 @@
           const formDocente = document.getElementById('form-docente');
 
           tabAlumnado.addEventListener('click', () => {
+            // Activa el tab de Alumnado y desactiva el de Docente
             tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
             tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
             tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
             tabDocente.classList.add('text-gray-400', 'border-transparent');
 
+            // Muestra el formulario de Alumnado con animación y oculta el de Docente
             formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
             formAlumnado.classList.add('translate-x-0', 'opacity-100');
             formAlumnado.style.zIndex = 2;
@@ -236,11 +238,13 @@
           });
 
           tabDocente.addEventListener('click', () => {
+            // Activa el tab de Docente y desactiva el de Alumnado
             tabDocente.classList.add('border-[#2D3E34]', 'text-black');
             tabDocente.classList.remove('text-gray-400', 'border-transparent');
             tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
             tabAlumnado.classList.add('text-gray-400', 'border-transparent');
 
+            // Muestra el formulario de Docente con animación y oculta el de Alumnado
             formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
             formDocente.classList.add('translate-x-0', 'opacity-100');
             formDocente.style.zIndex = 2;
