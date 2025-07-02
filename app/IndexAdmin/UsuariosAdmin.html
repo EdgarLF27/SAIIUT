@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+        overflow-x: hidden; /* Evita barra horizontal */
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+    <div class="flex flex-1 w-full">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="../IndexAdmin/IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="../IndexAdmin/RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="../IndexAdmin/CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="../IndexAdmin/UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="../IndexAdmin/ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Edición de usuarios</h2> 
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+
+        <!-- Contenedor de Tabs y tablas -->
+        <div class="w-full max-w-5xl mx-auto flex flex-col items-center">
+          <!-- Tabs -->
+          <div class="flex gap-8 mb-8">
+            <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
+              Alumnado
+            </button>
+            <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
+              Docente
+            </button>
+          </div>
+
+          <!-- Contenido dinámico según tab -->
+          <div class="relative w-full min-h-[340px]">
+            <!-- Sección Alumnado -->
+            <div id="form-alumnado" class="absolute inset-0 transition-all duration-500 transform translate-x-0 opacity-100 z-10">
+             <!-- Buscador centrado con lupa -->
+<div class="w-full flex justify-center mb-6">
+  <div class="relative w-full md:w-1/2">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+      <i class="fas fa-search"></i>
+    </span>
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+    />
+  </div>
+</div>
+
+              <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <table class="min-w-full">
+                  <thead class="bg-[#2D3E34] text-white">
+                    <tr>
+                      <th class="py-3 px-4 text-left">Nombre</th>
+                      <th class="py-3 px-4 text-left">Apellido</th>
+                      <th class="py-3 px-4 text-left">Carrera</th>
+                      <th class="py-3 px-4 text-left">Teléfono</th>
+                      <th class="py-3 px-4 text-left">Matrícula</th>
+                      <th class="py-3 px-4 text-left">Correo</th>
+                      <th class="py-3 px-4 text-left">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-[#2D3E34]">
+                    <tr class="border-b hover:bg-gray-100">
+                      <td class="py-3 px-4">Juan</td>
+                      <td class="py-3 px-4">Pérez</td>
+                      <td class="py-3 px-4">Ingeniería</td>
+                      <td class="py-3 px-4">555-123-4567</td>
+                      <td class="py-3 px-4">A12345</td>
+                      <td class="py-3 px-4">juan.perez@uttlaxcala.edu.mx</td>
+                      <td class="py-3 px-4 flex gap-3">
+                        <td class="py-3 px-4 flex gap-3">
+                     <button class="hover:text-[#F4A300]"><i class="fas fa-edit"></i></button>
+                              <button class="hover:text-[#F4A300]"><i class="fas fa-trash-alt"></i></button>
+                                  </td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Sección Docente -->
+            <div id="form-docente" class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
+             <!-- Buscador centrado con lupa -->
+<div class="w-full flex justify-center mb-6">
+  <div class="relative w-full md:w-1/2">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+      <i class="fas fa-search"></i>
+    </span>
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+    />
+  </div>
+</div>
+
+              <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <table class="min-w-full">
+                  <thead class="bg-[#2D3E34] text-white">
+                    <tr>
+                      <th class="py-3 px-4 text-left">Nombre</th>
+                      <th class="py-3 px-4 text-left">Apellido</th>
+                      <th class="py-3 px-4 text-left">Carrera</th>
+                      <th class="py-3 px-4 text-left">Teléfono</th>
+                      <th class="py-3 px-4 text-left">No. Empleado</th>
+                      <th class="py-3 px-4 text-left">Correo</th>
+                      <th class="py-3 px-4 text-left">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-[#2D3E34]">
+                    <tr class="border-b hover:bg-gray-100">
+                      <td class="py-3 px-4">María</td>
+                      <td class="py-3 px-4">López</td>
+                      <td class="py-3 px-4">Administración</td>
+                      <td class="py-3 px-4">555-987-6543</td>
+                      <td class="py-3 px-4">E67890</td>
+                      <td class="py-3 px-4">maria.lopez@uttlaxcala.edu.mx</td>
+                      <td class="py-3 px-4 flex gap-3">
+                       <td class="py-3 px-4 flex gap-3">
+  <button class="hover:text-[#F4A300]"><i class="fas fa-edit"></i></button>
+  <button class="hover:text-[#F4A300]"><i class="fas fa-trash-alt"></i></button>
+</td>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Script para tabs -->
+        <script>
+          // Simple tab/slide logic
+          const tabAlumnado = document.getElementById('tab-alumnado');
+          const tabDocente = document.getElementById('tab-docente');
+          const formAlumnado = document.getElementById('form-alumnado');
+          const formDocente = document.getElementById('form-docente');
+
+          tabAlumnado.addEventListener('click', () => {
+            tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
+            tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
+            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+            tabDocente.classList.add('text-gray-400', 'border-transparent');
+
+            formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAlumnado.classList.add('translate-x-0', 'opacity-100');
+            formAlumnado.style.zIndex = 2;
+
+            formDocente.classList.remove('translate-x-0', 'opacity-100');
+            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formDocente.style.zIndex = 1;
+          });
+
+          tabDocente.addEventListener('click', () => {
+            tabDocente.classList.add('border-[#2D3E34]', 'text-black');
+            tabDocente.classList.remove('text-gray-400', 'border-transparent');
+            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+
+            formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formDocente.classList.add('translate-x-0', 'opacity-100');
+            formDocente.style.zIndex = 2;
+
+            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAlumnado.style.zIndex = 1;
+          });
+        </script>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <p>Circuito de las Artes No. 104, Fracc. Universidades, Tlaxcala, Tlax., México</p>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
