@@ -16,7 +16,7 @@ def get_alumnos():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Obtener un alumno por ID
+# Obtener un alumno por ID  
 @alumnos_bp.route('/buscar/<int:id>', methods=['GET'])
 def get_alumno(id):
     try:
