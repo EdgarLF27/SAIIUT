@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+        overflow-x: hidden; /* Evita barra horizontal */
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+    <div class="flex flex-1 w-full">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="../IndexAdmin/IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="../IndexAdmin/CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="../IndexAdmin/UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="../IndexAdmin/ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Registro Alumnos y Docentes</h2> 
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[550px]">
+            <!-- Tabs -->
+            <div class="flex gap-8 mb-8">
+                <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
+                    Alumnado
+                </button>
+                <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
+                    Docente
+                </button>
+            </div>
+            <div class="relative w-full min-h-[400px]">
+                <!-- Formulario Alumnado -->
+                <form id="form-alumnado" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6"
+                    style="z-index:2;">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block font-semibold mb-1">Nombre:</label>
+                            <input id="nombre_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Paterno:</label>
+                            <input id="ap_p_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Materno:</label>
+                            <input id="ap_m_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Matrícula:</label>
+                            <input id="matricula_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Teléfono:</label>
+                            <input id="telefono_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Correo:</label>
+                            <input id="email_alumno" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Carrera:</label>
+                                <select id="carrera_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                                <option>TIDSM</option>
+                                <option>Opciones en camino</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Grado:</label>
+                                <select id="grado_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                                <option>1ro</option>
+                                <option>2do</option>
+                                <option>Opciones en camino</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Sexo:</label>
+                            <select id="sexo_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+                    </div>
+                </form>
+                <!-- Formulario Docente -->
+                <form id="form-docente" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
+                    style="z-index:1;">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block font-semibold mb-1">Nombre:</label>
+                            <input id="nombre_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Paterno:</label>
+                            <input id="ap_p_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Materno:</label>
+                            <input id="ap_m_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">No. Empleado:</label>
+                            <input id="num_empleado_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Teléfono:</label>
+                            <input id="telefono_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Correo:</label>
+                            <input id="email_docente" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Sexo:</label>
+                            <select id="sexo_docente" class="border border-gray-300 rounded px-3 py-1 w-full">
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                        <div class="flex justify-center mt-8">
+                                <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+       
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
+         <script>
+          // Simple tab/slide logic
+          const tabAlumnado = document.getElementById('tab-alumnado');
+          const tabDocente = document.getElementById('tab-docente');
+          const formAlumnado = document.getElementById('form-alumnado');
+          const formDocente = document.getElementById('form-docente');
+
+          tabAlumnado.addEventListener('click', () => {
+            // Activa el tab de Alumnado y desactiva el de Docente
+            tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
+            tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
+            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+            tabDocente.classList.add('text-gray-400', 'border-transparent');
+
+            // Muestra el formulario de Alumnado con animación y oculta el de Docente
+            formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAlumnado.classList.add('translate-x-0', 'opacity-100');
+            formAlumnado.style.zIndex = 2;
+
+            formDocente.classList.remove('translate-x-0', 'opacity-100');
+            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formDocente.style.zIndex = 1;
+          });
+
+          tabDocente.addEventListener('click', () => {
+            // Activa el tab de Docente y desactiva el de Alumnado
+            tabDocente.classList.add('border-[#2D3E34]', 'text-black');
+            tabDocente.classList.remove('text-gray-400', 'border-transparent');
+            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+
+            // Muestra el formulario de Docente con animación y oculta el de Alumnado
+            formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formDocente.classList.add('translate-x-0', 'opacity-100');
+            formDocente.style.zIndex = 2;
+
+            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAlumnado.style.zIndex = 1;
+          });
+        </script>
+
+      </main>
+    </div>
+  </body>
+</html>

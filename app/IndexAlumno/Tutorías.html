@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen">
+    <div class="flex flex-1">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="../IndexAlumno/index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="../IndexAlumno/Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="../IndexAlumno/Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="../IndexAlumno/Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">¡Bienvenido, Edgar!</h2>
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+
+        <!-- Tarjeta del Tutor -->
+        <div class="glass px-10 py-8 rounded-3xl shadow-lg border border-[#E0E0E0] mt-2 max-w-3xl mx-auto w-full flex flex-col items-center gap-4">
+          <h2 class="text-2xl font-bold">Tu tutor es:</h2>
+
+          <div class="w-32 h-32 rounded-full bg-black flex items-center justify-center text-5xl text-white">
+            <i class="fas fa-user"></i>
+          </div>
+          <p class="italic text-sm text-gray-600">Foto del tutor</p>
+
+          <p class="text-lg font-semibold flex items-center gap-2">
+            <i class="fas fa-child text-[#F4A300]"></i> Diana Lizeth
+          </p>
+
+          <hr class="w-full border border-gray-300" />
+
+          <h3 class="text-xl font-semibold">Contáctal@</h3>
+
+          <div class="flex flex-wrap justify-center gap-6 text-[#2D3E34]">
+            <div class="flex items-center gap-2">
+              <i class="fas fa-at"></i>
+              <a href="diana.ahuatzi.r@gmail.com" class="text-blue-600 underline">diana.ahuatzi.r@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fas fa-phone"></i>
+              <a href="tel:`52 246 216 0751" class="text-blue-600 underline">52 246 216 0751</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
+            <button class="border border-black px-4 py-1 rounded shadow hover:bg-gray-100 transition">
+              Déjale un mensaje
+            </button>
+            <p class="text-sm">3/3 Alertas restantes este mes</p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
