@@ -23,7 +23,7 @@ def buscar_profesor(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "SELECT nombre, ap_P, ap_M, no_empleado, telefono, email, sexo FROM profesores WHERE id_profesor=%s"
+            sql = "SELECT * FROM profesores WHERE id_profesor=%s"
             cursor.execute(sql, (id,))
             profesor = cursor.fetchone()
         conn.close()

@@ -60,10 +60,10 @@ def update_alumno_completo(id):
         with conn.cursor() as cursor:
             sql = """
             UPDATE alumnos
-            SET nombre=%s, ap_P=%s, ap_M=%s, matricula=%s, telefono=%s, email=%s, carrera=%s, grado=%s, grupo=%s, sexo=%s, id_carrera=%s
+            SET nombre=%s, ap_P=%s, ap_M=%s, matricula=%s, telefono=%s, email=%s, carrera=%s, grado=%s, grupo=%s, sexo=%s
             WHERE id_alumno=%s
             """
-            cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo'], data['id_carrera'], id))
+            cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo'], id))
             conn.commit()
         conn.close()
         return jsonify({'id': id, **data}), 200

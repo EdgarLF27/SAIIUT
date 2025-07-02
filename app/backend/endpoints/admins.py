@@ -23,7 +23,7 @@ def get_admin(id):
         conn = get_db_connection()
         with conn.cursor() as cursor:
             cursor.execute(
-                "SELECT id_admins, nombre, ap_P, ap_M, direccion, telefono, email, sexo FROM admins WHERE id_admins = %s", 
+                "SELECT * FROM admins WHERE id_admins = %s", 
                 (id,)
             )
             admin = cursor.fetchone()
@@ -43,8 +43,8 @@ def create_admin():
         conn = get_db_connection()
         with conn.cursor() as cursor:
             sql = """
-                INSERT INTO admins (nombre, ap_P, ap_M, direccion, telefono, email, sexo)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO admins (nombre, ap_P, ap_M, direccion, telefono, email, sexo, no_empleado, grado_estudios)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
                 data['nombre'],
@@ -53,7 +53,9 @@ def create_admin():
                 data['direccion'],
                 data['telefono'],
                 data['email'],
-                data['sexo']
+                data['sexo'],
+                data['no_empleado'],
+                data['grado_estudios']
             ))
             conn.commit()
             admin_id = cursor.lastrowid
@@ -71,7 +73,7 @@ def update_admin(id):
         with conn.cursor() as cursor:
             sql = """
                 UPDATE admins 
-                SET nombre=%s, ap_P=%s, ap_M=%s, direccion=%s, telefono=%s, email=%s, sexo=%s
+                SET nombre=%s, ap_P=%s, ap_M=%s, direccion=%s, telefono=%s, email=%s, sexo=%s, no_empleado=%s, grado_estudios=%s
                 WHERE id_admins=%s
             """
             cursor.execute(sql, (
@@ -82,6 +84,8 @@ def update_admin(id):
                 data['telefono'],
                 data['email'],
                 data['sexo'],
+                data['no_empleado'],
+                data['grado_estudios'],
                 id
             ))
             conn.commit()

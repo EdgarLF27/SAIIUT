@@ -283,9 +283,23 @@
 
         function getFormData(form) {
           const data = {};
+          // Mapeos personalizados para campos que no siguen el patrón
+          const customMap = {
+            'form-docente': {
+              'num_empleado_docente': 'no_empleado'
+            }
+            // Puedes agregar más mapeos si hay otros casos especiales
+          };
+          const formId = form.id;
           form.querySelectorAll('input[id], select[id]').forEach(el => {
-            // Quita el sufijo _alumno o _docente
-            const key = el.id.replace(/_(alumno|docente)$/, '');
+            let key;
+            // Si el campo está en el mapeo personalizado, usa ese nombre
+            if (customMap[formId] && customMap[formId][el.id]) {
+              key = customMap[formId][el.id];
+            } else {
+              // Si no, quita el sufijo _alumno o _docente
+              key = el.id.replace(/_(alumno|docente)$/, '');
+            }
             data[key] = el.value;
           });
           return data;
