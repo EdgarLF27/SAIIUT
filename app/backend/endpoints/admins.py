@@ -9,7 +9,7 @@ def get_admins():
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM admins")
+            cursor.execute("SELECT id_admins, nombre, ap_P, ap_M, direccion, telefono, email, sexo FROM admins")
             admins = cursor.fetchall()
         conn.close()
         return jsonify(admins), 200
@@ -22,7 +22,10 @@ def get_admin(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM admins WHERE id = %s", (id,))
+            cursor.execute(
+                "SELECT id_admins, nombre, ap_P, ap_M, direccion, telefono, email, sexo FROM admins WHERE id_admins = %s", 
+                (id,)
+            )
             admin = cursor.fetchone()
         conn.close()
         if admin:
@@ -39,8 +42,19 @@ def create_admin():
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "INSERT INTO admins (nombre, correo, password) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (data['nombre'], data['correo'], data['password']))
+            sql = """
+                INSERT INTO admins (nombre, ap_P, ap_M, direccion, telefono, email, sexo)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (
+                data['nombre'],
+                data['ap_P'],
+                data['ap_M'],
+                data['direccion'],
+                data['telefono'],
+                data['email'],
+                data['sexo']
+            ))
             conn.commit()
             admin_id = cursor.lastrowid
         conn.close()
@@ -55,8 +69,21 @@ def update_admin(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            sql = "UPDATE admins SET nombre=%s, correo=%s, password=%s WHERE id=%s"
-            cursor.execute(sql, (data['nombre'], data['correo'], data['password'], id))
+            sql = """
+                UPDATE admins 
+                SET nombre=%s, ap_P=%s, ap_M=%s, direccion=%s, telefono=%s, email=%s, sexo=%s
+                WHERE id_admins=%s
+            """
+            cursor.execute(sql, (
+                data['nombre'],
+                data['ap_P'],
+                data['ap_M'],
+                data['direccion'],
+                data['telefono'],
+                data['email'],
+                data['sexo'],
+                id
+            ))
             conn.commit()
         conn.close()
         return jsonify({'id': id, **data}), 200
@@ -69,7 +96,7 @@ def delete_admin(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("DELETE FROM admins WHERE id = %s", (id,))
+            cursor.execute("DELETE FROM admins WHERE id_admins = %s", (id,))
             conn.commit()
         conn.close()
         return jsonify({'result': 'Admin eliminado'}), 200
