@@ -22,7 +22,7 @@ def get_alumno(id):
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM alumnos WHERE id = %s", (id,))
+            cursor.execute("SELECT * FROM alumnos WHERE id_alumno = %s", (id,))
             alumno = cursor.fetchone()
         conn.close()
         if alumno:
@@ -52,7 +52,7 @@ def create_alumno_completo():
         return jsonify({'error': str(e)}), 500
 
 # Actualizar un alumno 
-@alumnos_bp.route('/actualizar_completo/<int:id>', methods=['PUT'])
+@alumnos_bp.route('/actualizar/<int:id>', methods=['PUT'])
 def update_alumno_completo(id):
     data = request.get_json()
     try:
@@ -60,8 +60,8 @@ def update_alumno_completo(id):
         with conn.cursor() as cursor:
             sql = """
             UPDATE alumnos
-            SET nombre=%s, apellido_p=%s, apellido_m=%s, matricula=%s, telefono=%s, email=%s, carrera=%s, grado=%s, grupo=%s, sexo=%s, id_carrera=%s
-            WHERE id=%s
+            SET nombre=%s, ap_P=%s, ap_M=%s, matricula=%s, telefono=%s, email=%s, carrera=%s, grado=%s, grupo=%s, sexo=%s, id_carrera=%s
+            WHERE id_alumno=%s
             """
             cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo'], data['id_carrera'], id))
             conn.commit()
