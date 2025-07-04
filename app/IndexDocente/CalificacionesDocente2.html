@@ -34,7 +34,7 @@
             <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
           </div>
           <nav class="space-y-4">
-            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="IndexDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
@@ -59,7 +59,7 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Bienvenido, Docente</h2> 
+            <h2 class="text-3xl font-bold">Asignar calificaciones</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -67,22 +67,79 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
+        <div class="flex items-center gap-4 w-full max-w-4xl mb-8">
+          <button onclick="history.back()" class="text-2xl text-[#2D3E34] hover:text-[#F4A300] transition p-2 rounded-full focus:outline-none" title="Regresar">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
         <!-- Contenido principal -->
-        <div class="flex w-full gap-6 justify-center items-center flex-1">
-          <!-- Sección de imagen (70%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
-            <!-- Aquí va tu imagen -->
-            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
-          </div>
-          <!-- Barra de notificaciones (30%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
-            <ul class="space-y-3 overflow-y-auto flex-1">
-              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
-          No hay notificaciones nuevas.
-              </li>
-              <!-- Más notificaciones aquí -->
-            </ul>
+        <div class="flex flex-col items-center w-full">
+          <!-- Encabezado con flecha y título -->
+          <!-- Tabla de alumnos y calificaciones por parciales -->
+          <div class="w-full max-w-4xl bg-white rounded-xl shadow border border-gray-200 p-6">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b">
+                  <th class="px-4 py-3 font-semibold text-gray-700">#</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700">Nombre</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700">Matrícula</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 1</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 2</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 3</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 4</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Final</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Editar</th>
+                </tr>
+              </thead>
+              <tbod y>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">1</td>
+                  <td class="px-4 py-3">Juan Pérez</td>
+                  <td class="px-4 py-3">20230001</td>
+                  <td class="px-4 py-3 text-center">85</td>
+                  <td class="px-4 py-3 text-center">90</td>
+                  <td class="px-4 py-3 text-center">88</td>
+                  <td class="px-4 py-3 text-center">92</td>
+                  <td class="px-4 py-3 text-center font-bold">89</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">2</td>
+                  <td class="px-4 py-3">María López</td>
+                  <td class="px-4 py-3">20230002</td>
+                  <td class="px-4 py-3 text-center">90</td>
+                  <td class="px-4 py-3 text-center">95</td>
+                  <td class="px-4 py-3 text-center">93</td>
+                  <td class="px-4 py-3 text-center">91</td>
+                  <td class="px-4 py-3 text-center font-bold">92</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">3</td>
+                  <td class="px-4 py-3">Carlos Ramírez</td>
+                  <td class="px-4 py-3">20230003</td>
+                  <td class="px-4 py-3 text-center">78</td>
+                  <td class="px-4 py-3 text-center">82</td>
+                  <td class="px-4 py-3 text-center">80</td>
+                  <td class="px-4 py-3 text-center">85</td>
+                  <td class="px-4 py-3 text-center font-bold">81</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-xs text-gray-400 mt-4">* Solo visualización. Para editar, haz clic en el lápiz.</div>
           </div>
         </div>
 
