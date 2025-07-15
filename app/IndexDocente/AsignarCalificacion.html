@@ -34,7 +34,7 @@
             <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
           </div>
           <nav class="space-y-4">
-            <a href="" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="IndexDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
@@ -59,7 +59,7 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Bienvenido, Docente</h2> 
+            <h2 class="text-3xl font-bold">Asignar calificaciones</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -67,25 +67,64 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
+        <div class="flex items-center gap-4 w-full max-w-4xl mb-8">
+            <button onclick="history.back()" class="text-2xl text-[#2D3E34] hover:text-[#F4A300] transition p-2 rounded-full focus:outline-none" title="Regresar">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
         <!-- Contenido principal -->
-        <div class="flex w-full gap-6 justify-center items-center flex-1">
-          <!-- Sección de imagen (70%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
-            <!-- Aquí va tu imagen -->
-            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
-          </div>
-          <!-- Barra de notificaciones (30%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
-            <ul class="space-y-3 overflow-y-auto flex-1">
-              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
-          No hay notificaciones nuevas.
-              </li>
-              <!-- Más notificaciones aquí -->
-            </ul>
+        <div class="flex flex-col items-center w-full">
+          <div class="w-full max-w-xl mx-auto bg-white rounded-xl shadow border border-gray-200 p-8 flex flex-col items-center">
+            <h3 class="text-lg font-semibold mb-6 text-center">Bastian Alessandro Sanchez Gallegos</h3>
+            <form class="w-full flex flex-col gap-4 items-center">
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 1:</label>
+          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial1">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 2:</label>
+          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial2">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 3:</label>
+          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial3">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 4:</label>
+          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial4">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+            </form>
+            <div class="flex justify-center w-full">
+              <button class="mx-auto mt-6 bg-[#2D3E34] text-white py-1 px-6 rounded-md text-base hover:bg-[#F4A300] transition duration-200 focus:outline-none">
+                Guardar
+              </button>
+            </div>
           </div>
         </div>
-
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
