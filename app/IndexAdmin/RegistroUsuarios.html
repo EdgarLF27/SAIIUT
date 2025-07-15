@@ -74,16 +74,22 @@
         </div>
 
         <!-- Formulario de Registro -->
-        <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[550px]">
-            <!-- Tabs -->
-            <div class="flex gap-8 mb-8">
-                <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
-                    Alumnado
-                </button>
-                <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
-                    Docente
-                </button>
-            </div>
+<div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[550px]">
+  <!-- Tabs -->
+  <div class="flex gap-8 mb-8">
+    <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
+      Alumnado
+    </button>
+    <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
+      Docente
+    </button>
+    <button id="tab-admin" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
+      Administradores 
+    </button>
+  </div>
+
+  
+  <!-- Contenedor de formularios -->
             <div class="relative w-full min-h-[400px]">
                 <!-- Formulario Alumnado -->
                 <form id="form-alumnado" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6"
@@ -182,9 +188,57 @@
                                 <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
                         </div>
                 </form>
+                <!-- Formulario Administradores -->
+                <form id="form-admin" class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
+                    style="z-index:1;">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block font-semibold mb-1">Nombre:</label>
+                            <input id="nombre_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Paterno:</label>
+                            <input id="ap_p_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Apellido Materno:</label>
+                            <input id="ap_m_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                         <div>
+                            <label class="block font-semibold mb-1">Email</label>
+                            <input id="email" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">No. Empleado:</label>
+                            <input id="num_empleado_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Teléfono:</label>
+                            <input id="telefono_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Grado de estudios:</label>
+                            <input id="grado_estudios_admin" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                         <div>
+                            <label class="block font-semibold mb-1">Dirección:</label>
+                            <input id="direccion" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Sexo:</label>
+                            <select id="sexo_admin" class="border border-gray-300 rounded px-3 py-1 w-full">
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                        <div class="flex justify-center mt-8">
+                                <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+                        </div>
+                </form>
             </div>
         </div>
-       
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
           <!-- Conócenos -->
@@ -214,46 +268,56 @@
           </div>
         </footer>
          <script>
-          // Simple tab/slide logic
-          const tabAlumnado = document.getElementById('tab-alumnado');
-          const tabDocente = document.getElementById('tab-docente');
-          const formAlumnado = document.getElementById('form-alumnado');
-          const formDocente = document.getElementById('form-docente');
+  // Obtener tabs
+  const tabAlumnado = document.getElementById('tab-alumnado');
+  const tabDocente = document.getElementById('tab-docente');
+  const tabAdmin = document.getElementById('tab-admin');
 
-          tabAlumnado.addEventListener('click', () => {
-            // Activa el tab de Alumnado y desactiva el de Docente
-            tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
-            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.add('text-gray-400', 'border-transparent');
+  // Obtener formularios
+  const formAlumnado = document.getElementById('form-alumnado');
+  const formDocente = document.getElementById('form-docente');
+  const formAdmin = document.getElementById('form-admin');
 
-            // Muestra el formulario de Alumnado con animación y oculta el de Docente
-            formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.classList.add('translate-x-0', 'opacity-100');
-            formAlumnado.style.zIndex = 2;
+  // Función para manejar el cambio de pestañas y animaciones
+  function activarTab(tabSeleccionado, formularioSeleccionado) {
+    // Quitar estilos activos de todos los tabs
+    [tabAlumnado, tabDocente, tabAdmin].forEach(tab => {
+      tab.classList.remove('border-[#2D3E34]', 'text-black');
+      tab.classList.add('text-gray-400', 'border-transparent');
+    });
 
-            formDocente.classList.remove('translate-x-0', 'opacity-100');
-            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.style.zIndex = 1;
-          });
+    // Activar el tab seleccionado
+    tabSeleccionado.classList.add('border-[#2D3E34]', 'text-black');
+    tabSeleccionado.classList.remove('text-gray-400', 'border-transparent');
 
-          tabDocente.addEventListener('click', () => {
-            // Activa el tab de Docente y desactiva el de Alumnado
-            tabDocente.classList.add('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.remove('text-gray-400', 'border-transparent');
-            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+    // Ocultar todos los formularios
+    [formAlumnado, formDocente, formAdmin].forEach(form => {
+      form.classList.remove('translate-x-0', 'opacity-100');
+      form.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+      form.style.zIndex = 1;
+    });
 
-            // Muestra el formulario de Docente con animación y oculta el de Alumnado
-            formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.classList.add('translate-x-0', 'opacity-100');
-            formDocente.style.zIndex = 2;
+    // Mostrar el formulario correspondiente
+    formularioSeleccionado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+    formularioSeleccionado.classList.add('translate-x-0', 'opacity-100');
+    formularioSeleccionado.style.zIndex = 2;
+  }
 
-            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
-            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.style.zIndex = 1;
-          });
-        </script>
+  // Eventos para cada tab
+  tabAlumnado.addEventListener('click', () => {
+    activarTab(tabAlumnado, formAlumnado);
+  });
+
+  tabDocente.addEventListener('click', () => {
+    activarTab(tabDocente, formDocente);
+  });
+
+  tabAdmin.addEventListener('click', () => {
+    activarTab(tabAdmin, formAdmin);
+  });
+</script>
+
+        
 
       </main>
     </div>
