@@ -66,7 +66,7 @@ def update_alumno_completo(id):
             cursor.execute(sql, (data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], data['telefono'], data['email'], data['carrera'], data['grado'], data['grupo'], data['sexo'], id))
             conn.commit()
         conn.close()
-        return jsonify({'id': id, **data}), 200
+        return jsonify({'result': 'Alumno actualizado correctamente', 'id': id, **data}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
