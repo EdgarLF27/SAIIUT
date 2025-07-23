@@ -399,45 +399,6 @@ function eliminarDocente(id) {
       });
   }
 }
-
-// Modal reutilizable para editar alumnos/docentes
-function abrirModalEditar(tipo, id) {
-  const modal = document.getElementById('modal-editar');
-  const titulo = document.getElementById('modal-titulo');
-  document.getElementById('editar-id').value = id;
-  document.getElementById('editar-tipo').value = tipo;
-
-  if (tipo === 'alumno') {
-    const a = alumnosData.find(x => x.id_alumno === id);
-    titulo.textContent = 'Editar Alumno';
-    document.getElementById('editar-nombre').value = a.nombre;
-    document.getElementById('editar-ap_P').value = a.ap_P;
-    document.getElementById('editar-ap_M').value = a.ap_M;
-    document.getElementById('editar-carrera').value = a.carrera || '';
-    document.getElementById('editar-grado').value = a.grado || '';
-    document.getElementById('editar-grupo').value = a.grupo || '';
-    document.getElementById('editar-sexo').value = a.sexo || '';
-    document.getElementById('editar-telefono').value = a.telefono;
-    document.getElementById('editar-matricula').value = a.matricula || '';
-    document.getElementById('editar-email').value = a.email;
-    document.getElementById('editar-matricula').placeholder = 'Matrícula';
-  } else {
-    const d = docentesData.find(x => x.id_profesor === id);
-    titulo.textContent = 'Editar Docente';
-    document.getElementById('editar-nombre').value = d.nombre;
-    document.getElementById('editar-ap_P').value = d.ap_P;
-    document.getElementById('editar-ap_M').value = d.ap_M;
-    document.getElementById('editar-carrera').value = d.carrera || '';
-    document.getElementById('editar-telefono').value = d.telefono;
-    document.getElementById('editar-matricula').value = d.no_empleado || '';
-    document.getElementById('editar-email').value = d.email;
-    document.getElementById('editar-matricula').placeholder = 'No. Empleado';
-  }
-  modal.classList.remove('hidden');
-}
-function cerrarModalEditar() {
-  document.getElementById('modal-editar').classList.add('hidden');
-}
 function cerrarModalEditarAlumno() {
   document.getElementById('modal-editar-alumno').classList.add('hidden');
 }
@@ -445,129 +406,64 @@ function cerrarModalEditarDocente() {
   document.getElementById('modal-editar-docente').classList.add('hidden');
 }
 
-// Maneja el submit del modal
+// Maneja el submit de los modales de edición
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('form-editar').onsubmit = function(e) {
+  // Maneja el submit del modal de alumno
+  document.getElementById('form-editar-alumno').onsubmit = function(e) {
     e.preventDefault();
-    const tipo = document.getElementById('editar-tipo').value;
-    const id = document.getElementById('editar-id').value;
-    const nombre = document.getElementById('editar-nombre').value;
-    const ap_P = document.getElementById('editar-ap_P').value;
-    const ap_M = document.getElementById('editar-ap_M').value;
-    const carrera = document.getElementById('editar-carrera').value;
-    const telefono = document.getElementById('editar-telefono').value;
-    const email = document.getElementById('editar-email').value;
-    if (tipo === 'alumno') {
-      const matricula = document.getElementById('editar-matricula').value;
-      const grado = document.getElementById('editar-grado').value;
-      const grupo = document.getElementById('editar-grupo').value;
-      const sexo = document.getElementById('editar-sexo').value;
-      fetch(`http://localhost:5000/alumnos/editar/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, ap_P, ap_M, carrera, grado, grupo, sexo, telefono, matricula, email })
-      })
-        .then(res => res.json())
-        .then(data => {
-          alert(data.result || data.error);
-          cerrarModalEditar();
-          cargarAlumnos();
-        });
-    } else {
-      const no_empleado = document.getElementById('editar-matricula').value;
-      fetch(`http://localhost:5000/profesores/editar/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, ap_P, ap_M, carrera, telefono, no_empleado, email })
-      })
-        .then(res => res.json())
-        .then(data => {
-          alert(data.result || data.error);
-          cerrarModalEditar();
-          cargarDocentes();
-        });
-    }
+    const id = document.getElementById('editar-id-alumno').value;
+    const nombre = document.getElementById('editar-nombre-alumno').value;
+    const ap_P = document.getElementById('editar-ap_P-alumno').value;
+    const ap_M = document.getElementById('editar-ap_M-alumno').value;
+    const carrera = document.getElementById('editar-carrera-alumno').value;
+    const grado = document.getElementById('editar-grado-alumno').value;
+    const grupo = document.getElementById('editar-grupo-alumno').value;
+    const sexo = document.getElementById('editar-sexo-alumno').value;
+    const telefono = document.getElementById('editar-telefono-alumno').value;
+    const matricula = document.getElementById('editar-matricula-alumno').value;
+    const email = document.getElementById('editar-email-alumno').value;
+
+    fetch(`http://localhost:5000/alumnos/editar/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, ap_P, ap_M, carrera, grado, grupo, sexo, telefono, matricula, email })
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.result || data.error);
+        cerrarModalEditarAlumno();
+        cargarAlumnos();
+      });
+  };
+
+  // Maneja el submit del modal de docente
+  document.getElementById('form-editar-docente').onsubmit = function(e) {
+    e.preventDefault();
+    const id = document.getElementById('editar-id-docente').value;
+    const nombre = document.getElementById('editar-nombre-docente').value;
+    const ap_P = document.getElementById('editar-ap_P-docente').value;
+    const ap_M = document.getElementById('editar-ap_M-docente').value;
+    const carrera = document.getElementById('editar-carrera-docente').value;
+    const no_empleado = document.getElementById('editar-no_empleado-docente').value;
+    const grado_estudio = document.getElementById('editar-grado_estudio-docente').value;
+    const sexo = document.getElementById('editar-sexo-docente').value;
+    const telefono = document.getElementById('editar-telefono-docente').value;
+    const email = document.getElementById('editar-email-docente').value;
+
+    fetch(`http://localhost:5000/profesores/editar/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, ap_P, ap_M, carrera, no_empleado, grado_estudio, sexo, telefono, email })
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.result || data.error);
+        cerrarModalEditarDocente();
+        cargarDocentes();
+      });
   };
 });
-
-// Maneja el submit del modal de alumno
-document.getElementById('form-editar-alumno').onsubmit = function(e) {
-  e.preventDefault();
-  const id = document.getElementById('editar-id-alumno').value;
-  const nombre = document.getElementById('editar-nombre-alumno').value;
-  const ap_P = document.getElementById('editar-ap_P-alumno').value;
-  const ap_M = document.getElementById('editar-ap_M-alumno').value;
-  const carrera = document.getElementById('editar-carrera-alumno').value;
-  const grado = document.getElementById('editar-grado-alumno').value;
-  const grupo = document.getElementById('editar-grupo-alumno').value;
-  const sexo = document.getElementById('editar-sexo-alumno').value;
-  const telefono = document.getElementById('editar-telefono-alumno').value;
-  const matricula = document.getElementById('editar-matricula-alumno').value;
-  const email = document.getElementById('editar-email-alumno').value;
-
-  fetch(`http://localhost:5000/alumnos/editar/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nombre, ap_P, ap_M, carrera, grado, grupo, sexo, telefono, matricula, email })
-  })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.result || data.error);
-      cerrarModalEditarAlumno();
-      cargarAlumnos();
-    });
-};
-
-// Maneja el submit del modal de docente
-document.getElementById('form-editar-docente').onsubmit = function(e) {
-  e.preventDefault();
-  const id = document.getElementById('editar-id-docente').value;
-  const nombre = document.getElementById('editar-nombre-docente').value;
-  const ap_P = document.getElementById('editar-ap_P-docente').value;
-  const ap_M = document.getElementById('editar-ap_M-docente').value;
-  const carrera = document.getElementById('editar-carrera-docente').value;
-  const no_empleado = document.getElementById('editar-no_empleado-docente').value;
-  const grado_estudio = document.getElementById('editar-grado_estudio-docente').value;
-  const sexo = document.getElementById('editar-sexo-docente').value;
-  const telefono = document.getElementById('editar-telefono-docente').value;
-  const email = document.getElementById('editar-email-docente').value;
-
-  fetch(`http://localhost:5000/profesores/editar/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nombre, ap_P, ap_M, carrera, no_empleado, grado_estudio, sexo, telefono, email })
-  })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.result || data.error);
-      cerrarModalEditarDocente();
-      cargarDocentes();
-    });
-};
         </script>
-
-        <!-- Modal de edición -->
-<div id="modal-editar" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-    <button onclick="cerrarModalEditar()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
-    <h3 id="modal-titulo" class="text-xl font-bold mb-4">Editar</h3>
-    <form id="form-editar" class="flex flex-col gap-3">
-      <input type="hidden" id="editar-id" />
-      <input type="hidden" id="editar-tipo" />
-      <input id="editar-nombre" class="border rounded px-3 py-2" placeholder="Nombre" required />
-      <input id="editar-ap_P" class="border rounded px-3 py-2" placeholder="Apellido paterno" required />
-      <input id="editar-ap_M" class="border rounded px-3 py-2" placeholder="Apellido materno" required />
-      <input id="editar-carrera" class="border rounded px-3 py-2" placeholder="Carrera" />
-      <input id="editar-grado" class="border rounded px-3 py-2" placeholder="Grado" />
-      <input id="editar-grupo" class="border rounded px-3 py-2" placeholder="Grupo" />
-      <input id="editar-sexo" class="border rounded px-3 py-2" placeholder="Sexo" />
-      <input id="editar-telefono" class="border rounded px-3 py-2" placeholder="Teléfono" required />
-      <input id="editar-matricula" class="border rounded px-3 py-2" placeholder="Matrícula / No. Empleado" />
-      <input id="editar-email" class="border rounded px-3 py-2" placeholder="Correo" required />
-      <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
-    </form>
-  </div>
-</div>
 
 <!-- Modal para editar alumno -->
 <div id="modal-editar-alumno" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
@@ -577,16 +473,16 @@ document.getElementById('form-editar-docente').onsubmit = function(e) {
     <form id="form-editar-alumno" class="flex flex-col gap-3">
       <!-- Campos de alumno -->
       <input type="hidden" id="editar-id-alumno" />
-      <input id="editar-nombre-alumno" placeholder="Nombre" required />
-      <input id="editar-ap_P-alumno" placeholder="Apellido paterno" required />
-      <input id="editar-ap_M-alumno" placeholder="Apellido materno" required />
-      <input id="editar-carrera-alumno" placeholder="Carrera" />
-      <input id="editar-grado-alumno" placeholder="Grado" />
-      <input id="editar-grupo-alumno" placeholder="Grupo" />
-      <input id="editar-sexo-alumno" placeholder="Sexo" />
-      <input id="editar-telefono-alumno" placeholder="Teléfono" required />
-      <input id="editar-matricula-alumno" placeholder="Matrícula" />
-      <input id="editar-email-alumno" placeholder="Correo" required />
+      <input id="editar-nombre-alumno" class="border rounded px-3 py-2 w-full" placeholder="Nombre" required />
+      <input id="editar-ap_P-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido paterno" required />
+      <input id="editar-ap_M-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno" required />
+      <input id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full" placeholder="Carrera" />
+      <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
+      <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
+      <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+      <input id="editar-telefono-alumno" class="border rounded px-3 py-2 w-full" placeholder="Teléfono" required />
+      <input id="editar-matricula-alumno" class="border rounded px-3 py-2 w-full" placeholder="Matrícula" />
+      <input id="editar-email-alumno" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
       <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
     </form>
   </div>
@@ -623,12 +519,13 @@ document.getElementById('form-editar-docente').onsubmit = function(e) {
             <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
           </div>
 
-          <!-- Síguenos -->
+          <!-- Redes Sociales -->
           <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <h4 class="font-semibold underline mb-2">Redes Sociales</h4>
             <div class="flex gap-4 text-2xl">
               <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-instagram"></i></a>
               <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
             </div>
           </div>
