@@ -3,14 +3,43 @@ from config import get_db_connection
 
 alumnos_bp = Blueprint('alumnos', __name__)
 
-# Obtener todos los alumnos
+# Buscar alumnos con filtros parametrizados
 @alumnos_bp.route('/todos', methods=['GET'])
 def get_alumnos():
     try:
+        # Leer parámetros opcionales de la URL
+        nombre = request.args.get('nombre', '')
+        apellido = request.args.get('apellido', '')
+        carrera = request.args.get('carrera', '')
+
         conn = get_db_connection()
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM alumnos")
+            sql = "SELECT * FROM alumnos"
+            params = []
+            conditions = []
+
+            # Construir condiciones WHERE dinámicamente
+            if nombre:
+                conditions.append("(nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s)")
+                # Buscamos el nombre en cualquiera de los campos de nombre/apellido
+                search_nombre = f"%{nombre}%"
+                params.extend([search_nombre, search_nombre, search_nombre])
+            
+            if apellido:
+                conditions.append("(ap_P LIKE %s OR ap_M LIKE %s)")
+                search_apellido = f"%{apellido}%"
+                params.extend([search_apellido, search_apellido])
+
+            if carrera:
+                conditions.append("carrera = %s")
+                params.append(carrera)
+
+            if conditions:
+                sql += " WHERE " + " AND ".join(conditions)
+
+            cursor.execute(sql, tuple(params))
             alumnos = cursor.fetchall()
+        
         conn.close()
         return jsonify(alumnos), 200
     except Exception as e:

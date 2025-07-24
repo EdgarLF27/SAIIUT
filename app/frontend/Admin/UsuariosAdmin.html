@@ -237,28 +237,26 @@
           });
         </script>
 
-        <!-- Script para cargar alumnos y docentes con filtros multi-criterio -->
+        <!-- Script para cargar alumnos y docentes con filtros multi-criterio y carga desde el backend -->
         <script>
           let alumnosData = [];
           let docentesData = [];
-          let filtradosAlumnos = [];
-          let filtradosDocentes = [];
           let mostradosAlumnos = 0;
           let mostradosDocentes = 0;
           const LOTE_SIZE = 50;
 
           document.addEventListener('DOMContentLoaded', () => {
-            // Carga inicial de datos (aún desde /todos)
-            cargarAlumnos();
-            cargarDocentes();
-
             // Listeners para el scroll infinito
             document.getElementById('tabla-alumnos-container').addEventListener('scroll', handleScrollAlumnos);
             document.getElementById('tabla-docentes-container').addEventListener('scroll', handleScrollDocentes);
             
             // Listeners para los botones de búsqueda
-            document.getElementById('btn-aplicar-filtros-alumnos').addEventListener('click', renderAlumnos);
-            document.getElementById('btn-aplicar-filtros-docentes').addEventListener('click', renderDocentes);
+            document.getElementById('btn-aplicar-filtros-alumnos').addEventListener('click', buscarAlumnos);
+            document.getElementById('btn-aplicar-filtros-docentes').addEventListener('click', buscarDocentes);
+
+            // Carga inicial con filtros vacíos para mostrar la lista completa la primera vez
+            buscarAlumnos();
+            buscarDocentes();
           });
 
           function handleScrollAlumnos() {
@@ -281,53 +279,58 @@
                   <tr>
                       <td colspan="7" class="text-center py-10">
                           <i class="fas fa-spinner fa-spin text-4xl text-[#2D3E34]"></i>
-                          <p class="mt-2">Cargando...</p>
+                          <p class="mt-2">Buscando...</p>
                       </td>
                   </tr>
               `;
           }
 
-          function cargarAlumnos() {
+          function buscarAlumnos() {
             showLoadingState('tbody-alumnos');
-            fetch('http://localhost:5000/alumnos/todos')
+            
+            const nombre = document.getElementById('filtro-nombre-alumno').value;
+            const apellido = document.getElementById('filtro-apellido-alumno').value;
+            const carrera = document.getElementById('filtro-carrera-alumno').value;
+
+            const url = new URL('http://localhost:5000/alumnos/todos');
+            if (nombre) url.searchParams.append('nombre', nombre);
+            if (apellido) url.searchParams.append('apellido', apellido);
+            if (carrera) url.searchParams.append('carrera', carrera);
+
+            fetch(url)
               .then(res => res.json())
               .then(alumnos => {
-                alumnosData = alumnos;
-                renderAlumnos(); // Renderiza con filtros vacíos al inicio
+                alumnosData = alumnos; // Guardamos los datos que ya vienen filtrados
+                renderAlumnos();
               });
           }
 
-          function cargarDocentes() {
+          function buscarDocentes() {
             showLoadingState('tbody-docentes');
-            fetch('http://localhost:5000/profesores/todos')
+
+            const nombre = document.getElementById('filtro-nombre-docente').value;
+            const apellido = document.getElementById('filtro-apellido-docente').value;
+            const carrera = document.getElementById('filtro-carrera-docente').value;
+
+            const url = new URL('http://localhost:5000/profesores/todos');
+            if (nombre) url.searchParams.append('nombre', nombre);
+            if (apellido) url.searchParams.append('apellido', apellido);
+            if (carrera) url.searchParams.append('carrera', carrera);
+
+            fetch(url)
               .then(res => res.json())
               .then(docentes => {
                 docentesData = docentes;
-                renderDocentes(); // Renderiza con filtros vacíos al inicio
+                renderDocentes();
               });
           }
 
           function renderAlumnos() {
-            const nombreFiltro = document.getElementById('filtro-nombre-alumno').value.toLowerCase();
-            const apellidoFiltro = document.getElementById('filtro-apellido-alumno').value.toLowerCase();
-            const carreraFiltro = document.getElementById('filtro-carrera-alumno').value.toLowerCase();
-
-            filtradosAlumnos = alumnosData.filter(a => {
-                const nombreCompleto = `${a.nombre} ${a.ap_P} ${a.ap_M}`.toLowerCase();
-                const carrera = (a.carrera || '').toLowerCase();
-
-                const matchNombre = !nombreFiltro || nombreCompleto.includes(nombreFiltro);
-                const matchApellido = !apellidoFiltro || a.ap_P.toLowerCase().includes(apellidoFiltro) || a.ap_M.toLowerCase().includes(apellidoFiltro);
-                const matchCarrera = !carreraFiltro || carrera === carreraFiltro;
-
-                return matchNombre && matchApellido && matchCarrera;
-            });
-
             const tbody = document.getElementById('tbody-alumnos');
             tbody.innerHTML = '';
             mostradosAlumnos = 0;
 
-            if (filtradosAlumnos.length === 0) {
+            if (alumnosData.length === 0) {
               tbody.innerHTML = `
                 <tr>
                   <td colspan="7" class="text-center py-10">
@@ -344,7 +347,7 @@
 
           function addMoreAlumnos() {
             const tbody = document.getElementById('tbody-alumnos');
-            const lote = filtradosAlumnos.slice(mostradosAlumnos, mostradosAlumnos + LOTE_SIZE);
+            const lote = alumnosData.slice(mostradosAlumnos, mostradosAlumnos + LOTE_SIZE);
 
             if (lote.length === 0) return;
 
@@ -370,26 +373,11 @@
           }
 
           function renderDocentes() {
-            const nombreFiltro = document.getElementById('filtro-nombre-docente').value.toLowerCase();
-            const apellidoFiltro = document.getElementById('filtro-apellido-docente').value.toLowerCase();
-            const carreraFiltro = document.getElementById('filtro-carrera-docente').value.toLowerCase();
-
-            filtradosDocentes = docentesData.filter(d => {
-                const nombreCompleto = `${d.nombre} ${d.ap_P} ${d.ap_M}`.toLowerCase();
-                const carrera = (d.carrera || '').toLowerCase();
-
-                const matchNombre = !nombreFiltro || nombreCompleto.includes(nombreFiltro);
-                const matchApellido = !apellidoFiltro || d.ap_P.toLowerCase().includes(apellidoFiltro) || d.ap_M.toLowerCase().includes(apellidoFiltro);
-                const matchCarrera = !carreraFiltro || carrera === carreraFiltro;
-
-                return matchNombre && matchApellido && matchCarrera;
-            });
-
             const tbody = document.getElementById('tbody-docentes');
             tbody.innerHTML = '';
             mostradosDocentes = 0;
 
-            if (filtradosDocentes.length === 0) {
+            if (docentesData.length === 0) {
               tbody.innerHTML = `
                 <tr>
                   <td colspan="7" class="text-center py-10">
@@ -406,7 +394,7 @@
 
           function addMoreDocentes() {
             const tbody = document.getElementById('tbody-docentes');
-            const lote = filtradosDocentes.slice(mostradosDocentes, mostradosDocentes + LOTE_SIZE);
+            const lote = docentesData.slice(mostradosDocentes, mostradosDocentes + LOTE_SIZE);
 
             if (lote.length === 0) return;
 
@@ -455,7 +443,7 @@
                 .then(res => res.json())
                 .then(data => {
                   alert(data.result || data.error);
-                  cargarAlumnos();
+                  buscarAlumnos();
                 });
             }
           }
@@ -481,7 +469,7 @@
                 .then(res => res.json())
                 .then(data => {
                   alert(data.result || data.error);
-                  cargarDocentes();
+                  buscarDocentes();
                 });
             }
           }
@@ -518,7 +506,7 @@
                 .then(data => {
                   alert(data.result || data.error);
                   cerrarModalEditarAlumno();
-                  cargarAlumnos();
+                  buscarAlumnos();
                 });
             };
 
@@ -545,7 +533,7 @@
                 .then(data => {
                   alert(data.result || data.error);
                   cerrarModalEditarDocente();
-                  cargarDocentes();
+                  buscarDocentes();
                 });
             };
           });
