@@ -96,6 +96,11 @@
             type="button">
             Docente
           </button>
+          <button id="tab-admin"
+            class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none"
+            type="button">
+            Administrador
+          </button>
         </div>
         <div class="relative w-full min-h-[400px]">
           <!-- Formulario Alumnado -->
@@ -197,12 +202,68 @@
                   <option>Otro</option>
                 </select>
               </div>
+              <div>
+                <label class="block font-semibold mb-1">Grado de estudios:</label>
+                <input id="grado_estudios" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
             </div>
             <div class="flex justify-center mt-4">
               <button type="submit"
                 class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
             </div>
           </form>
+          <!-- Formulario Administrador -->
+          <form id="form-admin"
+            class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
+            style="z-index:0;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label class="block font-semibold mb-1">Nombre:</label>
+                <input id="nombre_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Apellido Paterno:</label>
+                <input id="ap_P_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Apellido Materno:</label>
+                <input id="ap_M_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Dirección:</label>
+                <input id="direccion_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Telefono:</label>
+                <input id="telefono_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Correo</label>
+                <input id="email_admin" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Sexo:</label>
+                <select id="sexo_admin" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">No. Empleado:</label>
+                <input id="num_empleado_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Grado de estudios:</label>
+                <input id="grado_estudios_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+            </div>
+            <div class="flex justify-center mt-4">
+              <button type="submit"
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+            </div>
+          </form>
+            <!-- ...existing code for the main docente form... -->
         </div>
       </div>
 
@@ -241,20 +302,23 @@
         </div>
       </footer>
       <script>
-        // Simple tab/slide logic
+
+        // Simple tab/slide logic para 3 tabs
         const tabAlumnado = document.getElementById('tab-alumnado');
         const tabDocente = document.getElementById('tab-docente');
+        const tabAdmin = document.getElementById('tab-admin');
         const formAlumnado = document.getElementById('form-alumnado');
         const formDocente = document.getElementById('form-docente');
+        const formAdmin = document.getElementById('form-admin');
 
         tabAlumnado.addEventListener('click', () => {
-          // Activa el tab de Alumnado y desactiva el de Docente
           tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
           tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
           tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
           tabDocente.classList.add('text-gray-400', 'border-transparent');
+          tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
-          // Muestra el formulario de Alumnado con animación y oculta el de Docente
           formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
           formAlumnado.classList.add('translate-x-0', 'opacity-100');
           formAlumnado.style.zIndex = 2;
@@ -262,16 +326,20 @@
           formDocente.classList.remove('translate-x-0', 'opacity-100');
           formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
           formDocente.style.zIndex = 1;
+
+          formAdmin.classList.remove('translate-x-0', 'opacity-100');
+          formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.style.zIndex = 0;
         });
 
         tabDocente.addEventListener('click', () => {
-          // Activa el tab de Docente y desactiva el de Alumnado
           tabDocente.classList.add('border-[#2D3E34]', 'text-black');
           tabDocente.classList.remove('text-gray-400', 'border-transparent');
           tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
           tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+          tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
-          // Muestra el formulario de Docente con animación y oculta el de Alumnado
           formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
           formDocente.classList.add('translate-x-0', 'opacity-100');
           formDocente.style.zIndex = 2;
@@ -279,6 +347,31 @@
           formAlumnado.classList.remove('translate-x-0', 'opacity-100');
           formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
           formAlumnado.style.zIndex = 1;
+
+          formAdmin.classList.remove('translate-x-0', 'opacity-100');
+          formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.style.zIndex = 0;
+        });
+
+        tabAdmin.addEventListener('click', () => {
+          tabAdmin.classList.add('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.remove('text-gray-400', 'border-transparent');
+          tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+          tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+          tabDocente.classList.add('text-gray-400', 'border-transparent');
+
+          formAdmin.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.classList.add('translate-x-0', 'opacity-100');
+          formAdmin.style.zIndex = 2;
+
+          formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+          formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAlumnado.style.zIndex = 1;
+
+          formDocente.classList.remove('translate-x-0', 'opacity-100');
+          formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formDocente.style.zIndex = 0;
         });
 
         function getFormData(form) {
