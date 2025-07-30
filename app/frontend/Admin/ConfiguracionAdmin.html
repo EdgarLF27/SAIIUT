@@ -60,11 +60,11 @@
       </aside>
 
       <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Configuración</h2> 
+            <h2 class="text-3xl font-bold">Configuración</h2>
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -74,9 +74,9 @@
         </div>
 
         <!-- Grid de tarjetas -->
-        <div class="flex justify-center items-center flex-1 w-full">
-          <div class="glass p-10 rounded-3xl shadow-lg border border-[#E0E0E0] w-full max-w-4xl flex-1">
-            <h3 class="text-2xl font-semibold mb-8 text-center">Usuario</h3>
+        <div class="flex justify-center items-center flex-1">
+          <div class="glass p-10 rounded-3xl shadow-lg border border-[#E0E0E0] w-4/5 h-[600px]">
+            <h3 class="text-2xl font-semibold mb-8 text-center">¡Edgar!</h3>
 
             <!-- Interfaz de edición de usuario -->
             <div class="flex flex-col items-center w-full">
@@ -87,73 +87,66 @@
                 </div>
                 <button class="px-6 py-2 border rounded bg-white hover:bg-gray-100 text-base">Subir imagen</button>
               </div>
-<!-- Formulario de edición -->
-<form class="w-full max-w-2xl flex flex-col items-center space-y-6">
-  <!-- Nombre -->
-  <div class="relative w-full">
-    <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-    <input type="text" placeholder="Nombre..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-  </div>
 
-  <!-- Contraseña y Correo -->
-  <div class="flex w-full space-x-4">
-    <!-- Contraseña -->
-    <div class="relative w-full">
-      <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-      <input type="password" placeholder="Contraseña..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-    </div>
-    <!-- Correo -->
-    <div class="relative w-full">
-      <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-      <input type="email" placeholder="Correo..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-    </div>
-  </div>
-
-  <!-- Teléfono -->
-  <div class="relative w-full">
-    <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-    <input type="text" placeholder="Teléfono..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-  </div>
-
-  <!-- Botón -->
-  <button type="submit" class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
-    Guardar
-  </button>
-</form>
-
-
-
-      <!-- Footer fuera de <main> para ocupar todo el ancho y fondo -->
-      </div> <!-- cierre de glass p-10 ... -->
-    </div> <!-- cierre de flex justify-center ... -->
-  </main>
-  <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white w-full">
-      <!-- Conócenos -->
-      <div class="flex flex-col items-start w-full md:w-auto">
-        <h4 class="font-semibold underline">Conócenos</h4>
-        <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-        <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
-      </div>
-
-      <!-- Síguenos -->
-      <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-        <h4 class="font-semibold underline mb-2">Síguenos</h4>
-        <div class="flex gap-4 text-2xl">
-          <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-          <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+              <!-- Formulario de edición -->
+              <form class="w-full max-w-2xl flex flex-col items-center space-y-6">
+                <!-- Matrícula -->
+                <div class="flex items-center w-full ">
+                  <i class="fas fa-user mr-3 text-gray-500 text-lg"></i>
+                  <input type="text" placeholder="20242IDSM034" class="placeholder-white rounded bg-gray-300 flex-1 px-4 py-3 border-none focus:outline-none text-lg" readonly />
+                  <i class="fas fa-lock ml-3 text-gray-500 text-lg"></i>
+                </div>
+                <!-- Contraseña, correo -->
+                <div class="flex w-full space-x-4">
+                  <div class="flex items-center flex-1">
+                    <i class="fas fa-lock mr-3 text-gray-500 text-lg"></i>
+                    <input type="password" placeholder="Contraseña..." class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
+                  </div>
+                  <div class="flex items-center flex-1">
+                    <span class="mr-3 text-gray-500 text-lg">@</span>
+                    <input type="email" placeholder="correo..." class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
+                  </div>
+                </div>
+                <!-- Teléfono -->
+                <div class="flex items-center w-full">
+                  <i class="fas fa-phone mr-3 text-gray-500 text-lg"></i>
+                  <input type="text" placeholder="Telefono..." class="flex-1 border border-gray-300 rounded px-4 py-3 text-lg" />
+                </div>
+                <!-- Botón confirmar -->
+                <button type="submit" class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Ubicación -->
-      <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-        <h4 class="font-semibold underline mb-2">Ubicación</h4>
-        <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
-          <i class="fas fa-map-marker-alt"></i>
-          <span class="ml-2 text-base">Ver en Google Maps</span>
-        </a>
-      </div>
-    </footer>
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
       </main>
     </div>
   </body>
