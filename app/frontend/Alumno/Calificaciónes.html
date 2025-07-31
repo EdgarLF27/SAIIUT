@@ -34,19 +34,19 @@
             <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
           </div>
           <nav class="space-y-4">
-            <a href="../IndexAlumno/index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../Alumno/index.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-home w-5 h-5 text-white"></i>
               <span class="font-medium">Inicio</span>
             </a>
-            <a href="../IndexAlumno/Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="Calificaciónes.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chart-line w-5 h-5 text-white"></i>
               <span class="font-medium">Calificaciones</span>
             </a>
-            <a href="../IndexAlumno/Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../Alumno/Tutorías.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
               <span class="font-medium">Tutorías</span>
             </a>
-            <a href="../IndexAlumno/Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <a href="../Alumno/Configuración.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
             </a>
@@ -59,7 +59,7 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">¡Bienvenido, Edgar!</h2>
+            <h2 class="text-3xl font-bold">Calificaciones</h2>
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -69,9 +69,9 @@
         </div>
 
         <!-- Tabla de calificaciones y reprobadas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
+        <div class="flex flex-col md:flex-row gap-8 flex-grow items-stretch mt-8 mb-12">
           <!-- Tabla de calificaciones -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] overflow-auto w-[800px]">
+          <div class="glass p-4 rounded-2xl shadow-lg border border-[#E0E0E0] overflow-auto w-full md:w-[70%] md:max-w-[70%] mb-8 md:mb-0">
             <h3 class="text-xl font-semibold mb-4">Calificaciones por Parcial</h3>
 
             <label for="cuatrimestre" class="block mb-2 font-medium">Selecciona el cuatrimestre que deseas visualizar</label>
@@ -101,7 +101,7 @@
               </thead>
               <tbody>
                 <tr class="bg-white border-b">
-                  <td class="p-2 border">Programación Orientada a Objetos</td>
+                  <td class="p-2 border"></td>
                   <td class="p-2 border"></td>
                   <td class="p-2 border"></td>
                   <td class="p-2 border"></td>
@@ -113,7 +113,7 @@
           </div>
 
           <!-- Asignaturas Reprobadas -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] w-[300px] ml-auto">
+          <div class="glass p-4 rounded-2xl shadow-lg border border-[#E0E0E0] w-full md:w-[30%] md:max-w-[30%] md:mx-0 md:ml-0">
             <h3 class="text-xl font-semibold mb-4">Asignaturas Reprobadas</h3>
             <div class="border border-gray-300 rounded-lg p-4 min-h-[100px]">
               <ul class="space-y-2 text-gray-700">
