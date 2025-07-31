@@ -1,281 +1,356 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SAIIUT Dashboard</title>
 
-    <!-- Tailwind y fuentes -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard</title>
 
-    <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
-    <style>
-      body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
-        overflow-x: hidden;
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-    </style>
-  </head>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
-    <div class="flex flex-1 w-full">
-      <!-- Sidebar -->
-      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-        <div>
-          <div class="mb-12 text-center">
-            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
-          </div>
-          <nav class="space-y-4">
-            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-home w-5 h-5 text-white"></i>
-              <span class="font-medium">Inicio</span>
-            </a>
-            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Registros</span>
-            </a>
-            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-              <span class="font-medium">Calificaciones</span>
-            </a>
-            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-              <span class="font-medium">Usuarios</span>
-            </a>
-            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-cog w-5 h-5 text-white"></i>
-              <span class="font-medium">Configuración</span>
-            </a>
-          </nav>
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <div class="flex flex-1 w-full">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+      <div>
+        <div class="mb-12 text-center">
+          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
         </div>
-      </aside>
+        <nav class="space-y-4">
+          <a href="IndexAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-home w-5 h-5 text-white"></i>
+            <span class="font-medium">Inicio</span>
+          </a>
+          <a href="RegistroUsuarios.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+            <span class="font-medium">Registros</span>
+          </a>
+          <a href="CalificacionesIndex.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+            <span class="font-medium">Calificaciones</span>
+          </a>
+          <a href="UsuariosAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+            <span class="font-medium">Usuarios</span>
+          </a>
+          <a href="ConfiguracionAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-cog w-5 h-5 text-white"></i>
+            <span class="font-medium">Configuración</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
 
-      <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
-        <!-- Encabezado -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Edición de usuarios</h2> 
-            <div class="flex gap-6 text-3xl cursor-pointer">
-              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
-              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
-            </div>
-          </div>
-          <hr class="mt-4 border-[#D1D5DB]" />
-        </div>
-
-        <!-- Contenedor de Tabs y tablas -->
-        <div class="w-full max-w-5xl mx-auto flex flex-col items-center">
-          <!-- Tabs -->
-          <div class="flex gap-8 mb-8">
-            <button id="tab-alumnado" class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none" type="button">
-              Alumnado
-            </button>
-            <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
-              Docente
-            </button>
-          </div>
-
-          <!-- Contenido dinámico según tab -->
-          <div class="relative w-full min-h-[340px]">
-            <!-- Sección Alumnado -->
-            <div id="form-alumnado" class="absolute inset-0 transition-all duration-500 transform translate-x-0 opacity-100 z-10">
-              <!-- Filtros Multi-Criterio -->
-              <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 items-end">
-                <!-- Filtro por Nombre -->
-                <div>
-                    <label for="filtro-nombre-alumno" class="block text-sm font-medium text-gray-700">Nombre</label>
-                    <input type="text" id="filtro-nombre-alumno" placeholder="Ej. Juan" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                </div>
-                <!-- Filtro por Apellido -->
-                <div>
-                    <label for="filtro-apellido-alumno" class="block text-sm font-medium text-gray-700">Apellido</label>
-                    <input type="text" id="filtro-apellido-alumno" placeholder="Ej. Pérez" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                </div>
-                <!-- Filtro por Carrera -->
-                <div>
-                    <label for="filtro-carrera-alumno" class="block text-sm font-medium text-gray-700">Carrera</label>
-                    <select id="filtro-carrera-alumno" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                        <option value="">Todas</option>
-                        <option value="Sistemas Computacionales">Sistemas Computacionales</option>
-                        <option value="Mecatrónica">Mecatrónica</option>
-                        <option value="Procesos Industriales">Procesos Industriales</option>
-                        <!-- Nota: Estas carreras deberían cargarse dinámicamente en un futuro -->
-                    </select>
-                </div>
-                <!-- Botón de Aplicar Filtros -->
-                <div>
-                    <button id="btn-aplicar-filtros-alumnos" class="w-full bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300 flex items-center justify-center gap-2">
-                        <i class="fas fa-filter"></i>
-                        <span>Aplicar Filtros</span>
-                    </button>
-                </div>
-              </div>
-              <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white h-96">
-                <table class="min-w-full">
-                  <thead class="bg-[#2D3E34] text-white">
-                    <tr>
-                      <th class="py-3 px-4 text-left">Nombre</th>
-                      <th class="py-3 px-4 text-left">Apellido</th>
-                      <th class="py-3 px-4 text-left">Carrera</th>
-                      <th class="py-3 px-4 text-left">Teléfono</th>
-                      <th class="py-3 px-4 text-left">Matrícula</th>
-                      <th class="py-3 px-4 text-left">Correo</th>
-                      <th class="py-3 px-4 text-left">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-[#2D3E34]" id="tbody-alumnos">
-                    <!-- Los datos se cargarán aquí -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Sección Docente -->
-            <div id="form-docente" class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
-              <!-- Filtros Multi-Criterio -->
-              <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 items-end">
-                <!-- Filtro por Nombre -->
-                <div>
-                    <label for="filtro-nombre-docente" class="block text-sm font-medium text-gray-700">Nombre</label>
-                    <input type="text" id="filtro-nombre-docente" placeholder="Ej. Maria" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                </div>
-                <!-- Filtro por Apellido -->
-                <div>
-                    <label for="filtro-apellido-docente" class="block text-sm font-medium text-gray-700">Apellido</label>
-                    <input type="text" id="filtro-apellido-docente" placeholder="Ej. López" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                </div>
-                <!-- Filtro por Carrera -->
-                <div>
-                    <label for="filtro-carrera-docente" class="block text-sm font-medium text-gray-700">Carrera</label>
-                    <select id="filtro-carrera-docente" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                        <option value="">Todas</option>
-                        <option value="Sistemas Computacionales">Sistemas Computacionales</option>
-                        <option value="Mecatrónica">Mecatrónica</option>
-                        <option value="Procesos Industriales">Procesos Industriales</option>
-                    </select>
-                </div>
-                <!-- Botón de Aplicar Filtros -->
-                <div>
-                    <button id="btn-aplicar-filtros-docentes" class="w-full bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300 flex items-center justify-center gap-2">
-                        <i class="fas fa-filter"></i>
-                        <span>Aplicar Filtros</span>
-                    </button>
-                </div>
-              </div>
-              <div id="tabla-docentes-container" class="overflow-auto rounded-lg shadow bg-white h-96">
-                <table class="min-w-full">
-                  <thead class="bg-[#2D3E34] text-white">
-                    <tr>
-                      <th class="py-3 px-4 text-left">Nombre</th>
-                      <th class="py-3 px-4 text-left">Apellido</th>
-                      <th class="py-3 px-4 text-left">Carrera</th>
-                      <th class="py-3 px-4 text-left">Teléfono</th>
-                      <th class="py-3 px-4 text-left">No. Empleado</th>
-                      <th class="py-3 px-4 text-left">Correo</th>
-                      <th class="py-3 px-4 text-left">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-[#2D3E34]" id="tbody-docentes">
-                    <!-- Los datos se cargarán aquí -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Edición de usuarios</h2>
+          <div class="flex gap-6 text-3xl cursor-pointer">
+            <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+            <i class="fas fa-user hover:text-[#F4A300] transition"></i>
           </div>
         </div>
+        <hr class="mt-4 border-[#D1D5DB]" />
+      </div>
 
-        <!-- Script para tabs -->
-        <script>
-          // Simple tab/slide logic
-          const tabAlumnado = document.getElementById('tab-alumnado');
-          const tabDocente = document.getElementById('tab-docente');
-          const formAlumnado = document.getElementById('form-alumnado');
-          const formDocente = document.getElementById('form-docente');
+      <!-- Contenedor de Tabs y tablas -->
+      <div class="w-full max-w-5xl mx-auto flex flex-col items-center">
+        <!-- Tabs -->
+        <div class="flex gap-8 mb-8">
+          <button id="tab-alumnado"
+            class="text-2xl font-bold border-b-4 border-[#2D3E34] pb-1 transition-all duration-300 focus:outline-none"
+            type="button">
+            Alumnado
+          </button>
+          <button id="tab-docente"
+            class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none"
+            type="button">
+            Docente
+          </button>
+          <button id="tab-admin"
+            class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none"
+            type="button">
+            Administrador
+          </button>
+        </div>
 
-          tabAlumnado.addEventListener('click', () => {
-            tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
-            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.add('text-gray-400', 'border-transparent');
+        <!-- Contenido dinámico según tab -->
+        <div class="relative w-full min-h-[340px]">
+          <!-- Sección Alumnado -->
+          <div id="form-alumnado"
+            class="absolute inset-0 transition-all duration-500 transform translate-x-0 opacity-100 z-10">
+            <!-- Filtros Multi-Criterio -->
+            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 items-end">
+              <!-- Filtro por Nombre -->
+              <div>
+                <label for="filtro-nombre-alumno" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="filtro-nombre-alumno" placeholder="Ej. Juan"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
+              </div>
+              <!-- Filtro por Apellido -->
+              <div>
+                <label for="filtro-apellido-alumno" class="block text-sm font-medium text-gray-700">Apellido</label>
+                <input type="text" id="filtro-apellido-alumno" placeholder="Ej. Pérez"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
+              </div>
+              <!-- Filtro por Carrera -->
+              <div>
+                <label for="filtro-carrera-alumno" class="block text-sm font-medium text-gray-700">Carrera</label>
+                <select id="filtro-carrera-alumno"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
+                  <option value="">Todas</option>
+                  <option value="Sistemas Computacionales">Sistemas Computacionales</option>
+                  <option value="Mecatrónica">Mecatrónica</option>
+                  <option value="Procesos Industriales">Procesos Industriales</option>
+                  <!-- Nota: Estas carreras deberían cargarse dinámicamente en un futuro -->
+                </select>
+              </div>
+              <!-- Botón de Aplicar Filtros -->
+              <div>
+                <button id="btn-aplicar-filtros-alumnos"
+                  class="w-full bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300 flex items-center justify-center gap-2">
+                  <i class="fas fa-filter"></i>
+                  <span>Aplicar Filtros</span>
+                </button>
+              </div>
+            </div>
+            <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white h-96">
+              <table class="min-w-full">
+                <thead class="bg-[#2D3E34] text-white">
+                  <tr>
+                    <th class="py-3 px-4 text-left">Nombre</th>
+                    <th class="py-3 px-4 text-left">Apellido</th>
+                    <th class="py-3 px-4 text-left">Carrera</th>
+                    <th class="py-3 px-4 text-left">Teléfono</th>
+                    <th class="py-3 px-4 text-left">Matrícula</th>
+                    <th class="py-3 px-4 text-left">Correo</th>
+                    <th class="py-3 px-4 text-left">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[#2D3E34]" id="tbody-alumnos">
+                  <!-- Los datos se cargarán aquí -->
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-            formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.classList.add('translate-x-0', 'opacity-100');
-            formAlumnado.style.zIndex = 2;
+          <!-- Sección Docente -->
+          <div id="form-docente"
+            class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
+            <!-- Buscador centrado con lupa -->
+            <div class="w-full flex justify-center mb-6">
+              <div class="relative w-full md:w-1/2">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <i class="fas fa-search"></i>
+                </span>
+                <input type="text" placeholder="Buscar..."
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+                  id="buscador-docentes" />
+              </div>
+            </div>
+            <div class="overflow-x-auto rounded-lg shadow bg-white">
+              <table class="min-w-full">
+                <thead class="bg-[#2D3E34] text-white">
+                  <tr>
+                    <th class="py-3 px-4 text-left">Nombre</th>
+                    <th class="py-3 px-4 text-left">Apellido</th>
+                    <th class="py-3 px-4 text-left">No. Empleado</th>
+                    <th class="py-3 px-4 text-left">Teléfono</th>
+                    <th class="py-3 px-4 text-left">Correo</th>
+                    <th class="py-3 px-4 text-left">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[#2D3E34]" id="tbody-docentes">
+                  <!-- Aquí se cargan los docentes -->
+                </tbody>
+              </table>
+            </div>
+            <div id="paginador-docentes" class="flex justify-center mt-4"></div>
+          </div>
 
-            formDocente.classList.remove('translate-x-0', 'opacity-100');
-            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.style.zIndex = 1;
+          <!-- Sección Admin -->
+          <div id="form-admin"
+            class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
+            <!-- Buscador centrado con lupa (igual que Docente) -->
+            <div class="w-full flex justify-center mb-6">
+              <div class="relative w-full md:w-1/2">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <i class="fas fa-search"></i>
+                </span>
+                <input type="text" placeholder="Buscar..."
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+                  id="buscador-admins" />
+              </div>
+            </div>
+            <div class="overflow-x-auto rounded-lg shadow bg-white">
+              <table class="min-w-full">
+                <thead class="bg-[#2D3E34] text-white">
+                  <tr>
+                    <th class="py-3 px-4 text-left">Nombre</th>
+                    <th class="py-3 px-4 text-left">Apellido</th>
+                    <th class="py-3 px-4 text-left">No. Empleado</th>
+                    <th class="py-3 px-4 text-left">Teléfono</th>
+                    <th class="py-3 px-4 text-left">Correo</th>
+                    <th class="py-3 px-4 text-left">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[#2D3E34]" id="tbody-admins">
+                  <!-- Aquí se cargan los admins -->
+                </tbody>
+              </table>
+            </div>
+            <div id="paginador-admins" class="flex justify-center mt-4"></div>
+          </div>
+        </div>
+      </div>
 
-            cargarAlumnos();
-          });
+      <!-- Script para tabs -->
+      <script>
+        // Simple tab/slide logic para 3 tabs
+        const tabAlumnado = document.getElementById('tab-alumnado');
+        const tabDocente = document.getElementById('tab-docente');
+        const tabAdmin = document.getElementById('tab-admin');
+        const formAlumnado = document.getElementById('form-alumnado');
+        const formDocente = document.getElementById('form-docente');
+        const formAdmin = document.getElementById('form-admin');
 
-          tabDocente.addEventListener('click', () => {
-            tabDocente.classList.add('border-[#2D3E34]', 'text-black');
-            tabDocente.classList.remove('text-gray-400', 'border-transparent');
-            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
-            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+        tabAlumnado.addEventListener('click', () => {
+          tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
+          tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
+          tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+          tabDocente.classList.add('text-gray-400', 'border-transparent');
+          tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
-            formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formDocente.classList.add('translate-x-0', 'opacity-100');
-            formDocente.style.zIndex = 2;
+          formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAlumnado.classList.add('translate-x-0', 'opacity-100');
+          formAlumnado.style.zIndex = 2;
 
-            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
-            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
-            formAlumnado.style.zIndex = 1;
+          formDocente.classList.remove('translate-x-0', 'opacity-100');
+          formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formDocente.style.zIndex = 1;
 
-            cargarDocentes();
-          });
-        </script>
+          formAdmin.classList.remove('translate-x-0', 'opacity-100');
+          formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.style.zIndex = 0;
 
-        <!-- Script para cargar alumnos y docentes con filtros multi-criterio y carga desde el backend -->
-        <script>
-          let alumnosData = [];
-          let docentesData = [];
-          let mostradosAlumnos = 0;
-          let mostradosDocentes = 0;
-          const LOTE_SIZE = 50;
+          cargarAlumnos();
+        });
 
-          document.addEventListener('DOMContentLoaded', () => {
-            // Listeners para el scroll infinito
-            document.getElementById('tabla-alumnos-container').addEventListener('scroll', handleScrollAlumnos);
-            document.getElementById('tabla-docentes-container').addEventListener('scroll', handleScrollDocentes);
-            
-            // Listeners para los botones de búsqueda
-            document.getElementById('btn-aplicar-filtros-alumnos').addEventListener('click', buscarAlumnos);
-            document.getElementById('btn-aplicar-filtros-docentes').addEventListener('click', buscarDocentes);
+        tabDocente.addEventListener('click', () => {
+          tabDocente.classList.add('border-[#2D3E34]', 'text-black');
+          tabDocente.classList.remove('text-gray-400', 'border-transparent');
+          tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+          tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
-            // Carga inicial con filtros vacíos para mostrar la lista completa la primera vez
-            buscarAlumnos();
-            buscarDocentes();
-          });
+          formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formDocente.classList.add('translate-x-0', 'opacity-100');
+          formDocente.style.zIndex = 2;
 
-          function handleScrollAlumnos() {
-            const container = document.getElementById('tabla-alumnos-container');
-            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
-              addMoreAlumnos();
-            }
+          formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+          formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAlumnado.style.zIndex = 1;
+
+          formAdmin.classList.remove('translate-x-0', 'opacity-100');
+          formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.style.zIndex = 0;
+
+          cargarDocentes();
+        });
+
+        tabAdmin.addEventListener('click', () => {
+          tabAdmin.classList.add('border-[#2D3E34]', 'text-black');
+          tabAdmin.classList.remove('text-gray-400', 'border-transparent');
+          tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+          tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+          tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+          tabDocente.classList.add('text-gray-400', 'border-transparent');
+
+          formAdmin.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAdmin.classList.add('translate-x-0', 'opacity-100');
+          formAdmin.style.zIndex = 2;
+
+          formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+          formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formAlumnado.style.zIndex = 1;
+
+          formDocente.classList.remove('translate-x-0', 'opacity-100');
+          formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+          formDocente.style.zIndex = 0;
+
+          cargarAdmins();
+        });
+      </script>
+
+      <!-- Script para cargar alumnos y docentes con filtros multi-criterio y carga desde el backend -->
+      <script>
+        let alumnosData = [];
+        let docentesData = [];
+        let mostradosAlumnos = 0;
+        let mostradosDocentes = 0;
+        const LOTE_SIZE = 50;
+
+        document.addEventListener('DOMContentLoaded', () => {
+          // Listeners para el scroll infinito
+          document.getElementById('tabla-alumnos-container').addEventListener('scroll', handleScrollAlumnos);
+          document.getElementById('tabla-docentes-container').addEventListener('scroll', handleScrollDocentes);
+
+          // Listeners para los botones de búsqueda
+          document.getElementById('btn-aplicar-filtros-alumnos').addEventListener('click', buscarAlumnos);
+          document.getElementById('btn-aplicar-filtros-docentes').addEventListener('click', buscarDocentes);
+
+          // Carga inicial con filtros vacíos para mostrar la lista completa la primera vez
+          buscarAlumnos();
+          buscarDocentes();
+        });
+
+        function handleScrollAlumnos() {
+          const container = document.getElementById('tabla-alumnos-container');
+          if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
+            addMoreAlumnos();
           }
+        }
 
-          function handleScrollDocentes() {
-            const container = document.getElementById('tabla-docentes-container');
-            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
-              addMoreDocentes();
-            }
+        function handleScrollDocentes() {
+          const container = document.getElementById('tabla-docentes-container');
+          if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
+            addMoreDocentes();
           }
+        }
 
-          function showLoadingState(tbodyId) {
-              const tbody = document.getElementById(tbodyId);
-              tbody.innerHTML = `
+        function showLoadingState(tbodyId) {
+          const tbody = document.getElementById(tbodyId);
+          tbody.innerHTML = `
                   <tr>
                       <td colspan="7" class="text-center py-10">
                           <i class="fas fa-spinner fa-spin text-4xl text-[#2D3E34]"></i>
@@ -283,55 +358,55 @@
                       </td>
                   </tr>
               `;
-          }
+        }
 
-          function buscarAlumnos() {
-            showLoadingState('tbody-alumnos');
-            
-            const nombre = document.getElementById('filtro-nombre-alumno').value;
-            const apellido = document.getElementById('filtro-apellido-alumno').value;
-            const carrera = document.getElementById('filtro-carrera-alumno').value;
+        function buscarAlumnos() {
+          showLoadingState('tbody-alumnos');
 
-            const url = new URL('http://localhost:5000/alumnos/todos');
-            if (nombre) url.searchParams.append('nombre', nombre);
-            if (apellido) url.searchParams.append('apellido', apellido);
-            if (carrera) url.searchParams.append('carrera', carrera);
+          const nombre = document.getElementById('filtro-nombre-alumno').value;
+          const apellido = document.getElementById('filtro-apellido-alumno').value;
+          const carrera = document.getElementById('filtro-carrera-alumno').value;
 
-            fetch(url)
-              .then(res => res.json())
-              .then(alumnos => {
-                alumnosData = alumnos; // Guardamos los datos que ya vienen filtrados
-                renderAlumnos();
-              });
-          }
+          const url = new URL('http://localhost:5000/alumnos/todos');
+          if (nombre) url.searchParams.append('nombre', nombre);
+          if (apellido) url.searchParams.append('apellido', apellido);
+          if (carrera) url.searchParams.append('carrera', carrera);
 
-          function buscarDocentes() {
-            showLoadingState('tbody-docentes');
+          fetch(url)
+            .then(res => res.json())
+            .then(alumnos => {
+              alumnosData = alumnos; // Guardamos los datos que ya vienen filtrados
+              renderAlumnos();
+            });
+        }
 
-            const nombre = document.getElementById('filtro-nombre-docente').value;
-            const apellido = document.getElementById('filtro-apellido-docente').value;
-            const carrera = document.getElementById('filtro-carrera-docente').value;
+        function buscarDocentes() {
+          showLoadingState('tbody-docentes');
 
-            const url = new URL('http://localhost:5000/profesores/todos');
-            if (nombre) url.searchParams.append('nombre', nombre);
-            if (apellido) url.searchParams.append('apellido', apellido);
-            if (carrera) url.searchParams.append('carrera', carrera);
+          const nombre = document.getElementById('filtro-nombre-docente').value;
+          const apellido = document.getElementById('filtro-apellido-docente').value;
+          const carrera = document.getElementById('filtro-carrera-docente').value;
 
-            fetch(url)
-              .then(res => res.json())
-              .then(docentes => {
-                docentesData = docentes;
-                renderDocentes();
-              });
-          }
+          const url = new URL('http://localhost:5000/profesores/todos');
+          if (nombre) url.searchParams.append('nombre', nombre);
+          if (apellido) url.searchParams.append('apellido', apellido);
+          if (carrera) url.searchParams.append('carrera', carrera);
 
-          function renderAlumnos() {
-            const tbody = document.getElementById('tbody-alumnos');
-            tbody.innerHTML = '';
-            mostradosAlumnos = 0;
+          fetch(url)
+            .then(res => res.json())
+            .then(docentes => {
+              docentesData = docentes;
+              renderDocentes();
+            });
+        }
 
-            if (alumnosData.length === 0) {
-              tbody.innerHTML = `
+        function renderAlumnos() {
+          const tbody = document.getElementById('tbody-alumnos');
+          tbody.innerHTML = '';
+          mostradosAlumnos = 0;
+
+          if (alumnosData.length === 0) {
+            tbody.innerHTML = `
                 <tr>
                   <td colspan="7" class="text-center py-10">
                     <i class="fas fa-search text-4xl text-gray-400"></i>
@@ -339,21 +414,21 @@
                   </td>
                 </tr>
               `;
-              return;
-            }
-            
-            addMoreAlumnos();
+            return;
           }
 
-          function addMoreAlumnos() {
-            const tbody = document.getElementById('tbody-alumnos');
-            const lote = alumnosData.slice(mostradosAlumnos, mostradosAlumnos + LOTE_SIZE);
+          addMoreAlumnos();
+        }
 
-            if (lote.length === 0) return;
+        function addMoreAlumnos() {
+          const tbody = document.getElementById('tbody-alumnos');
+          const lote = alumnosData.slice(mostradosAlumnos, mostradosAlumnos + LOTE_SIZE);
 
-            let html = '';
-            lote.forEach(a => {
-              html += `
+          if (lote.length === 0) return;
+
+          let html = '';
+          lote.forEach(a => {
+            html += `
                 <tr class="border-b hover:bg-gray-100">
                   <td class="py-3 px-4">${a.nombre}</td>
                   <td class="py-3 px-4">${a.ap_P} ${a.ap_M}</td>
@@ -367,18 +442,18 @@
                   </td>
                 </tr>
               `;
-            });
-            tbody.innerHTML += html;
-            mostradosAlumnos += lote.length;
-          }
+          });
+          tbody.innerHTML += html;
+          mostradosAlumnos += lote.length;
+        }
 
-          function renderDocentes() {
-            const tbody = document.getElementById('tbody-docentes');
-            tbody.innerHTML = '';
-            mostradosDocentes = 0;
+        function renderDocentes() {
+          const tbody = document.getElementById('tbody-docentes');
+          tbody.innerHTML = '';
+          mostradosDocentes = 0;
 
-            if (docentesData.length === 0) {
-              tbody.innerHTML = `
+          if (docentesData.length === 0) {
+            tbody.innerHTML = `
                 <tr>
                   <td colspan="7" class="text-center py-10">
                     <i class="fas fa-search text-4xl text-gray-400"></i>
@@ -386,21 +461,21 @@
                   </td>
                 </tr>
               `;
-              return;
-            }
-            
-            addMoreDocentes();
+            return;
           }
 
-          function addMoreDocentes() {
-            const tbody = document.getElementById('tbody-docentes');
-            const lote = docentesData.slice(mostradosDocentes, mostradosDocentes + LOTE_SIZE);
+          addMoreDocentes();
+        }
 
-            if (lote.length === 0) return;
+        function addMoreDocentes() {
+          const tbody = document.getElementById('tbody-docentes');
+          const lote = docentesData.slice(mostradosDocentes, mostradosDocentes + LOTE_SIZE);
 
-            let html = '';
-            lote.forEach(d => {
-              html += `
+          if (lote.length === 0) return;
+
+          let html = '';
+          lote.forEach(d => {
+            html += `
                 <tr class="border-b hover:bg-gray-100">
                   <td class="py-3 px-4">${d.nombre}</td>
                   <td class="py-3 px-4">${d.ap_P} ${d.ap_M}</td>
@@ -414,203 +489,219 @@
                   </td>
                 </tr>
               `;
-            });
-            tbody.innerHTML += html;
-            mostradosDocentes += lote.length;
-          }
-
-          // Funciones para editar/elimiar
-          function editarAlumno(id) {
-            const a = alumnosData.find(x => x.id_alumno === id);
-            if (!a) return alert('Alumno no encontrado');
-            document.getElementById('editar-id-alumno').value = id;
-            document.getElementById('editar-nombre-alumno').value = a.nombre;
-            document.getElementById('editar-ap_P-alumno').value = a.ap_P;
-            document.getElementById('editar-ap_M-alumno').value = a.ap_M;
-            document.getElementById('editar-carrera-alumno').value = a.carrera || '';
-            document.getElementById('editar-grado-alumno').value = a.grado || '';
-            document.getElementById('editar-grupo-alumno').value = a.grupo || '';
-            document.getElementById('editar-sexo-alumno').value = a.sexo || '';
-            document.getElementById('editar-telefono-alumno').value = a.telefono;
-            document.getElementById('editar-matricula-alumno').value = a.matricula || '';
-            document.getElementById('editar-email-alumno').value = a.email;
-            document.getElementById('modal-editar-alumno').classList.remove('hidden');
-          }
-
-          function eliminarAlumno(id) {
-            if(confirm('¿Seguro que deseas eliminar este alumno?')) {
-              fetch(`http://localhost:5000/alumnos/eliminar/${id}`, { method: 'DELETE' })
-                .then(res => res.json())
-                .then(data => {
-                  alert(data.result || data.error);
-                  buscarAlumnos();
-                });
-            }
-          }
-          function editarDocente(id) {
-            const d = docentesData.find(x => x.id_profesor === id);
-            if (!d) return alert('Docente no encontrado');
-            document.getElementById('editar-id-docente').value = id;
-            document.getElementById('editar-nombre-docente').value = d.nombre;
-            document.getElementById('editar-ap_P-docente').value = d.ap_P;
-            document.getElementById('editar-ap_M-docente').value = d.ap_M;
-            document.getElementById('editar-carrera-docente').value = d.carrera || '';
-            document.getElementById('editar-no_empleado-docente').value = d.no_empleado || '';
-            document.getElementById('editar-grado_estudio-docente').value = d.grado_estudio || '';
-            document.getElementById('editar-sexo-docente').value = d.sexo || '';
-            document.getElementById('editar-telefono-docente').value = d.telefono;
-            document.getElementById('editar-email-docente').value = d.email;
-            document.getElementById('modal-editar-docente').classList.remove('hidden');
-          }
-
-          function eliminarDocente(id) {
-            if(confirm('¿Seguro que deseas eliminar este docente?')) {
-              fetch(`http://localhost:5000/profesores/eliminar/${id}`, { method: 'DELETE' })
-                .then(res => res.json())
-                .then(data => {
-                  alert(data.result || data.error);
-                  buscarDocentes();
-                });
-            }
-          }
-          function cerrarModalEditarAlumno() {
-            document.getElementById('modal-editar-alumno').classList.add('hidden');
-          }
-          function cerrarModalEditarDocente() {
-            document.getElementById('modal-editar-docente').classList.add('hidden');
-          }
-
-          // Maneja el submit de los modales de edición
-          document.addEventListener('DOMContentLoaded', function() {
-            // Maneja el submit del modal de alumno
-            document.getElementById('form-editar-alumno').onsubmit = function(e) {
-              e.preventDefault();
-              const id = document.getElementById('editar-id-alumno').value;
-              const nombre = document.getElementById('editar-nombre-alumno').value;
-              const ap_P = document.getElementById('editar-ap_P-alumno').value;
-              const ap_M = document.getElementById('editar-ap_M-alumno').value;
-              const carrera = document.getElementById('editar-carrera-alumno').value;
-              const grado = document.getElementById('editar-grado-alumno').value;
-              const grupo = document.getElementById('editar-grupo-alumno').value;
-              const sexo = document.getElementById('editar-sexo-alumno').value;
-              const telefono = document.getElementById('editar-telefono-alumno').value;
-              const matricula = document.getElementById('editar-matricula-alumno').value;
-              const email = document.getElementById('editar-email-alumno').value;
-
-              fetch(`http://localhost:5000/alumnos/editar/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre, ap_P, ap_M, carrera, grado, grupo, sexo, telefono, matricula, email })
-              })
-                .then(res => res.json())
-                .then(data => {
-                  alert(data.result || data.error);
-                  cerrarModalEditarAlumno();
-                  buscarAlumnos();
-                });
-            };
-
-            // Maneja el submit del modal de docente
-            document.getElementById('form-editar-docente').onsubmit = function(e) {
-              e.preventDefault();
-              const id = document.getElementById('editar-id-docente').value;
-              const nombre = document.getElementById('editar-nombre-docente').value;
-              const ap_P = document.getElementById('editar-ap_P-docente').value;
-              const ap_M = document.getElementById('editar-ap_M-docente').value;
-              const carrera = document.getElementById('editar-carrera-docente').value;
-              const no_empleado = document.getElementById('editar-no_empleado-docente').value;
-              const grado_estudio = document.getElementById('editar-grado_estudio-docente').value;
-              const sexo = document.getElementById('editar-sexo-docente').value;
-              const telefono = document.getElementById('editar-telefono-docente').value;
-              const email = document.getElementById('editar-email-docente').value;
-
-              fetch(`http://localhost:5000/profesores/editar/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre, ap_P, ap_M, carrera, no_empleado, grado_estudio, sexo, telefono, email })
-              })
-                .then(res => res.json())
-                .then(data => {
-                  alert(data.result || data.error);
-                  cerrarModalEditarDocente();
-                  buscarDocentes();
-                });
-            };
           });
-        </script>
+          tbody.innerHTML += html;
+          mostradosDocentes += lote.length;
+        }
 
-        <!-- Modal para editar alumno -->
-        <div id="modal-editar-alumno" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-          <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button onclick="cerrarModalEditarAlumno()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
-            <h3 class="text-xl font-bold mb-4">Editar Alumno</h3>
-            <form id="form-editar-alumno" class="flex flex-col gap-3">
-              <!-- Campos de alumno -->
-              <input type="hidden" id="editar-id-alumno" />
-              <input id="editar-nombre-alumno" class="border rounded px-3 py-2 w-full" placeholder="Nombre" required />
-              <input id="editar-ap_P-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido paterno" required />
-              <input id="editar-ap_M-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno" required />
-              <input id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full" placeholder="Carrera" />
-              <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
-              <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
-              <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
-              <input id="editar-telefono-alumno" class="border rounded px-3 py-2 w-full" placeholder="Teléfono" required />
-              <input id="editar-matricula-alumno" class="border rounded px-3 py-2 w-full" placeholder="Matrícula" />
-              <input id="editar-email-alumno" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
-              <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
-            </form>
+        // Funciones para editar/elimiar
+        function editarAlumno(id) {
+          const a = alumnosData.find(x => x.id_alumno === id);
+          if (!a) return alert('Alumno no encontrado');
+          document.getElementById('editar-id-alumno').value = id;
+          document.getElementById('editar-nombre-alumno').value = a.nombre;
+          document.getElementById('editar-ap_P-alumno').value = a.ap_P;
+          document.getElementById('editar-ap_M-alumno').value = a.ap_M;
+          document.getElementById('editar-carrera-alumno').value = a.carrera || '';
+          document.getElementById('editar-grado-alumno').value = a.grado || '';
+          document.getElementById('editar-grupo-alumno').value = a.grupo || '';
+          document.getElementById('editar-sexo-alumno').value = a.sexo || '';
+          document.getElementById('editar-telefono-alumno').value = a.telefono;
+          document.getElementById('editar-matricula-alumno').value = a.matricula || '';
+          document.getElementById('editar-email-alumno').value = a.email;
+          document.getElementById('modal-editar-alumno').classList.remove('hidden');
+        }
+
+        function eliminarAlumno(id) {
+          if (confirm('¿Seguro que deseas eliminar este alumno?')) {
+            fetch(`http://localhost:5000/alumnos/eliminar/${id}`, { method: 'DELETE' })
+              .then(res => res.json())
+              .then(data => {
+                alert(data.result || data.error);
+                buscarAlumnos();
+              });
+          }
+        }
+        function editarDocente(id) {
+          const d = docentesData.find(x => x.id_profesor === id);
+          if (!d) return alert('Docente no encontrado');
+          document.getElementById('editar-id-docente').value = id;
+          document.getElementById('editar-nombre-docente').value = d.nombre;
+          document.getElementById('editar-ap_P-docente').value = d.ap_P;
+          document.getElementById('editar-ap_M-docente').value = d.ap_M;
+          document.getElementById('editar-carrera-docente').value = d.carrera || '';
+          document.getElementById('editar-no_empleado-docente').value = d.no_empleado || '';
+          document.getElementById('editar-grado_estudio-docente').value = d.grado_estudio || '';
+          document.getElementById('editar-sexo-docente').value = d.sexo || '';
+          document.getElementById('editar-telefono-docente').value = d.telefono;
+          document.getElementById('editar-email-docente').value = d.email;
+          document.getElementById('modal-editar-docente').classList.remove('hidden');
+        }
+
+        function eliminarDocente(id) {
+          if (confirm('¿Seguro que deseas eliminar este docente?')) {
+            fetch(`http://localhost:5000/profesores/eliminar/${id}`, { method: 'DELETE' })
+              .then(res => res.json())
+              .then(data => {
+                alert(data.result || data.error);
+                buscarDocentes();
+              });
+          }
+        }
+        function cerrarModalEditarAlumno() {
+          document.getElementById('modal-editar-alumno').classList.add('hidden');
+        }
+        function cerrarModalEditarDocente() {
+          document.getElementById('modal-editar-docente').classList.add('hidden');
+        }
+
+        // Maneja el submit de los modales de edición
+        document.addEventListener('DOMContentLoaded', function () {
+          // Maneja el submit del modal de alumno
+          document.getElementById('form-editar-alumno').onsubmit = function (e) {
+            e.preventDefault();
+            const id = document.getElementById('editar-id-alumno').value;
+            const nombre = document.getElementById('editar-nombre-alumno').value;
+            const ap_P = document.getElementById('editar-ap_P-alumno').value;
+            const ap_M = document.getElementById('editar-ap_M-alumno').value;
+            const carrera = document.getElementById('editar-carrera-alumno').value;
+            const grado = document.getElementById('editar-grado-alumno').value;
+            const grupo = document.getElementById('editar-grupo-alumno').value;
+            const sexo = document.getElementById('editar-sexo-alumno').value;
+            const telefono = document.getElementById('editar-telefono-alumno').value;
+            const matricula = document.getElementById('editar-matricula-alumno').value;
+            const email = document.getElementById('editar-email-alumno').value;
+
+            fetch(`http://localhost:5000/alumnos/editar/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ nombre, ap_P, ap_M, carrera, grado, grupo, sexo, telefono, matricula, email })
+            })
+              .then(res => res.json())
+              .then(data => {
+                alert(data.result || data.error);
+                cerrarModalEditarAlumno();
+                buscarAlumnos();
+              });
+          };
+
+          // Maneja el submit del modal de docente
+          document.getElementById('form-editar-docente').onsubmit = function (e) {
+            e.preventDefault();
+            const id = document.getElementById('editar-id-docente').value;
+            const nombre = document.getElementById('editar-nombre-docente').value;
+            const ap_P = document.getElementById('editar-ap_P-docente').value;
+            const ap_M = document.getElementById('editar-ap_M-docente').value;
+            const carrera = document.getElementById('editar-carrera-docente').value;
+            const no_empleado = document.getElementById('editar-no_empleado-docente').value;
+            const grado_estudio = document.getElementById('editar-grado_estudio-docente').value;
+            const sexo = document.getElementById('editar-sexo-docente').value;
+            const telefono = document.getElementById('editar-telefono-docente').value;
+            const email = document.getElementById('editar-email-docente').value;
+
+            fetch(`http://localhost:5000/profesores/editar/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ nombre, ap_P, ap_M, carrera, no_empleado, grado_estudio, sexo, telefono, email })
+            })
+              .then(res => res.json())
+              .then(data => {
+                alert(data.result || data.error);
+                cerrarModalEditarDocente();
+                buscarDocentes();
+              });
+          };
+        });
+      </script>
+
+      <!-- Modal para editar alumno -->
+      <div id="modal-editar-alumno"
+        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+          <button onclick="cerrarModalEditarAlumno()"
+            class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
+          <h3 class="text-xl font-bold mb-4">Editar Alumno</h3>
+          <form id="form-editar-alumno" class="flex flex-col gap-3">
+            <!-- Campos de alumno -->
+            <input type="hidden" id="editar-id-alumno" />
+            <input id="editar-nombre-alumno" class="border rounded px-3 py-2 w-full" placeholder="Nombre" required />
+            <input id="editar-ap_P-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido paterno"
+              required />
+            <input id="editar-ap_M-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno"
+              required />
+            <input id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full" placeholder="Carrera" />
+            <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
+            <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
+            <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <input id="editar-telefono-alumno" class="border rounded px-3 py-2 w-full" placeholder="Teléfono"
+              required />
+            <input id="editar-matricula-alumno" class="border rounded px-3 py-2 w-full" placeholder="Matrícula" />
+            <input id="editar-email-alumno" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
+            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal para editar docente -->
+      <div id="modal-editar-docente"
+        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+          <button onclick="cerrarModalEditarDocente()"
+            class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
+          <h3 class="text-xl font-bold mb-4">Editar Docente</h3>
+          <form id="form-editar-docente" class="flex flex-col gap-3">
+            <!-- Campos de docente -->
+            <input type="hidden" id="editar-id-docente" />
+            <input id="editar-nombre-docente" placeholder="Nombre" required />
+            <input id="editar-ap_P-docente" placeholder="Apellido paterno" required />
+            <input id="editar-ap_M-docente" placeholder="Apellido materno" required />
+            <input id="editar-carrera-docente" placeholder="Carrera" />
+            <input id="editar-no_empleado-docente" placeholder="No. Empleado" />
+            <input id="editar-grado_estudio-docente" placeholder="Grado de estudio" />
+            <input id="editar-sexo-docente" placeholder="Sexo" />
+            <input id="editar-telefono-docente" placeholder="Teléfono" required />
+            <input id="editar-email-docente" placeholder="Correo" required />
+            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <!-- Conócenos -->
+        <div class="flex flex-col items-start w-full md:w-auto">
+          <h4 class="font-semibold underline">Conócenos</h4>
+          <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+          <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx"
+              class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Redes Sociales</h4>
+          <div class="flex gap-4 text-2xl">
+            <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
         </div>
 
-        <!-- Modal para editar docente -->
-        <div id="modal-editar-docente" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-          <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button onclick="cerrarModalEditarDocente()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
-            <h3 class="text-xl font-bold mb-4">Editar Docente</h3>
-            <form id="form-editar-docente" class="flex flex-col gap-3">
-              <!-- Campos de docente -->
-              <input type="hidden" id="editar-id-docente" />
-              <input id="editar-nombre-docente" placeholder="Nombre" required />
-              <input id="editar-ap_P-docente" placeholder="Apellido paterno" required />
-              <input id="editar-ap_M-docente" placeholder="Apellido materno" required />
-              <input id="editar-carrera-docente" placeholder="Carrera" />
-              <input id="editar-no_empleado-docente" placeholder="No. Empleado" />
-              <input id="editar-grado_estudio-docente" placeholder="Grado de estudio" />
-              <input id="editar-sexo-docente" placeholder="Sexo" />
-              <input id="editar-telefono-docente" placeholder="Teléfono" required />
-              <input id="editar-email-docente" placeholder="Correo" required />
-              <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
-            </form>
-          </div>
+        <!-- Ubicación -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Ubicación</h4>
+          <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+            class="text-3xl hover:text-[#F4A300]">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="ml-2 text-base">Ver en Google Maps</span>
+          </a>
         </div>
+      </footer>
+    </main>
+  </div>
+</body>
 
-        <!-- Footer -->
-        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-          <!-- Conócenos -->
-          <div class="flex flex-col items-start w-full md:w-auto">
-            <h4 class="font-semibold underline">Conócenos</h4>
-            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
-          </div>
-
-          <!-- Redes Sociales -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Redes Sociales</h4>
-            <div class="flex gap-4 text-2xl">
-              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-              <a href="https://www.instagram.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-instagram"></i></a>
-              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
-            </div>
-          </div>
-
-          <!-- Ubicación -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <p>Circuito de las Artes No. 104, Fracc. Universidades, Tlaxcala, Tlax., México</p>
-          </div>
-        </footer>
-      </main>
-    </div>
-  </body>
 </html>
