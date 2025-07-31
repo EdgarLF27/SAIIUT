@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-# Importamos el módulo de servicio que acabamos de crear
+
 import services.alumno_service as alumno_service
 
 alumnos_bp = Blueprint("alumnos", __name__)
@@ -58,7 +58,6 @@ def update_alumno_completo(id):
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
-
 
     # Validación de campos (para después)
     required_fields = [

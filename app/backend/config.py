@@ -1,7 +1,7 @@
 import pymysql
 import os
 from dotenv import load_dotenv
-from functools import wraps #importacion de decoradores
+from functools import wraps  # importacion de decoradores
 
 load_dotenv("credentials.env")
 
@@ -18,7 +18,9 @@ def get_db_connection():
     return pymysql.connect(**db_config)
 
 
-def with_db_connection(fn): #decorador para manejar la conexion a la base de datos, después de ahi se pasa la función que lo vaya a usar
+def with_db_connection(
+    fn,
+):  # decorador para manejar la conexion a la base de datos, después de ahi se pasa la función que lo vaya a usar
 
     @wraps(fn)
     def wrapper(*args, **kwargs):

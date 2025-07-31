@@ -36,7 +36,7 @@ def create_profesor():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
-   
+
     try:
         nuevo_profesor = profesor_service.create_profesor(data)
         if nuevo_profesor:
@@ -84,4 +84,6 @@ def delete_profesor(id):
         else:
             return jsonify({"error": "Error al eliminar o profesor no encontrado"}), 404
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
         return jsonify({"error": str(e)}), 500
