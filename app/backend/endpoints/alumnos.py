@@ -59,7 +59,8 @@ def update_alumno_completo(id):
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
 
-    # --- MEJORA: Validación explícita de campos ---
+
+    # Validación de campos (para después)
     required_fields = [
         "nombre",
         "ap_P",
