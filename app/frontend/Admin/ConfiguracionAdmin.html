@@ -60,11 +60,10 @@
       </aside>
 
       <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
-        <!-- Encabezado -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Configuración</h2> 
+            <h2 class="text-3xl font-bold">Configuración</h2>
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -75,8 +74,8 @@
 
         <!-- Grid de tarjetas -->
         <div class="flex justify-center items-center flex-1">
-          <div class="glass p-10 rounded-3xl shadow-lg border border-[#E0E0E0] w-4/5 h-[600px]">
-            <h3 class="text-2xl font-semibold mb-8 text-center">Usuario</h3>
+          <div class="glass p-8 rounded-2xl shadow-lg border border-[#E0E0E0] w-full max-w-max h-auto">
+            <h3 class="text-2xl font-semibold mb-6 text-center">¡Admin!</h3>
 
             <!-- Interfaz de edición de usuario -->
             <div class="flex flex-col items-center w-full">
@@ -87,41 +86,37 @@
                 </div>
                 <button class="px-6 py-2 border rounded bg-white hover:bg-gray-100 text-base">Subir imagen</button>
               </div>
-<!-- Formulario de edición -->
-<form class="w-full max-w-2xl flex flex-col items-center space-y-6">
-  <!-- Nombre -->
-  <div class="relative w-full">
-    <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-    <input type="text" placeholder="Nombre..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-  </div>
 
-  <!-- Contraseña y Correo -->
-  <div class="flex w-full space-x-4">
-    <!-- Contraseña -->
-    <div class="relative w-full">
-      <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-      <input type="password" placeholder="Contraseña..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-    </div>
-    <!-- Correo -->
-    <div class="relative w-full">
-      <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-      <input type="email" placeholder="Correo..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-    </div>
-  </div>
-
-  <!-- Teléfono -->
-  <div class="relative w-full">
-    <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
-    <input type="text" placeholder="Teléfono..." class="pl-12 pr-4 py-3 w-full border border-gray-300 rounded text-lg" />
-  </div>
-
-  <!-- Botón -->
-  <button type="submit" class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
-    Guardar
-  </button>
-</form>
-
-
+              <!-- Formulario de edición -->
+              <form class="w-full max-w-2xl flex flex-col items-center space-y-6">
+                <!-- Matrícula -->
+                <div class="flex items-center w-full ">
+                  <i class="fas fa-user mr-3 text-gray-500 text-lg"></i>
+                  <input type="text" placeholder="No. Empleado" class="placeholder-white rounded bg-gray-300 flex-1 px-4 py-3 border-none focus:outline-none text-lg" readonly />
+                  <i class="fas fa-lock ml-3 text-gray-500 text-lg"></i>
+                </div>
+                <!-- Contraseña, correo -->
+                <div class="flex w-full space-x-4">
+                  <div class="flex items-center flex-1">
+                    <i class="fas fa-lock mr-3 text-gray-500 text-lg"></i>
+                    <input type="password" placeholder="Contraseña..." class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
+                  </div>
+                  <div class="flex items-center flex-1">
+                    <span class="mr-3 text-gray-500 text-lg">@</span>
+                    <input type="email" placeholder="correo..." class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
+                  </div>
+                </div>
+                <!-- Teléfono -->
+                <div class="flex items-center w-full">
+                  <i class="fas fa-phone mr-3 text-gray-500 text-lg"></i>
+                  <input type="text" placeholder="Telefono..." class="flex-1 border border-gray-300 rounded px-4 py-3 text-lg" />
+                </div>
+                <!-- Botón confirmar -->
+                <button type="submit" class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">

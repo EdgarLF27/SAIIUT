@@ -83,6 +83,9 @@
             <button id="tab-docente" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
               Docente
             </button>
+            <button id="tab-admin" class="text-2xl font-bold border-b-4 border-transparent pb-1 text-gray-400 transition-all duration-300 focus:outline-none" type="button">
+              Administrador
+            </button>
           </div>
 
           <!-- Contenido dinámico según tab -->
@@ -160,22 +163,62 @@
               </div>
               <div id="paginador-docentes" class="flex justify-center mt-4"></div>
             </div>
+
+            <!-- Sección Admin -->
+            <div id="form-admin" class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
+              <!-- Buscador centrado con lupa (igual que Docente) -->
+              <div class="w-full flex justify-center mb-6">
+                <div class="relative w-full md:w-1/2">
+                  <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                    <i class="fas fa-search"></i>
+                  </span>
+                  <input 
+                    type="text" 
+                    placeholder="Buscar..." 
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
+                    id="buscador-admins"
+                  />
+                </div>
+              </div>
+              <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <table class="min-w-full">
+                  <thead class="bg-[#2D3E34] text-white">
+                    <tr>
+                      <th class="py-3 px-4 text-left">Nombre</th>
+                      <th class="py-3 px-4 text-left">Apellido</th>
+                      <th class="py-3 px-4 text-left">No. Empleado</th>
+                      <th class="py-3 px-4 text-left">Teléfono</th>
+                      <th class="py-3 px-4 text-left">Correo</th>
+                      <th class="py-3 px-4 text-left">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-[#2D3E34]" id="tbody-admins">
+                    <!-- Aquí se cargan los admins -->
+                  </tbody>
+                </table>
+              </div>
+              <div id="paginador-admins" class="flex justify-center mt-4"></div>
+            </div>
           </div>
         </div>
 
         <!-- Script para tabs -->
         <script>
-          // Simple tab/slide logic
+          // Simple tab/slide logic para 3 tabs
           const tabAlumnado = document.getElementById('tab-alumnado');
           const tabDocente = document.getElementById('tab-docente');
+          const tabAdmin = document.getElementById('tab-admin');
           const formAlumnado = document.getElementById('form-alumnado');
           const formDocente = document.getElementById('form-docente');
+          const formAdmin = document.getElementById('form-admin');
 
           tabAlumnado.addEventListener('click', () => {
             tabAlumnado.classList.add('border-[#2D3E34]', 'text-black');
             tabAlumnado.classList.remove('text-gray-400', 'border-transparent');
             tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
             tabDocente.classList.add('text-gray-400', 'border-transparent');
+            tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+            tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
             formAlumnado.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
             formAlumnado.classList.add('translate-x-0', 'opacity-100');
@@ -185,6 +228,10 @@
             formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
             formDocente.style.zIndex = 1;
 
+            formAdmin.classList.remove('translate-x-0', 'opacity-100');
+            formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAdmin.style.zIndex = 0;
+
             cargarAlumnos();
           });
 
@@ -193,6 +240,8 @@
             tabDocente.classList.remove('text-gray-400', 'border-transparent');
             tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
             tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+            tabAdmin.classList.remove('border-[#2D3E34]', 'text-black');
+            tabAdmin.classList.add('text-gray-400', 'border-transparent');
 
             formDocente.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
             formDocente.classList.add('translate-x-0', 'opacity-100');
@@ -202,7 +251,34 @@
             formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
             formAlumnado.style.zIndex = 1;
 
+            formAdmin.classList.remove('translate-x-0', 'opacity-100');
+            formAdmin.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAdmin.style.zIndex = 0;
+
             cargarDocentes();
+          });
+
+          tabAdmin.addEventListener('click', () => {
+            tabAdmin.classList.add('border-[#2D3E34]', 'text-black');
+            tabAdmin.classList.remove('text-gray-400', 'border-transparent');
+            tabAlumnado.classList.remove('border-[#2D3E34]', 'text-black');
+            tabAlumnado.classList.add('text-gray-400', 'border-transparent');
+            tabDocente.classList.remove('border-[#2D3E34]', 'text-black');
+            tabDocente.classList.add('text-gray-400', 'border-transparent');
+
+            formAdmin.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAdmin.classList.add('translate-x-0', 'opacity-100');
+            formAdmin.style.zIndex = 2;
+
+            formAlumnado.classList.remove('translate-x-0', 'opacity-100');
+            formAlumnado.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formAlumnado.style.zIndex = 1;
+
+            formDocente.classList.remove('translate-x-0', 'opacity-100');
+            formDocente.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            formDocente.style.zIndex = 0;
+
+            cargarAdmins();
           });
         </script>
 
@@ -615,28 +691,37 @@ document.getElementById('form-editar-docente').onsubmit = function(e) {
 </div>
 
         <!-- Footer -->
-        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <footer
+          class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
           <!-- Conócenos -->
           <div class="flex flex-col items-start w-full md:w-auto">
             <h4 class="font-semibold underline">Conócenos</h4>
             <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx"
+                class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
           </div>
 
           <!-- Síguenos -->
           <div class="flex flex-col items-start md:items-center w-full md:w-auto">
             <h4 class="font-semibold underline mb-2">Síguenos</h4>
             <div class="flex gap-4 text-2xl">
-              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                  class="fab fa-whatsapp"></i></a>
             </div>
           </div>
 
           <!-- Ubicación -->
           <div class="flex flex-col items-start md:items-center w-full md:w-auto">
             <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <p>Circuito de las Artes No. 104, Fracc. Universidades, Tlaxcala, Tlax., México</p>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+              class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
           </div>
         </footer>
       </main>
