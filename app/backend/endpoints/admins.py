@@ -5,16 +5,20 @@ admins_bp = Blueprint("admins", __name__)
 
 
 # Obtener todos los admins
-@admins_bp.route("/todos", methods=["GET"])
+@admins_bp.route('/todos', methods=['GET'])
 def get_admins():
     try:
-        admins = admin_service.get_all_admins()
+        # Recogemos el filtro de nombre de la URL
+        filtros = {
+            'nombre': request.args.get('nombre')
+        }
+        admins = admin_service.get_all_admins(filtros)
         if admins is not None:
             return jsonify(admins), 200
         else:
-            return jsonify({"error": "Error al obtener los administradores"}), 500
+            return jsonify({'error': 'Error al obtener los administradores'}), 500
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({'error': str(e)}), 500
 
 
 # Obtener un admin por ID

@@ -2,8 +2,35 @@ from config import with_db_connection
 
 
 @with_db_connection
-def get_all_alumnos(cursor):
-    cursor.execute("SELECT * FROM alumnos")
+def get_all_alumnos(cursor, filtros=None):
+    sql = "SELECT * FROM alumnos"
+    conditions = []
+    params = []
+
+    if filtros:
+        if filtros.get('nombre'):
+            # Busca el nombre en cualquiera de los campos de nombre o apellido
+            conditions.append("(nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s)")
+            search_nombre = f"%{filtros['nombre']}%"
+            params.extend([search_nombre, search_nombre, search_nombre])
+        
+        if filtros.get('apellido'):
+            conditions.append("(ap_P LIKE %s OR ap_M LIKE %s)")
+            search_apellido = f"%{filtros['apellido']}%"
+            params.extend([search_apellido, search_apellido])
+
+        if filtros.get('carrera'):
+            conditions.append("carrera = %s")
+            params.append(filtros['carrera'])
+        
+        if filtros.get('matricula'):
+            conditions.append("matricula = %s")
+            params.append(filtros['matricula'])
+
+    if conditions:
+        sql += " WHERE " + " AND ".join(conditions)
+
+    cursor.execute(sql, tuple(params))
     return cursor.fetchall()
 
 

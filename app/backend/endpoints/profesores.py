@@ -8,7 +8,11 @@ profesores_bp = Blueprint("profesores", __name__)
 @profesores_bp.route("/todos", methods=["GET"])
 def get_profesores():
     try:
-        profesores = profesor_service.get_all_profesores()
+        # Recogemos el filtro de nombre de la URL
+        filtros = {
+            'nombre': request.args.get('nombre')
+        }
+        profesores = profesor_service.get_all_profesores(filtros)
         if profesores is not None:
             return jsonify(profesores), 200
         else:

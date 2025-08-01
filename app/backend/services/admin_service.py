@@ -2,11 +2,20 @@ from config import with_db_connection
 
 
 @with_db_connection
-def get_all_admins(cursor):
-    # Excluimos el campo 'password' por seguridad
-    cursor.execute(
-        "SELECT id_admins, nombre, ap_P, ap_M, direccion, telefono, email, sexo, no_empleado, grado_estudios FROM admins"
-    )
+def get_all_admins(cursor, filtros=None):
+    sql = "SELECT id_admins, nombre, ap_P, ap_M, direccion, telefono, email, sexo, no_empleado, grado_estudios FROM admins"
+    conditions = []
+    params = []
+
+    if filtros and filtros.get('nombre'):
+        conditions.append("(nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s)")
+        search_term = f"%{filtros['nombre']}%"
+        params.extend([search_term, search_term, search_term])
+
+    if conditions:
+        sql += " WHERE " + " AND ".join(conditions)
+    
+    cursor.execute(sql, tuple(params))
     return cursor.fetchall()
 
 
