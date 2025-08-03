@@ -15,6 +15,8 @@ services:
     volumes:
       - ./app/backend:/app
     working_dir: /app
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
     command: python app.py
     ports:
       - "5000:5000"
