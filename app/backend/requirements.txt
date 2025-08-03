@@ -3,3 +3,5 @@ pymysql
 flask-cors
 cryptography
 python-dotenv
+black
+isort

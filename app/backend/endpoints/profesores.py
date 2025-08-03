@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
+
 import services.profesor_service as profesor_service
 
 profesores_bp = Blueprint("profesores", __name__)
@@ -8,17 +9,16 @@ profesores_bp = Blueprint("profesores", __name__)
 @profesores_bp.route("/todos", methods=["GET"])
 def get_profesores():
     try:
-        # Recogemos el filtro de nombre de la URL
-        filtros = {
-            'nombre': request.args.get('nombre')
-        }
+        filtros = {"nombre": request.args.get("nombre")}
+        filtros = {k: v for k, v in filtros.items() if v}
+
         profesores = profesor_service.get_all_profesores(filtros)
         if profesores is not None:
             return jsonify(profesores), 200
         else:
             return jsonify({"error": "Error al obtener los profesores"}), 500
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
 # Ruta para obtener un profesor por ID

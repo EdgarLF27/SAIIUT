@@ -1,5 +1,4 @@
-from flask import Blueprint, request, jsonify
-
+from flask import Blueprint, jsonify, request
 
 import services.alumno_service as alumno_service
 
@@ -7,26 +6,27 @@ alumnos_bp = Blueprint("alumnos", __name__)
 
 
 # Ruta para obtener todos los alumnos
-@alumnos_bp.route('/todos', methods=['GET'])
+@alumnos_bp.route("/todos", methods=["GET"])
 def get_alumnos():
     try:
-        # Recogemos los posibles filtros de los argumentos de la URL
+        # Recolectamos los argumentos de la URL en un diccionario
         filtros = {
-            'nombre': request.args.get('nombre'),
-            'apellido': request.args.get('apellido'),
-            'carrera': request.args.get('carrera'),
-            'matricula': request.args.get('matricula')
+            "nombre": request.args.get("nombre"),
+            "apellido": request.args.get("apellido"),
+            "matricula": request.args.get("matricula"),
+            "carrera": request.args.get("carrera"),
         }
-        # Pasamos el diccionario de filtros al servicio
+        # Eliminamos los filtros que no se hayan proporcionado (valor None o vacío)
+        filtros = {k: v for k, v in filtros.items() if v}
+
         alumnos = alumno_service.get_all_alumnos(filtros)
-        
+
         if alumnos is not None:
             return jsonify(alumnos), 200
         else:
-            # Este caso ahora es menos probable, a menos que haya un error de BD
-            return jsonify({'error': 'Error al obtener los alumnos'}), 500
+            return jsonify({"error": "Error al obtener los alumnos"}), 500
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
 # Ruta para obtener un alumno por ID

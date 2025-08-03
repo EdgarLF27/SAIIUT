@@ -2,30 +2,31 @@ from config import with_db_connection
 
 
 @with_db_connection
-def get_all_alumnos(cursor, filtros=None):
+def get_all_alumnos(cursor, filtros):
     sql = "SELECT * FROM alumnos"
-    conditions = []
     params = []
+    conditions = []
 
-    if filtros:
-        if filtros.get('nombre'):
-            # Busca el nombre en cualquiera de los campos de nombre o apellido
-            conditions.append("(nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s)")
-            search_nombre = f"%{filtros['nombre']}%"
-            params.extend([search_nombre, search_nombre, search_nombre])
-        
-        if filtros.get('apellido'):
-            conditions.append("(ap_P LIKE %s OR ap_M LIKE %s)")
-            search_apellido = f"%{filtros['apellido']}%"
-            params.extend([search_apellido, search_apellido])
+    # Filtro por nombre o apellido (búsqueda parcial)
+    if filtros.get("nombre"):
+        conditions.append("(nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s)")
+        search_term = f"%{filtros['nombre']}%"
+        params.extend([search_term, search_term, search_term])
 
-        if filtros.get('carrera'):
-            conditions.append("carrera = %s")
-            params.append(filtros['carrera'])
-        
-        if filtros.get('matricula'):
-            conditions.append("matricula = %s")
-            params.append(filtros['matricula'])
+    if filtros.get("apellido"):
+        conditions.append("(ap_P LIKE %s OR ap_M LIKE %s)")
+        search_term = f"%{filtros['apellido']}%"
+        params.extend([search_term, search_term])
+
+    # Filtro por matrícula (búsqueda parcial, por si escriben solo el inicio)
+    if filtros.get("matricula"):
+        conditions.append("matricula LIKE %s")
+        params.append(f"%{filtros['matricula']}%")
+
+    # Filtro por carrera (búsqueda exacta)
+    if filtros.get("carrera"):
+        conditions.append("carrera = %s")
+        params.append(filtros["carrera"])
 
     if conditions:
         sql += " WHERE " + " AND ".join(conditions)
