@@ -1,26 +1,22 @@
 from flask import Blueprint, jsonify, request
 
 import services.alumno_service as alumno_service
+from utils.validators import validate_alumno_data
 
 alumnos_bp = Blueprint("alumnos", __name__)
 
 
-# Ruta para obtener todos los alumnos
 @alumnos_bp.route("/todos", methods=["GET"])
 def get_alumnos():
     try:
-        # Recolectamos los argumentos de la URL en un diccionario
         filtros = {
             "nombre": request.args.get("nombre"),
             "apellido": request.args.get("apellido"),
             "matricula": request.args.get("matricula"),
             "carrera": request.args.get("carrera"),
         }
-        # Eliminamos los filtros que no se hayan proporcionado (valor None o vacío)
         filtros = {k: v for k, v in filtros.items() if v}
-
         alumnos = alumno_service.get_all_alumnos(filtros)
-
         if alumnos is not None:
             return jsonify(alumnos), 200
         else:
@@ -29,11 +25,9 @@ def get_alumnos():
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-# Ruta para obtener un alumno por ID
 @alumnos_bp.route("/buscar/<int:id>", methods=["GET"])
 def get_alumno(id):
     try:
-        # Llamamos a la función del servicio
         alumno = alumno_service.get_alumno_by_id(id)
         if alumno:
             return jsonify(alumno), 200
@@ -43,12 +37,16 @@ def get_alumno(id):
         return jsonify({"error": str(e)}), 500
 
 
-# Ruta para insertar un nuevo alumno
 @alumnos_bp.route("/insertar", methods=["POST"])
 def create_alumno_completo():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
+
+    # --- PASO DE VALIDACIÓN ---
+    errors = validate_alumno_data(data)
+    if errors:
+        return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
         nuevo_alumno = alumno_service.create_alumno(data)
@@ -61,52 +59,28 @@ def create_alumno_completo():
         return jsonify({"error": str(e)}), 500
 
 
-# Ruta para actualizar un alumno
 @alumnos_bp.route("/editar/<int:id>", methods=["PUT"])
 def update_alumno_completo(id):
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
 
-    # Validación de campos (para después)
-    required_fields = [
-        "nombre",
-        "ap_P",
-        "ap_M",
-        "matricula",
-        "telefono",
-        "email",
-        "carrera",
-        "grado",
-        "grupo",
-        "sexo",
-    ]
-    for field in required_fields:
-        if field not in data:
-            return jsonify({"error": f"Falta el campo obligatorio: '{field}'"}), 400
+    # --- PASO DE VALIDACIÓN (REUTILIZADO) ---
+    errors = validate_alumno_data(data)
+    if errors:
+        return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
-        # Llamamos a la función del servicio
         actualizado = alumno_service.update_alumno(id, data)
         if actualizado:
-            # Opcional: devolver el objeto actualizado
             alumno_actualizado = alumno_service.get_alumno_by_id(id)
             return jsonify(alumno_actualizado), 200
         else:
-            return (
-                jsonify(
-                    {
-                        "error": "Alumno no encontrado o los datos enviados son idénticos a los existentes"
-                    }
-                ),
-                404,
-            )
+            return jsonify({"error": "Alumno no encontrado o datos sin cambios"}), 404
     except Exception as e:
-        print(f"Error no esperado en update_alumno_completo: {e}")
-        return jsonify({"error": "Ocurrió un error interno en el servidor"}), 500
+        return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-# Ruta para eliminar un alumno
 @alumnos_bp.route("/eliminar/<int:id>", methods=["DELETE"])
 def delete_alumno(id):
     try:
@@ -114,6 +88,6 @@ def delete_alumno(id):
         if eliminado:
             return jsonify({"result": "Alumno eliminado correctamente"}), 200
         else:
-            return jsonify({"error": "Error al eliminar el alumno"}), 500
+            return jsonify({"error": "Error al eliminar o alumno no encontrado"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500

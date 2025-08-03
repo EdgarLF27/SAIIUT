@@ -1,17 +1,16 @@
 from flask import Blueprint, jsonify, request
 
 import services.profesor_service as profesor_service
+from utils.validators import validate_profesor_data
 
 profesores_bp = Blueprint("profesores", __name__)
 
 
-# Ruta para obtener todos los profesores
 @profesores_bp.route("/todos", methods=["GET"])
 def get_profesores():
     try:
         filtros = {"nombre": request.args.get("nombre")}
         filtros = {k: v for k, v in filtros.items() if v}
-
         profesores = profesor_service.get_all_profesores(filtros)
         if profesores is not None:
             return jsonify(profesores), 200
@@ -21,7 +20,6 @@ def get_profesores():
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-# Ruta para obtener un profesor por ID
 @profesores_bp.route("/buscar/<int:id>", methods=["GET"])
 def get_profesor(id):
     try:
@@ -34,12 +32,15 @@ def get_profesor(id):
         return jsonify({"error": str(e)}), 500
 
 
-# Ruta para insertar un nuevo profesor
 @profesores_bp.route("/insertar", methods=["POST"])
 def create_profesor():
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
+
+    errors = validate_profesor_data(data)
+    if errors:
+        return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
         nuevo_profesor = profesor_service.create_profesor(data)
@@ -52,12 +53,15 @@ def create_profesor():
         return jsonify({"error": str(e)}), 500
 
 
-# Ruta para actualizar un profesor
 @profesores_bp.route("/editar/<int:id>", methods=["PUT"])
 def update_profesor(id):
     data = request.get_json()
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
+
+    errors = validate_profesor_data(data)
+    if errors:
+        return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
         actualizado = profesor_service.update_profesor(id, data)
@@ -65,20 +69,11 @@ def update_profesor(id):
             profesor_actualizado = profesor_service.get_profesor_by_id(id)
             return jsonify(profesor_actualizado), 200
         else:
-            return (
-                jsonify(
-                    {
-                        "error": "Profesor no encontrado o los datos enviados son idénticos a los existentes"
-                    }
-                ),
-                404,
-            )
+            return jsonify({"error": "Profesor no encontrado o datos sin cambios"}), 404
     except Exception as e:
-        print(f"Error no esperado en update_profesor: {e}")
-        return jsonify({"error": "Ocurrió un error interno en el servidor"}), 500
+        return jsonify({"error": str(e)}), 500
 
 
-# Ruta para eliminar un profesor
 @profesores_bp.route("/eliminar/<int:id>", methods=["DELETE"])
 def delete_profesor(id):
     try:
@@ -88,6 +83,4 @@ def delete_profesor(id):
         else:
             return jsonify({"error": "Error al eliminar o profesor no encontrado"}), 404
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
         return jsonify({"error": str(e)}), 500
