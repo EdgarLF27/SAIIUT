@@ -556,6 +556,27 @@
           });
         }
 
+        // Función para validar email: debe tener @ y dominio válido (gmail, outlook, etc)
+        function validateEmailInput(input) {
+          input.addEventListener('input', function () {
+            const value = input.value.trim();
+            // Permite dominios comunes, puedes agregar más si lo deseas
+            const emailRegex = /^[\w\.-]+@(?:gmail|outlook|hotmail|yahoo|edu|uttlaxcala)\.[a-z]{2,}$/i;
+            if (value === '') {
+              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+              input.classList.add('border-gray-300');
+              return;
+            }
+            if (emailRegex.test(value)) {
+              input.classList.remove('border-red-500', 'bg-red-50');
+              input.classList.add('border-green-500', 'bg-green-50');
+            } else {
+              input.classList.remove('border-green-500', 'bg-green-50');
+              input.classList.add('border-red-500', 'bg-red-50');
+            }
+          });
+        }
+
         // Aplica la validación a los inputs relevantes de todos los formularios
         document.addEventListener('DOMContentLoaded', function () {
           // IDs de campos numéricos por formulario
@@ -571,6 +592,17 @@
           // Validación especial para matrícula
           const matriculaInput = document.getElementById('matricula_alumno');
           if (matriculaInput) validateMatriculaInput(matriculaInput);
+
+          // Validación para emails
+          const emailFields = [
+            'email_alumno',
+            'email_docente',
+            'email_admin'
+          ];
+          emailFields.forEach(function (id) {
+            const input = document.getElementById(id);
+            if (input) validateEmailInput(input);
+          });
         });
       </script>
     </main>
