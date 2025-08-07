@@ -151,7 +151,7 @@
                 </button>
               </div>
             </div>
-            <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white h-96">
+            <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white">
               <table class="min-w-full">
                 <thead class="bg-[#2D3E34] text-white">
                   <tr>
@@ -420,8 +420,8 @@
               }</td><td class="py-3 px-4">${a.telefono
               }</td><td class="py-3 px-4">${a.matricula || ""
               }</td><td class="py-3 px-4">${a.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarAlumno(${a.id_alumno
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarAlumno(${a.id_alumno
+              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300] transition duration-200" onclick="editarAlumno(${a.id_alumno
+              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300] transition duration-200" onclick="eliminarAlumno(${a.id_alumno
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -717,7 +717,7 @@
 
       <!-- Modales de Edición -->
       <div id="modal-editar-alumno"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAlumno()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -731,22 +731,37 @@
               required />
             <input id="editar-ap_M-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno"
               required />
-            <input id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full" placeholder="Carrera" />
-            <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
+            <select id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full">
+              <option>Software</option>
+              <option>Redes</option>
+              <option>Entorno virtuales</option>
+            </select>
+            <select id="editar-grado-alumno" class="border rounded px-3 py-2 w-full">
+              <option>1ro</option>
+              <option>2do</option>
+              <option>Opciones en camino</option>
+            </select>
             <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
-            <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <select id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
             <input id="editar-telefono-alumno" class="border rounded px-3 py-2 w-full" placeholder="Teléfono"
               required />
             <input id="editar-matricula-alumno" class="border rounded px-3 py-2 w-full" placeholder="Matrícula" />
             <input id="editar-email-alumno" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
         </div>
       </div>
+      <!-- Fin modal alumno -->
+
+      <!-- Modal para editar docente -->
       <div id="modal-editar-docente"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarDocente()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -764,19 +779,29 @@
               required />
             <input id="editar-email-docente" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
             <input id="editar-no_empleado-docente" class="border rounded px-3 py-2 w-full" placeholder="No. Empleado" />
-            <input id="editar-grado_estudio-docente" class="border rounded px-3 py-2 w-full"
-              placeholder="Grado de estudio" />
-            <input id="editar-sexo-docente" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <input id="editar-grado_estudio-docente" class="border rounded px-3 py-2 w-full" placeholder="Grado de estudio" />
+            <select id="editar-sexo-docente" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
+            <select id="editar-materia-docente" class="border rounded px-3 py-2 w-full">
+              <option>POO</option>
+              <option>DB</option>
+              <option>Humanidades</option>
+            </select>
             <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
         </div>
       </div>
+      <!-- Fin modal docente -->
+
 
       <!-- INICIO: NUEVO MODAL PARA ADMIN -->
       <div id="modal-editar-admin"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAdmin()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -793,7 +818,11 @@
             <input id="editar-direccion-admin" class="border rounded px-3 py-2 w-full" placeholder="Dirección" />
             <input id="editar-telefono-admin" class="border rounded px-3 py-2 w-full" placeholder="Teléfono" required />
             <input id="editar-email-admin" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
-            <input id="editar-sexo-admin" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <select id="editar-sexo-admin" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
             <input id="editar-no_empleado-admin" class="border rounded px-3 py-2 w-full" placeholder="No. Empleado" />
             <input id="editar-grado_estudios-admin" class="border rounded px-3 py-2 w-full"
               placeholder="Grado de estudios" />
@@ -806,10 +835,33 @@
       <!-- FIN: NUEVO MODAL PARA ADMIN -->
 
       <!-- Footer -->
-      <footer
-        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-        <!-- ... tu footer ... -->
-      </footer>
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
     </main>
   </div>
 </body>
