@@ -449,8 +449,8 @@
               }</td><td class="py-3 px-4">${d.no_empleado || ""
               }</td><td class="py-3 px-4">${d.telefono
               }</td><td class="py-3 px-4">${d.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarDocente(${d.id_profesor
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarDocente(${d.id_profesor
+              }</td><td class="py-3 px-4 flex gap-3"><button class="transition duration-200 hover:text-[#F4A300]" onclick="editarDocente(${d.id_profesor
+              })"><i class="fas fa-edit"></i></button><button class="transition duration-200 hover:text-[#F4A300]" onclick="eliminarDocente(${d.id_profesor
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -478,8 +478,8 @@
               }</td><td class="py-3 px-4">${admin.no_empleado || ""
               }</td><td class="py-3 px-4">${admin.telefono
               }</td><td class="py-3 px-4">${admin.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarAdmin(${admin.id_admins
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarAdmin(${admin.id_admins
+              }</td><td class="py-3 px-4 flex gap-3"><button class="transition duration-200 hover:text-[#F4A300]" onclick="editarAdmin(${admin.id_admins
+              })"><i class="fas fa-edit"></i></button><button class="transition duration-200 hover:text-[#F4A300]" onclick="eliminarAdmin(${admin.id_admins
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -790,7 +790,7 @@
               <option>DB</option>
               <option>Humanidades</option>
             </select>
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
@@ -826,7 +826,7 @@
             <input id="editar-no_empleado-admin" class="border rounded px-3 py-2 w-full" placeholder="No. Empleado" />
             <input id="editar-grado_estudios-admin" class="border rounded px-3 py-2 w-full"
               placeholder="Grado de estudios" />
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
