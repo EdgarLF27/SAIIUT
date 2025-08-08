@@ -32,40 +32,39 @@
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
-    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-      <div>
-        <div class="mb-12 text-center">
-          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
+              <span class="font-medium">Materias</span>
+            </a>
+            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
         </div>
-        <nav class="space-y-4">
-          <a href="IndexAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-home w-5 h-5 text-white"></i>
-            <span class="font-medium">Inicio</span>
-          </a>
-          <a href="RegistroUsuarios.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-            <span class="font-medium">Registros</span>
-          </a>
-          <a href="CalificacionesIndex.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-            <span class="font-medium">Calificaciones</span>
-          </a>
-          <a href="UsuariosAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-            <span class="font-medium">Usuarios</span>
-          </a>
-          <a href="ConfiguracionAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-cog w-5 h-5 text-white"></i>
-            <span class="font-medium">Configuración</span>
-          </a>
-        </nav>
-      </div>
-    </aside>
+      </aside>
 
     <!-- Contenido principal -->
     <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
@@ -717,7 +716,7 @@
 
       <!-- Modales de Edición -->
       <div id="modal-editar-alumno"
-        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAlumno()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -761,7 +760,7 @@
 
       <!-- Modal para editar docente -->
       <div id="modal-editar-docente"
-        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarDocente()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -801,7 +800,7 @@
 
       <!-- INICIO: NUEVO MODAL PARA ADMIN -->
       <div id="modal-editar-admin"
-        class="fixed inset-0 bg-transparent backdrop-blur-md flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAdmin()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
