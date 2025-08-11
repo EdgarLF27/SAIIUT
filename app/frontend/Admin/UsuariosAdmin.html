@@ -70,6 +70,42 @@
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
             </div>
           </div>
+          <nav class="space-y-4">
+            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Edición de usuarios</h2> 
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
 
@@ -162,7 +198,6 @@
             </div>
           </div>
         </div>
-
         <!-- Script para tabs -->
         <script>
           // Simple tab/slide logic
@@ -589,6 +624,63 @@ document.getElementById('form-editar-docente').onsubmit = function(e) {
       <input id="editar-email-alumno" placeholder="Correo" required />
       <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
     </form>
+  </div>
+</div>
+
+<!-- Modal para editar docente -->
+<div id="modal-editar-docente" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+    <button onclick="cerrarModalEditarDocente()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
+    <h3 class="text-xl font-bold mb-4">Editar Docente</h3>
+    <form id="form-editar-docente" class="flex flex-col gap-3">
+      <!-- Campos de docente -->
+      <input type="hidden" id="editar-id-docente" />
+      <input id="editar-nombre-docente" placeholder="Nombre" required />
+      <input id="editar-ap_P-docente" placeholder="Apellido paterno" required />
+      <input id="editar-ap_M-docente" placeholder="Apellido materno" required />
+      <input id="editar-carrera-docente" placeholder="Carrera" />
+      <input id="editar-no_empleado-docente" placeholder="No. Empleado" />
+      <input id="editar-grado_estudio-docente" placeholder="Grado de estudio" />
+      <input id="editar-sexo-docente" placeholder="Sexo" />
+      <input id="editar-telefono-docente" placeholder="Teléfono" required />
+      <input id="editar-email-docente" placeholder="Correo" required />
+      <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">Guardar</button>
+    </form>
+  </div>
+</div>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+            <p>
+              <i class="fas fa-phone mr-2 text-[#2D3E34]"></i>
+              <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a>
+            </p>
+            <p>
+              <i class="fas fa-envelope mr-2 text-[#2D3E34]"></i>
+              <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a>
+            </p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <p>Circuito de las Artes No. 104, Fracc. Universidades, Tlaxcala, Tlax., México</p>
+          </div>
+        </footer>
+    </main>
   </div>
 </div>
 
