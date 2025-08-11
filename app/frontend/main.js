@@ -10,7 +10,7 @@ function createWindow() {
     }
   });
 
-  win.loadFile('index.html');
+  win.loadFile('login.html'); // Carga el archivo HTML de inicio de sesión
 }
 
 app.whenReady().then(() => {
