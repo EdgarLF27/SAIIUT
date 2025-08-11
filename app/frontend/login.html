@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,66 +14,119 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-10 rounded-lg shadow-md w-full max-w-md">
         <!-- Encabezado -->
         <div class="text-center mb-8">
-                    <!-- Título del formulario -->
-        <h1 class="text-xl font-semibold text-gray-800 mb-5 text-center">Inicio de Sesión</h1>
+            <!-- Título del formulario -->
+            <h1 class="text-xl font-semibold text-gray-800 mb-5 text-center">Inicio de Sesión</h1>
             <svg class="w-24 h-24 mx-auto text-[#2D3E34]" viewBox="0 0 448 512">
-                <path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                <path fill="currentColor"
+                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
             </svg>
         </div>
-        
+
         <!-- Formulario -->
-        <form class="space-y-4">
+        <form id="login-form" class="space-y-4">
             <!-- Campo de entrada -->
-    <div class="flex-col space-y-4">
-    <!-- Campo de usuario con icono -->
-        <div class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
-            <div class="pl-3">
-                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
-                </svg>
+            <div class="flex-col space-y-4">
+                <!-- Campo de usuario con icono -->
+                <div
+                    class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
+                    <div class="pl-3">
+                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor"
+                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                        </svg>
+                    </div>
+                    <!-- Campo de usuario -->
+                    <input type="text" id="usuario" placeholder="Usuario..."
+                        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
+                </div>
+                <!-- Campo de contraseña con icono -->
+                <div
+                    class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
+                    <div class="pl-3">
+                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor"
+                                d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" />
+                        </svg>
+                    </div>
+                    <!-- Campo de contraseña -->
+                    <input type="password" id="contraseña" placeholder="Contraseña..."
+                        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
+                </div>
+                <!-- Enlace de recuperación (sin cambios) -->
+                <p class="text-center text-sm">
+                    <a class="text-gray-800">¿Olvidaste tu contraseña?</a> <a href=""
+                        class="text-blue-600 hover:underline cursor-pointer">Recuperala aquí</a>
+                </p>
             </div>
-    <!-- Campo de contraseña -->
-    <input
-        type="text" 
-        placeholder="Usuario..." 
-        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
-    </div>
-    <!-- Campo de contraseña con icono -->
-    <div class="flex items-center space-x-2 border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
-        <div class="pl-3">
-            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path fill="currentColor" d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
-            </svg>
-        </div>
-    <!-- Campo de contraseña -->
-    <input
-        type="password" 
-        placeholder="Contraseña..." 
-        class="flex-1 py-2 pr-3 border-none focus:outline-none bg-transparent">
-    </div>
-    <!-- Enlace de recuperación (sin cambios) -->
-    <p class="text-center text-sm">
-        <a class="text-gray-800">¿Olvidaste tu contraseña?</a> <a href="" class="text-blue-600 hover:underline cursor-pointer">Recuperala aquí</a>
-    </p>
-</div>
             <!-- Botón de entrada -->
-            <button
-                href="index.html"
-                type="submit" 
+            <button type="submit"
                 class="w-full bg-[#2D3E34] text-white py-2 px-4 rounded-md hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
                 Entrar
             </button>
         </form>
     </div>
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        window.location.href = 'index.html';
-    });
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const usuario = document.getElementById('usuario').value;
+            const contraseña = document.getElementById('contraseña').value;
+            const submitButton = e.target.querySelector('button[type="submit"]');
+
+            // Deshabilitar botón para evitar múltiples envíos
+            submitButton.disabled = true;
+            submitButton.textContent = 'Ingresando...';
+
+            try {
+                const response = await fetch('http://localhost:5000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ usuario, contraseña }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // Guardar datos del usuario para usarlos en otras páginas
+                    sessionStorage.setItem('userData', JSON.stringify(data.user_data));
+                    sessionStorage.setItem('userRole', data.role);
+
+                    // Redirigir según el rol
+                    switch (data.role) {
+                        case 'admin':
+                            window.location.href = 'Admin/IndexAdmin.html';
+                            break;
+                        case 'profesor':
+                            window.location.href = 'Docente/IndexDocente.html';
+                            break;
+                        case 'alumno':
+                            window.location.href = 'Alumno/index.html';
+                            break;
+                        default:
+                            alert('Rol no reconocido: ' + data.role);
+                    }
+                } else {
+                    // Si el servidor responde con un error (ej. 401 Credenciales incorrectas)
+                    alert(data.error || 'Ocurrió un error al iniciar sesión.');
+                }
+            } catch (error) {
+                // Si hay un error de red (ej. el servidor no está corriendo)
+                console.error('Error de conexión:', error);
+                alert('No se pudo conectar con el servidor. Verifique que el backend esté corriendo.');
+            } finally {
+                // Volver a habilitar el botón
+                submitButton.disabled = false;
+                submitButton.textContent = 'Entrar';
+            }
+        });
     </script>
 </body>
+
 </html>

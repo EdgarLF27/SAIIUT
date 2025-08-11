@@ -1,4 +1,5 @@
 from config import with_db_connection
+import services.usuario_service as usuario_service
 
 
 @with_db_connection
@@ -26,9 +27,14 @@ def get_profesor_by_id(cursor, id):
 
 @with_db_connection
 def create_profesor(cursor, data):
+    # Paso 1: Crear el usuario y obtener su ID y contraseña temporal
+    username = data["no_empleado"]
+    user_id, temp_password = usuario_service.create_user_and_get_id(username)
+
+    # Paso 2: Insertar el profesor, incluyendo el id_usuario para vincularlo
     sql = """
-    INSERT INTO profesores (nombre, ap_P, ap_M, telefono, email, no_empleado, grado_estudio, sexo)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO profesores (nombre, ap_P, ap_M, telefono, email, no_empleado, grado_estudio, sexo, id_usuario)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     cursor.execute(
         sql,
@@ -41,10 +47,13 @@ def create_profesor(cursor, data):
             data["no_empleado"],
             data["grado_estudio"],
             data["sexo"],
+            user_id,  # Vinculamos con el usuario creado
         ),
     )
     profesor_id = cursor.lastrowid
-    return {"id": profesor_id, **data}
+    
+    # Devolvemos los datos del profesor y la contraseña para el log/email
+    return {"id": profesor_id, **data}, temp_password
 
 
 @with_db_connection
