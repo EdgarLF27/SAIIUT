@@ -1,4 +1,5 @@
 from config import with_db_connection
+import services.usuario_service as usuario_service
 
 
 @with_db_connection
@@ -27,9 +28,14 @@ def get_admin_by_id(cursor, id):
 
 @with_db_connection
 def create_admin(cursor, data):
+    # Paso 1: Crear el usuario y obtener su ID y contraseña temporal
+    username = data["no_empleado"]
+    user_id, temp_password = usuario_service.create_user_and_get_id(username)
+
+    # Paso 2: Insertar el admin, incluyendo el id_usuario para vincularlo
     sql = """
-    INSERT INTO admins (nombre, ap_P, ap_M, direccion, telefono, email, sexo, no_empleado, grado_estudios)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO admins (nombre, ap_P, ap_M, direccion, telefono, email, sexo, no_empleado, grado_estudios, id_usuario)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     cursor.execute(
         sql,
@@ -43,11 +49,13 @@ def create_admin(cursor, data):
             data["sexo"],
             data["no_empleado"],
             data["grado_estudios"],
+            user_id,  # Vinculamos con el usuario creado
         ),
     )
     admin_id = cursor.lastrowid
-    # No devolvemos el password
-    return {"id": admin_id, **data}
+    
+    # Devolvemos los datos del admin y la contraseña para el log/email
+    return {"id": admin_id, **data}, temp_password
 
 
 @with_db_connection

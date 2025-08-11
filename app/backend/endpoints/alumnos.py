@@ -43,15 +43,20 @@ def create_alumno_completo():
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
 
-    # --- PASO DE VALIDACIÓN ---
     errors = validate_alumno_data(data)
     if errors:
-        return jsonify({"error": "Datos inválidos", "details": errors}), 400
+        return jsonify({'error': 'Datos inválidos', 'details': errors}), 400
 
     try:
-        nuevo_alumno = alumno_service.create_alumno(data)
+        nuevo_alumno, temp_password = alumno_service.create_alumno(data)
+        
         if nuevo_alumno:
-            nuevo_alumno["message"] = "Alumno creado exitosamente"
+            # --- SIMULACIÓN DE ENVÍO DE EMAIL ---
+            # En un futuro, aquí iría la lógica para enviar el email.
+            # Por ahora, lo imprimimos en la consola para poder probar.
+            print(f"Usuario creado: {nuevo_alumno['matricula']}, Contraseña temporal: {temp_password}")
+            
+            nuevo_alumno["message"] = "Alumno creado exitosamente. Se ha generado una contraseña temporal."
             return jsonify(nuevo_alumno), 201
         else:
             return jsonify({"error": "Error al crear el alumno"}), 500
@@ -65,7 +70,7 @@ def update_alumno_completo(id):
     if not data:
         return jsonify({"error": "No se proporcionaron datos"}), 400
 
-    # --- PASO DE VALIDACIÓN (REUTILIZADO) ---
+    # --- PASO DE VALIDACIÓN (REUTILIZADO)
     errors = validate_alumno_data(data)
     if errors:
         return jsonify({"error": "Datos inválidos", "details": errors}), 400

@@ -43,13 +43,15 @@ def create_profesor():
         return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
-        nuevo_profesor = profesor_service.create_profesor(data)
+        nuevo_profesor, temp_password = profesor_service.create_profesor(data)
         if nuevo_profesor:
+            print(f"Usuario de Profesor creado: {nuevo_profesor['no_empleado']}, Contraseña temporal: {temp_password}", flush=True)
             nuevo_profesor["message"] = "Profesor creado exitosamente"
             return jsonify(nuevo_profesor), 201
         else:
             return jsonify({"error": "Error al crear el profesor"}), 500
     except Exception as e:
+        # (Opcional) Podríamos añadir traceback aquí también para mejor depuración
         return jsonify({"error": str(e)}), 500
 
 

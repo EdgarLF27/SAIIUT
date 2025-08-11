@@ -43,8 +43,9 @@ def create_admin():
         return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
-        nuevo_admin = admin_service.create_admin(data)
+        nuevo_admin, temp_password = admin_service.create_admin(data)
         if nuevo_admin:
+            print(f"Usuario de Admin creado: {nuevo_admin['no_empleado']}, Contraseña temporal: {temp_password}", flush=True)
             nuevo_admin["message"] = "Administrador creado exitosamente"
             return jsonify(nuevo_admin), 201
         else:
