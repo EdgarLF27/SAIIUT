@@ -54,7 +54,7 @@ def create_alumno_completo():
             # --- SIMULACIÓN DE ENVÍO DE EMAIL ---
             # En un futuro, aquí iría la lógica para enviar el email.
             # Por ahora, lo imprimimos en la consola para poder probar.
-            print(f"Usuario creado: {nuevo_alumno['matricula']}, Contraseña temporal: {temp_password}")
+            print(f"Usuario creado: {nuevo_alumno['matricula']}, Contraseña temporal: {temp_password}", flush=True)
             
             nuevo_alumno["message"] = "Alumno creado exitosamente. Se ha generado una contraseña temporal."
             return jsonify(nuevo_alumno), 201
