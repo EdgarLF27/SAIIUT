@@ -41,19 +41,26 @@ def get_alumno_by_id(cursor, id):
 @with_db_connection
 #Función para crear un alumno
 def create_alumno(cursor, data):
+    # Paso 1: Crear el usuario y obtener su ID y contraseña temporal
     username = data['matricula']
     user_id, temp_password = usuario_service.create_user_and_get_id(username)
 
-    sql = """
+    # Paso 2: Insertar el alumno (SIN el id_usuario)
+    sql_insert = """
     INSERT INTO alumnos (nombre, ap_P, ap_M, matricula, telefono, email, carrera, grado, grupo, sexo)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
-    cursor.execute(sql, (
+    cursor.execute(sql_insert, (
         data['nombre'], data['ap_P'], data['ap_M'], data['matricula'], 
         data['telefono'], data['email'], data['carrera'], 
         data['grado'], data['grupo'], data['sexo']
     ))
     alumno_id = cursor.lastrowid
+
+    # Paso 3: Vincular el usuario con el alumno recién creado
+    if user_id:
+        sql_update = "UPDATE alumnos SET id_usuario = %s WHERE id_alumno = %s"
+        cursor.execute(sql_update, (user_id, alumno_id))
     
     # Devolvemos los datos del alumno y la contraseña para el email
     return {'id': alumno_id, **data}, temp_password
