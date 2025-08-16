@@ -6,7 +6,7 @@ from utils.validators import validate_alumno_data
 alumnos_bp = Blueprint("alumnos", __name__)
 
 
-@alumnos_bp.route("/todos", methods=["GET"])
+@alumnos_bp.route("/", methods=["GET"])
 def get_alumnos():
     try:
         filtros = {
@@ -25,7 +25,7 @@ def get_alumnos():
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-@alumnos_bp.route("/buscar/<int:id>", methods=["GET"])
+@alumnos_bp.route("/<int:id>", methods=["GET"])
 def get_alumno(id):
     try:
         alumno = alumno_service.get_alumno_by_id(id)
@@ -37,7 +37,7 @@ def get_alumno(id):
         return jsonify({"error": str(e)}), 500
 
 
-@alumnos_bp.route("/insertar", methods=["POST"])
+@alumnos_bp.route("/", methods=["POST"])
 def create_alumno_completo():
     data = request.get_json()
     if not data:
@@ -45,18 +45,23 @@ def create_alumno_completo():
 
     errors = validate_alumno_data(data)
     if errors:
-        return jsonify({'error': 'Datos inválidos', 'details': errors}), 400
+        return jsonify({"error": "Datos inválidos", "details": errors}), 400
 
     try:
         nuevo_alumno, temp_password = alumno_service.create_alumno(data)
-        
+
         if nuevo_alumno:
             # --- SIMULACIÓN DE ENVÍO DE EMAIL ---
             # En un futuro, aquí iría la lógica para enviar el email.
             # Por ahora, lo imprimimos en la consola para poder probar.
-            print(f"Usuario creado: {nuevo_alumno['matricula']}, Contraseña temporal: {temp_password}", flush=True)
-            
-            nuevo_alumno["message"] = "Alumno creado exitosamente. Se ha generado una contraseña temporal."
+            print(
+                f"Usuario creado: {nuevo_alumno['matricula']}, Contraseña temporal: {temp_password}",
+                flush=True,
+            )
+
+            nuevo_alumno["message"] = (
+                "Alumno creado exitosamente. Se ha generado una contraseña temporal."
+            )
             return jsonify(nuevo_alumno), 201
         else:
             return jsonify({"error": "Error al crear el alumno"}), 500
@@ -64,7 +69,7 @@ def create_alumno_completo():
         return jsonify({"error": str(e)}), 500
 
 
-@alumnos_bp.route("/editar/<int:id>", methods=["PUT"])
+@alumnos_bp.route("/<int:id>", methods=["PUT"])
 def update_alumno_completo(id):
     data = request.get_json()
     if not data:
@@ -86,7 +91,7 @@ def update_alumno_completo(id):
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-@alumnos_bp.route("/eliminar/<int:id>", methods=["DELETE"])
+@alumnos_bp.route("/<int:id>", methods=["DELETE"])
 def delete_alumno(id):
     try:
         eliminado = alumno_service.delete_alumno(id)

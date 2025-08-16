@@ -1,27 +1,32 @@
 import os
-from functools import wraps  # importacion de decoradores
-
-import pymysql
+from functools import wraps
+import psycopg2
+from psycopg2.extras import DictCursor
 from dotenv import load_dotenv
 
+# Carga las variables de entorno (asegúrate de que tu .env tenga las credenciales de Supabase)
 load_dotenv("credentials.env")
 
+# Configuración para la conexión a PostgreSQL (Supabase)
 db_config = {
     "host": os.getenv("DB_HOST"),
+    "dbname": os.getenv("DB_NAME"),
     "user": os.getenv("DB_USER"),
     "password": os.getenv("DB_PASSWORD"),
-    "database": os.getenv("DB_NAME"),
-    "cursorclass": pymysql.cursors.DictCursor,
+    "port": os.getenv("DB_PORT"),
 }
 
 
 def get_db_connection():
-    return pymysql.connect(**db_config)
+    """Establece y devuelve una nueva conexión a la base de datos PostgreSQL."""
+    return psycopg2.connect(**db_config)
 
 
-def with_db_connection(
-    fn,
-):  # decorador para manejar la conexion a la base de datos, después de ahi se pasa la función que lo vaya a usar
+def with_db_connection(fn):
+    """
+    Decorador para manejar de forma segura las conexiones y transacciones a la BD.
+    Abre una conexión, crea un cursor, ejecuta la función y cierra la conexión.
+    """
 
     @wraps(fn)
     def wrapper(*args, **kwargs):
@@ -33,7 +38,8 @@ def with_db_connection(
 
         try:
             conn = get_db_connection()
-            with conn.cursor() as cursor:
+            # Usamos DictCursor para que las filas se devuelvan como diccionarios
+            with conn.cursor(cursor_factory=DictCursor) as cursor:
                 # Pasa el cursor como primer argumento a la función original
                 result = fn(cursor, *args, **kwargs)
 
@@ -42,7 +48,7 @@ def with_db_connection(
                     conn.commit()
 
                 return result
-        except pymysql.MySQLError as e:
+        except psycopg2.Error as e:
             print(f"Error de base de datos en '{fn.__name__}': {e}")
             if conn and is_write_operation:
                 conn.rollback()

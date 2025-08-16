@@ -3,8 +3,8 @@ from flask_cors import CORS
 
 from endpoints.admins import admins_bp
 from endpoints.alumnos import alumnos_bp
-from endpoints.profesores import profesores_bp
 from endpoints.auth import auth_bp
+from endpoints.profesores import profesores_bp
 
 app = Flask(__name__)
 CORS(app)

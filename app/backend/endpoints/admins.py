@@ -6,7 +6,7 @@ from utils.validators import validate_admin_data
 admins_bp = Blueprint("admins", __name__)
 
 
-@admins_bp.route("/todos", methods=["GET"])
+@admins_bp.route("/", methods=["GET"])
 def get_admins():
     try:
         filtros = {"nombre": request.args.get("nombre")}
@@ -20,7 +20,7 @@ def get_admins():
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-@admins_bp.route("/buscar/<int:id>", methods=["GET"])
+@admins_bp.route("/<int:id>", methods=["GET"])
 def get_admin(id):
     try:
         admin = admin_service.get_admin_by_id(id)
@@ -32,7 +32,7 @@ def get_admin(id):
         return jsonify({"error": str(e)}), 500
 
 
-@admins_bp.route("/insertar", methods=["POST"])
+@admins_bp.route("/", methods=["POST"])
 def create_admin():
     data = request.get_json()
     if not data:
@@ -45,7 +45,10 @@ def create_admin():
     try:
         nuevo_admin, temp_password = admin_service.create_admin(data)
         if nuevo_admin:
-            print(f"Usuario de Admin creado: {nuevo_admin['no_empleado']}, Contraseña temporal: {temp_password}", flush=True)
+            print(
+                f"Usuario de Admin creado: {nuevo_admin['no_empleado']}, Contraseña temporal: {temp_password}",
+                flush=True,
+            )
             nuevo_admin["message"] = "Administrador creado exitosamente"
             return jsonify(nuevo_admin), 201
         else:
@@ -54,7 +57,7 @@ def create_admin():
         return jsonify({"error": str(e)}), 500
 
 
-@admins_bp.route("/editar/<int:id>", methods=["PUT"])
+@admins_bp.route("/<int:id>", methods=["PUT"])
 def update_admin(id):
     data = request.get_json()
     if not data:
@@ -75,7 +78,7 @@ def update_admin(id):
         return jsonify({"error": str(e)}), 500
 
 
-@admins_bp.route("/eliminar/<int:id>", methods=["DELETE"])
+@admins_bp.route("/<int:id>", methods=["DELETE"])
 def delete_admin(id):
     try:
         eliminado = admin_service.delete_admin(id)

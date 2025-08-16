@@ -22,35 +22,43 @@ def is_valid_phone(phone):
 
 
 def validate_alumno_data(data):
-    """Valida los datos para crear o actualizar un alumno."""
+    """Valida los datos para crear o actualizar un alumno (versión para BD de producción)."""
     errors = []
+    # Actualizamos los campos requeridos según el nuevo esquema de la BD.
     required_fields = [
         "nombre",
         "ap_P",
         "ap_M",
         "matricula",
-        "telefono",
         "email",
-        "carrera",
-        "grado",
-        "grupo",
+        "telefono",
         "sexo",
+        "id_carrera",
     ]
     for field in required_fields:
-        if field not in data or not data[field]:
+        if field not in data or data[field] is None or data[field] == "":
             errors.append(f"El campo '{field}' es obligatorio.")
 
+    # Si faltan campos básicos, devolvemos los errores inmediatamente.
     if errors:
         return errors
 
+    # Validaciones de formato y tipo.
     if not is_valid_email(data["email"]):
         errors.append("El formato del email no es válido.")
-    if not is_valid_phone(data["telefono"]):
-        errors.append("El teléfono solo debe contener números.")
+
+    # Hacemos la validación del teléfono opcional, solo si el campo existe y no está vacío.
+    if data.get("telefono") and not isinstance(data.get("telefono"), str):
+        errors.append("El teléfono debe ser una cadena de texto.")
+
+    if not isinstance(data["id_carrera"], int):
+        errors.append("El campo 'id_carrera' debe ser un número entero.")
+
     if len(data["nombre"]) > 50:
         errors.append("El nombre no puede tener más de 50 caracteres.")
     if len(data["matricula"]) > 20:
         errors.append("La matrícula no puede tener más de 20 caracteres.")
+
     return errors
 
 
@@ -88,7 +96,6 @@ def validate_admin_data(data):
         "nombre",
         "ap_P",
         "ap_M",
-        "direccion",
         "telefono",
         "email",
         "sexo",

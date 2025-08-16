@@ -1,14 +1,14 @@
-from config import with_db_connection
 import services.usuario_service as usuario_service
+from config import with_db_connection
 
 
 @with_db_connection
 def get_all_profesores(cursor, filtros):
-    sql = "SELECT id_profesor, nombre, ap_P, ap_M, telefono, email, no_empleado, grado_estudio, sexo FROM profesores"
+    sql = 'SELECT id_profesor, nombre, "ap_P", "ap_M", telefono, email, no_empleado, grado_estudio, sexo FROM profesores'
     params = []
 
     if filtros.get("nombre"):
-        sql += " WHERE nombre LIKE %s OR ap_P LIKE %s OR ap_M LIKE %s"
+        sql += ' WHERE nombre LIKE %s OR "ap_P" LIKE %s OR "ap_M" LIKE %s'
         search_term = f"%{filtros['nombre']}%"
         params.extend([search_term, search_term, search_term])
 
@@ -19,7 +19,7 @@ def get_all_profesores(cursor, filtros):
 @with_db_connection
 def get_profesor_by_id(cursor, id):
     cursor.execute(
-        "SELECT id_profesor, nombre, ap_P, ap_M, telefono, email, no_empleado, grado_estudio, sexo FROM profesores WHERE id_profesor = %s",
+        'SELECT id_profesor, nombre, "ap_P", "ap_M", telefono, email, no_empleado, grado_estudio, sexo FROM profesores WHERE id_profesor = %s',
         (id,),
     )
     return cursor.fetchone()
@@ -29,12 +29,20 @@ def get_profesor_by_id(cursor, id):
 def create_profesor(cursor, data):
     # Paso 1: Crear el usuario y obtener su ID y contraseña temporal
     username = data["no_empleado"]
-    user_id, temp_password = usuario_service.create_user_and_get_id(username)
+    # Se debe pasar el cursor a la función interna para mantener la transacción
+    user_id, temp_password = usuario_service._create_user_and_get_id_internal(
+        cursor, username
+    )
+
+    # Si el usuario ya existía, la función devuelve (id, None)
+    if temp_password is None:
+        return None, None
 
     # Paso 2: Insertar el profesor, incluyendo el id_usuario para vincularlo
     sql = """
-    INSERT INTO profesores (nombre, ap_P, ap_M, telefono, email, no_empleado, grado_estudio, sexo, id_usuario)
+    INSERT INTO profesores (nombre, "ap_P", "ap_M", telefono, email, no_empleado, grado_estudio, sexo, id_usuario)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    RETURNING id_profesor;
     """
     cursor.execute(
         sql,
@@ -50,8 +58,9 @@ def create_profesor(cursor, data):
             user_id,  # Vinculamos con el usuario creado
         ),
     )
-    profesor_id = cursor.lastrowid
-    
+    # Obtenemos el ID devuelto por la consulta RETURNING
+    profesor_id = cursor.fetchone()["id_profesor"]
+
     # Devolvemos los datos del profesor y la contraseña para el log/email
     return {"id": profesor_id, **data}, temp_password
 
@@ -60,7 +69,7 @@ def create_profesor(cursor, data):
 def update_profesor(cursor, id, data):
     sql = """
     UPDATE profesores
-    SET nombre=%s, ap_P=%s, ap_M=%s, telefono=%s, email=%s, no_empleado=%s, grado_estudio=%s, sexo=%s
+    SET nombre=%s, "ap_P"=%s, "ap_M"=%s, telefono=%s, email=%s, no_empleado=%s, grado_estudio=%s, sexo=%s
     WHERE id_profesor=%s
     """
     cursor.execute(
