@@ -51,8 +51,11 @@ def validate_alumno_data(data):
     if data.get("telefono") and not isinstance(data.get("telefono"), str):
         errors.append("El teléfono debe ser una cadena de texto.")
 
-    if not isinstance(data["id_carrera"], int):
-        errors.append("El campo 'id_carrera' debe ser un número entero.")
+    # Intentamos convertir id_carrera a entero. Si falla, añadimos un error.
+    try:
+        data["id_carrera"] = int(data["id_carrera"])
+    except (ValueError, TypeError):
+        errors.append("El campo 'id_carrera' debe ser un número entero válido.")
 
     if len(data["nombre"]) > 50:
         errors.append("El nombre no puede tener más de 50 caracteres.")

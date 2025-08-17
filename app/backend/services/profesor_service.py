@@ -13,7 +13,9 @@ def get_all_profesores(cursor, filtros):
         params.extend([search_term, search_term, search_term])
 
     cursor.execute(sql, tuple(params))
-    return cursor.fetchall()
+    # Convertir cada fila (que es un objeto tipo tupla/diccionario) a un diccionario estándar
+    rows = cursor.fetchall()
+    return [dict(row) for row in rows]
 
 
 @with_db_connection
@@ -22,7 +24,9 @@ def get_profesor_by_id(cursor, id):
         'SELECT id_profesor, nombre, "ap_P", "ap_M", telefono, email, no_empleado, grado_estudio, sexo FROM profesores WHERE id_profesor = %s',
         (id,),
     )
-    return cursor.fetchone()
+    row = cursor.fetchone()
+    # Convertir la fila a un diccionario estándar si existe
+    return dict(row) if row else None
 
 
 @with_db_connection
@@ -91,5 +95,20 @@ def update_profesor(cursor, id, data):
 
 @with_db_connection
 def delete_profesor(cursor, id):
+    # Paso 1: Obtener el id_usuario antes de borrar el profesor
+    cursor.execute("SELECT id_usuario FROM profesores WHERE id_profesor = %s", (id,))
+    result = cursor.fetchone()
+    if not result:
+        return 0  # El profesor no existía
+
+    id_usuario_a_eliminar = result["id_usuario"]
+
+    # Paso 2: Eliminar el registro del profesor
     cursor.execute("DELETE FROM profesores WHERE id_profesor = %s", (id,))
-    return cursor.rowcount > 0
+    rows_deleted = cursor.rowcount
+
+    # Paso 3: Eliminar el registro de usuario correspondiente
+    if rows_deleted > 0 and id_usuario_a_eliminar:
+        cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario_a_eliminar,))
+
+    return rows_deleted > 0

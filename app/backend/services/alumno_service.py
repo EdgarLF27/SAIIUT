@@ -29,14 +29,16 @@ def get_all_alumnos(cursor, filtros):
         sql += " WHERE " + " AND ".join(conditions)
 
     cursor.execute(sql, tuple(params))
-    return cursor.fetchall()
+    rows = cursor.fetchall()
+    return [dict(row) for row in rows]
 
 
 @with_db_connection
 # Función para buscar un alumno por ID
 def get_alumno_by_id(cursor, id):
     cursor.execute("SELECT * FROM alumnos WHERE id_alumno = %s", (id,))
-    return cursor.fetchone()
+    row = cursor.fetchone()
+    return dict(row) if row else None
 
 
 @with_db_connection
@@ -109,7 +111,20 @@ def update_alumno(cursor, id, data):
 
 @with_db_connection
 def delete_alumno(cursor, id):
-    # Futura mejora: decidir si al eliminar un alumno se elimina también su 'usuario'.
-    # Por ahora, solo se elimina el perfil del alumno.
+    # Paso 1: Obtener el id_usuario antes de borrar el alumno
+    cursor.execute("SELECT id_usuario FROM alumnos WHERE id_alumno = %s", (id,))
+    result = cursor.fetchone()
+    if not result:
+        return 0  # El alumno no existía
+
+    id_usuario_a_eliminar = result["id_usuario"]
+
+    # Paso 2: Eliminar el registro del alumno
     cursor.execute("DELETE FROM alumnos WHERE id_alumno = %s", (id,))
-    return cursor.rowcount > 0
+    rows_deleted = cursor.rowcount
+
+    # Paso 3: Eliminar el registro de usuario correspondiente
+    if rows_deleted > 0 and id_usuario_a_eliminar:
+        cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario_a_eliminar,))
+
+    return rows_deleted > 0

@@ -13,7 +13,8 @@ def get_all_admins(cursor, filtros):
         params.extend([search_term, search_term, search_term])
 
     cursor.execute(sql, tuple(params))
-    return cursor.fetchall()
+    rows = cursor.fetchall()
+    return [dict(row) for row in rows]
 
 
 @with_db_connection
@@ -23,7 +24,8 @@ def get_admin_by_id(cursor, id):
         'SELECT id_admin, nombre, "ap_P", "ap_M", telefono, email, sexo, no_empleado, grado_estudios FROM admins WHERE id_admin = %s',
         (id,),
     )
-    return cursor.fetchone()
+    row = cursor.fetchone()
+    return dict(row) if row else None
 
 
 @with_db_connection
@@ -93,5 +95,20 @@ def update_admin(cursor, id, data):
 
 @with_db_connection
 def delete_admin(cursor, id):
+    # Paso 1: Obtener el id_usuario antes de borrar el admin
+    cursor.execute("SELECT id_usuario FROM admins WHERE id_admin = %s", (id,))
+    result = cursor.fetchone()
+    if not result:
+        return 0  # El admin no existía
+
+    id_usuario_a_eliminar = result["id_usuario"]
+
+    # Paso 2: Eliminar el registro del admin
     cursor.execute("DELETE FROM admins WHERE id_admin = %s", (id,))
-    return cursor.rowcount > 0
+    rows_deleted = cursor.rowcount
+
+    # Paso 3: Eliminar el registro de usuario correspondiente
+    if rows_deleted > 0 and id_usuario_a_eliminar:
+        cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario_a_eliminar,))
+
+    return rows_deleted > 0

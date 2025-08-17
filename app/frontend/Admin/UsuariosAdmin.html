@@ -371,6 +371,9 @@
                 errorData.error || `Error del servidor: ${response.status}`
               );
             }
+            if (options.method === 'DELETE' && response.status === 200) {
+              return await response.json().catch(() => ({ result: 'Eliminado correctamente' }));
+            }
             return response.json();
           } catch (error) {
             console.error("Error en la petición fetch:", error);
@@ -392,23 +395,28 @@
 
         async function buscarAlumnos() {
           showLoadingState("tbody-alumnos");
-          const params = new URLSearchParams({
-            nombre: document.getElementById("filtro-nombre-alumno").value,
-            apellido: document.getElementById("filtro-apellido-alumno").value,
-            matricula: document.getElementById("filtro-matricula-alumno")
-              .value,
-            carrera: document.getElementById("filtro-carrera-alumno").value,
-          });
+          const params = new URLSearchParams();
+          const nombre = document.getElementById("filtro-nombre-alumno").value;
+          const apellido = document.getElementById("filtro-apellido-alumno").value;
+          const matricula = document.getElementById("filtro-matricula-alumno").value;
+          const carrera = document.getElementById("filtro-carrera-alumno").value;
+
+          if (nombre) params.append('nombre', nombre);
+          if (apellido) params.append('apellido', apellido);
+          if (matricula) params.append('matricula', matricula);
+          if (carrera) params.append('carrera', carrera);
+
           alumnosData =
             (await fetchData(
-              `http://localhost:5000/alumnos/todos?${params}`
+              `http://localhost:5000/alumnos/?${params}`
             )) || [];
           renderAlumnos();
         }
         function renderAlumnos() {
+          console.log("Datos de alumnos recibidos por el frontend:", alumnosData);
           const tbody = document.getElementById("tbody-alumnos");
           tbody.innerHTML = "";
-          if (!alumnosData.length)
+          if (!alumnosData || !alumnosData.length)
             return showEmptyState(
               "tbody-alumnos",
               "No se encontraron alumnos."
@@ -429,16 +437,20 @@
         async function buscarDocentes() {
           showLoadingState("tbody-docentes");
           const query = document.getElementById("buscador-docentes").value;
+          const params = new URLSearchParams();
+          if (query) params.append('nombre', query);
+          
           docentesData =
             (await fetchData(
-              `http://localhost:5000/profesores/todos?nombre=${query}`
+              `http://localhost:5000/profesores/?${params}`
             )) || [];
           renderDocentes();
         }
         function renderDocentes() {
+          console.log("Datos de docentes recibidos por el frontend:", docentesData);
           const tbody = document.getElementById("tbody-docentes");
           tbody.innerHTML = "";
-          if (!docentesData.length)
+          if (!docentesData || !docentesData.length)
             return showEmptyState(
               "tbody-docentes",
               "No se encontraron docentes."
@@ -458,16 +470,20 @@
         async function buscarAdmins() {
           showLoadingState("tbody-admins");
           const query = document.getElementById("buscador-admins").value;
+          const params = new URLSearchParams();
+          if (query) params.append('nombre', query);
+
           adminsData =
             (await fetchData(
-              `http://localhost:5000/admins/todos?nombre=${query}`
+              `http://localhost:5000/admins/?${params}`
             )) || [];
           renderAdmins();
         }
         function renderAdmins() {
+          console.log("Datos de admins recibidos por el frontend:", adminsData);
           const tbody = document.getElementById("tbody-admins");
           tbody.innerHTML = "";
-          if (!adminsData.length)
+          if (!adminsData || !adminsData.length)
             return showEmptyState(
               "tbody-admins",
               "No se encontraron administradores."
@@ -478,8 +494,8 @@
               }</td><td class="py-3 px-4">${admin.no_empleado || ""
               }</td><td class="py-3 px-4">${admin.telefono
               }</td><td class="py-3 px-4">${admin.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarAdmin(${admin.id_admins
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarAdmin(${admin.id_admins
+              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarAdmin(${admin.id_admin
+              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarAdmin(${admin.id_admin
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -491,8 +507,7 @@
           document.getElementById("editar-nombre-alumno").value = a.nombre;
           document.getElementById("editar-ap_P-alumno").value = a.ap_P;
           document.getElementById("editar-ap_M-alumno").value = a.ap_M;
-          document.getElementById("editar-carrera-alumno").value =
-            a.carrera || "";
+          document.getElementById("editar-id_carrera-alumno").value = a.id_carrera || "";
           document.getElementById("editar-grado-alumno").value =
             a.grado || "";
           document.getElementById("editar-grupo-alumno").value =
@@ -509,7 +524,7 @@
         }
         function eliminarAlumno(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/alumnos/eliminar/${id}`, {
+          fetchData(`http://localhost:5000/alumnos/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -539,7 +554,7 @@
         }
         function eliminarDocente(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/profesores/eliminar/${id}`, {
+          fetchData(`http://localhost:5000/profesores/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -549,14 +564,12 @@
           });
         }
         function editarAdmin(id) {
-          const admin = adminsData.find((x) => x.id_admins === id);
+          const admin = adminsData.find((x) => x.id_admin === id);
           if (!admin) return;
           document.getElementById("editar-id-admin").value = id;
           document.getElementById("editar-nombre-admin").value = admin.nombre;
           document.getElementById("editar-ap_P-admin").value = admin.ap_P;
           document.getElementById("editar-ap_M-admin").value = admin.ap_M;
-          document.getElementById("editar-direccion-admin").value =
-            admin.direccion || "";
           document.getElementById("editar-telefono-admin").value =
             admin.telefono;
           document.getElementById("editar-email-admin").value = admin.email;
@@ -572,7 +585,7 @@
         }
         function eliminarAdmin(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/admins/eliminar/${id}`, {
+          fetchData(`http://localhost:5000/admins/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -629,7 +642,7 @@
               nombre: document.getElementById("editar-nombre-alumno").value,
               ap_P: document.getElementById("editar-ap_P-alumno").value,
               ap_M: document.getElementById("editar-ap_M-alumno").value,
-              carrera: document.getElementById("editar-carrera-alumno").value,
+              id_carrera: parseInt(document.getElementById("editar-id_carrera-alumno").value, 10),
               grado: document.getElementById("editar-grado-alumno").value,
               grupo: document.getElementById("editar-grupo-alumno").value,
               sexo: document.getElementById("editar-sexo-alumno").value,
@@ -639,7 +652,7 @@
                 .value,
               email: document.getElementById("editar-email-alumno").value,
             };
-            fetchData(`http://localhost:5000/alumnos/editar/${id}`, {
+            fetchData(`http://localhost:5000/alumnos/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
@@ -669,7 +682,7 @@
               ).value,
               sexo: document.getElementById("editar-sexo-docente").value,
             };
-            fetchData(`http://localhost:5000/profesores/editar/${id}`, {
+            fetchData(`http://localhost:5000/profesores/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
@@ -688,8 +701,6 @@
               nombre: document.getElementById("editar-nombre-admin").value,
               ap_P: document.getElementById("editar-ap_P-admin").value,
               ap_M: document.getElementById("editar-ap_M-admin").value,
-              direccion: document.getElementById("editar-direccion-admin")
-                .value,
               telefono: document.getElementById("editar-telefono-admin")
                 .value,
               email: document.getElementById("editar-email-admin").value,
@@ -700,7 +711,7 @@
                 "editar-grado_estudios-admin"
               ).value,
             };
-            fetchData(`http://localhost:5000/admins/editar/${id}`, {
+            fetchData(`http://localhost:5000/admins/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
@@ -731,7 +742,11 @@
               required />
             <input id="editar-ap_M-alumno" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno"
               required />
-            <input id="editar-carrera-alumno" class="border rounded px-3 py-2 w-full" placeholder="Carrera" />
+            <label for="editar-id_carrera-alumno" class="mt-2">Carrera:</label>
+            <select id="editar-id_carrera-alumno" class="border rounded px-3 py-2 w-full">
+              <option value="1">TIDSM</option>
+              <option value="2">Otra Carrera</option>
+            </select>
             <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
             <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
             <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
@@ -774,7 +789,6 @@
         </div>
       </div>
 
-      <!-- INICIO: NUEVO MODAL PARA ADMIN -->
       <div id="modal-editar-admin"
         class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
@@ -790,7 +804,6 @@
               required />
             <input id="editar-ap_M-admin" class="border rounded px-3 py-2 w-full" placeholder="Apellido materno"
               required />
-            <input id="editar-direccion-admin" class="border rounded px-3 py-2 w-full" placeholder="Dirección" />
             <input id="editar-telefono-admin" class="border rounded px-3 py-2 w-full" placeholder="Teléfono" required />
             <input id="editar-email-admin" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
             <input id="editar-sexo-admin" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
@@ -803,12 +816,9 @@
           </form>
         </div>
       </div>
-      <!-- FIN: NUEVO MODAL PARA ADMIN -->
-
-      <!-- Footer -->
+      
       <footer
         class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-        <!-- ... tu footer ... -->
       </footer>
     </main>
   </div>
