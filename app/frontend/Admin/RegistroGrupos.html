@@ -182,7 +182,7 @@ async function cargarGrupos() {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
   try {
-    const res = await fetch("/api/grupos/");
+    const res = await fetch("http://localhost:5000/api/grupos/");
     const grupos = await res.json();
     grupos.forEach(grupo => {
       const tr = document.createElement("tr");
@@ -210,7 +210,7 @@ document.getElementById("form-materia").addEventListener("submit", async functio
   };
   console.log("Datos enviados:", data); // <-- Agrega esto
   try {
-    const res = await fetch("/api/grupos/", {
+    const res = await fetch("http://localhost:5000/api/grupos/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
