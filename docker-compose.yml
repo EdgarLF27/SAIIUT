@@ -14,6 +14,7 @@ services:
       context: app/backend
     volumes:
       - ./app/backend:/app
+      - ./app/backend/credentials.env:/app/credentials.env
     working_dir: /app
     environment:
       - PYTHONDONTWRITEBYTECODE=1
