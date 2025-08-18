@@ -108,27 +108,28 @@
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                <input id="ap_P_alumno" placeholder="Ej. Sanchez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_P_alumno" placeholder="Ej. Sánchez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Materno:</label>
-                <input id="ap_M_alumno" placeholder="Ej. Hernandez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_M_alumno" placeholder="Ej. Hernández" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Matrícula:</label>
-                <input id="matricula_alumno" placeholder="20241IDSM001" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="matricula_alumno" placeholder="Ej. 20241IDSM001" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Teléfono:</label>
-                <input id="telefono_alumno" placeholder="241" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="telefono_alumno" placeholder="Ej. 2411234567" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Correo:</label>
-                <input id="email_alumno" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="email_alumno" placeholder="Ej. juan@email.com" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
                 <select id="carrera_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona carrera</option>
                   <option>Software</option>
                   <option>Redes</option>
                   <option>Entornos Virtuales</option>
@@ -137,18 +138,28 @@
               <div>
                 <label class="block font-semibold mb-1">Grado:</label>
                 <select id="grado_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona grado</option>
                   <option>1ro</option>
                   <option>2do</option>
-                  <option>Opciones en camino</option>
+                  <option>3ro</option>
+                  <option>4to</option>
+                  <option>5to</option>
+                  <option>6to</option>
+                  <option>7mo</option>
+                  <option>8vo</option>
+                  <option>9no</option>
+                  <option>10mo</option>
+                  <option>11vo</option>
                 </select>
               </div>
               <div>
                 <label class="block font-semibold mb-1">Grupo:</label>
-                <input id="grupo_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="grupo_alumno" placeholder="Ej. A" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
                 <select id="sexo_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
@@ -167,31 +178,32 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label class="block font-semibold mb-1">Nombre:</label>
-                <input id="nombre_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="nombre_docente" placeholder="Ej. Laura" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                <input id="ap_P_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_P_docente" placeholder="Ej. Pérez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Materno:</label>
-                <input id="ap_M_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_M_docente" placeholder="Ej. Gómez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">No. Empleado:</label>
-                <input id="num_empleado_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="num_empleado_docente" placeholder="Ej. 12345" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Teléfono:</label>
-                <input id="telefono_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="telefono_docente" placeholder="Ej. 2411234567" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Correo:</label>
-                <input id="email_docente" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="email_docente" placeholder="Ej. laura@email.com" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
                 <select id="sexo_docente" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
@@ -200,6 +212,7 @@
               <div>
                 <label class="block font-semibold mb-1">Materia impartida:</label>
                 <select id="materia_docente" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona materia</option>
                   <option>POO</option>
                   <option>DB</option>
                   <option>Humanidades</option>
@@ -207,12 +220,64 @@
               </div>
               <div>
                 <label class="block font-semibold mb-1">Grado de estudios:</label>
-                <input id="grado_estudios" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="grado_estudios" placeholder="Ej. Maestría" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
             </div>
-            <div class="flex justify-center mt-8">
+            <div class="flex justify-center mt-4">
               <button type="submit"
-                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
+                Guardar
+              </button>
+            </div>
+          </form>
+          <!-- Formulario Administrador -->
+          <form id="form-admin"
+            class="absolute inset-0 transition-all duration-500 ease-in-out bg-white p-8 rounded-lg shadow-lg flex flex-col gap-6 translate-x-full opacity-0 pointer-events-none"
+            style="z-index: 0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label class="block font-semibold mb-1">Nombre:</label>
+                <input id="nombre_admin" placeholder="Ej. Mario" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Apellido Paterno:</label>
+                <input id="ap_P_admin" placeholder="Ej. López" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Apellido Materno:</label>
+                <input id="ap_M_admin" placeholder="Ej. Ramírez" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Telefono:</label>
+                <input id="telefono_admin" placeholder="Ej. 2411234567" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Correo</label>
+                <input id="email_admin" placeholder="Ej. mario@email.com" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Sexo:</label>
+                <select id="sexo_admin" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">No. Empleado:</label>
+                <input id="num_empleado_admin" placeholder="Ej. 54321" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Grado de estudios:</label>
+                <input id="grado_estudios_admin" placeholder="Ej. Licenciatura" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+              </div>
+            </div>
+            <div class="flex justify-center mt-4">
+              <button type="submit"
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg font-semibold shadow-md border-2 border-transparent hover:bg-[#F4A300] hover:text-[#2D3E34] hover:border-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
+                Guardar
+              </button>
             </div>
           </form>
         </div>
