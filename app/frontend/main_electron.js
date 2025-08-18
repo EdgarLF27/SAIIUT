@@ -1,7 +1,5 @@
-
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,20 +11,18 @@ function createWindow() {
     },
     // Puedes agregar icon: path.join(__dirname, 'ruta/a/tu/icono.ico') si tienes un icono
   });
-  win.loadFile('login.html');
+  win.loadFile("login.html");
 }
-
 
 app.whenReady().then(() => {
   createWindow();
-  app.on('activate', function () {
+  app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
-
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", function () {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
