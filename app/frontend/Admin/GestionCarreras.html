@@ -90,7 +90,6 @@
       </div>
 
       <!-- Formulario de Registro -->
-      <!-- Apartado de Gestión de Carreras -->
       <section class="mb-10">
         <h3 class="text-2xl font-semibold mb-4">Gestión de Carreras</h3>
         <div class="overflow-x-auto">
@@ -104,34 +103,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Ejemplo de fila, puedes reemplazar con datos dinámicos -->
-              <tr class="border-b">
-                <td class="py-3 px-4">Ingeniería en Sistemas</td>
-                <td class="py-3 px-4">ISIC</td>
-                <td class="py-3 px-4">1</td>
-                <td class="py-3 px-4 text-center">
-                  <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="text-red-600 hover:text-red-800" title="Eliminar">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr class="border-b">
-                <td class="py-3 px-4">Administración</td>
-                <td class="py-3 px-4">ADMI</td>
-                <td class="py-3 px-4">2</td>
-                <td class="py-3 px-4 text-center">
-                  <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="text-red-600 hover:text-red-800" title="Eliminar">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
-              <!-- ...agrega más filas según sea necesario... -->
             </tbody>
           </table>
         </div>
@@ -178,6 +149,138 @@
       </footer>
     </main>
   </div>
-</body>
 
+  <!-- Modal de edición de carrera -->
+<div id="modal-carrera" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative flex flex-col">
+    <button type="button" onclick="cerrarModalCarrera()"
+      class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
+      &times;
+    </button>
+    <h3 class="text-xl font-bold mb-4">Editar Carrera</h3>
+    <form id="form-carrera" class="flex flex-col gap-4">
+      <input type="hidden" id="carrera_id" />
+      <div>
+        <label class="block font-semibold mb-1">Nombre de la carrera:</label>
+        <input id="nombre_carrera" placeholder="Nombre" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Acrónimo:</label>
+        <input id="acronimo_carrera" placeholder="Acrónimo" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Cuatrimestre a cursar:</label>
+        <input id="cuatrimestre_carrera" placeholder="Cuatrimestre" type="number" min="1" max="12" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+      </div>
+      <div class="flex justify-center mt-2">
+        <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script>
+// 1. Cargar carreras y mostrarlas en la tabla
+async function cargarCarreras() {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+  try {
+    const res = await fetch("http://localhost:5000/api/carreras/");
+    const carreras = await res.json();
+    carreras.forEach(carrera => {
+      const tr = document.createElement("tr");
+      tr.className = "border-b";
+      tr.innerHTML = `
+        <td class="py-3 px-4">${carrera.nombre}</td>
+        <td class="py-3 px-4">${carrera.acronimo}</td>
+        <td class="py-3 px-4">${carrera.cuatrimestre}</td>
+        <td class="py-3 px-4 text-center">
+          <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar" onclick="editarCarrera(${carrera.id})">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="text-red-600 hover:text-red-800" title="Eliminar" onclick="eliminarCarrera(${carrera.id})">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (e) {
+    tbody.innerHTML = "<tr><td colspan='4'>Error al cargar carreras</td></tr>";
+  }
+}
+
+// Mostrar modal y llenar datos para editar
+async function editarCarrera(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/api/carreras/${id}`);
+    if (!res.ok) throw new Error("No se pudo obtener la carrera");
+    const carrera = await res.json();
+    document.getElementById("carrera_id").value = carrera.id;
+    document.getElementById("nombre_carrera").value = carrera.nombre;
+    document.getElementById("acronimo_carrera").value = carrera.acronimo;
+    document.getElementById("cuatrimestre_carrera").value = carrera.cuatrimestre;
+    document.getElementById("modal-carrera").classList.remove("hidden");
+    document.getElementById("modal-carrera").classList.add("flex");
+  } catch {
+    alert("Error al cargar datos de la carrera");
+  }
+}
+
+// Cerrar modal
+function cerrarModalCarrera() {
+  document.getElementById("modal-carrera").classList.add("hidden");
+  document.getElementById("modal-carrera").classList.remove("flex");
+}
+
+// Guardar cambios al editar carrera
+document.getElementById("form-carrera").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const id = document.getElementById("carrera_id").value;
+  const data = {
+    nombre: document.getElementById("nombre_carrera").value.trim(),
+    acronimo: document.getElementById("acronimo_carrera").value.trim(),
+    cuatrimestre: parseInt(document.getElementById("cuatrimestre_carrera").value)
+  };
+  try {
+    const res = await fetch(`http://localhost:5000/api/carreras/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      cerrarModalCarrera();
+      cargarCarreras();
+    } else {
+      const error = await res.json();
+      alert(error.error || "Error al actualizar carrera");
+    }
+  } catch {
+    alert("Error de red al actualizar");
+  }
+});
+
+// 2. Eliminar carrera (opcional)
+async function eliminarCarrera(id) {
+  if (!confirm("¿Seguro que deseas eliminar esta carrera?")) return;
+  try {
+    const res = await fetch(`http://localhost:5000/api/carreras/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      cargarCarreras();
+    } else {
+      alert("No se pudo eliminar la carrera");
+    }
+  } catch {
+    alert("Error de red al eliminar");
+  }
+}
+
+// 3. Inicializar al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
+  cargarCarreras();
+});
+</script>
+</body>
 </html>
