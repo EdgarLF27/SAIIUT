@@ -167,8 +167,9 @@
               </div>
               <div>
                 <label class="block font-semibold mb-1">Grupo:</label>
-                <input id="grupo_alumno" placeholder="Ej. A" type="text"
-                  class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <select id="grupo_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="">Selecciona grupo</option>
+                </select>
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
@@ -624,6 +625,32 @@
             const input = document.getElementById(id);
             if (input) validateEmailInput(input);
           });
+        });
+
+        // Cargar grupos en el select de alumnos
+        async function cargarGruposAlumnos() {
+          const select = document.getElementById('grupo_alumno');
+          if (!select) return;
+          select.innerHTML = '<option value="">Selecciona grupo</option>';
+          try {
+            const res = await fetch('/api/grupos/');
+            const grupos = await res.json();
+            grupos.forEach(grupo => {
+              // Puedes ajustar el value según tu modelo (por ejemplo, grupo.id si lo tienes)
+              const option = document.createElement('option');
+              option.value = grupo.nombre;
+              option.textContent = `${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}`;
+              select.appendChild(option);
+            });
+          } catch (e) {
+            select.innerHTML = '<option value="">Error al cargar grupos</option>';
+          }
+        }
+
+        // Llamar a la función para cargar grupos al iniciar
+        document.addEventListener('DOMContentLoaded', function () {
+          // ...ya tienes otras inicializaciones aquí...
+          cargarGruposAlumnos();
         });
       </script>
     </main>

@@ -114,12 +114,20 @@
               <label class="block font-semibold mb-1">Cuatrimestre:</label>
               <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
                 <option value="">Selecciona cuatrimestre</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
               </select>
             </div>
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
                 <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
                   <option value="">Selecciona una carrera</option>
+                  <option value="DSM">DSM</option>
+                  <option value="AI">AIRB</option>
                 </select>
               </div>
               <div class="flex justify-center mt-2">
@@ -168,6 +176,62 @@
               document.getElementById('modal-materia').classList.remove('hidden');
             });
           });
+
+          // Cargar grupos al iniciar
+async function cargarGrupos() {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+  try {
+    const res = await fetch("/api/grupos/");
+    const grupos = await res.json();
+    grupos.forEach(grupo => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="py-2 px-4">${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}</td>
+        <td class="py-2 px-4">
+          <!-- Aquí puedes agregar botones de editar/eliminar -->
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (e) {
+    tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
+  }
+}
+
+// Enviar formulario
+document.getElementById("form-materia").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const [nombreInput, cuatriSelect, carreraSelect] = this.querySelectorAll("input, select");
+  const data = {
+    nombre: nombreInput.value.trim(),
+    cuatrimestre: cuatriSelect.value,
+    carrera: carreraSelect.value
+  };
+  console.log("Datos enviados:", data); // <-- Agrega esto
+  try {
+    const res = await fetch("/api/grupos/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      document.getElementById("modal-materia").classList.add("hidden");
+      this.reset();
+      cargarGrupos();
+    } else {
+      const error = await res.json();
+      alert(error.error || "Error al guardar grupo");
+    }
+  } catch {
+    alert("Error de red");
+  }
+});
+
+// Inicializar
+document.addEventListener("DOMContentLoaded", function () {
+  cargarGrupos();
+});
         </script>
     </div>
   </body>
