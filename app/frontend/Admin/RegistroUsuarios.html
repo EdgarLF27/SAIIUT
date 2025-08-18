@@ -453,13 +453,13 @@
               let endpoint = "";
               let userType = "";
               if (formId === "form-alumnado") {
-                endpoint = "http://localhost:5000/alumnos/";
+                endpoint = "http://localhost:5000/api/api/alumnos/";
                 userType = "Alumno";
               } else if (formId === "form-docente") {
-                endpoint = "http://localhost:5000/profesores/";
+                endpoint = "http://localhost:5000/api/api/profesores/";
                 userType = "Docente";
               } else {
-                endpoint = "http://localhost:5000/admins/";
+                endpoint = "http://localhost:5000/api/api/admins/";
                 userType = "Administrador";
               }
 

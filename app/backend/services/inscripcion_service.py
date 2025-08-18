@@ -67,7 +67,8 @@ def obtener_inscripciones_de_alumno(cursor, id_alumno, id_periodo=None):
             m.nombre_materia,
             g.nombre_grupo,
             p.nombre AS nombre_profesor,
-            p.ap_P AS ap_P_profesor,
+            p."ap_P" AS "ap_P_profesor",
+            p."ap_M" AS "ap_M_profesor",
             c.parcial_1, c.parcial_2, c.parcial_3, c.calificacion_final
         FROM inscripciones i
         JOIN materias m ON i.id_materia = m.id_materia

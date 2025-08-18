@@ -48,3 +48,43 @@ def actualizar_calificacion(cursor, id_calificacion, parcial, calificacion):
     """
     cursor.execute(sql, (calificacion, id_calificacion))
     return cursor.rowcount > 0
+
+@with_db_connection
+def get_grupos_y_materias_de_profesor(cursor, id_profesor, id_periodo):
+    """
+    Obtiene los grupos y las materias que un profesor imparte en un periodo específico.
+    """
+    sql = """
+        SELECT DISTINCT
+            g.id_grupo,
+            g.nombre_grupo,
+            m.id_materia,
+            m.nombre_materia,
+            c.nombre_carrera
+        FROM inscripciones i
+        JOIN grupos g ON i.id_grupo = g.id_grupo
+        JOIN materias m ON i.id_materia = m.id_materia
+        JOIN carreras c ON g.id_carrera = c.id_carrera
+        WHERE i.id_profesor = %s AND g.id_periodo = %s
+        ORDER BY g.nombre_grupo, m.nombre_materia;
+    """
+    cursor.execute(sql, (id_profesor, id_periodo))
+    rows = cursor.fetchall()
+    
+    # Agrupar resultados por grupo
+    grupos = {}
+    for row in rows:
+        id_grupo = row['id_grupo']
+        if id_grupo not in grupos:
+            grupos[id_grupo] = {
+                "id_grupo": id_grupo,
+                "nombre_grupo": row['nombre_grupo'],
+                "nombre_carrera": row['nombre_carrera'],
+                "materias": []
+            }
+        grupos[id_grupo]['materias'].append({
+            "id_materia": row['id_materia'],
+            "nombre_materia": row['nombre_materia']
+        })
+        
+    return list(grupos.values())

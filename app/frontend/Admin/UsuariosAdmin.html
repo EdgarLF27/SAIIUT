@@ -408,7 +408,7 @@
 
           alumnosData =
             (await fetchData(
-              `http://localhost:5000/alumnos/?${params}`
+              `http://localhost:5000/api/alumnos/?${params}`
             )) || [];
           renderAlumnos();
         }
@@ -442,7 +442,7 @@
           
           docentesData =
             (await fetchData(
-              `http://localhost:5000/profesores/?${params}`
+              `http://localhost:5000/api/profesores/?${params}`
             )) || [];
           renderDocentes();
         }
@@ -475,7 +475,7 @@
 
           adminsData =
             (await fetchData(
-              `http://localhost:5000/admins/?${params}`
+              `http://localhost:5000/api/admins/?${params}`
             )) || [];
           renderAdmins();
         }
@@ -524,7 +524,7 @@
         }
         function eliminarAlumno(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/alumnos/${id}`, {
+          fetchData(`http://localhost:5000/api/alumnos/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -554,7 +554,7 @@
         }
         function eliminarDocente(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/profesores/${id}`, {
+          fetchData(`http://localhost:5000/api/profesores/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -585,7 +585,7 @@
         }
         function eliminarAdmin(id) {
           if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/admins/${id}`, {
+          fetchData(`http://localhost:5000/api/admins/${id}`, {
             method: "DELETE",
           }).then((data) => {
             if (data) {
@@ -652,7 +652,7 @@
                 .value,
               email: document.getElementById("editar-email-alumno").value,
             };
-            fetchData(`http://localhost:5000/alumnos/${id}`, {
+            fetchData(`http://localhost:5000/api/alumnos/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
@@ -682,7 +682,7 @@
               ).value,
               sexo: document.getElementById("editar-sexo-docente").value,
             };
-            fetchData(`http://localhost:5000/profesores/${id}`, {
+            fetchData(`http://localhost:5000/api/profesores/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
@@ -711,7 +711,7 @@
                 "editar-grado_estudios-admin"
               ).value,
             };
-            fetchData(`http://localhost:5000/admins/${id}`, {
+            fetchData(`http://localhost:5000/api/admins/${id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(body),
