@@ -99,15 +99,8 @@
                   <th class="p-2 border">Cf</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="bg-white border-b">
-                  <td class="p-2 border"></td>
-                  <td class="p-2 border"></td>
-                  <td class="p-2 border"></td>
-                  <td class="p-2 border"></td>
-                  <td class="p-2 border"></td>
-                  <td class="p-2 border"></td>
-                </tr>
+              <tbody id="tabla-calificaciones-body">
+                <!-- Aquí se llenarán las filas dinámicamente -->
               </tbody>
             </table>
           </div>
@@ -156,4 +149,65 @@
       </main>
     </div>
   </body>
+  <script>
+    // Cambia este valor por el id real del alumno autenticado
+    const idAlumno = 1;
+
+    // Relaciona los nombres de cuatrimestre con id_periodo (ajusta según tu lógica backend)
+    const periodos = {
+      "Primero": 1,
+      "Segundo": 2,
+      "Tercero": 3,
+      "Cuarto": 4,
+      "Quinto": 5,
+      "sexto": 6,
+      "Séptimo": 7,
+      "Octavo": 8,
+      "Noveno": 9,
+      "Décimo": 10
+    };
+
+    const selectCuatrimestre = document.getElementById('cuatrimestre');
+    const tablaBody = document.getElementById('tabla-calificaciones-body');
+
+    async function cargarCalificaciones() {
+      const cuatrimestre = selectCuatrimestre.value;
+      const idPeriodo = periodos[cuatrimestre];
+
+      // Limpia la tabla
+      tablaBody.innerHTML = '<tr><td colspan="6" class="text-center p-2">Cargando...</td></tr>';
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/alumno/${idAlumno}/calificaciones?id_periodo=${idPeriodo}`);
+        if (!response.ok) throw new Error('No se pudieron obtener las calificaciones');
+        const data = await response.json();
+
+        // data debe ser un array de inscripciones con materias y calificaciones
+        if (!Array.isArray(data) || data.length === 0) {
+          tablaBody.innerHTML = '<tr><td colspan="6" class="text-center p-2">Sin calificaciones</td></tr>';
+          return;
+        }
+
+        tablaBody.innerHTML = '';
+        data.forEach(row => {
+          tablaBody.innerHTML += `
+            <tr class="bg-white border-b">
+              <td class="p-2 border">${row.materia || ''}</td>
+              <td class="p-2 border">${row.p1 ?? ''}</td>
+              <td class="p-2 border">${row.p2 ?? ''}</td>
+              <td class="p-2 border">${row.p3 ?? ''}</td>
+              <td class="p-2 border">${row.p4 ?? ''}</td>
+              <td class="p-2 border">${row.cf ?? ''}</td>
+            </tr>
+          `;
+        });
+      } catch (e) {
+        tablaBody.innerHTML = `<tr><td colspan="6" class="text-center p-2 text-red-500">${e.message}</td></tr>`;
+      }
+    }
+
+    // Carga inicial y al cambiar el cuatrimestre
+    selectCuatrimestre.addEventListener('change', cargarCalificaciones);
+    cargarCalificaciones();
+  </script>
 </html>
