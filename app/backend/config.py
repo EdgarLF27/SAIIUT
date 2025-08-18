@@ -33,7 +33,7 @@ def with_db_connection(fn):
         conn = None
         # Determina si es una operación de escritura por el nombre de la función
         is_write_operation = any(
-            keyword in fn.__name__ for keyword in ["create", "update", "delete"]
+            keyword in fn.__name__ for keyword in ["create", "update", "delete", "asignar", "quitar", "inscribir"]
         )
 
         try:

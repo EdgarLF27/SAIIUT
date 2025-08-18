@@ -117,3 +117,103 @@ def validate_admin_data(data):
     if not is_valid_phone(data["telefono"]):
         errors.append("El teléfono solo debe contener números.")
     return errors
+
+def validate_carrera_data(data):
+    """Valida los datos para crear o actualizar una carrera."""
+    errors = []
+    required_fields = ["nombre_carrera", "abreviatura", "total_cuatrimestres"]
+    for field in required_fields:
+        if field not in data or not data[field]:
+            errors.append(f"El campo '{field}' es obligatorio.")
+
+    if errors:
+        return errors
+
+    try:
+        if int(data["total_cuatrimestres"]) <= 0:
+            errors.append("El total de cuatrimestres debe ser un número positivo.")
+    except (ValueError, TypeError):
+        errors.append("El total de cuatrimestres debe ser un número entero.")
+
+    return errors
+
+
+def validate_materia_data(data):
+    """Valida los datos para crear o actualizar una materia."""
+    errors = []
+    required_fields = ["nombre_materia", "id_carrera"]
+    for field in required_fields:
+        if field not in data or data[field] is None:
+            errors.append(f"El campo '{field}' es obligatorio.")
+
+    if errors:
+        return errors
+
+    try:
+        int(data["id_carrera"])
+    except (ValueError, TypeError):
+        errors.append("El campo 'id_carrera' debe ser un número entero.")
+
+    return errors
+
+
+def validate_grupo_data(data):
+    """Valida los datos para crear o actualizar un grupo."""
+    errors = []
+    required_fields = ["nombre_grupo", "id_carrera", "id_periodo"]
+    for field in required_fields:
+        if field not in data or data[field] is None:
+            errors.append(f"El campo '{field}' es obligatorio.")
+
+    if errors:
+        return errors
+
+    try:
+        int(data["id_carrera"])
+    except (ValueError, TypeError):
+        errors.append("El campo 'id_carrera' debe ser un número entero.")
+
+    try:
+        int(data["id_periodo"])
+    except (ValueError, TypeError):
+        errors.append("El campo 'id_periodo' debe ser un número entero.")
+
+    return errors
+
+
+def validate_periodo_data(data):
+    """Valida los datos para crear o actualizar un periodo escolar."""
+    errors = []
+    required_fields = ["nombre_periodo", "fecha_inicio", "fecha_fin"]
+    for field in required_fields:
+        if field not in data or not data[field]:
+            errors.append(f"El campo '{field}' es obligatorio.")
+
+    if errors:
+        return errors
+
+    return errors
+
+
+def validate_calificacion_data(data):
+    """Valida los datos para una calificación."""
+    errors = []
+    if "id_inscripcion" not in data or data["id_inscripcion"] is None:
+        errors.append("El campo 'id_inscripcion' es obligatorio.")
+    else:
+        try:
+            int(data["id_inscripcion"])
+        except (ValueError, TypeError):
+            errors.append("El campo 'id_inscripcion' debe ser un número entero.")
+
+    # Validar parciales solo si están presentes
+    for parcial in ["parcial_1", "parcial_2", "parcial_3"]:
+        if parcial in data and data[parcial] is not None:
+            try:
+                cal = float(data[parcial])
+                if not (0 <= cal <= 10):
+                    errors.append(f"La calificación de '{parcial}' debe estar entre 0 y 10.")
+            except (ValueError, TypeError):
+                errors.append(f"El valor de '{parcial}' debe ser un número.")
+    
+    return errors
