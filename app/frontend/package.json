@@ -1,10 +1,11 @@
 {
-  "name": "SAIIUT",
+  "name": "saiiut-frontend",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "main_electron.js",
   "scripts": {
-    "start": "npx electron .",
-    "package-win": "electron-packager . SAIIUT --platform=win32 --arch=x64 --out=dist --overwrite"
+    "start": "electron .",
+    "package-win": "electron-packager . SAIIUT --platform=win32 --arch=x64 --out=dist --overwrite --ignore=dist --ignore=package-lock.json --ignore=README.md",
+    "build": "electron-builder"
   },
   "dependencies": {
     "mysql": "^2.18.1"
