@@ -32,40 +32,43 @@
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
-    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-      <div>
-        <div class="mb-12 text-center">
-          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Grupos</span>
+            </a>
+            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
+              <span class="font-medium">Materias</span>
+            </a>
+            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
         </div>
-        <nav class="space-y-4">
-          <a href="IndexAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-home w-5 h-5 text-white"></i>
-            <span class="font-medium">Inicio</span>
-          </a>
-          <a href="RegistroUsuarios.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-            <span class="font-medium">Registros</span>
-          </a>
-          <a href="CalificacionesIndex.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-            <span class="font-medium">Calificaciones</span>
-          </a>
-          <a href="UsuariosAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-            <span class="font-medium">Usuarios</span>
-          </a>
-          <a href="ConfiguracionAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-cog w-5 h-5 text-white"></i>
-            <span class="font-medium">Configuración</span>
-          </a>
-        </nav>
-      </div>
-    </aside>
+      </aside>
 
     <!-- Contenido principal -->
     <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
@@ -107,51 +110,38 @@
           <!-- Sección Alumnado -->
           <div id="form-alumnado"
             class="absolute inset-0 transition-all duration-500 transform translate-x-0 opacity-100 z-10">
-            <!-- Filtros Multi-Criterio -->
-            <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 items-end">
-              <!-- Filtro por Nombre -->
-              <div>
-                <label for="filtro-nombre-alumno" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" id="filtro-nombre-alumno" placeholder="Ej. Juan"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
-              </div>
-              <!-- Filtro por Apellido -->
-              <div>
-                <label for="filtro-apellido-alumno" class="block text-sm font-medium text-gray-700">Apellido</label>
-                <input type="text" id="filtro-apellido-alumno" placeholder="Ej. Pérez"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
-              </div>
-              <!-- Filtro por Matrícula (NUEVO) -->
-              <div>
-                <label for="filtro-matricula-alumno" class="block text-sm font-medium text-gray-700">Matrícula</label>
-                <input type="text" id="filtro-matricula-alumno" placeholder="Ej. 2022..."
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
-              </div>
-              <!-- Filtro por Carrera -->
-              <div>
-                <label for="filtro-carrera-alumno" class="block text-sm font-medium text-gray-700">Carrera</label>
-                <select id="filtro-carrera-alumno"
-                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
-                  <option value="">Todas</option>
-                  <option value="Sistemas Computacionales">
-                    Sistemas Computacionales
-                  </option>
-                  <option value="Mecatrónica">Mecatrónica</option>
-                  <option value="Procesos Industriales">
-                    Procesos Industriales
-                  </option>
-                </select>
-              </div>
-              <!-- Botón de Aplicar Filtros -->
-              <div>
-                <button id="btn-aplicar-filtros-alumnos"
-                  class="w-full bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300 flex items-center justify-center gap-2">
-                  <i class="fas fa-filter"></i>
-                  <span>Aplicar</span>
-                </button>
+            <!-- Filtros Multi-Criterio Estandarizados -->
+            <div class="w-full flex justify-center items-center">
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 items-end w-full md:w-auto justify-items-center">
+                <div>
+                  <label for="filtro-nombre-alumno" class="block text-sm font-medium text-gray-700">Nombre</label>
+                  <input type="text" id="filtro-nombre-alumno" placeholder="Ej. Juan"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
+                </div>
+                <div>
+                  <label for="filtro-apellido-alumno" class="block text-sm font-medium text-gray-700">Apellido</label>
+                  <input type="text" id="filtro-apellido-alumno" placeholder="Ej. Pérez"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
+                </div>
+                <div>
+                  <label for="filtro-matricula-alumno" class="block text-sm font-medium text-gray-700">Matrícula</label>
+                  <input type="text" id="filtro-matricula-alumno" placeholder="Ej. 2022..."
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
+                </div>
+                <div>
+                  <label for="filtro-carrera-alumno" class="block text-sm font-medium text-gray-700">Carrera</label>
+                  <select id="filtro-carrera-alumno"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]">
+                    <option value="">Todas</option>
+                    <option value="Software">Software</option>
+                    <option value="Redes">Redes</option>
+                    <option value="Entornos Virtuales">Entornos Virtuales</option>
+                  </select>
+                </div>
+                <div></div>
               </div>
             </div>
-            <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white h-96">
+            <div id="tabla-alumnos-container" class="overflow-auto rounded-lg shadow bg-white">
               <table class="min-w-full">
                 <thead class="bg-[#2D3E34] text-white">
                   <tr>
@@ -172,20 +162,26 @@
           <!-- Sección Docente -->
           <div id="form-docente"
             class="absolute inset-0 transition-all duration-500 transform translate-x-full opacity-0 pointer-events-none z-0">
-            <!-- Buscador con botón -->
-            <div class="w-full flex justify-center mb-6 gap-2">
-              <div class="relative w-full md:w-1/2">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                  <i class="fas fa-search"></i>
-                </span>
-                <input type="text" placeholder="Buscar por nombre o apellido..."
-                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
-                  id="buscador-docentes" />
+            <!-- Filtros Multi-Criterio Estandarizados -->
+            <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 items-end">
+              <div>
+                <label for="filtro-nombre-docente" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="filtro-nombre-docente" placeholder="Ej. Laura"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
               </div>
-              <button id="btn-buscar-docentes"
-                class="bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300">
-                Buscar
-              </button>
+              <div>
+                <label for="filtro-apellido-docente" class="block text-sm font-medium text-gray-700">Apellido</label>
+                <input type="text" id="filtro-apellido-docente" placeholder="Ej. Pérez"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
+              </div>
+              <div>
+                <label for="filtro-numempleado-docente" class="block text-sm font-medium text-gray-700">No.
+                  Empleado</label>
+                <input type="text" id="filtro-numempleado-docente" placeholder="Ej. 12345"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-[#F4A300] focus:border-[#F4A300]" />
+              </div>
+              <div></div>
+              <div></div>
             </div>
             <div class="overflow-x-auto rounded-lg shadow bg-white">
               <table class="min-w-full">
@@ -213,14 +209,12 @@
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                   <i class="fas fa-search"></i>
                 </span>
-                <input type="text" placeholder="Buscar por nombre o apellido..."
+                <inp aceholder="Buscar por nombre o apellido..."
                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
                   id="buscador-admin" />
               </div>
-              <button id="btn-buscar-admins"
-                class="bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300">
-                Buscar
-              </button>
+              <div></div>
+              <div></div>
             </div>
             <div class="overflow-x-auto rounded-lg shadow bg-white">
               <table class="min-w-full">
@@ -428,8 +422,8 @@
               }</td><td class="py-3 px-4">${a.telefono
               }</td><td class="py-3 px-4">${a.matricula || ""
               }</td><td class="py-3 px-4">${a.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarAlumno(${a.id_alumno
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarAlumno(${a.id_alumno
+              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300] transition duration-200" onclick="editarAlumno(${a.id_alumno
+              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300] transition duration-200" onclick="eliminarAlumno(${a.id_alumno
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -439,7 +433,7 @@
           const query = document.getElementById("buscador-docentes").value;
           const params = new URLSearchParams();
           if (query) params.append('nombre', query);
-          
+
           docentesData =
             (await fetchData(
               `http://localhost:5000/api/profesores/?${params}`
@@ -461,8 +455,8 @@
               }</td><td class="py-3 px-4">${d.no_empleado || ""
               }</td><td class="py-3 px-4">${d.telefono
               }</td><td class="py-3 px-4">${d.email
-              }</td><td class="py-3 px-4 flex gap-3"><button class="hover:text-[#F4A300]" onclick="editarDocente(${d.id_profesor
-              })"><i class="fas fa-edit"></i></button><button class="hover:text-[#F4A300]" onclick="eliminarDocente(${d.id_profesor
+              }</td><td class="py-3 px-4 flex gap-3"><button class="transition duration-200 hover:text-[#F4A300]" onclick="editarDocente(${d.id_profesor
+              })"><i class="fas fa-edit"></i></button><button class="transition duration-200 hover:text-[#F4A300]" onclick="eliminarDocente(${d.id_profesor
               })"><i class="fas fa-trash-alt"></i></button></td></tr>`;
           });
         }
@@ -613,27 +607,19 @@
 
         document.addEventListener("DOMContentLoaded", () => {
           buscarAlumnos();
-          document
-            .getElementById("btn-aplicar-filtros-alumnos")
-            .addEventListener("click", buscarAlumnos);
-          document
-            .getElementById("btn-buscar-docentes")
-            .addEventListener("click", buscarDocentes);
-          document
-            .getElementById("btn-buscar-admins")
-            .addEventListener("click", buscarAdmins);
-          document
-            .getElementById("buscador-docentes")
-            .addEventListener(
-              "keypress",
-              (e) => e.key === "Enter" && buscarDocentes()
-            );
-          document
-            .getElementById("buscador-admins")
-            .addEventListener(
-              "keypress",
-              (e) => e.key === "Enter" && buscarAdmins()
-            );
+          // Filtros alumnos
+          ["filtro-nombre-alumno", "filtro-apellido-alumno", "filtro-matricula-alumno"].forEach(id => {
+            document.getElementById(id).addEventListener("input", buscarAlumnos);
+          });
+          document.getElementById("filtro-carrera-alumno").addEventListener("change", buscarAlumnos);
+          // Filtros docentes
+          ["filtro-nombre-docente", "filtro-apellido-docente", "filtro-numempleado-docente"].forEach(id => {
+            document.getElementById(id).addEventListener("input", buscarDocentes);
+          });
+          // Filtros admins
+          ["filtro-nombre-admin", "filtro-apellido-admin", "filtro-numempleado-admin"].forEach(id => {
+            document.getElementById(id).addEventListener("input", buscarAdmins);
+          });
 
           document.getElementById("form-editar-alumno").onsubmit = (e) => {
             e.preventDefault();
@@ -728,7 +714,7 @@
 
       <!-- Modales de Edición -->
       <div id="modal-editar-alumno"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAlumno()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -749,19 +735,27 @@
             </select>
             <input id="editar-grado-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grado" />
             <input id="editar-grupo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Grupo" />
-            <input id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <select id="editar-sexo-alumno" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
             <input id="editar-telefono-alumno" class="border rounded px-3 py-2 w-full" placeholder="Teléfono"
               required />
             <input id="editar-matricula-alumno" class="border rounded px-3 py-2 w-full" placeholder="Matrícula" />
             <input id="editar-email-alumno" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <button type="submit"
+              class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
         </div>
       </div>
+      <!-- Fin modal alumno -->
+
+      <!-- Modal para editar docente -->
       <div id="modal-editar-docente"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarDocente()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -781,16 +775,28 @@
             <input id="editar-no_empleado-docente" class="border rounded px-3 py-2 w-full" placeholder="No. Empleado" />
             <input id="editar-grado_estudio-docente" class="border rounded px-3 py-2 w-full"
               placeholder="Grado de estudio" />
-            <input id="editar-sexo-docente" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <select id="editar-sexo-docente" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
+            <select id="editar-materia-docente" class="border rounded px-3 py-2 w-full">
+              <option>POO</option>
+              <option>DB</option>
+              <option>Humanidades</option>
+            </select>
+            <button type="submit"
+              class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
         </div>
       </div>
+      <!-- Fin modal docente -->
+
 
       <div id="modal-editar-admin"
-        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
           <button onclick="cerrarModalEditarAdmin()"
             class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -806,17 +812,22 @@
               required />
             <input id="editar-telefono-admin" class="border rounded px-3 py-2 w-full" placeholder="Teléfono" required />
             <input id="editar-email-admin" class="border rounded px-3 py-2 w-full" placeholder="Correo" required />
-            <input id="editar-sexo-admin" class="border rounded px-3 py-2 w-full" placeholder="Sexo" />
+            <select id="editar-sexo-admin" class="border rounded px-3 py-2 w-full">
+              <option>Masculino</option>
+              <option>Femenino</option>
+              <option>Otro</option>
+            </select>
             <input id="editar-no_empleado-admin" class="border rounded px-3 py-2 w-full" placeholder="No. Empleado" />
             <input id="editar-grado_estudios-admin" class="border rounded px-3 py-2 w-full"
               placeholder="Grado de estudios" />
-            <button type="submit" class="bg-[#2D3E34] text-white rounded py-2 mt-2 hover:bg-[#F4A300]">
+            <button type="submit"
+              class="bg-[#2D3E34] text-white rounded py-2 mt-2 transition duration-200 hover:bg-[#F4A300]">
               Guardar
             </button>
           </form>
         </div>
       </div>
-      
+
       <footer
         class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
       </footer>

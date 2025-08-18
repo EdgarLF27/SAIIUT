@@ -33,40 +33,43 @@
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
-    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-      <div>
-        <div class="mb-12 text-center">
-          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Grupos</span>
+            </a>
+            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
+              <span class="font-medium">Materias</span>
+            </a>
+            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
         </div>
-        <nav class="space-y-4">
-          <a href="IndexAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-home w-5 h-5 text-white"></i>
-            <span class="font-medium">Inicio</span>
-          </a>
-          <a href="RegistroUsuarios.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-            <span class="font-medium">Registros</span>
-          </a>
-          <a href="CalificacionesIndex.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-            <span class="font-medium">Calificaciones</span>
-          </a>
-          <a href="UsuariosAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-            <span class="font-medium">Usuarios</span>
-          </a>
-          <a href="ConfiguracionAdmin.html"
-            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-            <i class="fas fa-cog w-5 h-5 text-white"></i>
-            <span class="font-medium">Configuración</span>
-          </a>
-        </nav>
-      </div>
-    </aside>
+      </aside>
 
     <!-- Contenido principal -->
     <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
@@ -110,27 +113,33 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label class="block font-semibold mb-1">Nombre:</label>
-                <input id="nombre_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="nombre_alumno" placeholder="Ej. Juan" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                <input id="ap_P_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_P_alumno" placeholder="Ej. Sánchez" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Materno:</label>
-                <input id="ap_M_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_M_alumno" placeholder="Ej. Hernández" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Matrícula:</label>
-                <input id="matricula_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="matricula_alumno" placeholder="Ej. 20241IDSM001" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Teléfono:</label>
-                <input id="telefono_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="telefono_alumno" placeholder="Ej. 2411234567" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Correo:</label>
-                <input id="email_alumno" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="email_alumno" placeholder="Ej. juan@email.com" type="email"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
@@ -142,18 +151,30 @@
               <div>
                 <label class="block font-semibold mb-1">Grado:</label>
                 <select id="grado_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona grado</option>
                   <option>1ro</option>
                   <option>2do</option>
-                  <option>Opciones en camino</option>
+                  <option>3ro</option>
+                  <option>4to</option>
+                  <option>5to</option>
+                  <option>6to</option>
+                  <option>7mo</option>
+                  <option>8vo</option>
+                  <option>9no</option>
+                  <option>10mo</option>
+                  <option>11vo</option>
                 </select>
               </div>
               <div>
                 <label class="block font-semibold mb-1">Grupo:</label>
-                <input id="grupo_alumno" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <select id="grupo_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="">Selecciona grupo</option>
+                </select>
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
                 <select id="sexo_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
@@ -174,39 +195,56 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label class="block font-semibold mb-1">Nombre:</label>
-                <input id="nombre_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="nombre_docente" placeholder="Ej. Laura" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                <input id="ap_P_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_P_docente" placeholder="Ej. Pérez" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Materno:</label>
-                <input id="ap_M_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_M_docente" placeholder="Ej. Gómez" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">No. Empleado:</label>
-                <input id="num_empleado_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="num_empleado_docente" placeholder="Ej. 12345" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Teléfono:</label>
-                <input id="telefono_docente" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="telefono_docente" placeholder="Ej. 2411234567" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Correo:</label>
-                <input id="email_docente" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="email_docente" placeholder="Ej. laura@email.com" type="email"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
                 <select id="sexo_docente" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
                 </select>
               </div>
               <div>
+                <label class="block font-semibold mb-1">Materia impartida:</label>
+                <select id="materia_docente" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona materia</option>
+                  <option>POO</option>
+                  <option>DB</option>
+                  <option>Humanidades</option>
+                </select>
+              </div>
+              <div>
                 <label class="block font-semibold mb-1">Grado de estudios:</label>
-                <input id="grado_estudios" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="grado_estudios" placeholder="Ej. Maestría" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
             </div>
             <div class="flex justify-center mt-4">
@@ -223,11 +261,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label class="block font-semibold mb-1">Nombre:</label>
-                <input id="nombre_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="nombre_admin" placeholder="Ej. Mario" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Paterno:</label>
-                <input id="ap_P_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="ap_P_admin" placeholder="Ej. López" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Apellido Materno:</label>
@@ -235,15 +275,18 @@
               </div>
               <div>
                 <label class="block font-semibold mb-1">Telefono:</label>
-                <input id="telefono_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="telefono_admin" placeholder="Ej. 2411234567" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Correo</label>
-                <input id="email_admin" type="email" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="email_admin" placeholder="Ej. mario@email.com" type="email"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Sexo:</label>
                 <select id="sexo_admin" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="" disabled selected>Selecciona sexo</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
@@ -251,16 +294,18 @@
               </div>
               <div>
                 <label class="block font-semibold mb-1">No. Empleado:</label>
-                <input id="num_empleado_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="num_empleado_admin" placeholder="Ej. 54321" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
               <div>
                 <label class="block font-semibold mb-1">Grado de estudios:</label>
-                <input id="grado_estudios_admin" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" />
+                <input id="grado_estudios_admin" placeholder="Ej. Licenciatura" type="text"
+                  class="border border-gray-300 rounded px-3 py-1 w-full" />
               </div>
             </div>
             <div class="flex justify-center mt-4">
               <button type="submit"
-                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg font-semibold shadow-md border-2 border-transparent hover:bg-[#F4A300] hover:text-[#2D3E34] hover:border-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">
                 Guardar
               </button>
             </div>
@@ -490,6 +535,122 @@
                   alert("Error al registrar: " + error.message);
                 });
             });
+        });
+
+        // Función para poner borde rojo si hay letras, verde si hay solo números
+        function validateNumericInput(input) {
+          input.addEventListener('input', function () {
+            const value = input.value;
+            if (value === '') {
+              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+              input.classList.add('border-gray-300');
+              return;
+            }
+            if (/^\d+$/.test(value)) {
+              input.classList.remove('border-red-500', 'bg-red-50');
+              input.classList.add('border-green-500', 'bg-green-50');
+            } else {
+              input.classList.remove('border-green-500', 'bg-green-50');
+              input.classList.add('border-red-500', 'bg-red-50');
+            }
+          });
+        }
+
+        // Función para poner borde rojo si la matrícula no cumple el formato, verde si es válida
+        function validateMatriculaInput(input) {
+          input.addEventListener('input', function () {
+            const value = input.value.trim();
+            // Ejemplo de formato: 20242IDSM034 (año, número, carrera, identificador, todo junto)
+            // Regex: 4 dígitos, 1 dígito, 3-6 letras, 3 dígitos
+            const matriculaRegex = /^\d{4}\d[A-Z]{3,6}\d{3}$/i;
+            if (value === '') {
+              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+              input.classList.add('border-gray-300');
+              return;
+            }
+            if (matriculaRegex.test(value)) {
+              input.classList.remove('border-red-500', 'bg-red-50');
+              input.classList.add('border-green-500', 'bg-green-50');
+            } else {
+              input.classList.remove('border-green-500', 'bg-green-50');
+              input.classList.add('border-red-500', 'bg-red-50');
+            }
+          });
+        }
+
+        // Función para validar email: debe tener @ y dominio válido (gmail, outlook, etc)
+        function validateEmailInput(input) {
+          input.addEventListener('input', function () {
+            const value = input.value.trim();
+            // Permite dominios comunes, puedes agregar más si lo deseas
+            const emailRegex = /^[\w\.-]+@(?:gmail|outlook|hotmail|yahoo|edu|uttlaxcala)\.[a-z]{2,}$/i;
+            if (value === '') {
+              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+              input.classList.add('border-gray-300');
+              return;
+            }
+            if (emailRegex.test(value)) {
+              input.classList.remove('border-red-500', 'bg-red-50');
+              input.classList.add('border-green-500', 'bg-green-50');
+            } else {
+              input.classList.remove('border-green-500', 'bg-green-50');
+              input.classList.add('border-red-500', 'bg-red-50');
+            }
+          });
+        }
+
+        // Aplica la validación a los inputs relevantes de todos los formularios
+        document.addEventListener('DOMContentLoaded', function () {
+          // IDs de campos numéricos por formulario
+          const numericFields = [
+            'telefono_alumno',
+            'num_empleado_docente', 'telefono_docente',
+            'num_empleado_admin', 'telefono_admin'
+          ];
+          numericFields.forEach(function (id) {
+            const input = document.getElementById(id);
+            if (input) validateNumericInput(input);
+          });
+          // Validación especial para matrícula
+          const matriculaInput = document.getElementById('matricula_alumno');
+          if (matriculaInput) validateMatriculaInput(matriculaInput);
+
+          // Validación para emails
+          const emailFields = [
+            'email_alumno',
+            'email_docente',
+            'email_admin'
+          ];
+          emailFields.forEach(function (id) {
+            const input = document.getElementById(id);
+            if (input) validateEmailInput(input);
+          });
+        });
+
+        // Cargar grupos en el select de alumnos
+        async function cargarGruposAlumnos() {
+          const select = document.getElementById('grupo_alumno');
+          if (!select) return;
+          select.innerHTML = '<option value="">Selecciona grupo</option>';
+          try {
+            const res = await fetch('/api/grupos/');
+            const grupos = await res.json();
+            grupos.forEach(grupo => {
+              // Puedes ajustar el value según tu modelo (por ejemplo, grupo.id si lo tienes)
+              const option = document.createElement('option');
+              option.value = grupo.nombre;
+              option.textContent = `${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}`;
+              select.appendChild(option);
+            });
+          } catch (e) {
+            select.innerHTML = '<option value="">Error al cargar grupos</option>';
+          }
+        }
+
+        // Llamar a la función para cargar grupos al iniciar
+        document.addEventListener('DOMContentLoaded', function () {
+          // ...ya tienes otras inicializaciones aquí...
+          cargarGruposAlumnos();
         });
       </script>
     </main>

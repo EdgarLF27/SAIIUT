@@ -62,10 +62,6 @@
               <i class="fas fa-cog w-5 h-5 text-white"></i>
               <span class="font-medium">Configuración</span>
             </a>
-             <a href="GestionCarreras.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-cog w-5 h-5 text-white"></i>
-              <span class="font-medium">Gestion de carreras</span>
-            </a>
           </nav>
         </div>
       </aside>
@@ -75,33 +71,73 @@
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Bienvenido, Admin</h2> 
-            <div class="flex gap-6 text-3xl cursor-pointer">
-              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
-              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
-            </div>
-          </div>
-          <hr class="mt-4 border-[#D1D5DB]" />
+            <h2 class="text-3xl font-bold">Grupos</h2>
         </div>
-        <!-- Contenido principal -->
-        <div class="flex w-full gap-6 justify-center items-center flex-1">
-          <!-- Sección de imagen (70%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
-            <!-- Aquí va tu imagen -->
-            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
-          </div>
-          <!-- Barra de notificaciones (30%) -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
-            <ul class="space-y-3 overflow-y-auto flex-1">
-              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
-          No hay notificaciones nuevas.
-              </li>
-              <!-- Más notificaciones aquí -->
-            </ul>
-          </div>
+        <hr class="mt-4 border-[#D1D5DB]" />
+    </div>
+    
+    <div class="flex justify-end mb-8">
+        <button id="btn-agregar-materia" type="button" class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 gap-2 flex items-center">
+            <i class="fa-solid fa-plus"></i>
+            Agregar Grupo
+        </button>
+    </div>
+
+        <!-- Tabla de materias -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <table class="min-w-full">
+            <thead class="bg-[#2D3E34] text-white">
+              <tr>
+                <th class="align py-3 px-4 text-left">Grupo</th>
+                <th class="align py-3 px-4 text-left">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#2D3E34]">
+            </tbody>
+          </table>
         </div>
 
+        <!-- Modal de registro de materia -->
+        <div id="modal-materia" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
+          <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+            <button type="button" onclick="document.getElementById('modal-materia').classList.add('hidden')"
+              class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
+              &times;
+            </button>
+            <h3 class="text-xl font-bold mb-4">Agregar Grupo</h3>
+            <form id="form-materia" class="flex flex-col gap-4">
+              <div>
+                <label class="block font-semibold mb-1">Nombre del grupo:</label>
+                <input placeholder="A,B o C" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Cuatrimestre:</label>
+              <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <option value="">Selecciona cuatrimestre</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+              <div>
+                <label class="block font-semibold mb-1">Carrera:</label>
+                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                  <option value="">Selecciona una carrera</option>
+                  <option value="DSM">DSM</option>
+                  <option value="AI">AIRB</option>
+                </select>
+              </div>
+              <div class="flex justify-center mt-2">
+                <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
@@ -132,6 +168,71 @@
           </div>
         </footer>
       </main>
+        <script>
+          // Mostrar modal al hacer click en "Agregar Materia"
+          document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('modal-materia').classList.add('hidden'); // Oculta el modal al cargar
+            document.getElementById('btn-agregar-materia').addEventListener('click', function () {
+              document.getElementById('modal-materia').classList.remove('hidden');
+            });
+          });
+
+          // Cargar grupos al iniciar
+async function cargarGrupos() {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+  try {
+    const res = await fetch("http://localhost:5000/api/grupos/");
+    const grupos = await res.json();
+    grupos.forEach(grupo => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="py-2 px-4">${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}</td>
+        <td class="py-2 px-4">
+          <!-- Aquí puedes agregar botones de editar/eliminar -->
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (e) {
+    tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
+  }
+}
+
+// Enviar formulario
+document.getElementById("form-materia").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const [nombreInput, cuatriSelect, carreraSelect] = this.querySelectorAll("input, select");
+  const data = {
+    nombre: nombreInput.value.trim(),
+    cuatrimestre: cuatriSelect.value,
+    carrera: carreraSelect.value
+  };
+  console.log("Datos enviados:", data); // <-- Agrega esto
+  try {
+    const res = await fetch("http://localhost:5000/api/grupos/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      document.getElementById("modal-materia").classList.add("hidden");
+      this.reset();
+      cargarGrupos();
+    } else {
+      const error = await res.json();
+      alert(error.error || "Error al guardar grupo");
+    }
+  } catch {
+    alert("Error de red");
+  }
+});
+
+// Inicializar
+document.addEventListener("DOMContentLoaded", function () {
+  cargarGrupos();
+});
+        </script>
     </div>
   </body>
 </html>
