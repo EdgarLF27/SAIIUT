@@ -215,7 +215,7 @@
                 </span>
                 <input type="text" placeholder="Buscar por nombre o apellido..."
                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition-all"
-                  id="buscador-admins" />
+                  id="buscador-admin" />
               </div>
               <button id="btn-buscar-admins"
                 class="bg-[#2D3E34] text-white px-6 py-2 rounded-md hover:bg-[#1b2b23] transition-all duration-300">
@@ -469,7 +469,7 @@
 
         async function buscarAdmins() {
           showLoadingState("tbody-admins");
-          const query = document.getElementById("buscador-admins").value;
+          const query = document.getElementById("buscador-admin").value;
           const params = new URLSearchParams();
           if (query) params.append('nombre', query);
 
