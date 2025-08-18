@@ -21,27 +21,27 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - saiiut-mysql
+      - saiiut-postgres
 
-  saiiut-mysql:
-    image: mysql:8.0
+  saiiut-postgres:
+    image: postgres:13
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: noobmaster27
-      MYSQL_USER: ed123
-      MYSQL_PASSWORD: noobmaster27
-      MYSQL_DATABASE: saiiut_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: saiiut_db
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+  pgadmin:
+    image: dpage/pgadmin4
     restart: always
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: saiiut-mysql
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     depends_on:
-      - saiiut-mysql
+      - saiiut-postgres

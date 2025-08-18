@@ -6,7 +6,7 @@ from utils.validators import validate_profesor_data
 profesores_bp = Blueprint("profesores", __name__)
 
 
-@profesores_bp.route("/todos", methods=["GET"])
+@profesores_bp.route("/", methods=["GET"])
 def get_profesores():
     try:
         filtros = {"nombre": request.args.get("nombre")}
@@ -20,7 +20,7 @@ def get_profesores():
         return jsonify({"error": f"Un error ocurrió: {str(e)}"}), 500
 
 
-@profesores_bp.route("/buscar/<int:id>", methods=["GET"])
+@profesores_bp.route("/<int:id>", methods=["GET"])
 def get_profesor(id):
     try:
         profesor = profesor_service.get_profesor_by_id(id)
@@ -32,7 +32,7 @@ def get_profesor(id):
         return jsonify({"error": str(e)}), 500
 
 
-@profesores_bp.route("/insertar", methods=["POST"])
+@profesores_bp.route("/", methods=["POST"])
 def create_profesor():
     data = request.get_json()
     if not data:
@@ -45,7 +45,10 @@ def create_profesor():
     try:
         nuevo_profesor, temp_password = profesor_service.create_profesor(data)
         if nuevo_profesor:
-            print(f"Usuario de Profesor creado: {nuevo_profesor['no_empleado']}, Contraseña temporal: {temp_password}", flush=True)
+            print(
+                f"Usuario de Profesor creado: {nuevo_profesor['no_empleado']}, Contraseña temporal: {temp_password}",
+                flush=True,
+            )
             nuevo_profesor["message"] = "Profesor creado exitosamente"
             return jsonify(nuevo_profesor), 201
         else:
@@ -55,7 +58,7 @@ def create_profesor():
         return jsonify({"error": str(e)}), 500
 
 
-@profesores_bp.route("/editar/<int:id>", methods=["PUT"])
+@profesores_bp.route("/<int:id>", methods=["PUT"])
 def update_profesor(id):
     data = request.get_json()
     if not data:
@@ -76,7 +79,7 @@ def update_profesor(id):
         return jsonify({"error": str(e)}), 500
 
 
-@profesores_bp.route("/eliminar/<int:id>", methods=["DELETE"])
+@profesores_bp.route("/<int:id>", methods=["DELETE"])
 def delete_profesor(id):
     try:
         eliminado = profesor_service.delete_profesor(id)
