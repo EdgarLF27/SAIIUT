@@ -12,7 +12,6 @@ from .docente.routes import docente_bp
 from .grupos.routes import grupos_bp
 from .inscripciones.routes import inscripciones_bp
 from .materias.routes import materias_bp
-from .periodos.routes import periodos_bp
 from .profesor_materias.routes import profesor_materias_bp
 from .profesores.routes import profesores_bp
 from .tutorias.routes import tutorias_bp
@@ -27,7 +26,6 @@ api_bp.register_blueprint(docente_bp, url_prefix='/docente')
 api_bp.register_blueprint(grupos_bp, url_prefix='/grupos')
 api_bp.register_blueprint(inscripciones_bp, url_prefix='/inscripciones')
 api_bp.register_blueprint(materias_bp, url_prefix='/materias')
-api_bp.register_blueprint(periodos_bp, url_prefix='/periodos')
 api_bp.register_blueprint(profesor_materias_bp) # Rutas anidadas, sin prefijo
 api_bp.register_blueprint(profesores_bp, url_prefix='/profesores')
 api_bp.register_blueprint(tutorias_bp, url_prefix='/tutorias')

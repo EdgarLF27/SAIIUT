@@ -7,7 +7,7 @@ class InscripcionError(Exception):
 @with_db_connection
 def inscribir_alumno_en_grupo(cursor, id_alumno, id_grupo):
     # 1. Validaciones previas
-    cursor.execute("SELECT id_carrera, id_periodo FROM grupos WHERE id_grupo = %s", (id_grupo,))
+    cursor.execute("SELECT id_carrera FROM grupos WHERE id_grupo = %s", (id_grupo,))
     grupo = cursor.fetchone()
     if not grupo:
         raise InscripcionError("El grupo especificado no existe.")
@@ -16,7 +16,7 @@ def inscribir_alumno_en_grupo(cursor, id_alumno, id_grupo):
     if not cursor.fetchone():
         raise InscripcionError("El alumno especificado no existe.")
 
-    # Evitar doble inscripción del alumno en el mismo grupo/periodo
+    # Evitar doble inscripción del alumno en el mismo grupo
     cursor.execute("SELECT 1 FROM inscripciones WHERE id_alumno = %s AND id_grupo = %s", (id_alumno, id_grupo))
     if cursor.fetchone():
         raise InscripcionError("El alumno ya está inscrito en este grupo.")
@@ -60,7 +60,7 @@ def inscribir_alumno_en_grupo(cursor, id_alumno, id_grupo):
     return {"message": f"Alumno inscrito exitosamente en {len(inscripciones_creadas)} materias.", "inscripciones_ids": inscripciones_creadas}
 
 @with_db_connection
-def obtener_inscripciones_de_alumno(cursor, id_alumno, id_periodo=None):
+def obtener_inscripciones_de_alumno(cursor, id_alumno):
     sql = """
         SELECT 
             i.id_inscripcion,
@@ -78,9 +78,6 @@ def obtener_inscripciones_de_alumno(cursor, id_alumno, id_periodo=None):
         WHERE i.id_alumno = %s
     """
     params = [id_alumno]
-    if id_periodo:
-        sql += " AND g.id_periodo = %s"
-        params.append(id_periodo)
     
     cursor.execute(sql, tuple(params))
     rows = cursor.fetchall()

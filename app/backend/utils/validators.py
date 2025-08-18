@@ -160,7 +160,7 @@ def validate_materia_data(data):
 def validate_grupo_data(data):
     """Valida los datos para crear o actualizar un grupo."""
     errors = []
-    required_fields = ["nombre_grupo", "id_carrera", "id_periodo"]
+    required_fields = ["nombre_grupo", "id_carrera"]
     for field in required_fields:
         if field not in data or data[field] is None:
             errors.append(f"El campo '{field}' es obligatorio.")
@@ -172,25 +172,6 @@ def validate_grupo_data(data):
         int(data["id_carrera"])
     except (ValueError, TypeError):
         errors.append("El campo 'id_carrera' debe ser un número entero.")
-
-    try:
-        int(data["id_periodo"])
-    except (ValueError, TypeError):
-        errors.append("El campo 'id_periodo' debe ser un número entero.")
-
-    return errors
-
-
-def validate_periodo_data(data):
-    """Valida los datos para crear o actualizar un periodo escolar."""
-    errors = []
-    required_fields = ["nombre_periodo", "fecha_inicio", "fecha_fin"]
-    for field in required_fields:
-        if field not in data or not data[field]:
-            errors.append(f"El campo '{field}' es obligatorio.")
-
-    if errors:
-        return errors
 
     return errors
 

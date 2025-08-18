@@ -7,12 +7,9 @@ def get_all_grupos(cursor):
             g.id_grupo, 
             g.nombre_grupo, 
             g.id_carrera, 
-            c.nombre_carrera, 
-            g.id_periodo, 
-            p.nombre_periodo
+            c.nombre_carrera
         FROM grupos g
         JOIN carreras c ON g.id_carrera = c.id_carrera
-        JOIN periodos_escolares p ON g.id_periodo = p.id_periodo
         ORDER BY g.nombre_grupo
     """)
     rows = cursor.fetchall()
@@ -25,12 +22,9 @@ def get_grupo_by_id(cursor, id):
             g.id_grupo, 
             g.nombre_grupo, 
             g.id_carrera, 
-            c.nombre_carrera, 
-            g.id_periodo, 
-            p.nombre_periodo
+            c.nombre_carrera
         FROM grupos g
         JOIN carreras c ON g.id_carrera = c.id_carrera
-        JOIN periodos_escolares p ON g.id_periodo = p.id_periodo
         WHERE g.id_grupo = %s
     """, (id,))
     row = cursor.fetchone()
@@ -39,11 +33,11 @@ def get_grupo_by_id(cursor, id):
 @with_db_connection
 def create_grupo(cursor, data):
     sql = """
-    INSERT INTO grupos (nombre_grupo, id_carrera, id_periodo)
-    VALUES (%s, %s, %s)
+    INSERT INTO grupos (nombre_grupo, id_carrera)
+    VALUES (%s, %s)
     RETURNING id_grupo;
     """
-    cursor.execute(sql, (data['nombre_grupo'], data['id_carrera'], data['id_periodo']))
+    cursor.execute(sql, (data['nombre_grupo'], data['id_carrera']))
     grupo_id = cursor.fetchone()['id_grupo']
     return {'id_grupo': grupo_id, **data}
 
@@ -51,10 +45,10 @@ def create_grupo(cursor, data):
 def update_grupo(cursor, id, data):
     sql = """
     UPDATE grupos
-    SET nombre_grupo = %s, id_carrera = %s, id_periodo = %s
+    SET nombre_grupo = %s, id_carrera = %s
     WHERE id_grupo = %s
     """
-    cursor.execute(sql, (data['nombre_grupo'], data['id_carrera'], data['id_periodo'], id))
+    cursor.execute(sql, (data['nombre_grupo'], data['id_carrera'], id))
     return cursor.rowcount > 0
 
 @with_db_connection

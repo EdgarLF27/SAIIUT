@@ -50,9 +50,9 @@ def actualizar_calificacion(cursor, id_calificacion, parcial, calificacion):
     return cursor.rowcount > 0
 
 @with_db_connection
-def get_grupos_y_materias_de_profesor(cursor, id_profesor, id_periodo):
+def get_grupos_y_materias_de_profesor(cursor, id_profesor):
     """
-    Obtiene los grupos y las materias que un profesor imparte en un periodo específico.
+    Obtiene los grupos y las materias que un profesor imparte.
     """
     sql = """
         SELECT DISTINCT
@@ -65,10 +65,10 @@ def get_grupos_y_materias_de_profesor(cursor, id_profesor, id_periodo):
         JOIN grupos g ON i.id_grupo = g.id_grupo
         JOIN materias m ON i.id_materia = m.id_materia
         JOIN carreras c ON g.id_carrera = c.id_carrera
-        WHERE i.id_profesor = %s AND g.id_periodo = %s
+        WHERE i.id_profesor = %s
         ORDER BY g.nombre_grupo, m.nombre_materia;
     """
-    cursor.execute(sql, (id_profesor, id_periodo))
+    cursor.execute(sql, (id_profesor,))
     rows = cursor.fetchall()
     
     # Agrupar resultados por grupo
