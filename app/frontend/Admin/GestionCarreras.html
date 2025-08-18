@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard</title>
+
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      overflow-x: hidden;
+      /* Evita barra horizontal */
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <div class="flex flex-1 w-full">
+    <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Grupos</span>
+            </a>
+            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+              <span class="font-medium">Registros</span>
+            </a>
+            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
+              <span class="font-medium">Materias</span>
+            </a>
+            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
+              <span class="font-medium">Usuarios</span>
+            </a>
+            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+             <a href="GestionCarreras.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Gestion de carreras</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col w-full">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Registro Alumnos y Docentes</h2>
+          <div class="flex gap-6 text-3xl cursor-pointer">
+            <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+            <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+          </div>
+        </div>
+        <hr class="mt-4 border-[#D1D5DB]" />
+      </div>
+
+      <!-- Formulario de Registro -->
+      <!-- Apartado de Gestión de Carreras -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-semibold mb-4">Gestión de Carreras</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white rounded-lg shadow-md">
+            <thead class="bg-[#2D3E34] text-white">
+              <tr>
+                <th class="py-3 px-4 text-left">Nombre de la carrera</th>
+                <th class="py-3 px-4 text-left">Acrónimo</th>
+                <th class="py-3 px-4 text-left">Cuatrimestre a cursar</th>
+                <th class="py-3 px-4 text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Ejemplo de fila, puedes reemplazar con datos dinámicos -->
+              <tr class="border-b">
+                <td class="py-3 px-4">Ingeniería en Sistemas</td>
+                <td class="py-3 px-4">ISIC</td>
+                <td class="py-3 px-4">1</td>
+                <td class="py-3 px-4 text-center">
+                  <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="text-red-600 hover:text-red-800" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-3 px-4">Administración</td>
+                <td class="py-3 px-4">ADMI</td>
+                <td class="py-3 px-4">2</td>
+                <td class="py-3 px-4 text-center">
+                  <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="text-red-600 hover:text-red-800" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              <!-- ...agrega más filas según sea necesario... -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <!-- Conócenos -->
+        <div class="flex flex-col items-start w-full md:w-auto">
+          <h4 class="font-semibold underline">Conócenos</h4>
+          <p>
+            Teléfono:
+            <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a>
+          </p>
+          <p>
+            Email:
+            <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a>
+          </p>
+        </div>
+
+        <!-- Síguenos -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Síguenos</h4>
+          <div class="flex gap-4 text-2xl">
+            <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Ubicación</h4>
+          <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+            class="text-3xl hover:text-[#F4A300]">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="ml-2 text-base">Ver en Google Maps</span>
+          </a>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+
+</html>
