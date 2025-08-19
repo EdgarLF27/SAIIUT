@@ -170,9 +170,63 @@
               <i class="fas fa-map-marker-alt"></i>
               <span class="ml-2 text-base">Ver en Google Maps</span>
             </a>
+              <tbody id="alumnos-body">
+              </tbody>
+            </table>
           </div>
-        </footer>
-      </main>
-    </div>
-  </body>
-</html>
+        </div>
+
+        <script>
+          function queryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+          }
+
+          const profesorId = queryParam('profesor');
+          const grupoId = queryParam('grupo');
+          const materiaId = queryParam('materia');
+
+          async function cargarAlumnos() {
+            const tbody = document.getElementById('alumnos-body');
+            tbody.innerHTML = '';
+            if (!profesorId || !grupoId || !materiaId) {
+              tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">Parámetros incompletos</td></tr>';
+              return;
+            }
+            try {
+              const res = await fetch(`http://localhost:5000/api/docente/${profesorId}/grupos/${grupoId}/materias/${materiaId}/alumnos`);
+              if (!res.ok) throw new Error('No se pudieron obtener los alumnos');
+              const alumnos = await res.json();
+              if (!alumnos || alumnos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">No hay alumnos</td></tr>';
+                return;
+              }
+              alumnos.forEach((a, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b hover:bg-gray-50 transition';
+                tr.innerHTML = `
+                  <td class="px-4 py-3">${idx+1}</td>
+                  <td class="px-4 py-3">${escapeHtml(a.nombre)} ${escapeHtml(a.ap_P || '')} ${escapeHtml(a.ap_M || '')}</td>
+                  <td class="px-4 py-3">${escapeHtml(a.matricula)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_1)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_2)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_3)}</td>
+                  <td class="px-4 py-3 text-center">-</td>
+                  <td class="px-4 py-3 text-center font-bold">${escapeHtml(a.calificacion_final)}</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html?calificacion=${a.id_calificacion}" title="Asignar calificación">
+                      <i class="fa-solid fa-pen-to-square text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                `;
+                tbody.appendChild(tr);
+              });
+            } catch (e) {
+              tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">Error al cargar alumnos</td></tr>';
+            }
+          }
+
+          function escapeHtml(str){ if(str===null||str===undefined) return ''; return String(str).replace(/[&<>"'`]/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s]); }
+
+          document.addEventListener('DOMContentLoaded', cargarAlumnos);
+        </script>
