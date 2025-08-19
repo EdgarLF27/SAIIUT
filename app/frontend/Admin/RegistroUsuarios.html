@@ -633,13 +633,13 @@
           if (!select) return;
           select.innerHTML = '<option value="">Selecciona grupo</option>';
           try {
-            const res = await fetch('/api/grupos/');
+            const res = await fetch('http://localhost:5000/api/grupos/');
             const grupos = await res.json();
             grupos.forEach(grupo => {
-              // Puedes ajustar el value según tu modelo (por ejemplo, grupo.id si lo tienes)
+              // backend fields: id_grupo, nombre_grupo, id_carrera, nombre_carrera
               const option = document.createElement('option');
-              option.value = grupo.nombre;
-              option.textContent = `${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}`;
+              option.value = grupo.id_grupo;
+              option.textContent = `${grupo.nombre_grupo} - ${grupo.nombre_carrera}`;
               select.appendChild(option);
             });
           } catch (e) {
