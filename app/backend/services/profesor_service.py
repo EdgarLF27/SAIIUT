@@ -95,7 +95,7 @@ def update_profesor(cursor, id, data):
 
 @with_db_connection
 def delete_profesor(cursor, id):
-    # Paso 1: Obtener el id_usuario antes de borrar el profesor
+    # Paso 1: Obtener el id_usuario antes de borrar nada
     cursor.execute("SELECT id_usuario FROM profesores WHERE id_profesor = %s", (id,))
     result = cursor.fetchone()
     if not result:
@@ -103,11 +103,27 @@ def delete_profesor(cursor, id):
 
     id_usuario_a_eliminar = result["id_usuario"]
 
-    # Paso 2: Eliminar el registro del profesor
+    # Paso 2: Eliminar dependencias en cadena para evitar errores de FK
+    # 2a: Eliminar calificaciones ligadas a las inscripciones del profesor
+    cursor.execute("""
+        DELETE FROM calificaciones 
+        WHERE id_inscripcion IN (SELECT id_inscripcion FROM inscripciones WHERE id_profesor = %s)
+    """, (id,))
+    
+    # 2b: Eliminar inscripciones donde el profesor imparte clase
+    cursor.execute("DELETE FROM inscripciones WHERE id_profesor = %s", (id,))
+    
+    # 2c: Eliminar tutorías asignadas al profesor
+    cursor.execute("DELETE FROM tutorias WHERE id_profesor_tutor = %s", (id,))
+    
+    # 2d: Eliminar asignaciones de materias del profesor
+    cursor.execute("DELETE FROM profesor_materias WHERE id_profesor = %s", (id,))
+
+    # Paso 3: Eliminar el registro del profesor
     cursor.execute("DELETE FROM profesores WHERE id_profesor = %s", (id,))
     rows_deleted = cursor.rowcount
 
-    # Paso 3: Eliminar el registro de usuario correspondiente
+    # Paso 4: Eliminar el registro de usuario correspondiente
     if rows_deleted > 0 and id_usuario_a_eliminar:
         cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario_a_eliminar,))
 
