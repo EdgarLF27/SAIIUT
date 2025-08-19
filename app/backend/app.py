@@ -6,7 +6,8 @@ from flask_cors import CORS
 from api import api_bp
 
 app = Flask(__name__)
-CORS(app)
+# Configuración de CORS más explícita para desarrollo
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Registrar el Blueprint principal de la API
 # Todas nuestras rutas ahora estarán bajo /api
