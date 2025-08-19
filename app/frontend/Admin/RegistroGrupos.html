@@ -104,8 +104,9 @@
               class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
               &times;
             </button>
-            <h3 class="text-xl font-bold mb-4">Agregar Grupo</h3>
+            <h3 id="modal-title" class="text-xl font-bold mb-4">Agregar Grupo</h3>
             <form id="form-grupo" class="flex flex-col gap-4">
+              <input type="hidden" id="id_grupo_edit" />
               <div>
                 <label class="block font-semibold mb-1">Nombre del grupo:</label>
                 <input id="nombre_grupo" placeholder="Ej. 4A" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
@@ -116,6 +117,12 @@
                   <option value="">Selecciona una carrera</option>
                   <option value="1">TIDSM</option>
                   <option value="2">AIRB</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Asignar tutor (opcional):</label>
+                <select id="tutor_profesor" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="">No asignar tutor</option>
                 </select>
               </div>
               <div class="flex justify-center mt-2">
@@ -161,14 +168,20 @@
             const modal = document.getElementById('modal-grupo');
             const btnAgregar = document.getElementById('btn-agregar-materia');
             
-            if(modal) modal.classList.add('hidden');
-            if(btnAgregar) {
-                btnAgregar.addEventListener('click', function () {
-                    modal.classList.remove('hidden');
-                });
-            }
+      if(modal) modal.classList.add('hidden');
+      if(btnAgregar) {
+        btnAgregar.addEventListener('click', function () {
+          // Open modal in create mode
+          document.getElementById('modal-title').textContent = 'Agregar Grupo';
+          document.getElementById('id_grupo_edit').value = '';
+          document.getElementById('form-grupo').reset();
+          modal.classList.remove('hidden');
+        });
+      }
 
             cargarGrupos();
+            // Cargar lista de profesores para el select de tutor
+            cargarProfesores();
 
             const form = document.getElementById("form-grupo");
             if(form) {
@@ -185,14 +198,77 @@
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(data)
                         });
-                        if (res.ok) {
-                            modal.classList.add("hidden");
-                            this.reset();
-                            cargarGrupos();
-                        } else {
+                // determine create or update based on hidden id
+                const editIdEl = document.getElementById('id_grupo_edit');
+                const editId = editIdEl && editIdEl.value ? parseInt(editIdEl.value, 10) : null;
+                if (!editId) {
+                    if (res.ok) {
+                      const nuevo = await res.json();
+                      // Si el usuario seleccionó un profesor para tutor, intentar asignarlo
+                      const tutorSelect = document.getElementById('tutor_profesor');
+                      const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
+                      if (idProfesor && nuevo && nuevo.id_grupo) {
+                        try {
+                        const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ id_profesor: idProfesor, id_grupo: nuevo.id_grupo })
+                        });
+                        if (!assignRes.ok && assignRes.status === 409) {
+                          const err = await assignRes.json().catch(()=>({}));
+                          alert('Grupo creado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
+                        }
+                        } catch (e) {
+                        console.error('Error de red al asignar tutor:', e);
+                        alert('Grupo creado pero error de red al asignar tutor');
+                        }
+                      }
+                      modal.classList.add("hidden");
+                      this.reset();
+                      cargarGrupos();
+                    } else {
                             const error = await res.json();
                             alert(error.error || "Error al guardar grupo");
                         }
+                } else {
+                  // Update flow: send PUT
+                  try {
+                    const putRes = await fetch(`http://localhost:5000/api/grupos/${editId}`, {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data)
+                    });
+                    if (putRes.ok) {
+                      // After update, optionally assign tutor if selected
+                      const tutorSelect = document.getElementById('tutor_profesor');
+                      const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
+                      if (idProfesor) {
+                        try {
+                          const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ id_profesor: idProfesor, id_grupo: editId })
+                          });
+                          if (!assignRes.ok && assignRes.status === 409) {
+                            const err = await assignRes.json().catch(()=>({}));
+                            alert('Grupo actualizado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
+                          }
+                        } catch (e) {
+                          console.error('Error al asignar tutor tras update:', e);
+                        }
+                      }
+                      modal.classList.add('hidden');
+                      document.getElementById('form-grupo').reset();
+                      cargarGrupos();
+                    } else {
+                      const err = await putRes.json().catch(()=>({}));
+                      alert(err.error || 'Error al actualizar');
+                    }
+                  } catch (e) {
+                    console.error('Error en PUT grupo:', e);
+                    alert('Error de red al actualizar grupo');
+                  }
+                }
                     } catch {
                         alert("Error de red");
                     }
@@ -208,20 +284,76 @@
                 const grupos = await res.json();
                 if (grupos && grupos.length) {
                     grupos.forEach(grupo => {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `
-                            <td class="py-2 px-4">${grupo.nombre_grupo} - ${grupo.nombre_carrera}</td>
-                            <td class="py-2 px-4">
-                            <!-- Aquí puedes agregar botones de editar/eliminar -->
-                            </td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
+                                <td class="py-2 px-4">${grupo.nombre_grupo} - ${grupo.nombre_carrera}</td>
+                                <td class="py-2 px-4">
+                                  <button onclick="editarGrupo(${grupo.id_grupo})" class="bg-yellow-400 text-white px-3 py-1 rounded mr-2">Editar</button>
+                                  <button onclick="eliminarGrupo(${grupo.id_grupo})" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
+                                </td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
                 } else {
                     tbody.innerHTML = "<tr><td colspan='2'>No se encontraron grupos</td></tr>";
                 }
             } catch (e) {
                 tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
+            }
+          }
+
+          // Abrir modal con datos para editar un grupo
+          async function editarGrupo(id) {
+            try {
+              const res = await fetch(`http://localhost:5000/api/grupos/${id}`);
+              if (!res.ok) throw new Error('No se encontró grupo');
+              const grupo = await res.json();
+              document.getElementById('modal-title').textContent = 'Editar Grupo';
+              document.getElementById('id_grupo_edit').value = grupo.id_grupo;
+              document.getElementById('nombre_grupo').value = grupo.nombre_grupo;
+              document.getElementById('id_carrera').value = grupo.id_carrera;
+              // Si quieres mantener el tutor select, no lo tocamos aquí (se puede dejar en blanco o cargar el tutor actual en una mejora)
+              document.getElementById('modal-grupo').classList.remove('hidden');
+            } catch (e) {
+              console.error('Error al cargar grupo para editar:', e);
+              alert('No se pudo cargar el grupo para editar');
+            }
+          }
+
+          // Eliminar grupo
+          async function eliminarGrupo(id) {
+            if (!confirm('¿Eliminar este grupo? Esta acción no se puede deshacer.')) return;
+            try {
+              const res = await fetch(`http://localhost:5000/api/grupos/${id}`, { method: 'DELETE' });
+              if (res.ok) {
+                cargarGrupos();
+              } else {
+                const err = await res.json().catch(()=>({}));
+                alert(err.error || 'No se pudo eliminar el grupo');
+              }
+            } catch (e) {
+              console.error('Error al eliminar grupo:', e);
+              alert('Error de red al eliminar grupo');
+            }
+          }
+
+          async function cargarProfesores() {
+            const select = document.getElementById('tutor_profesor');
+            if (!select) return;
+            select.innerHTML = '<option value="">No asignar tutor</option>';
+            try {
+              const res = await fetch('http://localhost:5000/api/profesores/');
+              if (!res.ok) throw new Error('Error al obtener profesores');
+              const profesores = await res.json();
+              profesores.forEach(p => {
+                const option = document.createElement('option');
+                option.value = p.id_profesor || p.id;
+                option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''} (${p.no_empleado || ''})`;
+                select.appendChild(option);
+              });
+            } catch (e) {
+              console.error('No se pudieron cargar profesores:', e);
+              select.innerHTML = '<option value="">Error al cargar profesores</option>';
             }
           }
         </script>
