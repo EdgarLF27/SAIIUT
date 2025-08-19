@@ -90,20 +90,26 @@
       </div>
 
       <!-- Formulario de Registro -->
+      <div class="flex justify-end mb-6">
+        <button id="btn-agregar-carrera" type="button" class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 gap-2 flex items-center">
+          <i class="fa-solid fa-plus"></i>
+          Agregar Carrera
+        </button>
+      </div>
+
       <section class="mb-10">
         <h3 class="text-2xl font-semibold mb-4">Gestión de Carreras</h3>
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white rounded-lg shadow-md">
-            <thead class="bg-[#2D3E34] text-white">
-              <tr>
-                <th class="py-3 px-4 text-left">Nombre de la carrera</th>
-                <th class="py-3 px-4 text-left">Acrónimo</th>
-                <th class="py-3 px-4 text-left">Cuatrimestre a cursar</th>
-                <th class="py-3 px-4 text-center">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
+        <thead class="bg-[#2D3E34] text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">Nombre de la carrera (Acrónimo)</th>
+            <th class="py-3 px-4 text-left">Cuatrimestres</th>
+            <th class="py-3 px-4 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
           </table>
         </div>
       </section>
@@ -145,7 +151,7 @@
   </div>
 
   <!-- Modal de edición de carrera -->
-<div id="modal-carrera" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center justify-center z-50 hidden">
+<div id="modal-carrera" class="fixed inset-0 bg-[#2226] backdrop-blur-sm flex items-center justify-center z-50 hidden">
   <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative flex flex-col">
     <button type="button" onclick="cerrarModalCarrera()"
       class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
@@ -174,107 +180,147 @@
     </form>
   </div>
 </div>
+<script>
+  // Frontend integration for carreras: cargar, crear, editar y eliminar
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('modal-carrera');
+    const btnAgregar = document.getElementById('btn-agregar-carrera');
+    const form = document.getElementById('form-carrera');
+    const tbody = document.querySelector('section tbody');
 
-  <script>
-// 1. Cargar carreras y mostrarlas en la tabla
-async function cargarCarreras() {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  try {
-    const res = await fetch("http://localhost:5000/api/carreras/");
-    const carreras = await res.json();
-    carreras.forEach(carrera => {
-      const tr = document.createElement("tr");
-      tr.className = "border-b";
-      tr.innerHTML = `
-        <td class="py-3 px-4">${carrera.nombre}</td>
-        <td class="py-3 px-4">${carrera.acronimo}</td>
-        <td class="py-3 px-4">${carrera.cuatrimestre}</td>
-        <td class="py-3 px-4 text-center">
-          <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar" onclick="editarCarrera(${carrera.id})">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="text-red-600 hover:text-red-800" title="Eliminar" onclick="eliminarCarrera(${carrera.id})">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (e) {
-    tbody.innerHTML = "<tr><td colspan='4'>Error al cargar carreras</td></tr>";
-  }
-}
+    if (modal) modal.classList.add('hidden');
 
-// Mostrar modal y llenar datos para editar
-async function editarCarrera(id) {
-  try {
-    const res = await fetch(`http://localhost:5000/api/carreras/${id}`);
-    if (!res.ok) throw new Error("No se pudo obtener la carrera");
-    const carrera = await res.json();
-    document.getElementById("carrera_id").value = carrera.id;
-    document.getElementById("nombre_carrera").value = carrera.nombre;
-    document.getElementById("acronimo_carrera").value = carrera.acronimo;
-    document.getElementById("cuatrimestre_carrera").value = carrera.cuatrimestre;
-    document.getElementById("modal-carrera").classList.remove("hidden");
-    document.getElementById("modal-carrera").classList.add("flex");
-  } catch {
-    alert("Error al cargar datos de la carrera");
-  }
-}
-
-// Cerrar modal
-function cerrarModalCarrera() {
-  document.getElementById("modal-carrera").classList.add("hidden");
-  document.getElementById("modal-carrera").classList.remove("flex");
-}
-
-// Guardar cambios al editar carrera
-document.getElementById("form-carrera").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const id = document.getElementById("carrera_id").value;
-  const data = {
-    nombre: document.getElementById("nombre_carrera").value.trim(),
-    acronimo: document.getElementById("acronimo_carrera").value.trim(),
-    cuatrimestre: parseInt(document.getElementById("cuatrimestre_carrera").value)
-  };
-  try {
-    const res = await fetch(`http://localhost:5000/api/carreras/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-    if (res.ok) {
-      cerrarModalCarrera();
-      cargarCarreras();
-    } else {
-      const error = await res.json();
-      alert(error.error || "Error al actualizar carrera");
+    if (btnAgregar) {
+      btnAgregar.addEventListener('click', function () {
+        abrirModalNuevaCarrera();
+      });
     }
-  } catch {
-    alert("Error de red al actualizar");
-  }
-});
 
-// 2. Eliminar carrera (opcional)
-async function eliminarCarrera(id) {
-  if (!confirm("¿Seguro que deseas eliminar esta carrera?")) return;
-  try {
-    const res = await fetch(`http://localhost:5000/api/carreras/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      cargarCarreras();
-    } else {
-      alert("No se pudo eliminar la carrera");
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const id = document.getElementById('carrera_id').value;
+        // map form fields to the backend field names
+        const payload = {
+          nombre_carrera: document.getElementById('nombre_carrera').value,
+          abreviatura: document.getElementById('acronimo_carrera').value,
+          total_cuatrimestres: parseInt(document.getElementById('cuatrimestre_carrera').value, 10)
+        };
+
+        try {
+          let res;
+          if (id) {
+            res = await fetch(`http://localhost:5000/api/carreras/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } else {
+            res = await fetch('http://localhost:5000/api/carreras/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          }
+
+          if (res.ok) {
+            cerrarModalCarrera();
+            form.reset();
+            cargarCarreras();
+          } else {
+            const err = await res.json();
+            alert(err.error || 'Error al guardar carrera');
+          }
+        } catch (err) {
+          alert('Error de red');
+        }
+      });
     }
-  } catch {
-    alert("Error de red al eliminar");
-  }
-}
 
-// 3. Inicializar al cargar la página
-document.addEventListener("DOMContentLoaded", function () {
-  cargarCarreras();
-});
+    cargarCarreras();
+  });
+
+  function abrirModalNuevaCarrera() {
+    document.getElementById('carrera_id').value = '';
+    document.getElementById('nombre_carrera').value = '';
+    document.getElementById('acronimo_carrera').value = '';
+    document.getElementById('cuatrimestre_carrera').value = '';
+    const modal = document.getElementById('modal-carrera');
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function cerrarModalCarrera() {
+    const modal = document.getElementById('modal-carrera');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  async function cargarCarreras() {
+    const tbody = document.querySelector('section tbody');
+    tbody.innerHTML = '';
+    try {
+      const res = await fetch('http://localhost:5000/api/carreras/');
+      const carreras = await res.json();
+      if (carreras && carreras.length) {
+        carreras.forEach(c => {
+          const tr = document.createElement('tr');
+          // backend fields: id_carrera, nombre_carrera, abreviatura, total_cuatrimestres
+          tr.innerHTML = `
+            <td class="py-2 px-4">${escapeHtml(c.nombre_carrera)} (${escapeHtml(c.abreviatura)})</td>
+            <td class="py-2 px-4">${escapeHtml(c.total_cuatrimestres)}</td>
+            <td class="py-2 px-4 text-center">
+              <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick="editarCarrera(${c.id_carrera})">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarCarrera(${c.id_carrera})">Eliminar</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } else {
+        tbody.innerHTML = "<tr><td colspan='3'>No se encontraron carreras</td></tr>";
+      }
+    } catch (e) {
+      tbody.innerHTML = "<tr><td colspan='3'>Error al cargar carreras</td></tr>";
+    }
+  }
+
+  async function editarCarrera(id) {
+    try {
+      const res = await fetch(`http://localhost:5000/api/carreras/${id}`);
+      if (!res.ok) return alert('No se pudo obtener la carrera');
+      const c = await res.json();
+  // backend returns id_carrera, abreviatura, total_cuatrimestres
+  document.getElementById('carrera_id').value = c.id_carrera || id;
+  document.getElementById('nombre_carrera').value = c.nombre_carrera || '';
+  document.getElementById('acronimo_carrera').value = c.abreviatura || '';
+  document.getElementById('cuatrimestre_carrera').value = c.total_cuatrimestres || '';
+      const modal = document.getElementById('modal-carrera');
+      if (modal) modal.classList.remove('hidden');
+    } catch (e) {
+      alert('Error al obtener carrera');
+    }
+  }
+
+  async function eliminarCarrera(id) {
+    if (!confirm('¿Eliminar esta carrera?')) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/carreras/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        cargarCarreras();
+      } else {
+        const err = await res.json();
+        alert(err.error || 'Error al eliminar');
+      }
+    } catch (e) {
+      alert('Error de red');
+    }
+  }
+
+  // Simple HTML escaper to avoid injecting raw content
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>"'`]/g, function (s) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s];
+    });
+  }
 </script>
 </body>
 </html>

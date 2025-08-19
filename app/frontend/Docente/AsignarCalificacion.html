@@ -79,7 +79,7 @@
             <form class="w-full flex flex-col gap-4 items-center">
               <div class="w-full flex flex-col gap-3">
           <label class="font-medium">Calificación parcial 1:</label>
-          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial1">
+          <select id="parcial_1" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial1">
             <option value="">Seleccionar calificación</option>
             <option value="1" id="parcial_au">AU</option>
             <option value="2" id="parcial_de">DE</option>
@@ -89,7 +89,7 @@
               </div>
               <div class="w-full flex flex-col gap-3">
           <label class="font-medium">Calificación parcial 2:</label>
-          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial2">
+          <select id="parcial_2" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial2">
             <option value="">Seleccionar calificación</option>
             <option value="1" id="parcial_au">AU</option>
             <option value="2" id="parcial_de">DE</option>
@@ -99,7 +99,7 @@
               </div>
               <div class="w-full flex flex-col gap-3">
           <label class="font-medium">Calificación parcial 3:</label>
-          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial3">
+          <select id="parcial_3" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial3">
             <option value="">Seleccionar calificación</option>
             <option value="1" id="parcial_au">AU</option>
             <option value="2" id="parcial_de">DE</option>
@@ -109,7 +109,7 @@
               </div>
               <div class="w-full flex flex-col gap-3">
           <label class="font-medium">Calificación parcial 4:</label>
-          <select class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial4">
+          <select id="parcial_4" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial4">
             <option value="">Seleccionar calificación</option>
             <option value="1" id="parcial_au">AU</option>
             <option value="2" id="parcial_de">DE</option>
@@ -125,6 +125,38 @@
             </div>
           </div>
         </div>
+
+        <script>
+          function queryParam(name) { const url = new URL(window.location.href); return url.searchParams.get(name); }
+          const idCalificacion = queryParam('calificacion');
+
+          async function guardarCambios() {
+            if (!idCalificacion) return alert('Falta id de calificación');
+            // Aquí suponemos que 'parcial' será una de: parcial_1, parcial_2, parcial_3, calificacion_final
+            // Por simplicidad actualizaremos parcial_1 si está seleccionado, puedes adaptar.
+            const parcial = 'parcial_1';
+            const val = document.getElementById('parcial_1').value;
+            if (!val) return alert('Selecciona una calificación');
+
+            try {
+              const res = await fetch(`http://localhost:5000/api/docente/calificaciones/${idCalificacion}`, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ parcial, calificacion: val })
+              });
+              if (!res.ok) {
+                const e = await res.json().catch(()=>({}));
+                throw new Error(e.error || 'Error al guardar');
+              }
+              alert('Calificación guardada');
+              history.back();
+            } catch (err) {
+              alert('Error: ' + err.message);
+            }
+          }
+
+          document.querySelector('button.mx-auto').addEventListener('click', guardarCambios);
+        </script>
 
         <!-- Footer -->
         <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
