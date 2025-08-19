@@ -116,25 +116,26 @@
             </button>
             <h3 class="text-xl font-bold mb-4">Agregar Materia</h3>
             <form id="form-materia" class="flex flex-col gap-4">
+              <input type="hidden" id="materia_id" />
               <div>
                 <label class="block font-semibold mb-1">Nombre de la materia:</label>
-                <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+                <input id="nombre_materia" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
             </div>
             <div>
               <label class="block font-semibold mb-1">Cuatrimestre:</label>
-              <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+              <select id="cuatrimestre_materia" class="border border-gray-300 rounded px-3 py-1 w-full">
                 <option value="">Selecciona cuatrimestre</option>
               </select>
             </div>
             <div>
                 <label class="block font-semibold mb-1">Profesor:</label>
-                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <select id="profesor_materia" class="border border-gray-300 rounded px-3 py-1 w-full">
                   <option value="">Selecciona un profesor</option>
                 </select>
               </div>
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
-                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <select id="id_carrera" class="border border-gray-300 rounded px-3 py-1 w-full" required>
                   <option value="">Selecciona una carrera</option>
                 </select>
               </div>
@@ -176,131 +177,153 @@
           </div>
         </footer>
       </main>
-        <script>
-          // Cargar materias y mostrarlas en la tabla
-async function cargarMaterias() {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  try {
-    const res = await fetch("http://localhost:5000/api/materias/");
-    const materias = await res.json();
-    materias.forEach(materia => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="py-3 px-4">${materia.nombre}</td>
-        <td class="py-3 px-4">${materia.profesor || ''}</td>
-        <td class="py-3 px-4">${materia.cuatrimestre}</td>
-        <td class="py-3 px-4">
-          <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar" onclick="editarMateria(${materia.id})">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="text-red-600 hover:text-red-800" title="Eliminar" onclick="eliminarMateria(${materia.id})">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (e) {
-    tbody.innerHTML = "<tr><td colspan='4'>Error al cargar materias</td></tr>";
-  }
-}
-
-// Mostrar modal para agregar materia
-document.getElementById('btn-agregar-materia').addEventListener('click', function () {
-  limpiarModalMateria();
-  document.getElementById('modal-materia').classList.remove('hidden');
-});
-
-// Cerrar modal
-function cerrarModalMateria() {
-  document.getElementById('modal-materia').classList.add('hidden');
-}
-
-// Limpiar modal
-function limpiarModalMateria() {
-  document.querySelector("#form-materia").reset();
-  document.getElementById("form-materia").removeAttribute("data-id");
-}
-
-// Enviar formulario para agregar o editar materia
-document.getElementById("form-materia").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const inputs = this.querySelectorAll("input, select");
-  const data = {
-    nombre: inputs[0].value.trim(),
-    cuatrimestre: parseInt(inputs[1].value),
-    profesor: inputs[2].value,
-    carrera: inputs[3].value
-  };
-  const id = this.getAttribute("data-id");
-  try {
-    let res;
-    if (id) {
-      res = await fetch(`http://localhost:5000/api/materias/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-    } else {
-      res = await fetch("http://localhost:5000/api/materias/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-    }
-    if (res.ok) {
-      cerrarModalMateria();
-      cargarMaterias();
-    } else {
-      const error = await res.json();
-      alert(error.error || "Error al guardar materia");
-    }
-  } catch {
-    alert("Error de red");
-  }
-});
-
-// Editar materia
-async function editarMateria(id) {
-  try {
-    const res = await fetch(`http://localhost:5000/api/materias/${id}`);
-    if (!res.ok) throw new Error("No se pudo obtener la materia");
-    const materia = await res.json();
-    const inputs = document.querySelectorAll("#form-materia input, #form-materia select");
-    inputs[0].value = materia.nombre;
-    inputs[1].value = materia.cuatrimestre;
-    inputs[2].value = materia.profesor;
-    inputs[3].value = materia.carrera;
-    document.getElementById("form-materia").setAttribute("data-id", materia.id);
-    document.getElementById('modal-materia').classList.remove('hidden');
-  } catch {
-    alert("Error al cargar datos de la materia");
-  }
-}
-
-// Eliminar materia
-async function eliminarMateria(id) {
-  if (!confirm("¿Seguro que deseas eliminar esta materia?")) return;
-  try {
-    const res = await fetch(`http://localhost:5000/api/materias/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      cargarMaterias();
-    } else {
-      alert("No se pudo eliminar la materia");
-    }
-  } catch {
-    alert("Error de red al eliminar");
-  }
-}
-
-// Inicializar
-document.addEventListener("DOMContentLoaded", function () {
-  cargarMaterias();
-  // Cerrar modal al hacer click en la X
-  document.querySelector("#modal-materia button[type=button]").onclick = cerrarModalMateria;
-});
-        </script>
     </div>
   </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const btnAgregar = document.getElementById('btn-agregar-materia');
+  const modal = document.getElementById('modal-materia');
+  const form = document.getElementById('form-materia');
+
+  if (modal) modal.classList.add('hidden');
+  if (btnAgregar) btnAgregar.addEventListener('click', abrirModalNuevaMateria);
+
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const id = document.getElementById('materia_id').value;
+      const payload = {
+        nombre_materia: document.getElementById('nombre_materia').value,
+        id_carrera: parseInt(document.getElementById('id_carrera').value, 10)
+      };
+
+      try {
+        let res;
+        if (id) {
+          res = await fetch(`http://localhost:5000/api/materias/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          res = await fetch('http://localhost:5000/api/materias/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
+
+        if (res.ok) {
+          cerrarModalMateria();
+          form.reset();
+          cargarMaterias();
+        } else {
+          const err = await res.json();
+          alert(err.error || 'Error al guardar materia');
+        }
+      } catch (e) {
+        alert('Error de red');
+      }
+    });
+  }
+
+  cargarCarreras();
+  cargarMaterias();
+});
+
+function abrirModalNuevaMateria() {
+  document.getElementById('materia_id').value = '';
+  document.getElementById('nombre_materia').value = '';
+  document.getElementById('id_carrera').value = '';
+  const modal = document.getElementById('modal-materia');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function cerrarModalMateria() {
+  const modal = document.getElementById('modal-materia');
+  if (modal) modal.classList.add('hidden');
+}
+
+async function cargarCarreras() {
+  try {
+    const res = await fetch('http://localhost:5000/api/carreras/');
+    const carreras = await res.json();
+    const select = document.getElementById('id_carrera');
+    select.innerHTML = '<option value="">Selecciona una carrera</option>';
+    carreras.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.id_carrera;
+      opt.textContent = `${c.nombre_carrera} (${c.abreviatura})`;
+      select.appendChild(opt);
+    });
+  } catch (e) {
+    // ignore
+  }
+}
+
+async function cargarMaterias() {
+  const tbody = document.querySelector('table tbody');
+  tbody.innerHTML = '';
+  try {
+    const res = await fetch('http://localhost:5000/api/materias/');
+    const materias = await res.json();
+    if (materias && materias.length) {
+      materias.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 px-4">${escapeHtml(m.nombre_materia)}</td>
+          <td class="py-2 px-4">-</td>
+          <td class="py-2 px-4">-</td>
+          <td class="py-2 px-4 text-center">
+            <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick="editarMateria(${m.id_materia})">Editar</button>
+            <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarMateria(${m.id_materia})">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="4">No se encontraron materias</td></tr>';
+    }
+  } catch (e) {
+    tbody.innerHTML = '<tr><td colspan="4">Error al cargar materias</td></tr>';
+  }
+}
+
+async function editarMateria(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/api/materias/${id}`);
+    if (!res.ok) return alert('No se pudo obtener la materia');
+    const m = await res.json();
+    document.getElementById('materia_id').value = m.id_materia || id;
+    document.getElementById('nombre_materia').value = m.nombre_materia || '';
+    document.getElementById('id_carrera').value = m.id_carrera || '';
+    const modal = document.getElementById('modal-materia');
+    if (modal) modal.classList.remove('hidden');
+  } catch (e) {
+    alert('Error al obtener materia');
+  }
+}
+
+async function eliminarMateria(id) {
+  if (!confirm('¿Eliminar esta materia?')) return;
+  try {
+    const res = await fetch(`http://localhost:5000/api/materias/${id}`, { method: 'DELETE' });
+    if (res.ok) cargarMaterias();
+    else {
+      const err = await res.json();
+      alert(err.error || 'Error al eliminar');
+    }
+  } catch (e) {
+    alert('Error de red');
+  }
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>"'`]/g, function (s) {
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s];
+  });
+}
+</script>
