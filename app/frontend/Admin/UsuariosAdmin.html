@@ -430,9 +430,14 @@
 
         async function buscarDocentes() {
           showLoadingState("tbody-docentes");
-          const query = document.getElementById("buscador-docentes").value;
           const params = new URLSearchParams();
-          if (query) params.append('nombre', query);
+          const nombre = document.getElementById("filtro-nombre-docente").value;
+          const apellido = document.getElementById("filtro-apellido-docente").value;
+          const numEmpleado = document.getElementById("filtro-numempleado-docente").value;
+
+          if (nombre) params.append('nombre', nombre);
+          if (apellido) params.append('apellido', apellido);
+          if (numEmpleado) params.append('no_empleado', numEmpleado);
 
           docentesData =
             (await fetchData(
@@ -616,10 +621,8 @@
           ["filtro-nombre-docente", "filtro-apellido-docente", "filtro-numempleado-docente"].forEach(id => {
             document.getElementById(id).addEventListener("input", buscarDocentes);
           });
-          // Filtros admins
-          ["filtro-nombre-admin", "filtro-apellido-admin", "filtro-numempleado-admin"].forEach(id => {
-            document.getElementById(id).addEventListener("input", buscarAdmins);
-          });
+          // Filtro admin
+          document.getElementById("buscador-admin").addEventListener("input", buscarAdmins);
 
           document.getElementById("form-editar-alumno").onsubmit = (e) => {
             e.preventDefault();

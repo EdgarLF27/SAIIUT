@@ -97,37 +97,25 @@
           </table>
         </div>
 
-        <!-- Modal de registro de materia -->
-        <div id="modal-materia" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
+        <!-- Modal de registro de grupo -->
+        <div id="modal-grupo" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
           <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button type="button" onclick="document.getElementById('modal-materia').classList.add('hidden')"
+            <button type="button" onclick="document.getElementById('modal-grupo').classList.add('hidden')"
               class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
               &times;
             </button>
             <h3 class="text-xl font-bold mb-4">Agregar Grupo</h3>
-            <form id="form-materia" class="flex flex-col gap-4">
+            <form id="form-grupo" class="flex flex-col gap-4">
               <div>
                 <label class="block font-semibold mb-1">Nombre del grupo:</label>
-                <input placeholder="A,B o C" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
-            </div>
-            <div>
-              <label class="block font-semibold mb-1">Cuatrimestre:</label>
-              <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
-                <option value="">Selecciona cuatrimestre</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+                <input id="nombre_grupo" placeholder="Ej. 4A" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
             </div>
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
-                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <select id="id_carrera" class="border border-gray-300 rounded px-3 py-1 w-full" required>
                   <option value="">Selecciona una carrera</option>
-                  <option value="DSM">DSM</option>
-                  <option value="AI">AIRB</option>
+                  <option value="1">TIDSM</option>
+                  <option value="2">AIRB</option>
                 </select>
               </div>
               <div class="flex justify-center mt-2">
@@ -169,69 +157,73 @@
         </footer>
       </main>
         <script>
-          // Mostrar modal al hacer click en "Agregar Materia"
           document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('modal-materia').classList.add('hidden'); // Oculta el modal al cargar
-            document.getElementById('btn-agregar-materia').addEventListener('click', function () {
-              document.getElementById('modal-materia').classList.remove('hidden');
-            });
+            const modal = document.getElementById('modal-grupo');
+            const btnAgregar = document.getElementById('btn-agregar-materia');
+            
+            if(modal) modal.classList.add('hidden');
+            if(btnAgregar) {
+                btnAgregar.addEventListener('click', function () {
+                    modal.classList.remove('hidden');
+                });
+            }
+
+            cargarGrupos();
+
+            const form = document.getElementById("form-grupo");
+            if(form) {
+                form.addEventListener("submit", async function(e) {
+                    e.preventDefault();
+                    const data = {
+                        nombre_grupo: document.getElementById("nombre_grupo").value,
+                        id_carrera: parseInt(document.getElementById("id_carrera").value)
+                    };
+                    
+                    try {
+                        const res = await fetch("http://localhost:5000/api/grupos/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(data)
+                        });
+                        if (res.ok) {
+                            modal.classList.add("hidden");
+                            this.reset();
+                            cargarGrupos();
+                        } else {
+                            const error = await res.json();
+                            alert(error.error || "Error al guardar grupo");
+                        }
+                    } catch {
+                        alert("Error de red");
+                    }
+                });
+            }
           });
 
-          // Cargar grupos al iniciar
-async function cargarGrupos() {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  try {
-    const res = await fetch("http://localhost:5000/api/grupos/");
-    const grupos = await res.json();
-    grupos.forEach(grupo => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="py-2 px-4">${grupo.nombre} (${grupo.cuatrimestre}°) - ${grupo.carrera}</td>
-        <td class="py-2 px-4">
-          <!-- Aquí puedes agregar botones de editar/eliminar -->
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (e) {
-    tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
-  }
-}
-
-// Enviar formulario
-document.getElementById("form-materia").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const [nombreInput, cuatriSelect, carreraSelect] = this.querySelectorAll("input, select");
-  const data = {
-    nombre: nombreInput.value.trim(),
-    cuatrimestre: cuatriSelect.value,
-    carrera: carreraSelect.value
-  };
-  console.log("Datos enviados:", data); // <-- Agrega esto
-  try {
-    const res = await fetch("http://localhost:5000/api/grupos/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-    if (res.ok) {
-      document.getElementById("modal-materia").classList.add("hidden");
-      this.reset();
-      cargarGrupos();
-    } else {
-      const error = await res.json();
-      alert(error.error || "Error al guardar grupo");
-    }
-  } catch {
-    alert("Error de red");
-  }
-});
-
-// Inicializar
-document.addEventListener("DOMContentLoaded", function () {
-  cargarGrupos();
-});
+          async function cargarGrupos() {
+            const tbody = document.querySelector("tbody");
+            tbody.innerHTML = "";
+            try {
+                const res = await fetch("http://localhost:5000/api/grupos/");
+                const grupos = await res.json();
+                if (grupos && grupos.length) {
+                    grupos.forEach(grupo => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td class="py-2 px-4">${grupo.nombre_grupo} - ${grupo.nombre_carrera}</td>
+                            <td class="py-2 px-4">
+                            <!-- Aquí puedes agregar botones de editar/eliminar -->
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = "<tr><td colspan='2'>No se encontraron grupos</td></tr>";
+                }
+            } catch (e) {
+                tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
+            }
+          }
         </script>
     </div>
   </body>
