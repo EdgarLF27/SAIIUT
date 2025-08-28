@@ -6,10 +6,17 @@ from cryptography.fernet import Fernet
 
 from config import with_db_connection
 
-ENCRYPTION_KEY = os.getenv(
-    "ENCRYPTION_KEY", "4LrOadb3vc7wrBu99G2_oK_2UQWyWftt9L_t_nU4at0="
-).encode("utf-8")
-cipher_suite = Fernet(ENCRYPTION_KEY)
+# Carga la clave de encriptación desde el entorno.
+ENCRYPTION_KEY = os.getenv("ENCRYPTION_KEY")
+
+# Si la clave no se encuentra, el programa debe detenerse para evitar inconsistencias.
+if not ENCRYPTION_KEY:
+    raise ValueError(
+        "Error crítico: La variable de entorno ENCRYPTION_KEY no está definida en credentials.env"
+    )
+
+# Convertimos la clave a bytes para usarla en la encriptación
+cipher_suite = Fernet(ENCRYPTION_KEY.encode("utf-8"))
 
 
 # Genera una contraseña al azar
@@ -58,7 +65,10 @@ def verify_user(cursor, username, plain_password):
     cursor.execute("SELECT * FROM usuarios WHERE usuario = %s", (username,))
     user = cursor.fetchone()
     if user:
-        decrypted_pass = decrypt_password(user["contraseña"])
+        # La columna BYTEA de la BD se lee como un objeto 'memoryview'.
+        # Lo convertimos explícitamente a 'bytes' para que la librería de criptografía lo acepte.
+        encrypted_pass_bytes = bytes(user["contraseña"])
+        decrypted_pass = decrypt_password(encrypted_pass_bytes)
         if decrypted_pass == plain_password:
             return user
     return None
