@@ -180,6 +180,8 @@
       }
 
             cargarGrupos();
+            // Cargar lista de carreras para el select
+            cargarCarreras();
             // Cargar lista de profesores para el select de tutor
             cargarProfesores();
 
@@ -354,6 +356,26 @@
             } catch (e) {
               console.error('No se pudieron cargar profesores:', e);
               select.innerHTML = '<option value="">Error al cargar profesores</option>';
+            }
+          }
+
+          async function cargarCarreras() {
+            const select = document.getElementById('id_carrera');
+            if (!select) return;
+            select.innerHTML = '<option value="">Selecciona una carrera</option>'; // Limpiar opciones estáticas
+            try {
+              const res = await fetch('http://localhost:5000/api/carreras/');
+              if (!res.ok) throw new Error('Error al obtener carreras');
+              const carreras = await res.json();
+              carreras.forEach(carrera => {
+                const option = document.createElement('option');
+                option.value = carrera.id_carrera;
+                option.textContent = carrera.nombre_carrera;
+                select.appendChild(option);
+              });
+            } catch (e) {
+              console.error('No se pudieron cargar las carreras:', e);
+              select.innerHTML = '<option value="">Error al cargar carreras</option>';
             }
           }
         </script>

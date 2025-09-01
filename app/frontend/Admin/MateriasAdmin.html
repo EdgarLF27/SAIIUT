@@ -194,9 +194,11 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       const id = document.getElementById('materia_id').value;
+      const idProfesor = document.getElementById('profesor_materia').value;
       const payload = {
         nombre_materia: document.getElementById('nombre_materia').value,
-        id_carrera: parseInt(document.getElementById('id_carrera').value, 10)
+        id_carrera: parseInt(document.getElementById('id_carrera').value, 10),
+        id_profesor: idProfesor ? parseInt(idProfesor, 10) : null
       };
 
       try {
@@ -230,6 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   cargarCarreras();
+  cargarProfesores();
   cargarMaterias();
 });
 
@@ -269,19 +272,31 @@ async function cargarMaterias() {
   try {
     const res = await fetch('http://localhost:5000/api/materias/');
     const materias = await res.json();
+    console.log("Datos recibidos del backend:", materias); // Esto nos mostrará qué estamos recibiendo
     if (materias && materias.length) {
       materias.forEach(m => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-2 px-4">${escapeHtml(m.nombre_materia)}</td>
-          <td class="py-2 px-4">-</td>
-          <td class="py-2 px-4">-</td>
-          <td class="py-2 px-4 text-center">
-            <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick="editarMateria(${m.id_materia})">Editar</button>
-            <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarMateria(${m.id_materia})">Eliminar</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
+        try {
+          const tr = document.createElement('tr');
+          const nombreCompletoProfesor = [m.nombre_profesor, m.ap_P_profesor, m.ap_M_profesor].filter(Boolean).join(' ');
+          const profesorDisplay = nombreCompletoProfesor.trim() ? escapeHtml(nombreCompletoProfesor) : 'No asignado';
+
+          tr.innerHTML = `
+            <td class="py-2 px-4">${escapeHtml(m.nombre_materia)}</td>
+            <td class="py-2 px-4">${profesorDisplay}</td>
+            <td class="py-2 px-4">-</td>
+            <td class="py-2 px-4 text-center">
+              <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick="editarMateria(${m.id_materia})">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarMateria(${m.id_materia})">Eliminar</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        } catch (e) {
+          console.error("Error al procesar la siguiente materia:", m);
+          console.error("El error de JavaScript fue:", e);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td colspan="4" class="py-2 px-4 text-red-500">Error al procesar una fila. Revisa la consola para más detalles.</td>`;
+          tbody.appendChild(tr);
+        }
       });
     } else {
       tbody.innerHTML = '<tr><td colspan="4">No se encontraron materias</td></tr>';
@@ -325,5 +340,25 @@ function escapeHtml(str) {
   return String(str).replace(/[&<>"'`]/g, function (s) {
     return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s];
   });
+}
+
+async function cargarProfesores() {
+  const select = document.getElementById('profesor_materia');
+  if (!select) return;
+  select.innerHTML = '<option value="">Selecciona un profesor</option>';
+  try {
+    const res = await fetch('http://localhost:5000/api/profesores/');
+    if (!res.ok) throw new Error('Error al obtener profesores');
+    const profesores = await res.json();
+    profesores.forEach(p => {
+      const option = document.createElement('option');
+      option.value = p.id_profesor;
+      option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
+      select.appendChild(option);
+    });
+  } catch (e) {
+    console.error('No se pudieron cargar los profesores:', e);
+    select.innerHTML = '<option value="">Error al cargar profesores</option>';
+  }
 }
 </script>
