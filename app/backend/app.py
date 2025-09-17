@@ -11,8 +11,16 @@ load_dotenv("credentials.env")
 from api import api_bp
 
 app = Flask(__name__)
+
+# Configurar la Secret Key para la sesión
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
+if not app.config['SECRET_KEY']:
+    raise ValueError("Error crítico: La variable de entorno SECRET_KEY no está definida en credentials.env")
+
 # Configuración de CORS más explícita para desarrollo
-CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5500"}}, supports_credentials=True)
+CORS(app, supports_credentials=True)
 
 # Registrar el Blueprint principal de la API
 # Todas nuestras rutas ahora estarán bajo /api

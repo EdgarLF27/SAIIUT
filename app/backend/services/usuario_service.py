@@ -1,6 +1,8 @@
 import os
 import secrets
 import string
+from werkzeug.utils import secure_filename
+from flask import current_app
 
 from cryptography.fernet import Fernet
 
@@ -76,17 +78,75 @@ def verify_user(cursor, username, plain_password):
 
 @with_db_connection
 def find_user_role(cursor, user_id):
-    # ... (el resto de la función se mantiene igual)
-    cursor.execute("SELECT * FROM alumnos WHERE id_usuario = %s", (user_id,))
+    # Busca en la tabla de administradores
+    cursor.execute("SELECT a.*, u.usuario FROM admins a JOIN usuarios u ON a.id_usuario = u.id_usuario WHERE a.id_usuario = %s", (user_id,))
     profile = cursor.fetchone()
     if profile:
-        return {"role": "alumno", "profile": profile}
-    cursor.execute("SELECT * FROM profesores WHERE id_usuario = %s", (user_id,))
+        return {"role": "admin", "profile": dict(profile)}
+
+    # Busca en la tabla de profesores
+    cursor.execute("SELECT p.*, u.usuario FROM profesores p JOIN usuarios u ON p.id_usuario = u.id_usuario WHERE p.id_usuario = %s", (user_id,))
     profile = cursor.fetchone()
     if profile:
-        return {"role": "profesor", "profile": profile}
-    cursor.execute("SELECT * FROM admins WHERE id_usuario = %s", (user_id,))
+        return {"role": "profesor", "profile": dict(profile)}
+
+    # Busca en la tabla de alumnos
+    cursor.execute("SELECT al.*, u.usuario FROM alumnos al JOIN usuarios u ON al.id_usuario = u.id_usuario WHERE al.id_usuario = %s", (user_id,))
     profile = cursor.fetchone()
     if profile:
-        return {"role": "admin", "profile": profile}
+        return {"role": "alumno", "profile": dict(profile)}
+
     return None
+
+@with_db_connection
+def update_my_profile(cursor, user_id, role, data):
+    # Actualizar campos en la tabla de rol (admins, profesores, etc.)
+    allowed_fields = ['email', 'telefono'] # foto_url se maneja por separado
+    fields_to_update = {k: v for k, v in data.items() if k in allowed_fields and v is not None}
+
+    if fields_to_update:
+        table_name = f"{role}s"
+        if role == 'profesor':
+            table_name = 'profesores'
+            
+        set_clause = ", ".join([f"{key} = %s" for key in fields_to_update.keys()])
+        sql = f"UPDATE {table_name} SET {set_clause} WHERE id_usuario = %s"
+        
+        values = list(fields_to_update.values()) + [user_id]
+        cursor.execute(sql, tuple(values))
+
+    # Actualizar la contraseña si se proporcionó una nueva
+    if 'new_password' in data and data['new_password']:
+        new_encrypted_pass = encrypt_password(data['new_password'])
+        cursor.execute(
+            "UPDATE usuarios SET contraseña = %s WHERE id_usuario = %s",
+            (new_encrypted_pass, user_id)
+        )
+
+    # Devolver los datos actualizados
+    return find_user_role(user_id=user_id)
+
+@with_db_connection
+def update_my_photo(cursor, user_id, role, file):
+    # 1. Guardar el archivo de forma segura
+    filename = secure_filename(file.filename)
+    # Crear un nombre de archivo único para evitar colisiones
+    unique_filename = f"{user_id}_{role}_{filename}"
+    
+    # Ruta de guardado
+    upload_folder = os.path.join(current_app.root_path, 'static', 'uploads')
+    os.makedirs(upload_folder, exist_ok=True) # Crear carpeta si no existe
+    file_path = os.path.join(upload_folder, unique_filename)
+    file.save(file_path)
+
+    # 2. Actualizar la base de datos con la URL del archivo
+    file_url = f"/static/uploads/{unique_filename}"
+    table_name = f"{role}s"
+    if role == 'profesor':
+        table_name = 'profesores'
+
+    sql = f"UPDATE {table_name} SET foto_url = %s WHERE id_usuario = %s"
+    cursor.execute(sql, (file_url, user_id))
+
+    # 3. Devolver el perfil actualizado
+    return find_user_role(user_id=user_id)

@@ -161,25 +161,13 @@
               <div>
                 <label class="block font-semibold mb-1">Carrera:</label>
                 <select id="id_carrera_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
-                  <option value="1">TIDSM</option>
-                  <option value="2">Opciones en camino</option>
+                  <option value="">Selecciona una carrera</option>
                 </select>
               </div>
               <div>
-                <label class="block font-semibold mb-1">Grado:</label>
-                <select id="grado_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
-                  <option value="" disabled selected>Selecciona grado</option>
-                  <option>1ro</option>
-                  <option>2do</option>
-                  <option>3ro</option>
-                  <option>4to</option>
-                  <option>5to</option>
-                  <option>6to</option>
-                  <option>7mo</option>
-                  <option>8vo</option>
-                  <option>9no</option>
-                  <option>10mo</option>
-                  <option>11vo</option>
+                <label class="block font-semibold mb-1">Cuatrimestre:</label>
+                <select id="id_cuatrimestre_alumno" class="border border-gray-300 rounded px-3 py-1 w-full">
+                  <option value="">Selecciona un cuatrimestre</option>
                 </select>
               </div>
               <div>
@@ -651,11 +639,50 @@
           }
         }
 
-        // Llamar a la función para cargar grupos al iniciar
+        // Llamar a las funciones de carga al iniciar
         document.addEventListener('DOMContentLoaded', function () {
-          // ...ya tienes otras inicializaciones aquí...
           cargarGruposAlumnos();
+          cargarCuatrimestres();
+          cargarCarreras();
         });
+
+        // Cargar cuatrimestres en el select de alumnos
+        async function cargarCuatrimestres() {
+          const select = document.getElementById('id_cuatrimestre_alumno');
+          if (!select) return;
+          select.innerHTML = '<option value="">Selecciona un cuatrimestre</option>';
+          try {
+            const res = await fetch('http://localhost:5000/api/cuatrimestres/');
+            const cuatrimestres = await res.json();
+            cuatrimestres.forEach(cuatri => {
+              const option = document.createElement('option');
+              option.value = cuatri.id_cuatrimestre;
+              option.textContent = cuatri.nombre;
+              select.appendChild(option);
+            });
+          } catch (e) {
+            select.innerHTML = '<option value="">Error al cargar cuatrimestres</option>';
+          }
+        }
+
+        // Cargar carreras en el select de alumnos
+        async function cargarCarreras() {
+          const select = document.getElementById('id_carrera_alumno');
+          if (!select) return;
+          select.innerHTML = '<option value="">Selecciona una carrera</option>';
+          try {
+            const res = await fetch('http://localhost:5000/api/carreras/');
+            const carreras = await res.json();
+            carreras.forEach(carrera => {
+              const option = document.createElement('option');
+              option.value = carrera.id_carrera;
+              option.textContent = carrera.nombre_carrera;
+              select.appendChild(option);
+            });
+          } catch (e) {
+            select.innerHTML = '<option value="">Error al cargar carreras</option>';
+          }
+        }
       </script>
     </main>
   </div>

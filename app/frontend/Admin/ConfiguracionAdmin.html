@@ -115,41 +115,51 @@
                 <img id="profile-img" src="" alt="Foto de perfil" class="w-24 h-25 object-cover"
                   onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/solid/user.svg';this.classList.add('p-4','bg-gray-200');" />
               </div>
-              <button class="px-6 py-2 border rounded bg-white hover:bg-gray-100 text-base">Subir imagen</button>
+              <input type="file" id="photo-input" class="hidden" accept="image/*">
+              <button type="button" id="upload-button"
+                class="px-6 py-2 border rounded bg-white hover:bg-gray-100 text-base">Subir imagen</button>
             </div>
 
             <!-- Formulario de edición -->
-            <form class="w-full max-w-2xl flex flex-col items-center space-y-6">
-              <!-- Matrícula -->
+            <form id="profile-form" class="w-full max-w-2xl flex flex-col items-center space-y-6">
+              <!-- No. Empleado (solo lectura) -->
               <div class="flex items-center w-full ">
                 <i class="fas fa-user mr-3 text-gray-500 text-lg"></i>
-                <input type="text" placeholder="No. Empleado"
+                <input id="no_empleado" type="text" placeholder="No. Empleado"
                   class="placeholder-white rounded bg-gray-300 flex-1 px-4 py-3 border-none focus:outline-none text-lg"
                   readonly />
                 <i class="fas fa-lock ml-3 text-gray-500 text-lg"></i>
               </div>
-              <!-- Contraseña, correo -->
+              <!-- Correo y Teléfono -->
+              <div class="flex w-full space-x-4">
+                <div class="flex items-center flex-1">
+                  <span class="mr-3 text-gray-500 text-lg">@</span>
+                  <input id="email" type="email" placeholder="correo..."
+                    class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
+                </div>
+                <div class="flex items-center flex-1">
+                  <i class="fas fa-phone mr-3 text-gray-500 text-lg"></i>
+                  <input id="telefono" type="text" placeholder="Telefono..."
+                    class="flex-1 border border-gray-300 rounded px-4 py-3 text-lg" />
+                </div>
+              </div>
+              <!-- Contraseñas -->
               <div class="flex w-full space-x-4">
                 <div class="flex items-center flex-1">
                   <i class="fas fa-lock mr-3 text-gray-500 text-lg"></i>
-                  <input type="password" placeholder="Contraseña..."
+                  <input id="new_password" type="password" placeholder="Nueva Contraseña..."
                     class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
                 </div>
                 <div class="flex items-center flex-1">
-                  <span class="mr-3 text-gray-500 text-lg">@</span>
-                  <input type="email" placeholder="correo..."
+                  <i class="fas fa-lock mr-3 text-gray-500 text-lg"></i>
+                  <input id="confirm_password" type="password" placeholder="Confirmar Contraseña..."
                     class="border border-gray-300 rounded px-4 py-3 w-full text-lg" />
                 </div>
               </div>
-              <!-- Teléfono -->
-              <div class="flex items-center w-full">
-                <i class="fas fa-phone mr-3 text-gray-500 text-lg"></i>
-                <input type="text" placeholder="Telefono..."
-                  class="flex-1 border border-gray-300 rounded px-4 py-3 text-lg" />
-              </div>
               <!-- Botón confirmar -->
               <button type="submit"
-                class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar</button>
+                class="w-56 bg-[#2D3E34] text-white py-3 px-6 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#F4A300] focus:ring-offset-2">Guardar
+                Cambios</button>
             </form>
           </div>
         </div>
@@ -192,6 +202,140 @@
       </footer>
     </main>
   </div>
+  <script>
+    const API_BASE_URL = 'http://localhost:5000';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      cargarMiPerfil();
+
+      const form = document.getElementById('profile-form');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        guardarPerfil();
+      });
+
+      const uploadButton = document.getElementById('upload-button');
+      const photoInput = document.getElementById('photo-input');
+      
+      uploadButton.addEventListener('click', () => photoInput.click());
+      photoInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          subirFoto(file);
+        }
+      });
+    });
+
+    async function cargarMiPerfil() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/me`, { credentials: 'include' });
+        if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = '../login.html';
+          }
+          throw new Error('No se pudo cargar la información del perfil.');
+        }
+        const data = await response.json();
+        const profile = data.profile;
+
+        if (profile) {
+          document.getElementById('no_empleado').value = profile.no_empleado || '';
+          document.getElementById('email').value = profile.email || '';
+          document.getElementById('telefono').value = profile.telefono || '';
+          
+          const profileImg = document.getElementById('profile-img');
+          if (profile.foto_url) {
+            profileImg.src = `${API_BASE_URL}${profile.foto_url}`;
+          } else {
+            profileImg.src = 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/solid/user.svg';
+            profileImg.classList.add('p-4', 'bg-gray-200');
+          }
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert(error.message);
+      }
+    }
+
+    async function guardarPerfil() {
+      const newPassword = document.getElementById('new_password').value;
+      const confirmPassword = document.getElementById('confirm_password').value;
+
+      if (newPassword && newPassword !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
+        return;
+      }
+
+      const data = {
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value,
+      };
+
+      if (newPassword) {
+        data.new_password = newPassword;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Error al actualizar el perfil.');
+        }
+
+        alert('Perfil actualizado exitosamente.');
+        document.getElementById('new_password').value = '';
+        document.getElementById('confirm_password').value = '';
+        cargarMiPerfil();
+
+      } catch (error) {
+        console.error('Error al guardar:', error);
+        alert(error.message);
+      }
+    }
+
+    async function subirFoto(file) {
+      const formData = new FormData();
+      formData.append('profile_photo', file);
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/auth/me/photo`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+        });
+
+        const responseText = await response.text();
+
+        if (!response.ok) {
+          throw new Error(`El servidor respondió con un error ${response.status}:\n\n${responseText}`);
+        }
+
+        const updatedProfile = JSON.parse(responseText);
+        
+        const profileImg = document.getElementById('profile-img');
+        if (updatedProfile.profile && updatedProfile.profile.foto_url) {
+          profileImg.src = `${API_BASE_URL}${updatedProfile.profile.foto_url}`;
+        }
+
+        alert('Foto de perfil actualizada.');
+
+      } catch (error) {
+        let fullErrorDetails = 'Error Message: ' + error.message;
+        if (error.stack) {
+            fullErrorDetails += '\n\nStack Trace:\n' + error.stack;
+        }
+        alert('Ha ocurrido un error. Por favor, COPIA Y PEGA TODO ESTE TEXTO:\n\n' + fullErrorDetails);
+      }
+    }
+  </script>
 </body>
 
 </html>

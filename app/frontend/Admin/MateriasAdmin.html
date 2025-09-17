@@ -212,7 +212,7 @@
 
 </html>
 
-<script>
+  <script>
   document.addEventListener('DOMContentLoaded', function () {
     const btnAgregar = document.getElementById('btn-agregar-materia');
     const modal = document.getElementById('modal-materia');
@@ -226,9 +226,11 @@
         e.preventDefault();
         const id = document.getElementById('materia_id').value;
         const idProfesor = document.getElementById('profesor_materia').value;
+        const idCuatrimestre = document.getElementById('cuatrimestre_materia').value;
         const payload = {
           nombre_materia: document.getElementById('nombre_materia').value,
           id_carrera: parseInt(document.getElementById('id_carrera').value, 10),
+          id_cuatrimestre: idCuatrimestre ? parseInt(idCuatrimestre, 10) : null,
           id_profesor: idProfesor ? parseInt(idProfesor, 10) : null
         };
 
@@ -264,13 +266,13 @@
 
     cargarCarreras();
     cargarProfesores();
+    cargarCuatrimestres();
     cargarMaterias();
   });
 
   function abrirModalNuevaMateria() {
     document.getElementById('materia_id').value = '';
-    document.getElementById('nombre_materia').value = '';
-    document.getElementById('id_carrera').value = '';
+    document.getElementById('form-materia').reset();
     const modal = document.getElementById('modal-materia');
     if (modal) modal.classList.remove('hidden');
   }
@@ -278,6 +280,26 @@
   function cerrarModalMateria() {
     const modal = document.getElementById('modal-materia');
     if (modal) modal.classList.add('hidden');
+  }
+
+  async function cargarCuatrimestres() {
+    const select = document.getElementById('cuatrimestre_materia');
+    if (!select) return;
+    select.innerHTML = '<option value="">Selecciona un cuatrimestre</option>';
+    try {
+      const res = await fetch('http://localhost:5000/api/cuatrimestres/');
+      if (!res.ok) throw new Error('Error al obtener cuatrimestres');
+      const cuatrimestres = await res.json();
+      cuatrimestres.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id_cuatrimestre;
+        opt.textContent = c.nombre;
+        select.appendChild(opt);
+      });
+    } catch (e) {
+      console.error('No se pudieron cargar los cuatrimestres:', e);
+      select.innerHTML = '<option value="">Error al cargar cuatrimestres</option>';
+    }
   }
 
   async function cargarCarreras() {
@@ -289,7 +311,7 @@
       carreras.forEach(c => {
         const opt = document.createElement('option');
         opt.value = c.id_carrera;
-        opt.textContent = `${c.nombre_carrera} (${c.abreviatura})`;
+        opt.textContent = `${c.nombre_carrera}`;
         select.appendChild(opt);
       });
     } catch (e) {
@@ -303,20 +325,20 @@
     try {
       const res = await fetch('http://localhost:5000/api/materias/');
       const materias = await res.json();
-      console.log("Datos recibidos del backend:", materias); // Esto nos mostrará qué estamos recibiendo
       if (materias && materias.length) {
         materias.forEach(m => {
           try {
             const tr = document.createElement('tr');
             const nombreCompletoProfesor = [m.nombre_profesor, m.ap_P_profesor, m.ap_M_profesor].filter(Boolean).join(' ');
             const profesorDisplay = nombreCompletoProfesor.trim() ? escapeHtml(nombreCompletoProfesor) : 'No asignado';
+            const cuatrimestreDisplay = m.nombre_cuatrimestre ? escapeHtml(m.nombre_cuatrimestre) : 'No asignado';
 
             tr.innerHTML = `
             <td class="py-2 px-4">${escapeHtml(m.nombre_materia)}</td>
             <td class="py-2 px-4">${profesorDisplay}</td>
-            <td class="py-2 px-4">-</td>
+            <td class="py-2 px-4">${cuatrimestreDisplay}</td>
             <td class="py-2 px-4 text-center">
-              <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick="editarMateria(${m.id_materia})">Editar</button>
+              <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick='editarMateria(${JSON.stringify(m)})'>Editar</button>
               <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarMateria(${m.id_materia})">Eliminar</button>
             </td>
           `;
@@ -337,19 +359,14 @@
     }
   }
 
-  async function editarMateria(id) {
-    try {
-      const res = await fetch(`http://localhost:5000/api/materias/${id}`);
-      if (!res.ok) return alert('No se pudo obtener la materia');
-      const m = await res.json();
-      document.getElementById('materia_id').value = m.id_materia || id;
-      document.getElementById('nombre_materia').value = m.nombre_materia || '';
-      document.getElementById('id_carrera').value = m.id_carrera || '';
-      const modal = document.getElementById('modal-materia');
-      if (modal) modal.classList.remove('hidden');
-    } catch (e) {
-      alert('Error al obtener materia');
-    }
+  function editarMateria(materia) {
+    document.getElementById('materia_id').value = materia.id_materia || '';
+    document.getElementById('nombre_materia').value = materia.nombre_materia || '';
+    document.getElementById('id_carrera').value = materia.id_carrera || '';
+    document.getElementById('cuatrimestre_materia').value = materia.id_cuatrimestre || '';
+    document.getElementById('profesor_materia').value = materia.id_profesor || '';
+    const modal = document.getElementById('modal-materia');
+    if (modal) modal.classList.remove('hidden');
   }
 
   async function eliminarMateria(id) {
@@ -369,6 +386,30 @@
   function escapeHtml(str) {
     if (str === null || str === undefined) return '';
     return String(str).replace(/[&<>"'`]/g, function (s) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;", "`": "&#96;" })[s];
+    });
+  }
+
+  async function cargarProfesores() {
+    const select = document.getElementById('profesor_materia');
+    if (!select) return;
+    select.innerHTML = '<option value="">Selecciona un profesor</option>';
+    try {
+      const res = await fetch('http://localhost:5000/api/profesores/');
+      if (!res.ok) throw new Error('Error al obtener profesores');
+      const profesores = await res.json();
+      profesores.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.id_profesor;
+        option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
+        select.appendChild(option);
+      });
+    } catch (e) {
+      console.error('No se pudieron cargar los profesores:', e);
+      select.innerHTML = '<option value="">Error al cargar profesores</option>';
+    }
+  }
+</script>"'`]/g, function (s) {
       return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;", "`": "&#96;" })[s];
     });
   }
