@@ -1,0 +1,48 @@
+services:
+  frontend:
+    build:
+      context: app/frontend
+    volumes:
+      - ./app/frontend:/app
+    working_dir: /app
+    command: npm start
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: app/backend
+    volumes:
+      - ./app/backend:/app
+      - ./app/backend/credentials.env:/app/credentials.env
+    working_dir: /app
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    command: python app.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - saiiut-postgres
+
+  saiiut-postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: saiiut_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - saiiut-postgres

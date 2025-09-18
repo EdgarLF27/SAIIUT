@@ -34,6 +34,24 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div
+      class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl"
+      style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
+  <!-- Mensaje de éxito con colorimetría del botón Guardar -->
+  <div id="successMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div
+      class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl"
+      style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span class="font-semibold">¡Alumno registrado exitosamente!</span>
+    </div>
+  </div>
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -348,6 +366,127 @@
         </div>
       </footer>
       <script>
+        // Eliminar el mensaje de error debajo del formulario
+        function mostrarErrorForm(id, mensaje) {
+          const div = document.getElementById(id);
+          if (div) {
+            div.textContent = '';
+            div.classList.add('hidden');
+          }
+        }
+        // Mostrar error bonito debajo del formulario
+        function mostrarErrorForm(id, mensaje) {
+          const div = document.getElementById(id);
+          div.textContent = mensaje;
+          div.classList.remove('hidden');
+          setTimeout(() => { div.classList.add('hidden'); }, 3500);
+        }
+        // Ejemplo de validación en tiempo real para campos de registro alumno
+        document.querySelectorAll('.alumno-form input, .alumno-form select').forEach(function (el) {
+          el.addEventListener('input', function () {
+            // Solo alerta, sin bordes
+          });
+        });
+
+        // Ejemplo de validación al enviar para alumno
+        function validarFormularioAlumno() {
+          let valido = true;
+          document.querySelectorAll('.alumno-form input, .alumno-form select').forEach(function (el) {
+            if (el.required && !el.value) {
+              mostrarAlerta('Todos los campos obligatorios deben estar llenos.');
+              valido = false;
+            }
+          });
+          return valido;
+        }
+        // document.getElementById('formAlumno').onsubmit = function(e) {
+        //   e.preventDefault();
+        //   if (validarFormularioAlumno()) {
+        //     // enviar datos
+        //     mostrarAlerta('¡Alumno registrado!');
+        //   }
+        // };
+        // Ejemplo de validación en tiempo real para campos de registro docente
+        document.querySelectorAll('.docente-form input, .docente-form select').forEach(function (el) {
+          el.addEventListener('input', function () {
+            // Solo alerta, sin bordes
+          });
+        });
+
+        // Ejemplo de validación al enviar para docente
+        function validarFormularioDocente() {
+          let valido = true;
+          document.querySelectorAll('.docente-form input, .docente-form select').forEach(function (el) {
+            if (el.required && !el.value) {
+              mostrarAlerta('Todos los campos obligatorios deben estar llenos.');
+              valido = false;
+            }
+          });
+          return valido;
+        }
+        // document.getElementById('formDocente').onsubmit = function(e) {
+        //   e.preventDefault();
+        //   if (validarFormularioDocente()) {
+        //     // enviar datos
+        //     mostrarAlerta('¡Docente registrado!');
+        //   }
+        // };
+        // Validación visual y lógica
+        function mostrarAlerta(texto) {
+          const msg = document.getElementById('alertMessage');
+          const inner = msg.querySelector('div');
+          const span = document.getElementById('alertText');
+          span.textContent = texto;
+          inner.style.opacity = '1';
+          msg.style.pointerEvents = 'auto';
+          setTimeout(() => {
+            inner.style.opacity = '0';
+            msg.style.pointerEvents = 'none';
+          }, 3000);
+        }
+
+        // Ejemplo de validación en tiempo real para campos de registro
+        document.querySelectorAll('input, select').forEach(function (el) {
+          el.addEventListener('input', function () {
+            // Solo alerta, sin bordes
+          });
+        });
+
+        // Ejemplo de validación al enviar para registro general
+        function validarFormularioRegistro() {
+          let valido = true;
+          document.querySelectorAll('input, select').forEach(function (el) {
+            if (el.required && !el.value) {
+              mostrarAlerta('Todos los campos obligatorios deben estar llenos.');
+              valido = false;
+            }
+          });
+          return valido;
+        }
+        // document.getElementById('form-alumnado').onsubmit = function(e) {
+        //   e.preventDefault();
+        //   if (validarFormularioAlumno()) {
+        //     mostrarAlerta('¡Alumno registrado!');
+        //   } else {
+        //     mostrarErrorForm('error-alumno', 'Por favor llena todos los campos correctamente.');
+        //   }
+        // };
+        // document.getElementById('form-docente').onsubmit = function(e) {
+        //   e.preventDefault();
+        //   if (validarFormularioDocente()) {
+        //     mostrarAlerta('¡Docente registrado!');
+        //   } else {
+        //     mostrarErrorForm('error-docente', 'Por favor llena todos los campos correctamente.');
+        //   }
+        // };
+        // document.getElementById('form-admin').onsubmit = function(e) {
+        //   e.preventDefault();
+        //   if (validarFormularioRegistro()) {
+        //     mostrarAlerta('¡Admin registrado!');
+        //   } else {
+        //     mostrarErrorForm('error-admin', 'Por favor llena todos los campos correctamente.');
+        //   }
+        // };
         // Simple tab/slide logic para 3 tabs
         const tabAlumnado = document.getElementById("tab-alumnado");
         const tabDocente = document.getElementById("tab-docente");
@@ -522,12 +661,29 @@
                   return res.json();
                 })
                 .then((respuesta) => {
-                  alert(userType + ' registrado exitosamente.');
+                  // Cambia el texto del mensaje según el tipo de usuario
+                  const msg = document.getElementById('successMessage');
+                  const inner = msg.querySelector('span');
+                  if (userType === 'Alumno') {
+                    inner.textContent = '¡Registro exitoso!';
+                  } else if (userType === 'Docente') {
+                    inner.textContent = '¡Docente registrado exitosamente!';
+                  } else {
+                    inner.textContent = '¡Administrador registrado exitosamente!';
+                  }
+                  mostrarMensajeExito();
                   document.getElementById(formId).reset();
                 })
                 .catch((error) => {
                   console.error("Error en la petición:", error);
-                  alert("Error al registrar: " + error.message);
+                  mostrarAlerta("Error al registrar: " + error.message);
+                  if (formId === "form-alumnado") {
+                    mostrarErrorForm("error-alumno", "Error al registrar: " + error.message);
+                  } else if (formId === "form-docente") {
+                    mostrarErrorForm("error-docente", "Error al registrar: " + error.message);
+                  } else {
+                    mostrarErrorForm("error-admin", "Error al registrar: " + error.message);
+                  }
                 });
             });
         });
@@ -537,16 +693,10 @@
           input.addEventListener('input', function () {
             const value = input.value;
             if (value === '') {
-              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
-              input.classList.add('border-gray-300');
               return;
             }
-            if (/^\d+$/.test(value)) {
-              input.classList.remove('border-red-500', 'bg-red-50');
-              input.classList.add('border-green-500', 'bg-green-50');
-            } else {
-              input.classList.remove('border-green-500', 'bg-green-50');
-              input.classList.add('border-red-500', 'bg-red-50');
+            if (!/^\d+$/.test(value)) {
+              mostrarAlerta('Solo se permiten números en este campo.');
             }
           });
         }
@@ -559,16 +709,10 @@
             // Regex: 4 dígitos, 1 dígito, 3-6 letras, 3 dígitos
             const matriculaRegex = /^\d{4}\d[A-Z]{3,6}\d{3}$/i;
             if (value === '') {
-              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
-              input.classList.add('border-gray-300');
               return;
             }
-            if (matriculaRegex.test(value)) {
-              input.classList.remove('border-red-500', 'bg-red-50');
-              input.classList.add('border-green-500', 'bg-green-50');
-            } else {
-              input.classList.remove('border-green-500', 'bg-green-50');
-              input.classList.add('border-red-500', 'bg-red-50');
+            if (!matriculaRegex.test(value)) {
+              mostrarAlerta('Formato de matrícula incorrecto.');
             }
           });
         }
@@ -580,19 +724,31 @@
             // Permite dominios comunes, puedes agregar más si lo deseas
             const emailRegex = /^[\w\.-]+@(?:gmail|outlook|hotmail|yahoo|edu|uttlaxcala)\.[a-z]{2,}$/i;
             if (value === '') {
-              input.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
-              input.classList.add('border-gray-300');
               return;
             }
-            if (emailRegex.test(value)) {
-              input.classList.remove('border-red-500', 'bg-red-50');
-              input.classList.add('border-green-500', 'bg-green-50');
-            } else {
-              input.classList.remove('border-green-500', 'bg-green-50');
-              input.classList.add('border-red-500', 'bg-red-50');
+            if (!emailRegex.test(value)) {
+              mostrarAlerta('Correo electrónico inválido.');
             }
           });
         }
+
+        // Eliminar cualquier borde/fondo rojo visual en los inputs
+        // Reemplazar todas las clases 'border-red-500' y 'bg-red-50' por 'border-gray-300' en los inputs
+        const limpiarBordes = () => {
+          document.querySelectorAll('input, select').forEach(el => {
+            el.classList.remove('border-red-500', 'bg-red-50', 'border-green-500', 'bg-green-50');
+            el.classList.add('border-gray-300');
+          });
+        };
+        // Ejecutar al cargar y después de cada validación
+        window.addEventListener('DOMContentLoaded', limpiarBordes);
+        // Llamar limpiarBordes después de cada submit
+        ['form-alumnado', 'form-docente', 'form-admin'].forEach(formId => {
+          const form = document.getElementById(formId);
+          if (form) {
+            form.addEventListener('submit', limpiarBordes);
+          }
+        });
 
         // Aplica la validación a los inputs relevantes de todos los formularios
         document.addEventListener('DOMContentLoaded', function () {
@@ -686,6 +842,19 @@
             select.innerHTML = '<option value="">Error al cargar carreras</option>';
           }
         }
+        // Función para mostrar el mensaje de éxito
+        function mostrarMensajeExito() {
+          const msg = document.getElementById('successMessage');
+          const inner = msg.querySelector('div');
+          inner.style.opacity = '1';
+          msg.style.pointerEvents = 'auto';
+          setTimeout(() => {
+            inner.style.opacity = '0';
+            msg.style.pointerEvents = 'none';
+          }, 3000);
+        }
+        // Llama a mostrarMensajeExito() cuando el registro sea exitoso
+        // Ejemplo: mostrarMensajeExito();
       </script>
     </main>
   </div>

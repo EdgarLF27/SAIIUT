@@ -33,6 +33,13 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -372,6 +379,19 @@
 
       <!-- Script para cargar datos y manejar la interactividad -->
       <script>
+        // Función para mostrar alerta visual
+        function mostrarAlerta(texto) {
+          const msg = document.getElementById('alertMessage');
+          const inner = msg.querySelector('div');
+          const span = document.getElementById('alertText');
+          span.textContent = texto;
+          inner.style.opacity = '1';
+          msg.style.pointerEvents = 'auto';
+          setTimeout(() => {
+            inner.style.opacity = '0';
+            msg.style.pointerEvents = 'none';
+          }, 3000);
+        }
         let alumnosData = [],
           docentesData = [],
           adminsData = [];
@@ -391,7 +411,7 @@
             return response.json();
           } catch (error) {
             console.error("Error en la petición fetch:", error);
-            alert(`Ocurrió un error: ${error.message}`);
+            mostrarAlerta(`Ocurrió un error: ${error.message}`);
             return null;
           }
         }
@@ -542,15 +562,7 @@
             .classList.remove("hidden");
         }
         function eliminarAlumno(id) {
-          if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/api/alumnos/${id}`, {
-            method: "DELETE",
-          }).then((data) => {
-            if (data) {
-              alert(data.result || data.error);
-              buscarAlumnos();
-            }
-          });
+          mostrarModalEliminar('alumno', id);
         }
         function editarDocente(id) {
           const d = docentesData.find((x) => x.id_profesor === id);
@@ -572,15 +584,7 @@
             .classList.remove("hidden");
         }
         function eliminarDocente(id) {
-          if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/api/profesores/${id}`, {
-            method: "DELETE",
-          }).then((data) => {
-            if (data) {
-              alert(data.result || data.error);
-              buscarDocentes();
-            }
-          });
+          mostrarModalEliminar('docente', id);
         }
         function editarAdmin(id) {
           const admin = adminsData.find((x) => x.id_admin === id);
@@ -603,15 +607,57 @@
             .classList.remove("hidden");
         }
         function eliminarAdmin(id) {
-          if (!confirm("¿Seguro?")) return;
-          fetchData(`http://localhost:5000/api/admins/${id}`, {
-            method: "DELETE",
-          }).then((data) => {
-            if (data) {
-              alert(data.result || data.error);
-              buscarAdmins();
+          mostrarModalEliminar('admin', id);
+        }
+
+        // Modal minimalista de confirmación para eliminar (global)
+        function mostrarModalEliminar(tipo, id) {
+          const modal = document.createElement('div');
+          modal.id = 'modal-confirm-delete-usuario';
+          modal.className = 'fixed inset-0 bg-[#2226] backdrop-blur-sm flex items-center justify-center z-50';
+          modal.innerHTML = `
+            <div class="bg-white border border-[#E0E0E0] rounded-lg p-6 w-full max-w-sm flex flex-col items-center gap-4 relative shadow-sm">
+              <button type="button" id="cancelDeleteUsuario" class="absolute top-2 right-2 text-gray-400 hover:text-black text-xl">&times;</button>
+              <i class="fa-solid fa-exclamation-triangle text-[#F4A300] text-xl mb-2"></i>
+              <h3 class="text-base font-semibold mb-1 text-[#2D3E34]">¿Eliminar ${tipo}?</h3>
+              <p class="text-sm text-[#2D3E34] text-center mb-2">¿Estás seguro de que quieres eliminar este ${tipo}?</p>
+              <div class="flex gap-2 mt-2">
+                <button id="confirmDeleteUsuario" type="button" class="bg-[#F4A300] text-white px-4 py-1 rounded font-medium text-sm hover:bg-[#2D3E34] transition">Eliminar</button>
+                <button type="button" id="cancelDeleteUsuario2" class="bg-gray-100 text-[#2D3E34] px-4 py-1 rounded font-medium text-sm hover:bg-gray-200 transition">Cancelar</button>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(modal);
+          function closeModal() { modal.remove(); }
+          document.getElementById('cancelDeleteUsuario').onclick = closeModal;
+          document.getElementById('cancelDeleteUsuario2').onclick = closeModal;
+          document.getElementById('confirmDeleteUsuario').onclick = async function () {
+            let url = '';
+            let reloadFn = null;
+            if (tipo === 'alumno') {
+              url = `http://localhost:5000/api/alumnos/${id}`;
+              reloadFn = buscarAlumnos;
+            } else if (tipo === 'docente') {
+              url = `http://localhost:5000/api/profesores/${id}`;
+              reloadFn = buscarDocentes;
+            } else if (tipo === 'admin') {
+              url = `http://localhost:5000/api/admins/${id}`;
+              reloadFn = buscarAdmins;
             }
-          });
+            try {
+              const res = await fetch(url, { method: 'DELETE' });
+              if (res.ok) {
+                mostrarAlerta('¡Eliminado exitosamente!');
+                reloadFn();
+                closeModal();
+              } else {
+                const err = await res.json();
+                mostrarAlerta(err.error || 'Error al eliminar');
+              }
+            } catch (e) {
+              mostrarAlerta('Error de red');
+            }
+          };
         }
 
         function cerrarModalEditarAlumno() {
@@ -667,10 +713,17 @@
               body: JSON.stringify(body),
             }).then((data) => {
               if (data) {
-                alert(data.nombre ? "Alumno actualizado" : data.error);
+                if (data.nombre) {
+                  mostrarAlerta('¡Cambio exitoso!');
+                } else {
+                  mostrarAlerta(data.error || 'Error al actualizar');
+                }
                 cerrarModalEditarAlumno();
                 buscarAlumnos();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Alumno actualizado' : data.error);
             });
           };
           document.getElementById("form-editar-docente").onsubmit = (e) => {
@@ -697,10 +750,17 @@
               body: JSON.stringify(body),
             }).then((data) => {
               if (data) {
-                alert(data.nombre ? "Docente actualizado" : data.error);
+                if (data.nombre) {
+                  mostrarAlerta('¡Cambio exitoso!');
+                } else {
+                  mostrarAlerta(data.error || 'Error al actualizar');
+                }
                 cerrarModalEditarDocente();
                 buscarDocentes();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Docente actualizado' : data.error);
             });
           };
           document.getElementById("form-editar-admin").onsubmit = (e) => {
@@ -726,10 +786,17 @@
               body: JSON.stringify(body),
             }).then((data) => {
               if (data) {
-                alert(data.nombre ? "Admin actualizado" : data.error);
+                if (data.nombre) {
+                  mostrarAlerta('¡Cambio exitoso!');
+                } else {
+                  mostrarAlerta(data.error || 'Error al actualizar');
+                }
                 cerrarModalEditarAdmin();
                 buscarAdmins();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Administrador actualizado' : data.error);
             });
           };
         });

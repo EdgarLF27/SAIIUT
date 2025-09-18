@@ -1,8 +1,14 @@
 from config import with_db_connection
 
 @with_db_connection
+<<<<<<< HEAD
 def get_all_materias(cursor, id_carrera=None):
     sql = """
+=======
+def get_all_materias(cursor):
+    # Ponemos comillas dobles en los nombres de columnas con mayúsculas ("ap_P", "ap_M") para que PostgreSQL las encuentre.
+    cursor.execute("""
+>>>>>>> e2129d705f4cfee97a3f1af836a8baabecb14f5e
         SELECT 
             m.id_materia, 
             m.nombre_materia, 
@@ -19,6 +25,7 @@ def get_all_materias(cursor, id_carrera=None):
         LEFT JOIN cuatrimestres cu ON m.id_cuatrimestre = cu.id_cuatrimestre
         LEFT JOIN profesor_materias pm ON m.id_materia = pm.id_materia
         LEFT JOIN profesores p ON pm.id_profesor = p.id_profesor
+<<<<<<< HEAD
     """
     params = []
     if id_carrera:
@@ -28,6 +35,10 @@ def get_all_materias(cursor, id_carrera=None):
     sql += " ORDER BY m.nombre_materia"
     
     cursor.execute(sql, tuple(params))
+=======
+        ORDER BY m.nombre_materia
+    """)
+>>>>>>> e2129d705f4cfee97a3f1af836a8baabecb14f5e
     rows = cursor.fetchall()
     return [dict(row) for row in rows]
 

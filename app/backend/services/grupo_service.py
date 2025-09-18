@@ -39,6 +39,7 @@ def create_grupo(cursor, data):
     """
     cursor.execute(sql, (data['nombre_grupo'], data['id_carrera']))
     grupo_id = cursor.fetchone()['id_grupo']
+<<<<<<< HEAD
 
     # Asignar materias al grupo
     if 'materias' in data and data['materias']:
@@ -49,6 +50,10 @@ def create_grupo(cursor, data):
             )
 
     return {'id_grupo': grupo_id, **data}
+=======
+    # Devolvemos el objeto completo, asegurándonos de usar la misma clave que recibió el frontend
+    return {'id_grupo': grupo_id, 'nombre_grupo': data['nombre_grupo'], 'id_carrera': data['id_carrera']}
+>>>>>>> e2129d705f4cfee97a3f1af836a8baabecb14f5e
 
 @with_db_connection
 def update_grupo(cursor, id, data):

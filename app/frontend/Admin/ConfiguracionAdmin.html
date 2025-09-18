@@ -14,9 +14,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Auth Guard -->
-  <script src="../js/auth-guard.js"></script>
-
   <style>
     body {
       font-family: 'IBM Plex Sans', sans-serif;
@@ -34,6 +31,15 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div
+      class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl"
+      style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -206,20 +212,33 @@
     </main>
   </div>
   <script>
+    // Función para mostrar alerta visual
+    function mostrarAlerta(texto) {
+      const msg = document.getElementById('alertMessage');
+      const inner = msg.querySelector('div');
+      const span = document.getElementById('alertText');
+      span.textContent = texto;
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
     const API_BASE_URL = 'http://localhost:5000';
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       cargarMiPerfil();
 
       const form = document.getElementById('profile-form');
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
         guardarPerfil();
       });
 
       const uploadButton = document.getElementById('upload-button');
       const photoInput = document.getElementById('photo-input');
-      
+
       uploadButton.addEventListener('click', () => photoInput.click());
       photoInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -245,7 +264,7 @@
           document.getElementById('no_empleado').value = profile.no_empleado || '';
           document.getElementById('email').value = profile.email || '';
           document.getElementById('telefono').value = profile.telefono || '';
-          
+
           const profileImg = document.getElementById('profile-img');
           if (profile.foto_url) {
             profileImg.src = `${API_BASE_URL}${profile.foto_url}`;
@@ -256,7 +275,7 @@
         }
       } catch (error) {
         console.error('Error:', error);
-        alert(error.message);
+        mostrarAlerta(error.message);
       }
     }
 
@@ -265,7 +284,7 @@
       const confirmPassword = document.getElementById('confirm_password').value;
 
       if (newPassword && newPassword !== confirmPassword) {
-        alert('Las contraseñas no coinciden.');
+        mostrarAlerta('Las contraseñas no coinciden.');
         return;
       }
 
@@ -290,17 +309,18 @@
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || 'Error al actualizar el perfil.');
+          mostrarAlerta(errorData.error || 'Error al actualizar el perfil.');
+          return;
         }
 
-        alert('Perfil actualizado exitosamente.');
+        mostrarAlerta('¡Perfil actualizado exitosamente!');
         document.getElementById('new_password').value = '';
         document.getElementById('confirm_password').value = '';
         cargarMiPerfil();
 
       } catch (error) {
         console.error('Error al guardar:', error);
-        alert(error.message);
+        mostrarAlerta(error.message);
       }
     }
 
@@ -322,7 +342,7 @@
         }
 
         const updatedProfile = JSON.parse(responseText);
-        
+
         const profileImg = document.getElementById('profile-img');
         if (updatedProfile.profile && updatedProfile.profile.foto_url) {
           profileImg.src = `${API_BASE_URL}${updatedProfile.profile.foto_url}`;
@@ -333,7 +353,7 @@
       } catch (error) {
         let fullErrorDetails = 'Error Message: ' + error.message;
         if (error.stack) {
-            fullErrorDetails += '\n\nStack Trace:\n' + error.stack;
+          fullErrorDetails += '\n\nStack Trace:\n' + error.stack;
         }
         alert('Ha ocurrido un error. Por favor, COPIA Y PEGA TODO ESTE TEXTO:\n\n' + fullErrorDetails);
       }
