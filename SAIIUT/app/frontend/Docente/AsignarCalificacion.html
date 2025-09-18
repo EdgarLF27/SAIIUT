@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen">
+    <div class="flex flex-1">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="CalificacionesDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="TutoriasDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="ConfiguracionDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Asignar calificaciones</h2> 
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+        <div class="flex items-center gap-4 w-full max-w-4xl mb-8">
+            <button onclick="history.back()" class="text-2xl text-[#2D3E34] hover:text-[#F4A300] transition p-2 rounded-full focus:outline-none" title="Regresar">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+        <!-- Contenido principal -->
+        <div class="flex flex-col items-center w-full">
+          <div class="w-full max-w-xl mx-auto bg-white rounded-xl shadow border border-gray-200 p-8 flex flex-col items-center">
+            <h3 class="text-lg font-semibold mb-6 text-center">Bastian Alessandro Sanchez Gallegos</h3>
+            <form class="w-full flex flex-col gap-4 items-center">
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 1:</label>
+          <select id="parcial_1" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial1">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 2:</label>
+          <select id="parcial_2" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial2">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 3:</label>
+          <select id="parcial_3" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial3">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+              <div class="w-full flex flex-col gap-3">
+          <label class="font-medium">Calificación parcial 4:</label>
+          <select id="parcial_4" class="border border-gray-300 rounded px-3 py-2 w-full" name="parcial4">
+            <option value="">Seleccionar calificación</option>
+            <option value="1" id="parcial_au">AU</option>
+            <option value="2" id="parcial_de">DE</option>
+            <option value="3" id="parcial_sa">SA</option>
+            <option value="4" id="parcial_na">NA</option>
+          </select>
+              </div>
+            </form>
+            <div class="flex justify-center w-full">
+              <button class="mx-auto mt-6 bg-[#2D3E34] text-white py-1 px-6 rounded-md text-base hover:bg-[#F4A300] transition duration-200 focus:outline-none">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          function queryParam(name) { const url = new URL(window.location.href); return url.searchParams.get(name); }
+          const idCalificacion = queryParam('calificacion');
+
+          async function guardarCambios() {
+            if (!idCalificacion) return alert('Falta id de calificación');
+            // Aquí suponemos que 'parcial' será una de: parcial_1, parcial_2, parcial_3, calificacion_final
+            // Por simplicidad actualizaremos parcial_1 si está seleccionado, puedes adaptar.
+            const parcial = 'parcial_1';
+            const val = document.getElementById('parcial_1').value;
+            if (!val) return alert('Selecciona una calificación');
+
+            try {
+              const res = await fetch(`http://localhost:5000/api/docente/calificaciones/${idCalificacion}`, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ parcial, calificacion: val })
+              });
+              if (!res.ok) {
+                const e = await res.json().catch(()=>({}));
+                throw new Error(e.error || 'Error al guardar');
+              }
+              alert('Calificación guardada');
+              history.back();
+            } catch (err) {
+              alert('Error: ' + err.message);
+            }
+          }
+
+          document.querySelector('button.mx-auto').addEventListener('click', guardarCambios);
+        </script>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+              <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+              <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
