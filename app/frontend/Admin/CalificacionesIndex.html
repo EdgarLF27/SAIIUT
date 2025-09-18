@@ -1,241 +1,268 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SAIIUT Dashboard</title>
 
-    <!-- Tailwind y fuentes -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard</title>
 
-    <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
-    <style>
-      body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-    </style>
-  </head>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <body class="text-[#2D3E34] flex flex-col min-h-screen">
-    <div class="flex flex-1">
-      <!-- Sidebar -->
-      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-        <div>
-          <div class="mb-12 text-center">
-            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
-          </div>
-          <nav class="space-y-4">
-            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-home w-5 h-5 text-white"></i>
-              <span class="font-medium">Inicio</span>
-            </a>
-            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Grupos</span>
-            </a>
-            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Registros</span>
-            </a>
-            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-              <span class="font-medium">Calificaciones</span>
-            </a>
-            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
-              <span class="font-medium">Materias</span>
-            </a>
-            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-              <span class="font-medium">Usuarios</span>
-            </a>
-            <a href="GestionCarreras.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-graduation-cap w-5 h-5 text-white"></i>
-              <span class="font-medium">Gestión de carreras</span>
-            </a>
-            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-cog w-5 h-5 text-white"></i>
-              <span class="font-medium">Configuración</span>
-            </a>
-          </nav>
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+      <div>
+        <div class="mb-12 text-center">
+          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
         </div>
-      </aside>
+        <nav class="space-y-4">
+          <a href="IndexAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-home w-5 h-5 text-white"></i>
+            <span class="font-medium">Inicio</span>
+          </a>
+          <a href="GestionCuatrimestres.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-calendar-alt w-5 h-5 text-white"></i>
+            <span class="font-medium">Cuatrimestres</span>
+          </a>
+          <a href="GestionCarreras.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap w-5 h-5 text-white"></i>
+            <span class="font-medium">Gestion de carreras</span>
+          </a>
+          <a href="RegistroGrupos.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-users w-5 h-5 text-white"></i>
+            <span class="font-medium">Grupos</span>
+          </a>
+          <a href="RegistroUsuarios.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+            <span class="font-medium">Registros</span>
+          </a>
+          <a href="MateriasAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-book-open w-5 h-5 text-white"></i>
+            <span class="font-medium">Materias</span>
+          </a>
+          <a href="CalificacionesIndex.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-pencil w-5 h-5 text-white"></i>
+            <span class="font-medium">Calificaciones</span>
+          </a>
+          <a href="UsuariosAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user w-5 h-5 text-white"></i>
+            <span class="font-medium">Usuarios</span>
+          </a>
+          <a href="ConfiguracionAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-cog w-5 h-5 text-white"></i>
+            <span class="font-medium">Configuración</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
 
-      <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col">
-        <!-- Encabezado -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Calificaciones de Alumnos</h2> 
-            <div class="flex gap-6 text-3xl cursor-pointer">
-              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
-              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
-            </div>
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Calificaciones de Alumnos</h2>
+          <div class="flex gap-6 text-3xl cursor-pointer">
+            <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+            <i class="fas fa-user hover:text-[#F4A300] transition"></i>
           </div>
-          <hr class="mt-4 border-[#D1D5DB]" />
         </div>
-    <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[400px] bg-white p-8 rounded-lg shadow-md">
+        <hr class="mt-4 border-[#D1D5DB]" />
+      </div>
+      <div
+        class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[400px] bg-white p-8 rounded-lg shadow-md">
         <!-- Barra de búsqueda -->
         <div class="w-full flex flex-col md:flex-row items-center gap-4 mb-6">
-            <input
-                type="text"
-                placeholder="Buscar alumno por nombre, matrícula, etc."
-                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition"
-                id="searchInput"
-                oninput="filtrarTabla()"
-            />
+          <input type="text" placeholder="Buscar alumno por nombre, matrícula, etc."
+            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300] transition"
+            id="searchInput" oninput="filtrarTabla()" />
         </div>
 
         <!-- Filtros -->
         <div class="w-full flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
-            <select id="carreraFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]" onchange="filtrarTabla()">
-                <option value="">Todas las carreras</option>
-                <option value="TI">Tecnologías de la Información</option>
-                <option value="GA">Gestión Administrativa</option>
-                <option value="IM">Ingeniería Mecatrónica</option>
-            </select>
-            <select id="grupoFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]" onchange="filtrarTabla()">
-                <option value="">Todos los grupos</option>
-                <option value="A">Grupo A</option>
-                <option value="B">Grupo B</option>
-                <option value="C">Grupo C</option>
-            </select>
-            <select id="cuatriFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]" onchange="filtrarTabla()">
-                <option value="">Todos los cuatrimestres</option>
-                <option value="1">1° Cuatrimestre</option>
-                <option value="2">2° Cuatrimestre</option>
-                <option value="3">3° Cuatrimestre</option>
-                <option value="4">4° Cuatrimestre</option>
-                <option value="5">5° Cuatrimestre</option>
-                <option value="6">6° Cuatrimestre</option>
-                <option value="7">7° Cuatrimestre</option>
-                <option value="8">8° Cuatrimestre</option>
-                <option value="9">9° Cuatrimestre</option>
-            </select>
+          <select id="carreraFilter"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]"
+            onchange="filtrarTabla()">
+            <option value="">Todas las carreras</option>
+            <option value="TI">Tecnologías de la Información</option>
+            <option value="GA">Gestión Administrativa</option>
+            <option value="IM">Ingeniería Mecatrónica</option>
+          </select>
+          <select id="grupoFilter"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]"
+            onchange="filtrarTabla()">
+            <option value="">Todos los grupos</option>
+            <option value="A">Grupo A</option>
+            <option value="B">Grupo B</option>
+            <option value="C">Grupo C</option>
+          </select>
+          <select id="cuatriFilter"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F4A300]"
+            onchange="filtrarTabla()">
+            <option value="">Todos los cuatrimestres</option>
+            <option value="1">1° Cuatrimestre</option>
+            <option value="2">2° Cuatrimestre</option>
+            <option value="3">3° Cuatrimestre</option>
+            <option value="4">4° Cuatrimestre</option>
+            <option value="5">5° Cuatrimestre</option>
+            <option value="6">6° Cuatrimestre</option>
+            <option value="7">7° Cuatrimestre</option>
+            <option value="8">8° Cuatrimestre</option>
+            <option value="9">9° Cuatrimestre</option>
+          </select>
         </div>
 
         <!-- Tabla de alumnos -->
         <div class="w-full overflow-x-auto glass rounded-xl shadow-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-[#2D3E34] text-white">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Matrícula</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nombre</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Carrera</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grupo</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Cuatrimestre</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Calificación</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-100" id="alumnosTable">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">2023001</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Juan Pérez</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Tecnologías de la Información</td>
-                        <td class="px-6 py-4 whitespace-nowrap">A</td>
-                        <td class="px-6 py-4 whitespace-nowrap">3</td>
-                        <td class="px-6 py-4 whitespace-nowrap">AU</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">2023002</td>
-                        <td class="px-6 py-4 whitespace-nowrap">María López</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Gestión Administrativa</td>
-                        <td class="px-6 py-4 whitespace-nowrap">B</td>
-                        <td class="px-6 py-4 whitespace-nowrap">2</td>
-                        <td class="px-6 py-4 whitespace-nowrap">SA</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">2023003</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Carlos Sánchez</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Ingeniería Mecatrónica</td>
-                        <td class="px-6 py-4 whitespace-nowrap">C</td>
-                        <td class="px-6 py-4 whitespace-nowrap">4</td>
-                        <td class="px-6 py-4 whitespace-nowrap">DE</td>
-                    </tr>
-                </tbody>
-            </table>
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-[#2D3E34] text-white">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Matrícula</th>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nombre</th>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Carrera</th>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grupo</th>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Cuatrimestre</th>
+                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100" id="alumnosTable">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">2023001</td>
+                <td class="px-6 py-4 whitespace-nowrap">Juan Pérez</td>
+                <td class="px-6 py-4 whitespace-nowrap">Tecnologías de la Información</td>
+                <td class="px-6 py-4 whitespace-nowrap">A</td>
+                <td class="px-6 py-4 whitespace-nowrap">3</td>
+                <td class="px-6 py-4 whitespace-nowrap">AU</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">2023002</td>
+                <td class="px-6 py-4 whitespace-nowrap">María López</td>
+                <td class="px-6 py-4 whitespace-nowrap">Gestión Administrativa</td>
+                <td class="px-6 py-4 whitespace-nowrap">B</td>
+                <td class="px-6 py-4 whitespace-nowrap">2</td>
+                <td class="px-6 py-4 whitespace-nowrap">SA</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">2023003</td>
+                <td class="px-6 py-4 whitespace-nowrap">Carlos Sánchez</td>
+                <td class="px-6 py-4 whitespace-nowrap">Ingeniería Mecatrónica</td>
+                <td class="px-6 py-4 whitespace-nowrap">C</td>
+                <td class="px-6 py-4 whitespace-nowrap">4</td>
+                <td class="px-6 py-4 whitespace-nowrap">DE</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </div>
+      </div>
 
-        <!-- Footer -->
-        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-          <!-- Conócenos -->
-          <div class="flex flex-col items-start w-full md:w-auto">
-            <h4 class="font-semibold underline">Conócenos</h4>
-              <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-              <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+      <!-- Footer -->
+      <footer
+        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <!-- Conócenos -->
+        <div class="flex flex-col items-start w-full md:w-auto">
+          <h4 class="font-semibold underline">Conócenos</h4>
+          <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52
+              (247) 47-25-300</a></p>
+          <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx"
+              class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+        </div>
+
+        <!-- Síguenos -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Síguenos</h4>
+          <div class="flex gap-4 text-2xl">
+            <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
+        </div>
 
-          <!-- Síguenos -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Síguenos</h4>
-            <div class="flex gap-4 text-2xl">
-              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
-            </div>
-          </div>
+        <!-- Ubicación -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Ubicación</h4>
+          <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+            class="text-3xl hover:text-[#F4A300]">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="ml-2 text-base">Ver en Google Maps</span>
+          </a>
+        </div>
+      </footer>
+    </main>
+    <script>
+      function filtrarTabla() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const carrera = document.getElementById('carreraFilter').value;
+        const grupo = document.getElementById('grupoFilter').value;
+        const cuatri = document.getElementById('cuatriFilter').value;
+        const table = document.getElementById('alumnosTable');
+        const rows = table.getElementsByTagName('tr');
 
-          <!-- Ubicación -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
-              <i class="fas fa-map-marker-alt"></i>
-              <span class="ml-2 text-base">Ver en Google Maps</span>
-            </a>
-          </div>
-        </footer>
-      </main>
-                  <script>
-            function filtrarTabla() {
-                const input = document.getElementById('searchInput').value.toLowerCase();
-                const carrera = document.getElementById('carreraFilter').value;
-                const grupo = document.getElementById('grupoFilter').value;
-                const cuatri = document.getElementById('cuatriFilter').value;
-                const table = document.getElementById('alumnosTable');
-                const rows = table.getElementsByTagName('tr');
+        for (let i = 0; i < rows.length; i++) {
+          let cells = rows[i].getElementsByTagName('td');
+          if (cells.length === 0) continue;
 
-                for (let i = 0; i < rows.length; i++) {
-                    let cells = rows[i].getElementsByTagName('td');
-                    if (cells.length === 0) continue;
+          let matricula = cells[0].textContent.toLowerCase();
+          let nombre = cells[1].textContent.toLowerCase();
+          let carreraText = cells[2].textContent;
+          let grupoText = cells[3].textContent;
+          let cuatriText = cells[4].textContent;
 
-                    let matricula = cells[0].textContent.toLowerCase();
-                    let nombre = cells[1].textContent.toLowerCase();
-                    let carreraText = cells[2].textContent;
-                    let grupoText = cells[3].textContent;
-                    let cuatriText = cells[4].textContent;
+          let matchSearch = (
+            matricula.includes(input) ||
+            nombre.includes(input) ||
+            carreraText.toLowerCase().includes(input) ||
+            grupoText.toLowerCase().includes(input) ||
+            cuatriText.toLowerCase().includes(input)
+          );
 
-                    let matchSearch = (
-                        matricula.includes(input) ||
-                        nombre.includes(input) ||
-                        carreraText.toLowerCase().includes(input) ||
-                        grupoText.toLowerCase().includes(input) ||
-                        cuatriText.toLowerCase().includes(input)
-                    );
+          let matchCarrera = !carrera || (carrera === "TI" && carreraText === "Tecnologías de la Información") ||
+            (carrera === "GA" && carreraText === "Gestión Administrativa") ||
+            (carrera === "IM" && carreraText === "Ingeniería Mecatrónica");
+          let matchGrupo = !grupo || grupoText === grupo;
+          let matchCuatri = !cuatri || cuatriText === cuatri;
 
-                    let matchCarrera = !carrera || (carrera === "TI" && carreraText === "Tecnologías de la Información") ||
-                        (carrera === "GA" && carreraText === "Gestión Administrativa") ||
-                        (carrera === "IM" && carreraText === "Ingeniería Mecatrónica");
-                    let matchGrupo = !grupo || grupoText === grupo;
-                    let matchCuatri = !cuatri || cuatriText === cuatri;
+          if (matchSearch && matchCarrera && matchGrupo && matchCuatri) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </div>
+</body>
 
-                    if (matchSearch && matchCarrera && matchGrupo && matchCuatri) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
-            }
-            </script>
-    </div>
-  </body>
 </html>
