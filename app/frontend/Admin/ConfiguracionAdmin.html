@@ -205,18 +205,18 @@
   <script>
     const API_BASE_URL = 'http://localhost:5000';
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       cargarMiPerfil();
 
       const form = document.getElementById('profile-form');
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
         guardarPerfil();
       });
 
       const uploadButton = document.getElementById('upload-button');
       const photoInput = document.getElementById('photo-input');
-      
+
       uploadButton.addEventListener('click', () => photoInput.click());
       photoInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -242,7 +242,7 @@
           document.getElementById('no_empleado').value = profile.no_empleado || '';
           document.getElementById('email').value = profile.email || '';
           document.getElementById('telefono').value = profile.telefono || '';
-          
+
           const profileImg = document.getElementById('profile-img');
           if (profile.foto_url) {
             profileImg.src = `${API_BASE_URL}${profile.foto_url}`;
@@ -319,7 +319,7 @@
         }
 
         const updatedProfile = JSON.parse(responseText);
-        
+
         const profileImg = document.getElementById('profile-img');
         if (updatedProfile.profile && updatedProfile.profile.foto_url) {
           profileImg.src = `${API_BASE_URL}${updatedProfile.profile.foto_url}`;
@@ -330,7 +330,7 @@
       } catch (error) {
         let fullErrorDetails = 'Error Message: ' + error.message;
         if (error.stack) {
-            fullErrorDetails += '\n\nStack Trace:\n' + error.stack;
+          fullErrorDetails += '\n\nStack Trace:\n' + error.stack;
         }
         alert('Ha ocurrido un error. Por favor, COPIA Y PEGA TODO ESTE TEXTO:\n\n' + fullErrorDetails);
       }

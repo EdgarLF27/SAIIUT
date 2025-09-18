@@ -212,7 +212,7 @@
 
 </html>
 
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     const btnAgregar = document.getElementById('btn-agregar-materia');
     const modal = document.getElementById('modal-materia');
@@ -410,27 +410,19 @@
     }
   }
 </script>"'`]/g, function (s) {
-      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;", "`": "&#96;" })[s];
-    });
+return ({ '&': '&amp;', '<': '&lt;' , '>' : '&gt;' , '"' : '&quot;' , "'" : "&#39;" , "`" : "&#96;" })[s]; }); } async
+  function cargarProfesores() { const select=document.getElementById('profesor_materia'); if (!select) return;
+  select.innerHTML='<option value="">Selecciona un profesor</option>' ; try { const res=await
+  fetch('http://localhost:5000/api/profesores/'); if (!res.ok) throw new Error('Error al obtener profesores'); const
+  profesores=await res.json(); profesores.forEach(p=> {
+  const option = document.createElement('option');
+  option.value = p.id_profesor;
+  option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
+  select.appendChild(option);
+  });
+  } catch (e) {
+  console.error('No se pudieron cargar los profesores:', e);
+  select.innerHTML = '<option value="">Error al cargar profesores</option>';
   }
-
-  async function cargarProfesores() {
-    const select = document.getElementById('profesor_materia');
-    if (!select) return;
-    select.innerHTML = '<option value="">Selecciona un profesor</option>';
-    try {
-      const res = await fetch('http://localhost:5000/api/profesores/');
-      if (!res.ok) throw new Error('Error al obtener profesores');
-      const profesores = await res.json();
-      profesores.forEach(p => {
-        const option = document.createElement('option');
-        option.value = p.id_profesor;
-        option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
-        select.appendChild(option);
-      });
-    } catch (e) {
-      console.error('No se pudieron cargar los profesores:', e);
-      select.innerHTML = '<option value="">Error al cargar profesores</option>';
-    }
   }
-</script>
+  </script>

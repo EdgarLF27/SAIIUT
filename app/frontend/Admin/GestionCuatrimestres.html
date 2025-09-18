@@ -23,6 +23,26 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <!-- Modal de confirmación de eliminación -->
+  <div id="modal-confirm-delete" class="fixed inset-0 bg-[#2226] backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white border border-[#E0E0E0] rounded-lg p-6 w-full max-w-sm flex flex-col items-center gap-4 relative shadow-sm">
+      <button type="button" onclick="cerrarModalEliminar()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-xl">&times;</button>
+      <i class="fa-solid fa-exclamation-triangle text-[#F4A300] text-xl mb-2"></i>
+      <h3 class="text-base font-semibold mb-1 text-[#2D3E34]">ALERTA</h3>
+      <p class="text-sm text-[#2D3E34] text-center mb-2">¿Estás seguro de que quieres eliminar este cuatrimestre?</p>
+      <div class="flex gap-2 mt-2">
+        <button id="btn-confirm-delete" type="button" class="bg-[#F4A300] text-white px-4 py-1 rounded font-medium text-sm hover:bg-[#2D3E34] transition">Eliminar</button>
+        <button type="button" onclick="cerrarModalEliminar()" class="bg-gray-100 text-[#2D3E34] px-4 py-1 rounded font-medium text-sm hover:bg-gray-200 transition">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
   <div class="flex flex-1">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -144,6 +164,19 @@
   </div>
 
   <script>
+    // Función para mostrar alerta visual
+    function mostrarAlerta(texto) {
+      const msg = document.getElementById('alertMessage');
+      const inner = msg.querySelector('div');
+      const span = document.getElementById('alertText');
+      span.textContent = texto;
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
     const API_URL = 'http://localhost:5000/api/cuatrimestres/';
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -219,6 +252,7 @@
         if (res.ok) {
           cerrarModal();
           cargarCuatrimestres();
+          mostrarAlerta('¡Cambio exitoso!');
         } else {
           const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
           alert(err.error);
@@ -244,21 +278,38 @@
         alert(e.message);
       }
     }
-
+    // Scope global
+    let idCuatrimestreAEliminar = null;
     async function eliminarCuatrimestre(id) {
-      if (!confirm('¿Estás seguro de que quieres eliminar este cuatrimestre?')) return;
-
-      try {
-        const res = await fetch(`${API_URL}${id}`, { method: 'DELETE' });
-        if (res.ok) {
-          cargarCuatrimestres();
-        } else {
-          const err = await res.json().catch(() => ({ error: 'No se pudo eliminar' }));
-          alert(err.error);
+      abrirModalEliminar(id);
+    }
+    function abrirModalEliminar(id) {
+      idCuatrimestreAEliminar = id;
+      document.getElementById('modal-confirm-delete').classList.remove('hidden');
+      // Elimina listeners previos
+      const btn = document.getElementById('btn-confirm-delete');
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      newBtn.addEventListener('click', async function () {
+        if (!idCuatrimestreAEliminar) return;
+        try {
+          const res = await fetch(`${API_URL}${idCuatrimestreAEliminar}`, { method: 'DELETE' });
+          if (res.ok) {
+            cargarCuatrimestres();
+            mostrarAlerta('¡Eliminado exitosamente!');
+            cerrarModalEliminar();
+          } else {
+            const err = await res.json().catch(() => ({ error: 'No se pudo eliminar' }));
+            alert(err.error);
+          }
+        } catch (e) {
+          alert('Error de red al eliminar.');
         }
-      } catch (e) {
-        alert('Error de red al eliminar.');
-      }
+      });
+    }
+    function cerrarModalEliminar() {
+      idCuatrimestreAEliminar = null;
+      document.getElementById('modal-confirm-delete').classList.add('hidden');
     }
 
     function escapeHtml(str) {

@@ -29,8 +29,15 @@
     }
   </style>
 </head>
-
+  
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <!-- Mensaje de éxito con colorimetría del botón Guardar -->
+  <div id="successMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span class="font-semibold">¡Alumno registrado exitosamente!</span>
+    </div>
+  </div>
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -519,7 +526,17 @@
                   return res.json();
                 })
                 .then((respuesta) => {
-                  alert(userType + ' registrado exitosamente.');
+                  // Cambia el texto del mensaje según el tipo de usuario
+                  const msg = document.getElementById('successMessage');
+                  const inner = msg.querySelector('span');
+                  if (userType === 'Alumno') {
+                    inner.textContent = '¡Registro exitoso!';
+                  } else if (userType === 'Docente') {
+                    inner.textContent = '¡Docente registrado exitosamente!';
+                  } else {
+                    inner.textContent = '¡Administrador registrado exitosamente!';
+                  }
+                  mostrarMensajeExito();
                   document.getElementById(formId).reset();
                 })
                 .catch((error) => {
@@ -683,7 +700,20 @@
             select.innerHTML = '<option value="">Error al cargar carreras</option>';
           }
         }
-      </script>
+    // Función para mostrar el mensaje de éxito
+    function mostrarMensajeExito() {
+      const msg = document.getElementById('successMessage');
+      const inner = msg.querySelector('div');
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
+    // Llama a mostrarMensajeExito() cuando el registro sea exitoso
+    // Ejemplo: mostrarMensajeExito();
+    </script>
     </main>
   </div>
 </body>
