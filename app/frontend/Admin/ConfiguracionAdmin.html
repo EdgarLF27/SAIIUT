@@ -31,6 +31,13 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen w-full overflow-x-hidden">
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
   <div class="flex flex-1 w-full">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -203,6 +210,19 @@
     </main>
   </div>
   <script>
+    // Función para mostrar alerta visual
+    function mostrarAlerta(texto) {
+      const msg = document.getElementById('alertMessage');
+      const inner = msg.querySelector('div');
+      const span = document.getElementById('alertText');
+      span.textContent = texto;
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
     const API_BASE_URL = 'http://localhost:5000';
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -290,14 +310,14 @@
           throw new Error(errorData.error || 'Error al actualizar el perfil.');
         }
 
-        alert('Perfil actualizado exitosamente.');
+  mostrarAlerta('¡Perfil actualizado exitosamente!');
         document.getElementById('new_password').value = '';
         document.getElementById('confirm_password').value = '';
         cargarMiPerfil();
 
       } catch (error) {
         console.error('Error al guardar:', error);
-        alert(error.message);
+  mostrarAlerta(error.message);
       }
     }
 
