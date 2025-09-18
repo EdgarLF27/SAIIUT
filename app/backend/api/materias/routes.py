@@ -7,7 +7,8 @@ materias_bp = Blueprint("materias", __name__)
 @materias_bp.route("/", methods=["GET"])
 def get_materias():
     try:
-        materias = materia_service.get_all_materias()
+        id_carrera = request.args.get('id_carrera', type=int)
+        materias = materia_service.get_all_materias(id_carrera=id_carrera)
         return jsonify(materias), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

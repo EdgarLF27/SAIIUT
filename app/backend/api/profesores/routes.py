@@ -85,7 +85,22 @@ def delete_profesor(id):
         eliminado = profesor_service.delete_profesor(id)
         if eliminado:
             return jsonify({"result": "Profesor eliminado correctamente"}), 200
-        else:
-            return jsonify({"error": "Error al eliminar o profesor no encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@profesores_bp.route("/<int:id_profesor>/materias", methods=["GET"])
+def get_materias_por_profesor(id_profesor):
+    try:
+        materias = profesor_service.get_materias_by_profesor_id(id_profesor)
+        return jsonify(materias), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@profesores_bp.route("/<int:id_profesor>/materia/<int:id_materia>/grupos", methods=["GET"])
+def get_grupos_por_profesor_y_materia(id_profesor, id_materia):
+    try:
+        grupos = profesor_service.get_grupos_by_profesor_and_materia(id_profesor, id_materia)
+        return jsonify(grupos), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

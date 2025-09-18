@@ -12,6 +12,9 @@
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Auth Guard -->
+    <script src="../js/auth-guard.js"></script>
+
     <style>
       body {
         font-family: 'IBM Plex Sans', sans-serif;
@@ -68,80 +71,129 @@
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
         <!-- Contenido principal -->
-        <div class="flex flex-col items-center w-full">
-          <div class="w-full max-w-2xl mt-8">
-            <div class="bg-white rounded-xl shadow border border-gray-200">
-              <table class="w-full text-left">
-                <thead>
-                  <tr class="border-b">
-                    <th class="px-6 py-4 font-semibold text-gray-700">Especialidad<br><span class="font-normal text-xs text-gray-400">Cantidad de alumnos</span></th>
-                    <th class="px-6 py-4 font-semibold text-gray-700">Grupo</th>
-                    <th class="px-6 py-4 font-semibold text-gray-700 text-center">Administrar</th>
-                  </tr>
-                </thead>
-                <tbody id="grupos-body">
-                </tbody>
-              </table>
+        <div class="flex flex-col items-center w-full pt-10">
+          <div class="w-full max-w-lg mx-auto bg-white rounded-xl shadow-lg border border-gray-200 p-8 flex flex-col gap-6">
+            <h3 class="text-xl font-semibold text-center text-gray-800">Seleccionar Grupo</h3>
+            
+            <div class="flex flex-col gap-2">
+              <label for="materias-select" class="font-medium text-gray-700">1. Selecciona una materia:</label>
+              <select id="materias-select" class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="">Cargando materias...</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="grupos-select" class="font-medium text-gray-700">2. Selecciona un grupo:</label>
+              <select id="grupos-select" class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" disabled>
+                <option value="">Selecciona una materia primero</option>
+              </select>
+            </div>
+
+            <div class="flex justify-center mt-4">
+              <button id="btn-administrar" class="bg-gray-400 text-white py-2 px-6 rounded-md transition duration-200 focus:outline-none cursor-not-allowed" disabled>
+                Administrar Calificaciones
+              </button>
             </div>
           </div>
         </div>
 
         <script>
-          // TODO: replace profesorId with the real logged-in profesor id
-          const profesorId = 1;
-
-          async function cargarGrupos() {
-            const tbody = document.getElementById('grupos-body');
-            tbody.innerHTML = '';
-            try {
-              const res = await fetch(`http://localhost:5000/api/docente/${profesorId}/grupos`);
-              if (!res.ok) throw new Error('Error al obtener grupos');
-              const grupos = await res.json();
-              if (!grupos || grupos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" class="p-4 text-center">No hay grupos asignados</td></tr>';
+          document.addEventListener('DOMContentLoaded', () => {
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            if (!userData || !userData.id_profesor) {
+                console.error("No se encontró el ID del profesor en la sesión.");
+                alert("Error de autenticación. No se pudo identificar al profesor.");
                 return;
-              }
-              grupos.forEach(g => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b hover:bg-gray-50 transition';
-                // build materias select
-                let materiasHtml = '';
-                if (g.materias && g.materias.length) {
-                  materiasHtml = `<select id="sel-${g.id_grupo}" class="border px-2 py-1 rounded mr-2">`;
-                  g.materias.forEach(m => {
-                    materiasHtml += `<option value="${m.id_materia}">${m.nombre_materia}</option>`;
-                  });
-                  materiasHtml += '</select>';
-                } else {
-                  materiasHtml = 'Sin materias';
-                }
-
-                tr.innerHTML = `
-                  <td class="px-6 py-4">${escapeHtml(g.nombre_carrera)}<br><span class="text-gray-400 text-sm">Grupo ${escapeHtml(g.nombre_grupo)}</span></td>
-                  <td class="px-6 py-4">${escapeHtml(g.nombre_grupo)}</td>
-                  <td class="px-6 py-4 text-center">
-                    ${materiasHtml}
-                    <button class="bg-[#2D3E34] text-white px-3 py-1 rounded" onclick="irAAlumnos(${g.id_grupo})">Administrar</button>
-                  </td>
-                `;
-                tbody.appendChild(tr);
-              });
-            } catch (e) {
-              tbody.innerHTML = '<tr><td colspan="3" class="p-4 text-center">Error al cargar grupos</td></tr>';
             }
-          }
+            const profesorId = userData.id_profesor;
 
-          function irAAlumnos(id_grupo) {
-            const sel = document.getElementById(`sel-${id_grupo}`);
-            const id_materia = sel ? sel.value : '';
-            if (!id_materia) return alert('Selecciona una materia');
-            // Navegar a la página de alumnos con parámetros
-            window.location.href = `CalificacionesDocente2.html?profesor=${profesorId}&grupo=${id_grupo}&materia=${id_materia}`;
-          }
+            const materiasSelect = document.getElementById('materias-select');
+            const gruposSelect = document.getElementById('grupos-select');
+            const adminButton = document.getElementById('btn-administrar');
 
-          function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>"'`]/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s]); }
+            // --- Carga inicial de materias ---
+            async function cargarMaterias() {
+                try {
+                    const res = await fetch(`http://localhost:5000/api/profesores/${profesorId}/materias`, { credentials: 'include' });
+                    if (!res.ok) throw new Error('Error al obtener las materias del profesor.');
+                    
+                    const materias = await res.json();
+                    materiasSelect.innerHTML = '<option value="">Selecciona una materia</option>';
+                    materias.forEach(m => {
+                        const option = document.createElement('option');
+                        option.value = m.id_materia;
+                        option.textContent = m.nombre_materia;
+                        materiasSelect.appendChild(option);
+                    });
+                } catch (e) {
+                    console.error(e);
+                    materiasSelect.innerHTML = '<option value="">Error al cargar materias</option>';
+                }
+            }
 
-          document.addEventListener('DOMContentLoaded', cargarGrupos);
+            // --- Carga de grupos cuando se selecciona una materia ---
+            async function cargarGruposPorMateria(idMateria) {
+                gruposSelect.disabled = true;
+                gruposSelect.innerHTML = '<option value="">Cargando grupos...</option>';
+                adminButton.disabled = true;
+                adminButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+
+                try {
+                    // Asumimos que existe un endpoint que devuelve los grupos para un profesor y una materia.
+                    // Si no existe, necesitaremos crearlo.
+                    const res = await fetch(`http://localhost:5000/api/profesores/${profesorId}/materia/${idMateria}/grupos`, { credentials: 'include' });
+                    if (!res.ok) throw new Error('Error al obtener los grupos para la materia seleccionada.');
+
+                    const grupos = await res.json();
+                    gruposSelect.innerHTML = '<option value="">Selecciona un grupo</option>';
+                    grupos.forEach(g => {
+                        const option = document.createElement('option');
+                        option.value = g.id_grupo;
+                        option.textContent = g.nombre_grupo;
+                        gruposSelect.appendChild(option);
+                    });
+                    gruposSelect.disabled = false;
+                } catch (e) {
+                    console.error(e);
+                    gruposSelect.innerHTML = '<option value="">Error al cargar grupos</option>';
+                }
+            }
+
+            // --- Event Listeners ---
+            materiasSelect.addEventListener('change', () => {
+                const idMateria = materiasSelect.value;
+                if (idMateria) {
+                    cargarGruposPorMateria(idMateria);
+                } else {
+                    gruposSelect.innerHTML = '<option value="">Selecciona una materia primero</option>';
+                    gruposSelect.disabled = true;
+                    adminButton.disabled = true;
+                    adminButton.classList.add('bg-ray-400', 'cursor-not-allowed');
+                }
+            });
+
+            gruposSelect.addEventListener('change', () => {
+                if (gruposSelect.value) {
+                    adminButton.disabled = false;
+                    adminButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    adminButton.classList.add('bg-[#2D3E34]', 'hover:bg-[#F4A300]');
+                } else {
+                    adminButton.disabled = true;
+                    adminButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                }
+            });
+
+            adminButton.addEventListener('click', () => {
+                const idMateria = materiasSelect.value;
+                const idGrupo = gruposSelect.value;
+                if (idMateria && idGrupo) {
+                    window.location.href = `CalificacionesDocente2.html?profesor=${profesorId}&grupo=${idGrupo}&materia=${idMateria}`;
+                }
+            });
+
+            // --- Carga inicial ---
+            cargarMaterias();
+          });
         </script>
 
         <!-- Footer -->

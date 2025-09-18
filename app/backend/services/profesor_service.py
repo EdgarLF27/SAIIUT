@@ -104,19 +104,10 @@ def delete_profesor(cursor, id):
     id_usuario_a_eliminar = result["id_usuario"]
 
     # Paso 2: Eliminar dependencias en cadena para evitar errores de FK
-    # 2a: Eliminar calificaciones ligadas a las inscripciones del profesor
-    cursor.execute("""
-        DELETE FROM calificaciones 
-        WHERE id_inscripcion IN (SELECT id_inscripcion FROM inscripciones WHERE id_profesor = %s)
-    """, (id,))
-    
-    # 2b: Eliminar inscripciones donde el profesor imparte clase
-    cursor.execute("DELETE FROM inscripciones WHERE id_profesor = %s", (id,))
-    
-    # 2c: Eliminar tutorías asignadas al profesor
+    # 2a: Eliminar tutorías asignadas al profesor
     cursor.execute("DELETE FROM tutorias WHERE id_profesor_tutor = %s", (id,))
     
-    # 2d: Eliminar asignaciones de materias del profesor
+    # 2b: Eliminar asignaciones de materias del profesor
     cursor.execute("DELETE FROM profesor_materias WHERE id_profesor = %s", (id,))
 
     # Paso 3: Eliminar el registro del profesor
@@ -128,3 +119,34 @@ def delete_profesor(cursor, id):
         cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario_a_eliminar,))
 
     return rows_deleted > 0
+
+@with_db_connection
+def get_materias_by_profesor_id(cursor, id_profesor):
+    sql = """
+    SELECT m.id_materia, m.nombre_materia
+    FROM materias m
+    JOIN profesor_materias pm ON m.id_materia = pm.id_materia
+    WHERE pm.id_profesor = %s
+    ORDER BY m.nombre_materia;
+    """
+    rows = cursor.fetchall()
+    return [dict(row) for row in rows]
+
+@with_db_connection
+def get_grupos_by_profesor_and_materia(cursor, id_profesor, id_materia):
+    # Selecciona los grupos que tienen una materia específica asignada,
+    # y asegura que el profesor también tenga esa materia asignada.
+    sql = """
+    SELECT DISTINCT g.id_grupo, g.nombre_grupo
+    FROM grupos g
+    JOIN grupo_materias gm ON g.id_grupo = gm.id_grupo
+    WHERE gm.id_materia = %s
+    AND EXISTS (
+        SELECT 1 FROM profesor_materias pm
+        WHERE pm.id_profesor = %s AND pm.id_materia = gm.id_materia
+    )
+    ORDER BY g.nombre_grupo;
+    """
+    cursor.execute(sql, (id_materia, id_profesor))
+    rows = cursor.fetchall()
+    return [dict(row) for row in rows]

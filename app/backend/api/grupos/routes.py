@@ -62,3 +62,11 @@ def delete_grupo(id):
             return jsonify({"error": "Grupo no encontrado"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@grupos_bp.route("/<int:id_grupo>/materias", methods=["GET"])
+def get_materias_del_grupo(id_grupo):
+    try:
+        materias = grupo_service.get_materias_by_grupo_id(id_grupo)
+        return jsonify(materias), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

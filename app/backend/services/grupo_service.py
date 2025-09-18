@@ -39,8 +39,16 @@ def create_grupo(cursor, data):
     """
     cursor.execute(sql, (data['nombre_grupo'], data['id_carrera']))
     grupo_id = cursor.fetchone()['id_grupo']
-    # Devolvemos el objeto completo, asegurándonos de usar la misma clave que recibió el frontend
-    return {'id_grupo': grupo_id, 'nombre_grupo': data['nombre_grupo'], 'id_carrera': data['id_carrera']}
+
+    # Asignar materias al grupo
+    if 'materias' in data and data['materias']:
+        for id_materia in data['materias']:
+            cursor.execute(
+                "INSERT INTO grupo_materias (id_grupo, id_materia) VALUES (%s, %s)",
+                (grupo_id, id_materia)
+            )
+
+    return {'id_grupo': grupo_id, **data}
 
 @with_db_connection
 def update_grupo(cursor, id, data):
@@ -50,9 +58,30 @@ def update_grupo(cursor, id, data):
     WHERE id_grupo = %s
     """
     cursor.execute(sql, (data['nombre_grupo'], data['id_carrera'], id))
+    
+    # Actualizar las materias del grupo
+    # 1. Borrar todas las asignaciones existentes para este grupo
+    cursor.execute("DELETE FROM grupo_materias WHERE id_grupo = %s", (id,))
+
+    # 2. Insertar las nuevas asignaciones
+    if 'materias' in data and data['materias']:
+        for id_materia in data['materias']:
+            cursor.execute(
+                "INSERT INTO grupo_materias (id_grupo, id_materia) VALUES (%s, %s)",
+                (id, id_materia)
+            )
+
     return cursor.rowcount > 0
 
 @with_db_connection
 def delete_grupo(cursor, id):
-    cursor.execute('DELETE FROM grupos WHERE id_grupo = %s', (id,))
     return cursor.rowcount > 0
+
+@with_db_connection
+def get_materias_by_grupo_id(cursor, id_grupo):
+    sql = """
+    SELECT id_materia FROM grupo_materias WHERE id_grupo = %s
+    """
+    cursor.execute(sql, (id_grupo,))
+    rows = cursor.fetchall()
+    return [row['id_materia'] for row in rows]
