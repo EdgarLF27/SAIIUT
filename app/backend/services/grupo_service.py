@@ -39,7 +39,8 @@ def create_grupo(cursor, data):
     """
     cursor.execute(sql, (data['nombre_grupo'], data['id_carrera']))
     grupo_id = cursor.fetchone()['id_grupo']
-    return {'id_grupo': grupo_id, **data}
+    # Devolvemos el objeto completo, asegurándonos de usar la misma clave que recibió el frontend
+    return {'id_grupo': grupo_id, 'nombre_grupo': data['nombre_grupo'], 'id_carrera': data['id_carrera']}
 
 @with_db_connection
 def update_grupo(cursor, id, data):

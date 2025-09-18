@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard - Gestión de Cuatrimestres</title>
+
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <!-- Modal de confirmación de eliminación -->
+  <div id="modal-confirm-delete" class="fixed inset-0 bg-[#2226] backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white border border-[#E0E0E0] rounded-lg p-6 w-full max-w-sm flex flex-col items-center gap-4 relative shadow-sm">
+      <button type="button" onclick="cerrarModalEliminar()" class="absolute top-2 right-2 text-gray-400 hover:text-black text-xl">&times;</button>
+      <i class="fa-solid fa-exclamation-triangle text-[#F4A300] text-xl mb-2"></i>
+      <h3 class="text-base font-semibold mb-1 text-[#2D3E34]">ALERTA</h3>
+      <p class="text-sm text-[#2D3E34] text-center mb-2">¿Estás seguro de que quieres eliminar este cuatrimestre?</p>
+      <div class="flex gap-2 mt-2">
+        <button id="btn-confirm-delete" type="button" class="bg-[#F4A300] text-white px-4 py-1 rounded font-medium text-sm hover:bg-[#2D3E34] transition">Eliminar</button>
+        <button type="button" onclick="cerrarModalEliminar()" class="bg-gray-100 text-[#2D3E34] px-4 py-1 rounded font-medium text-sm hover:bg-gray-200 transition">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+      <div>
+        <div class="mb-12 text-center">
+          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+        </div>
+        <nav class="space-y-4">
+          <a href="IndexAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-home w-5 h-5 text-white"></i>
+            <span class="font-medium">Inicio</span>
+          </a>
+          <a href="GestionCuatrimestres.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-calendar-alt w-5 h-5 text-white"></i>
+            <span class="font-medium">Cuatrimestres</span>
+          </a>
+          <a href="GestionCarreras.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap w-5 h-5 text-white"></i>
+            <span class="font-medium">Gestion de carreras</span>
+          </a>
+          <a href="RegistroGrupos.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-users w-5 h-5 text-white"></i>
+            <span class="font-medium">Grupos</span>
+          </a>
+          <a href="RegistroUsuarios.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+            <span class="font-medium">Registros</span>
+          </a>
+          <a href="MateriasAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-book-open w-5 h-5 text-white"></i>
+            <span class="font-medium">Materias</span>
+          </a>
+          <a href="CalificacionesIndex.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-pencil w-5 h-5 text-white"></i>
+            <span class="font-medium">Calificaciones</span>
+          </a>
+          <a href="UsuariosAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user w-5 h-5 text-white"></i>
+            <span class="font-medium">Usuarios</span>
+          </a>
+          <a href="ConfiguracionAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-cog w-5 h-5 text-white"></i>
+            <span class="font-medium">Configuración</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Gestión de Cuatrimestres</h2>
+        </div>
+        <hr class="mt-4 border-[#D1D5DB]" />
+      </div>
+
+      <div class="flex justify-end mb-8">
+        <button id="btn-agregar-cuatrimestre" type="button"
+          class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 flex items-center gap-2">
+          <i class="fa-solid fa-plus"></i>
+          Agregar Cuatrimestre
+        </button>
+      </div>
+
+      <!-- Tabla de cuatrimestres -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <table class="min-w-full">
+          <thead class="bg-[#2D3E34] text-white">
+            <tr>
+              <th class="py-3 px-4 text-left">Nombre</th>
+              <th class="py-3 px-4 text-left">Orden</th>
+              <th class="py-3 px-4 text-left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#2D3E34]">
+            <!-- Las filas se insertarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal de registro de cuatrimestre -->
+      <div id="modal-cuatrimestre"
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+          <button type="button" onclick="cerrarModal()"
+            class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">&times;</button>
+          <h3 id="modal-title" class="text-xl font-bold mb-4">Agregar Cuatrimestre</h3>
+          <form id="form-cuatrimestre" class="flex flex-col gap-4">
+            <input type="hidden" id="id_cuatrimestre" />
+            <div>
+              <label class="block font-semibold mb-1">Nombre del cuatrimestre:</label>
+              <input id="nombre" type="text" placeholder="Ej. 1ro"
+                class="border border-gray-300 rounded px-3 py-1 w-full" required />
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Orden:</label>
+              <input id="orden" type="number" placeholder="Ej. 1"
+                class="border border-gray-300 rounded px-3 py-1 w-full" required />
+            </div>
+            <div class="flex justify-center mt-2">
+              <button type="submit"
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Función para mostrar alerta visual
+    function mostrarAlerta(texto) {
+      const msg = document.getElementById('alertMessage');
+      const inner = msg.querySelector('div');
+      const span = document.getElementById('alertText');
+      span.textContent = texto;
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
+    const API_URL = 'http://localhost:5000/api/cuatrimestres/';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const btnAgregar = document.getElementById('btn-agregar-cuatrimestre');
+      const form = document.getElementById('form-cuatrimestre');
+
+      btnAgregar.addEventListener('click', abrirModalParaCrear);
+      form.addEventListener('submit', guardarCuatrimestre);
+
+      cargarCuatrimestres();
+    });
+
+    function abrirModalParaCrear() {
+      document.getElementById('form-cuatrimestre').reset();
+      document.getElementById('id_cuatrimestre').value = '';
+      document.getElementById('modal-title').textContent = 'Agregar Cuatrimestre';
+      document.getElementById('modal-cuatrimestre').classList.remove('hidden');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-cuatrimestre').classList.add('hidden');
+    }
+
+    async function cargarCuatrimestres() {
+      const tbody = document.querySelector('table tbody');
+      tbody.innerHTML = '<tr><td colspan="3">Cargando...</td></tr>';
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('Error al cargar los datos');
+        const cuatrimestres = await res.json();
+
+        tbody.innerHTML = '';
+        if (cuatrimestres.length) {
+          cuatrimestres.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+          <td class="py-2 px-4">${escapeHtml(c.nombre)}</td>
+          <td class="py-2 px-4">${escapeHtml(c.orden)}</td>
+          <td class="py-2 px-4">
+            <button class="bg-yellow-400 text-white px-3 py-1 rounded mr-2" onclick="editarCuatrimestre(${c.id_cuatrimestre})">Editar</button>
+            <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarCuatrimestre(${c.id_cuatrimestre})">Eliminar</button>
+          </td>
+        `;
+            tbody.appendChild(tr);
+          });
+        } else {
+          tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4">No se encontraron cuatrimestres.</td></tr>';
+        }
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="3" class="text-center py-4 text-red-500">Error: ${e.message}</td></tr>`;
+      }
+    }
+
+    async function guardarCuatrimestre(e) {
+      e.preventDefault();
+      const id = document.getElementById('id_cuatrimestre').value;
+      const payload = {
+        nombre: document.getElementById('nombre').value,
+        orden: parseInt(document.getElementById('orden').value, 10)
+      };
+
+      const isUpdating = !!id;
+      const url = isUpdating ? `${API_URL}${id}` : API_URL;
+      const method = isUpdating ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          cerrarModal();
+          cargarCuatrimestres();
+          mostrarAlerta('¡Cambio exitoso!');
+        } else {
+          const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
+          alert(err.error);
+        }
+      } catch (e) {
+        alert('Error de red al guardar.');
+      }
+    }
+
+    async function editarCuatrimestre(id) {
+      try {
+        const res = await fetch(`${API_URL}${id}`);
+        if (!res.ok) throw new Error('No se pudo obtener el cuatrimestre');
+        const cuatrimestre = await res.json();
+
+        document.getElementById('id_cuatrimestre').value = cuatrimestre.id_cuatrimestre;
+        document.getElementById('nombre').value = cuatrimestre.nombre;
+        document.getElementById('orden').value = cuatrimestre.orden;
+
+        document.getElementById('modal-title').textContent = 'Editar Cuatrimestre';
+        document.getElementById('modal-cuatrimestre').classList.remove('hidden');
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    // Scope global
+    let idCuatrimestreAEliminar = null;
+    async function eliminarCuatrimestre(id) {
+      abrirModalEliminar(id);
+    }
+    function abrirModalEliminar(id) {
+      idCuatrimestreAEliminar = id;
+      document.getElementById('modal-confirm-delete').classList.remove('hidden');
+      // Elimina listeners previos
+      const btn = document.getElementById('btn-confirm-delete');
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      newBtn.addEventListener('click', async function () {
+        if (!idCuatrimestreAEliminar) return;
+        try {
+          const res = await fetch(`${API_URL}${idCuatrimestreAEliminar}`, { method: 'DELETE' });
+          if (res.ok) {
+            cargarCuatrimestres();
+            mostrarAlerta('¡Eliminado exitosamente!');
+            cerrarModalEliminar();
+          } else {
+            const err = await res.json().catch(() => ({ error: 'No se pudo eliminar' }));
+            alert(err.error);
+          }
+        } catch (e) {
+          alert('Error de red al eliminar.');
+        }
+      });
+    }
+    function cerrarModalEliminar() {
+      idCuatrimestreAEliminar = null;
+      document.getElementById('modal-confirm-delete').classList.add('hidden');
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return String(str).replace(/[&<>"']/g, (m) => map[m]);
+    }
+  </script>
+</body>
+
+</html>

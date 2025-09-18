@@ -1,306 +1,428 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SAIIUT Dashboard</title>
 
-    <!-- Tailwind y fuentes -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard</title>
 
-    <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
-    <style>
-      body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-    </style>
-  </head>
-  
-  <body class="text-[#2D3E34] flex flex-col min-h-screen">
-    <div class="flex flex-1">
-      <!-- Sidebar -->
-      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-        <div>
-          <div class="mb-12 text-center">
-            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
-          </div>
-          <nav class="space-y-4">
-            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-home w-5 h-5 text-white"></i>
-              <span class="font-medium">Inicio</span>
-            </a>
-            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Grupos</span>
-            </a>
-            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Registros</span>
-            </a>
-            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-              <span class="font-medium">Calificaciones</span>
-            </a>
-            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
-              <span class="font-medium">Materias</span>
-            </a>
-            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-              <span class="font-medium">Usuarios</span>
-            </a>
-            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-cog w-5 h-5 text-white"></i>
-              <span class="font-medium">Configuración</span>
-            </a>
-          </nav>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+      <div>
+        <div class="mb-12 text-center">
+          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
         </div>
-      </aside>
+        <nav class="space-y-4">
+          <a href="IndexAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-home w-5 h-5 text-white"></i>
+            <span class="font-medium">Inicio</span>
+          </a>
+          <a href="GestionCuatrimestres.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-calendar-alt w-5 h-5 text-white"></i>
+            <span class="font-medium">Cuatrimestres</span>
+          </a>
+          <a href="GestionCarreras.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap w-5 h-5 text-white"></i>
+            <span class="font-medium">Gestion de carreras</span>
+          </a>
+          <a href="RegistroGrupos.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-users w-5 h-5 text-white"></i>
+            <span class="font-medium">Grupos</span>
+          </a>
+          <a href="RegistroUsuarios.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+            <span class="font-medium">Registros</span>
+          </a>
+          <a href="MateriasAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-book-open w-5 h-5 text-white"></i>
+            <span class="font-medium">Materias</span>
+          </a>
+          <a href="CalificacionesIndex.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-pencil w-5 h-5 text-white"></i>
+            <span class="font-medium">Calificaciones</span>
+          </a>
+          <a href="UsuariosAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user w-5 h-5 text-white"></i>
+            <span class="font-medium">Usuarios</span>
+          </a>
+          <a href="ConfiguracionAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-cog w-5 h-5 text-white"></i>
+            <span class="font-medium">Configuración</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
 
-      <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col">
-        <!-- Encabezado -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Materias</h2>
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Materias</h2>
         </div>
         <hr class="mt-4 border-[#D1D5DB]" />
-    </div>
-    
-    <!-- Filtros y selección de grado -->
-    <div class="bg-white rounded-lg shadow p-6 mb-8 flex flex-col gap-4">
+      </div>
+
+      <!-- Filtros y selección de grado -->
+      <div class="bg-white rounded-lg shadow p-6 mb-8 flex flex-col gap-4">
         <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-0">
-            <label class="font-semibold md:mr-4">Selecciona el cuatrimestre:</label>
-            <select class="border border-gray-300 rounded px-3 py-1 w-full md:w-60 md:mr-4">
-                <option value="">Todos los cuatrimestres</option>
-            </select>
-            <div class="flex-1 flex justify-end"></div>
-                <button id="btn-agregar-materia" type="button" class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 flex items-end gap-2">
-                    <i class="fa-solid fa-plus"></i>
-                    Agregar Materia
-                </button>
-            </div>
+          <label class="font-semibold md:mr-4">Selecciona el cuatrimestre:</label>
+          <select class="border border-gray-300 rounded px-3 py-1 w-full md:w-60 md:mr-4">
+            <option value="">Todos los cuatrimestres</option>
+          </select>
+          <div class="flex-1 flex justify-end"></div>
+          <button id="btn-agregar-materia" type="button"
+            class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 flex items-end gap-2">
+            <i class="fa-solid fa-plus"></i>
+            Agregar Materia
+          </button>
         </div>
+      </div>
 
-        <!-- Tabla de materias -->
-        <div class="bg-white rounded-lg shadow p-6">
-          <table class="min-w-full">
-            <thead class="bg-[#2D3E34] text-white">
-              <tr>
-                <th class="py-3 px-4 text-left">Materia</th>
-                <th class="py-3 px-4 text-left">Profesor</th>
-                <th class="py-3 px-4 text-left">Cuatrimestre</th>
-                <th class="py-3 px-4 text-left">Acciones</th>
-              </tr>
-            </thead>
-            <tbody class="text-[#2D3E34]">
-            </tbody>
-          </table>
-        </div>
+      <!-- Tabla de materias -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <table class="min-w-full">
+          <thead class="bg-[#2D3E34] text-white">
+            <tr>
+              <th class="py-3 px-4 text-left">Materia</th>
+              <th class="py-3 px-4 text-left">Profesor</th>
+              <th class="py-3 px-4 text-left">Cuatrimestre</th>
+              <th class="py-3 px-4 text-left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#2D3E34]">
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Modal de registro de materia -->
-        <div id="modal-materia" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
-          <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button type="button" onclick="document.getElementById('modal-materia').classList.add('hidden')"
-              class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
-              &times;
-            </button>
-            <h3 class="text-xl font-bold mb-4">Agregar Materia</h3>
-            <form id="form-materia" class="flex flex-col gap-4">
-              <div>
-                <label class="block font-semibold mb-1">Nombre de la materia:</label>
-                <input type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
+      <!-- Modal de registro de materia -->
+      <div id="modal-materia"
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+          <button type="button" onclick="document.getElementById('modal-materia').classList.add('hidden')"
+            class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
+            &times;
+          </button>
+          <h3 class="text-xl font-bold mb-4">Agregar Materia</h3>
+          <form id="form-materia" class="flex flex-col gap-4">
+            <input type="hidden" id="materia_id" />
+            <div>
+              <label class="block font-semibold mb-1">Nombre de la materia:</label>
+              <input id="nombre_materia" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
             </div>
             <div>
               <label class="block font-semibold mb-1">Cuatrimestre:</label>
-              <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
+              <select id="cuatrimestre_materia" class="border border-gray-300 rounded px-3 py-1 w-full">
                 <option value="">Selecciona cuatrimestre</option>
               </select>
             </div>
             <div>
-                <label class="block font-semibold mb-1">Profesor:</label>
-                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
-                  <option value="">Selecciona un profesor</option>
-                </select>
-              </div>
-              <div>
-                <label class="block font-semibold mb-1">Carrera:</label>
-                <select class="border border-gray-300 rounded px-3 py-1 w-full" required>
-                  <option value="">Selecciona una carrera</option>
-                </select>
-              </div>
-              <div class="flex justify-center mt-2">
-                <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
-                  Guardar
-                </button>
-              </div>
-            </form>
+              <label class="block font-semibold mb-1">Profesor:</label>
+              <select id="profesor_materia" class="border border-gray-300 rounded px-3 py-1 w-full">
+                <option value="">Selecciona un profesor</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Carrera:</label>
+              <select id="id_carrera" class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <option value="">Selecciona una carrera</option>
+              </select>
+            </div>
+            <div class="flex justify-center mt-2">
+              <button type="submit"
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <!-- Conócenos -->
+        <div class="flex flex-col items-start w-full md:w-auto">
+          <h4 class="font-semibold underline">Conócenos</h4>
+          <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52
+              (247) 47-25-300</a></p>
+          <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx"
+              class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+        </div>
+
+        <!-- Síguenos -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Síguenos</h4>
+          <div class="flex gap-4 text-2xl">
+            <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-          <!-- Conócenos -->
-          <div class="flex flex-col items-start w-full md:w-auto">
-            <h4 class="font-semibold underline">Conócenos</h4>
-            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
-          </div>
+        <!-- Ubicación -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Ubicación</h4>
+          <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+            class="text-3xl hover:text-[#F4A300]">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="ml-2 text-base">Ver en Google Maps</span>
+          </a>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
 
-          <!-- Síguenos -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Síguenos</h4>
-            <div class="flex gap-4 text-2xl">
-              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
-            </div>
-          </div>
-
-          <!-- Ubicación -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
-              <i class="fas fa-map-marker-alt"></i>
-              <span class="ml-2 text-base">Ver en Google Maps</span>
-            </a>
-          </div>
-        </footer>
-      </main>
-        <script>
-          // Cargar materias y mostrarlas en la tabla
-async function cargarMaterias() {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  try {
-    const res = await fetch("http://localhost:5000/api/materias/");
-    const materias = await res.json();
-    materias.forEach(materia => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td class="py-3 px-4">${materia.nombre}</td>
-        <td class="py-3 px-4">${materia.profesor || ''}</td>
-        <td class="py-3 px-4">${materia.cuatrimestre}</td>
-        <td class="py-3 px-4">
-          <button class="text-blue-600 hover:text-blue-800 mr-2" title="Editar" onclick="editarMateria(${materia.id})">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="text-red-600 hover:text-red-800" title="Eliminar" onclick="eliminarMateria(${materia.id})">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (e) {
-    tbody.innerHTML = "<tr><td colspan='4'>Error al cargar materias</td></tr>";
-  }
-}
-
-// Mostrar modal para agregar materia
-document.getElementById('btn-agregar-materia').addEventListener('click', function () {
-  limpiarModalMateria();
-  document.getElementById('modal-materia').classList.remove('hidden');
-});
-
-// Cerrar modal
-function cerrarModalMateria() {
-  document.getElementById('modal-materia').classList.add('hidden');
-}
-
-// Limpiar modal
-function limpiarModalMateria() {
-  document.querySelector("#form-materia").reset();
-  document.getElementById("form-materia").removeAttribute("data-id");
-}
-
-// Enviar formulario para agregar o editar materia
-document.getElementById("form-materia").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const inputs = this.querySelectorAll("input, select");
-  const data = {
-    nombre: inputs[0].value.trim(),
-    cuatrimestre: parseInt(inputs[1].value),
-    profesor: inputs[2].value,
-    carrera: inputs[3].value
-  };
-  const id = this.getAttribute("data-id");
-  try {
-    let res;
-    if (id) {
-      res = await fetch(`http://localhost:5000/api/materias/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-    } else {
-      res = await fetch("http://localhost:5000/api/materias/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-    }
-    if (res.ok) {
-      cerrarModalMateria();
-      cargarMaterias();
-    } else {
-      const error = await res.json();
-      alert(error.error || "Error al guardar materia");
-    }
-  } catch {
-    alert("Error de red");
-  }
-});
-
-// Editar materia
-async function editarMateria(id) {
-  try {
-    const res = await fetch(`http://localhost:5000/api/materias/${id}`);
-    if (!res.ok) throw new Error("No se pudo obtener la materia");
-    const materia = await res.json();
-    const inputs = document.querySelectorAll("#form-materia input, #form-materia select");
-    inputs[0].value = materia.nombre;
-    inputs[1].value = materia.cuatrimestre;
-    inputs[2].value = materia.profesor;
-    inputs[3].value = materia.carrera;
-    document.getElementById("form-materia").setAttribute("data-id", materia.id);
-    document.getElementById('modal-materia').classList.remove('hidden');
-  } catch {
-    alert("Error al cargar datos de la materia");
-  }
-}
-
-// Eliminar materia
-async function eliminarMateria(id) {
-  if (!confirm("¿Seguro que deseas eliminar esta materia?")) return;
-  try {
-    const res = await fetch(`http://localhost:5000/api/materias/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      cargarMaterias();
-    } else {
-      alert("No se pudo eliminar la materia");
-    }
-  } catch {
-    alert("Error de red al eliminar");
-  }
-}
-
-// Inicializar
-document.addEventListener("DOMContentLoaded", function () {
-  cargarMaterias();
-  // Cerrar modal al hacer click en la X
-  document.querySelector("#modal-materia button[type=button]").onclick = cerrarModalMateria;
-});
-        </script>
-    </div>
-  </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btnAgregar = document.getElementById('btn-agregar-materia');
+    const modal = document.getElementById('modal-materia');
+    const form = document.getElementById('form-materia');
+
+    if (modal) modal.classList.add('hidden');
+    if (btnAgregar) btnAgregar.addEventListener('click', abrirModalNuevaMateria);
+
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const id = document.getElementById('materia_id').value;
+        const idProfesor = document.getElementById('profesor_materia').value;
+        const idCuatrimestre = document.getElementById('cuatrimestre_materia').value;
+        const payload = {
+          nombre_materia: document.getElementById('nombre_materia').value,
+          id_carrera: parseInt(document.getElementById('id_carrera').value, 10),
+          id_cuatrimestre: idCuatrimestre ? parseInt(idCuatrimestre, 10) : null,
+          id_profesor: idProfesor ? parseInt(idProfesor, 10) : null
+        };
+
+        try {
+          let res;
+          if (id) {
+            res = await fetch(`http://localhost:5000/api/materias/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } else {
+            res = await fetch('http://localhost:5000/api/materias/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          }
+
+          if (res.ok) {
+            cerrarModalMateria();
+            form.reset();
+            cargarMaterias();
+          } else {
+            const err = await res.json();
+            alert(err.error || 'Error al guardar materia');
+          }
+        } catch (e) {
+          alert('Error de red');
+        }
+      });
+    }
+
+    cargarCarreras();
+    cargarProfesores();
+    cargarCuatrimestres();
+    cargarMaterias();
+  });
+
+  function abrirModalNuevaMateria() {
+    document.getElementById('materia_id').value = '';
+    document.getElementById('form-materia').reset();
+    const modal = document.getElementById('modal-materia');
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function cerrarModalMateria() {
+    const modal = document.getElementById('modal-materia');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  async function cargarCuatrimestres() {
+    const select = document.getElementById('cuatrimestre_materia');
+    if (!select) return;
+    select.innerHTML = '<option value="">Selecciona un cuatrimestre</option>';
+    try {
+      const res = await fetch('http://localhost:5000/api/cuatrimestres/');
+      if (!res.ok) throw new Error('Error al obtener cuatrimestres');
+      const cuatrimestres = await res.json();
+      cuatrimestres.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id_cuatrimestre;
+        opt.textContent = c.nombre;
+        select.appendChild(opt);
+      });
+    } catch (e) {
+      console.error('No se pudieron cargar los cuatrimestres:', e);
+      select.innerHTML = '<option value="">Error al cargar cuatrimestres</option>';
+    }
+  }
+
+  async function cargarCarreras() {
+    try {
+      const res = await fetch('http://localhost:5000/api/carreras/');
+      const carreras = await res.json();
+      const select = document.getElementById('id_carrera');
+      select.innerHTML = '<option value="">Selecciona una carrera</option>';
+      carreras.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id_carrera;
+        opt.textContent = `${c.nombre_carrera}`;
+        select.appendChild(opt);
+      });
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  async function cargarMaterias() {
+    const tbody = document.querySelector('table tbody');
+    tbody.innerHTML = '';
+    try {
+      const res = await fetch('http://localhost:5000/api/materias/');
+      const materias = await res.json();
+      if (materias && materias.length) {
+        materias.forEach(m => {
+          try {
+            const tr = document.createElement('tr');
+            const nombreCompletoProfesor = [m.nombre_profesor, m.ap_P_profesor, m.ap_M_profesor].filter(Boolean).join(' ');
+            const profesorDisplay = nombreCompletoProfesor.trim() ? escapeHtml(nombreCompletoProfesor) : 'No asignado';
+            const cuatrimestreDisplay = m.nombre_cuatrimestre ? escapeHtml(m.nombre_cuatrimestre) : 'No asignado';
+
+            tr.innerHTML = `
+            <td class="py-2 px-4">${escapeHtml(m.nombre_materia)}</td>
+            <td class="py-2 px-4">${profesorDisplay}</td>
+            <td class="py-2 px-4">${cuatrimestreDisplay}</td>
+            <td class="py-2 px-4 text-center">
+              <button class="bg-[#2D3E34] text-white px-3 py-1 rounded mr-2" onclick='editarMateria(${JSON.stringify(m)})'>Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarMateria(${m.id_materia})">Eliminar</button>
+            </td>
+          `;
+            tbody.appendChild(tr);
+          } catch (e) {
+            console.error("Error al procesar la siguiente materia:", m);
+            console.error("El error de JavaScript fue:", e);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td colspan="4" class="py-2 px-4 text-red-500">Error al procesar una fila. Revisa la consola para más detalles.</td>`;
+            tbody.appendChild(tr);
+          }
+        });
+      } else {
+        tbody.innerHTML = '<tr><td colspan="4">No se encontraron materias</td></tr>';
+      }
+    } catch (e) {
+      tbody.innerHTML = '<tr><td colspan="4">Error al cargar materias</td></tr>';
+    }
+  }
+
+  function editarMateria(materia) {
+    document.getElementById('materia_id').value = materia.id_materia || '';
+    document.getElementById('nombre_materia').value = materia.nombre_materia || '';
+    document.getElementById('id_carrera').value = materia.id_carrera || '';
+    document.getElementById('cuatrimestre_materia').value = materia.id_cuatrimestre || '';
+    document.getElementById('profesor_materia').value = materia.id_profesor || '';
+    const modal = document.getElementById('modal-materia');
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  async function eliminarMateria(id) {
+    if (!confirm('¿Eliminar esta materia?')) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/materias/${id}`, { method: 'DELETE' });
+      if (res.ok) cargarMaterias();
+      else {
+        const err = await res.json();
+        alert(err.error || 'Error al eliminar');
+      }
+    } catch (e) {
+      alert('Error de red');
+    }
+  }
+
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>"'`]/g, function (s) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;", "`": "&#96;" })[s];
+    });
+  }
+
+  async function cargarProfesores() {
+    const select = document.getElementById('profesor_materia');
+    if (!select) return;
+    select.innerHTML = '<option value="">Selecciona un profesor</option>';
+    try {
+      const res = await fetch('http://localhost:5000/api/profesores/');
+      if (!res.ok) throw new Error('Error al obtener profesores');
+      const profesores = await res.json();
+      profesores.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.id_profesor;
+        option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
+        select.appendChild(option);
+      });
+    } catch (e) {
+      console.error('No se pudieron cargar los profesores:', e);
+      select.innerHTML = '<option value="">Error al cargar profesores</option>';
+    }
+  }
+</script>"'`]/g, function (s) {
+return ({ '&': '&amp;', '<': '&lt;' , '>' : '&gt;' , '"' : '&quot;' , "'" : "&#39;" , "`" : "&#96;" })[s]; }); } async
+  function cargarProfesores() { const select=document.getElementById('profesor_materia'); if (!select) return;
+  select.innerHTML='<option value="">Selecciona un profesor</option>' ; try { const res=await
+  fetch('http://localhost:5000/api/profesores/'); if (!res.ok) throw new Error('Error al obtener profesores'); const
+  profesores=await res.json(); profesores.forEach(p=> {
+  const option = document.createElement('option');
+  option.value = p.id_profesor;
+  option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''}`;
+  select.appendChild(option);
+  });
+  } catch (e) {
+  console.error('No se pudieron cargar los profesores:', e);
+  select.innerHTML = '<option value="">Error al cargar profesores</option>';
+  }
+  }
+  </script>

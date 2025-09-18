@@ -54,12 +54,13 @@
         </div>
       </aside>
 
-      <!-- Contenido principal -->
+      
+  <!-- Contenido principal -->
       <main class="flex-1 p-6 md:p-10 flex flex-col">
         <!-- Encabezado -->
         <div class="mb-6">
           <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">¡Bienvenido, Edgar!</h2> 
+            <h2 class="text-3xl font-bold">Bienvenido, Alumno</h2> 
             <div class="flex gap-6 text-3xl cursor-pointer">
               <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
               <i class="fas fa-user hover:text-[#F4A300] transition"></i>
@@ -67,33 +68,21 @@
           </div>
           <hr class="mt-4 border-[#D1D5DB]" />
         </div>
-
-        <!-- Grid de tarjetas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow mt-8 mb-12">
-          <!-- Rendimiento académico -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
-            <h3 class="text-xl font-semibold mb-4">Rendimiento académico</h3>
-            <div class="h-48 bg-gradient-to-r from-[#d3e4dc] to-[#f0f4f3] rounded-xl flex items-center justify-center text-[#999] text-sm">
-              (Gráfica en desarrollo)
-            </div>
+        <!-- Contenido principal -->
+        <div class="flex w-full gap-6 justify-center items-center flex-1">
+          <!-- Sección de imagen (70%) -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex items-center justify-center h-[400px] min-h-[300px] w-[70%]">
+            <!-- Aquí va tu imagen -->
+            <img src="../images/CalendarioUTT.jpg" alt="Imagen principal" class="max-h-full max-w-full rounded-2xl" />
           </div>
-
-          <!-- Notificaciones -->
-          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0]">
-            <h3 class="text-xl font-semibold mb-4">Notificaciones recientes</h3>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span><strong>Ruth Cervantes</strong> subió calificación de Inglés III</span>
+          <!-- Barra de notificaciones (30%) -->
+          <div class="glass p-6 rounded-3xl shadow-lg border border-[#E0E0E0] flex flex-col h-[400px] min-h-[300px] w-[30%]">
+            <h3 class="text-xl font-semibold mb-4">Notificaciones</h3>
+            <ul class="space-y-3 overflow-y-auto flex-1">
+              <li class="bg-[#F4A300]/10 border-l-4 border-[#F4A300] p-3 rounded shadow-sm">
+          No hay notificaciones nuevas.
               </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span><strong>Diana Lizeth</strong> subió calificación de Tópicos de Software</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#F4A300]">●</span>
-                <span>Evaluación parcial próxima</span>
-              </li>
+              <!-- Más notificaciones aquí -->
             </ul>
           </div>
         </div>
@@ -103,8 +92,8 @@
           <!-- Conócenos -->
           <div class="flex flex-col items-start w-full md:w-auto">
             <h4 class="font-semibold underline">Conócenos</h4>
-            <p>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-            <p>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+              <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+              <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
           </div>
 
           <!-- Síguenos -->
