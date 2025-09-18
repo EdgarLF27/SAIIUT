@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIIUT Dashboard</title>
+
+    <!-- Tailwind y fuentes -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body class="text-[#2D3E34] flex flex-col min-h-screen">
+    <div class="flex flex-1">
+      <!-- Sidebar -->
+      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+        <div>
+          <div class="mb-12 text-center">
+            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
+          </div>
+          <nav class="space-y-4">
+            <a href="IndexDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-home w-5 h-5 text-white"></i>
+              <span class="font-medium">Inicio</span>
+            </a>
+            <a href="CalificacionesDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
+              <span class="font-medium">Calificaciones</span>
+            </a>
+            <a href="TutoriasDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-chalkboard-teacher w-5 h-5 text-white"></i>
+              <span class="font-medium">Tutorías</span>
+            </a>
+            <a href="ConfiguracionDocente.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+              <i class="fas fa-cog w-5 h-5 text-white"></i>
+              <span class="font-medium">Configuración</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="flex-1 p-6 md:p-10 flex flex-col">
+        <!-- Encabezado -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center flex-wrap gap-4">
+            <h2 class="text-3xl font-bold">Asignar calificaciones</h2> 
+            <div class="flex gap-6 text-3xl cursor-pointer">
+              <i class="fas fa-bell hover:text-[#F4A300] transition"></i>
+              <i class="fas fa-user hover:text-[#F4A300] transition"></i>
+            </div>
+          </div>
+          <hr class="mt-4 border-[#D1D5DB]" />
+        </div>
+        <div class="flex items-center gap-4 w-full max-w-4xl mb-8">
+          <button onclick="history.back()" class="text-2xl text-[#2D3E34] hover:text-[#F4A300] transition p-2 rounded-full focus:outline-none" title="Regresar">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <!-- Contenido principal -->
+        <div class="flex flex-col items-center w-full">
+          <!-- Encabezado con flecha y título -->
+          <!-- Tabla de alumnos y calificaciones por parciales -->
+          <div class="w-full max-w-4xl bg-white rounded-xl shadow border border-gray-200 p-6">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b">
+                  <th class="px-4 py-3 font-semibold text-gray-700">#</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700">Nombre</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700">Matrícula</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 1</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 2</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 3</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Parcial 4</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Final</th>
+                  <th class="px-4 py-3 font-semibold text-gray-700 text-center">Editar</th>
+                </tr>
+              </thead>
+              <tbod y>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">1</td>
+                  <td class="px-4 py-3">Juan Pérez</td>
+                  <td class="px-4 py-3">20230001</td>
+                  <td class="px-4 py-3 text-center">85</td>
+                  <td class="px-4 py-3 text-center">90</td>
+                  <td class="px-4 py-3 text-center">88</td>
+                  <td class="px-4 py-3 text-center">92</td>
+                  <td class="px-4 py-3 text-center font-bold">89</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">2</td>
+                  <td class="px-4 py-3">María López</td>
+                  <td class="px-4 py-3">20230002</td>
+                  <td class="px-4 py-3 text-center">90</td>
+                  <td class="px-4 py-3 text-center">95</td>
+                  <td class="px-4 py-3 text-center">93</td>
+                  <td class="px-4 py-3 text-center">91</td>
+                  <td class="px-4 py-3 text-center font-bold">92</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition">
+                  <td class="px-4 py-3">3</td>
+                  <td class="px-4 py-3">Carlos Ramírez</td>
+                  <td class="px-4 py-3">20230003</td>
+                  <td class="px-4 py-3 text-center">78</td>
+                  <td class="px-4 py-3 text-center">82</td>
+                  <td class="px-4 py-3 text-center">80</td>
+                  <td class="px-4 py-3 text-center">85</td>
+                  <td class="px-4 py-3 text-center font-bold">81</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html" title="Asignar calificación">
+                      <i class="fa-solid fa-pencil text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-xs text-gray-400 mt-4">* Solo visualización. Para editar, haz clic en el lápiz.</div>
+          </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+          <!-- Conócenos -->
+          <div class="flex flex-col items-start w-full md:w-auto">
+            <h4 class="font-semibold underline">Conócenos</h4>
+              <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
+              <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
+          </div>
+
+          <!-- Síguenos -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Síguenos</h4>
+            <div class="flex gap-4 text-2xl">
+              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
+              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+            <h4 class="font-semibold underline mb-2">Ubicación</h4>
+            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="ml-2 text-base">Ver en Google Maps</span>
+            </a>
+              <tbody id="alumnos-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <script>
+          function queryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+          }
+
+          const profesorId = queryParam('profesor');
+          const grupoId = queryParam('grupo');
+          const materiaId = queryParam('materia');
+
+          async function cargarAlumnos() {
+            const tbody = document.getElementById('alumnos-body');
+            tbody.innerHTML = '';
+            if (!profesorId || !grupoId || !materiaId) {
+              tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">Parámetros incompletos</td></tr>';
+              return;
+            }
+            try {
+              const res = await fetch(`http://localhost:5000/api/docente/${profesorId}/grupos/${grupoId}/materias/${materiaId}/alumnos`);
+              if (!res.ok) throw new Error('No se pudieron obtener los alumnos');
+              const alumnos = await res.json();
+              if (!alumnos || alumnos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">No hay alumnos</td></tr>';
+                return;
+              }
+              alumnos.forEach((a, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b hover:bg-gray-50 transition';
+                tr.innerHTML = `
+                  <td class="px-4 py-3">${idx+1}</td>
+                  <td class="px-4 py-3">${escapeHtml(a.nombre)} ${escapeHtml(a.ap_P || '')} ${escapeHtml(a.ap_M || '')}</td>
+                  <td class="px-4 py-3">${escapeHtml(a.matricula)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_1)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_2)}</td>
+                  <td class="px-4 py-3 text-center">${escapeHtml(a.parcial_3)}</td>
+                  <td class="px-4 py-3 text-center">-</td>
+                  <td class="px-4 py-3 text-center font-bold">${escapeHtml(a.calificacion_final)}</td>
+                  <td class="px-4 py-3 text-center">
+                    <a href="AsignarCalificacion.html?calificacion=${a.id_calificacion}" title="Asignar calificación">
+                      <i class="fa-solid fa-pen-to-square text-[#2D3E34] text-lg hover:text-[#F4A300] cursor-pointer transition"></i>
+                    </a>
+                  </td>
+                `;
+                tbody.appendChild(tr);
+              });
+            } catch (e) {
+              tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center">Error al cargar alumnos</td></tr>';
+            }
+          }
+
+          function escapeHtml(str){ if(str===null||str===undefined) return ''; return String(str).replace(/[&<>"'`]/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","`":"&#96;"})[s]); }
+
+          document.addEventListener('DOMContentLoaded', cargarAlumnos);
+        </script>

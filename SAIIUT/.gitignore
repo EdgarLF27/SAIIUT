@@ -1,0 +1,11 @@
+# Ignorar node_modules y archivos pesados de Electron
+node_modules/
+*.log
+dist/
+*.exe
+.DS_Store
+__pycache__/
+*.pyc
+*.env
+*.sql
+GEMINI.md
