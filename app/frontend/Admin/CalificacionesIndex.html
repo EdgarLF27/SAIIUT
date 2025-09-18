@@ -29,6 +29,13 @@
 </head>
 
 <body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <!-- Alerta visual reutilizable -->
+  <div id="alertMessage" class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div class="bg-[#2D3E34] text-white px-10 py-6 rounded-xl flex items-center gap-4 border-4 border-[#F4A300] transition-opacity duration-500 opacity-0 shadow-xl" style="min-width:340px; max-width:90vw; font-size:1.35rem;">
+      <i class="fa-solid fa-check-circle text-[#F4A300] text-3xl"></i>
+      <span id="alertText" class="font-semibold">¡Cambio exitoso!</span>
+    </div>
+  </div>
   <div class="flex flex-1">
     <!-- Sidebar -->
     <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
@@ -222,6 +229,60 @@
       </footer>
     </main>
     <script>
+    // Validación visual y lógica
+    function mostrarAlerta(texto) {
+      const msg = document.getElementById('alertMessage');
+      const inner = msg.querySelector('div');
+      const span = document.getElementById('alertText');
+      span.textContent = texto;
+      inner.style.opacity = '1';
+      msg.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        inner.style.opacity = '0';
+        msg.style.pointerEvents = 'none';
+      }, 3000);
+    }
+
+    // Ejemplo de validación en tiempo real para filtros
+    document.getElementById('searchInput').addEventListener('input', function() {
+      if (this.value.length < 3 && this.value.length > 0) {
+        this.classList.add('border-red-500');
+        mostrarAlerta('Escribe al menos 3 caracteres para buscar.');
+      } else {
+        this.classList.remove('border-red-500');
+      }
+    });
+
+    // Ejemplo de validación al enviar (puedes adaptar para formularios de calificaciones)
+    function validarFormularioCalificacion() {
+      // Suponiendo que tienes un formulario para agregar calificación
+      const matricula = document.getElementById('matriculaInput');
+      const calificacion = document.getElementById('calificacionInput');
+      let valido = true;
+      if (!matricula.value) {
+        matricula.classList.add('border-red-500');
+        mostrarAlerta('La matrícula es obligatoria.');
+        valido = false;
+      } else {
+        matricula.classList.remove('border-red-500');
+      }
+      if (!calificacion.value || isNaN(calificacion.value) || calificacion.value < 0 || calificacion.value > 10) {
+        calificacion.classList.add('border-red-500');
+        mostrarAlerta('La calificación debe ser un número entre 0 y 10.');
+        valido = false;
+      } else {
+        calificacion.classList.remove('border-red-500');
+      }
+      return valido;
+    }
+    // Si tienes un formulario, puedes usar:
+    // document.getElementById('formCalificacion').onsubmit = function(e) {
+    //   e.preventDefault();
+    //   if (validarFormularioCalificacion()) {
+    //     // enviar datos
+    //     mostrarAlerta('¡Calificación guardada!');
+    //   }
+    // };
       function filtrarTabla() {
         const input = document.getElementById('searchInput').value.toLowerCase();
         const carrera = document.getElementById('carreraFilter').value;

@@ -273,7 +273,7 @@
         }
       } catch (error) {
         console.error('Error:', error);
-        alert(error.message);
+        mostrarAlerta(error.message);
       }
     }
 
@@ -282,7 +282,7 @@
       const confirmPassword = document.getElementById('confirm_password').value;
 
       if (newPassword && newPassword !== confirmPassword) {
-        alert('Las contraseñas no coinciden.');
+        mostrarAlerta('Las contraseñas no coinciden.');
         return;
       }
 
@@ -307,17 +307,18 @@
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.error || 'Error al actualizar el perfil.');
+          mostrarAlerta(errorData.error || 'Error al actualizar el perfil.');
+          return;
         }
 
-  mostrarAlerta('¡Perfil actualizado exitosamente!');
+        mostrarAlerta('¡Perfil actualizado exitosamente!');
         document.getElementById('new_password').value = '';
         document.getElementById('confirm_password').value = '';
         cargarMiPerfil();
 
       } catch (error) {
         console.error('Error al guardar:', error);
-  mostrarAlerta(error.message);
+        mostrarAlerta(error.message);
       }
     }
 

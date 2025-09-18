@@ -718,6 +718,9 @@
                 cerrarModalEditarAlumno();
                 buscarAlumnos();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Alumno actualizado' : data.error);
             });
           };
           document.getElementById("form-editar-docente").onsubmit = (e) => {
@@ -752,6 +755,9 @@
                 cerrarModalEditarDocente();
                 buscarDocentes();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Docente actualizado' : data.error);
             });
           };
           document.getElementById("form-editar-admin").onsubmit = (e) => {
@@ -785,6 +791,9 @@
                 cerrarModalEditarAdmin();
                 buscarAdmins();
               }
+            })
+            .catch((data) => {
+              mostrarAlerta(data.nombre ? 'Administrador actualizado' : data.error);
             });
           };
         });

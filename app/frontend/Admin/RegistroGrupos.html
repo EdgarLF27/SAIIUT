@@ -281,13 +281,13 @@
 
                       if (!assignRes.ok) {
                         const err = await assignRes.json().catch(() => ({}));
-                        alert('Grupo actualizado, pero no se pudo asignar el nuevo tutor: ' + (err.error || 'Error desconocido'));
+                        mostrarAlerta('Grupo actualizado, pero no se pudo asignar el nuevo tutor: ' + (err.error || 'Error desconocido'));
                       }
                     }
                     // Si idProfesor es nulo, la eliminación fue suficiente.
                   } catch (e) {
                     console.error('Error al actualizar la tutoría:', e);
-                    alert('Grupo actualizado, pero hubo un error de red al gestionar la tutoría.');
+                    mostrarAlerta('Grupo actualizado, pero hubo un error de red al gestionar la tutoría.');
                   }
 
                   modal.classList.add('hidden');
@@ -296,7 +296,7 @@
                   mostrarAlerta('¡Cambio exitoso!');
                 } else {
                   const err = await putRes.json().catch(() => ({}));
-                  alert(err.error || 'Error al actualizar');
+                  mostrarAlerta(err.error || 'Error al actualizar');
                 }
               } else {
                 // Create flow: send POST
@@ -319,11 +319,11 @@
                       });
                       if (!assignRes.ok && assignRes.status === 409) {
                         const err = await assignRes.json().catch(() => ({}));
-                        alert('Grupo creado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
+                        mostrarAlerta('Grupo creado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
                       }
                     } catch (e) {
                       console.error('Error de red al asignar tutor:', e);
-                      alert('Grupo creado pero error de red al asignar tutor');
+                      mostrarAlerta('Grupo creado pero error de red al asignar tutor');
                     }
                   }
                   modal.classList.add("hidden");
@@ -332,11 +332,11 @@
                   mostrarAlerta('Nuevo grupo registrado');
                 } else {
                   const error = await res.json();
-                  alert(error.error || "Error al guardar grupo");
+                  mostrarAlerta(error.error || "Error al guardar grupo");
                 }
               }
             } catch {
-              alert("Error de red");
+              mostrarAlerta("Error de red");
             }
           });
         }
@@ -394,7 +394,7 @@
           document.getElementById('modal-grupo').classList.remove('hidden');
         } catch (e) {
           console.error('Error al cargar grupo para editar:', e);
-          alert('No se pudo cargar la información del grupo para editar.');
+          mostrarAlerta('No se pudo cargar la información del grupo para editar.');
         }
       }
 
@@ -431,11 +431,11 @@
               closeModal();
             } else {
               const err = await res.json().catch(() => ({}));
-              alert(err.error || 'No se pudo eliminar el grupo');
+              mostrarAlerta(err.error || 'No se pudo eliminar el grupo');
             }
           } catch (e) {
             console.error('Error al eliminar grupo:', e);
-            alert('Error de red al eliminar grupo');
+            mostrarAlerta('Error de red al eliminar grupo');
           }
         };
       }

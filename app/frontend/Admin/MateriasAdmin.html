@@ -281,10 +281,10 @@
             }
           } else {
             const err = await res.json();
-            alert(err.error || 'Error al guardar materia');
+            mostrarAlerta(err.error || 'Error al guardar materia');
           }
         } catch (e) {
-          alert('Error de red');
+          mostrarAlerta('Error de red');
         }
       });
     }
@@ -380,7 +380,7 @@
         tbody.innerHTML = '<tr><td colspan="4">No se encontraron materias</td></tr>';
       }
     } catch (e) {
-      tbody.innerHTML = '<tr><td colspan="4">Error al cargar materias</td></tr>';
+      mostrarAlerta('Error al cargar materias');
     }
   }
 
@@ -426,10 +426,10 @@
           closeModal();
         } else {
           const err = await res.json();
-          alert(err.error || 'Error al eliminar');
+          mostrarAlerta(err.error || 'Error al eliminar');
         }
       } catch (e) {
-        alert('Error de red');
+        mostrarAlerta('Error de red');
       }
     };
   }

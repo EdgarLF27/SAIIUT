@@ -255,10 +255,10 @@
           mostrarAlerta('¡Cambio exitoso!');
         } else {
           const err = await res.json().catch(() => ({ error: 'Error desconocido' }));
-          alert(err.error);
+          mostrarAlerta(err.error);
         }
       } catch (e) {
-        alert('Error de red al guardar.');
+        mostrarAlerta('Error de red al guardar.');
       }
     }
 
@@ -275,7 +275,7 @@
         document.getElementById('modal-title').textContent = 'Editar Cuatrimestre';
         document.getElementById('modal-cuatrimestre').classList.remove('hidden');
       } catch (e) {
-        alert(e.message);
+        mostrarAlerta(e.message);
       }
     }
     // Scope global
@@ -300,10 +300,10 @@
             cerrarModalEliminar();
           } else {
             const err = await res.json().catch(() => ({ error: 'No se pudo eliminar' }));
-            alert(err.error);
+            mostrarAlerta(err.error);
           }
         } catch (e) {
-          alert('Error de red al eliminar.');
+          mostrarAlerta('Error de red al eliminar.');
         }
       });
     }

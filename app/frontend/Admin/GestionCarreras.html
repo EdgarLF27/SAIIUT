@@ -275,10 +275,10 @@
               }
             } else {
               const err = await res.json();
-              alert(err.error || 'Error al guardar carrera');
+              mostrarAlerta(err.error || 'Error al guardar carrera');
             }
           } catch (err) {
-            alert('Error de red');
+            mostrarAlerta('Error de red');
           }
         });
       }
@@ -324,14 +324,14 @@
           tbody.innerHTML = "<tr><td colspan='3'>No se encontraron carreras</td></tr>";
         }
       } catch (e) {
-        tbody.innerHTML = "<tr><td colspan='3'>Error al cargar carreras</td></tr>";
+        mostrarAlerta('Error al cargar carreras');
       }
     }
 
     async function editarCarrera(id) {
       try {
         const res = await fetch(`http://localhost:5000/api/carreras/${id}`);
-        if (!res.ok) return alert('No se pudo obtener la carrera');
+        if (!res.ok) return mostrarAlerta('No se pudo obtener la carrera');
         const c = await res.json();
         // backend returns id_carrera, abreviatura, total_cuatrimestres
         document.getElementById('carrera_id').value = c.id_carrera || id;
@@ -341,7 +341,7 @@
         const modal = document.getElementById('modal-carrera');
         if (modal) modal.classList.remove('hidden');
       } catch (e) {
-        alert('Error al obtener carrera');
+        mostrarAlerta('Error al obtener carrera');
       }
     }
 
@@ -377,10 +377,10 @@
             closeModal();
           } else {
             const err = await res.json();
-            alert(err.error || 'Error al eliminar');
+            mostrarAlerta(err.error || 'Error al eliminar');
           }
         } catch (e) {
-          alert('Error de red');
+          mostrarAlerta('Error de red');
         }
       };
     }
