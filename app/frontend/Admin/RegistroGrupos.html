@@ -1,362 +1,439 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SAIIUT Dashboard</title>
 
-    <!-- Tailwind y fuentes -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAIIUT Dashboard</title>
 
-    <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind y fuentes -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
 
-    <style>
-      body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-    </style>
-  </head>
-  
-  <body class="text-[#2D3E34] flex flex-col min-h-screen">
-    <div class="flex flex-1">
-      <!-- Sidebar -->
-      <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
-        <div>
-          <div class="mb-12 text-center">
-            <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
-          </div>
-          <nav class="space-y-4">
-            <a href="IndexAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-home w-5 h-5 text-white"></i>
-              <span class="font-medium">Inicio</span>
-            </a>
-            <a href="RegistroGrupos.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Grupos</span>
-            </a>
-            <a href="RegistroUsuarios.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
-              <span class="font-medium">Registros</span>
-            </a>
-            <a href="CalificacionesIndex.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-chart-line w-5 h-5 text-white"></i>
-              <span class="font-medium">Calificaciones</span>
-            </a>
-            <a href="MateriasAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-book w-5 h-5 text-white"></i>
-              <span class="font-medium">Materias</span>
-            </a>
-            <a href="UsuariosAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fa-solid fa-pencil w-5 h-5 text-white"></i>
-              <span class="font-medium">Usuarios</span>
-            </a>
-            <a href="ConfiguracionAdmin.html" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
-              <i class="fas fa-cog w-5 h-5 text-white"></i>
-              <span class="font-medium">Configuración</span>
-            </a>
-          </nav>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f3 100%);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+
+<body class="text-[#2D3E34] flex flex-col min-h-screen">
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex w-64 bg-[#2D3E34] text-white flex-col justify-between p-6 shadow-xl">
+      <div>
+        <div class="mb-12 text-center">
+          <img src="../images/logo.png" alt="Mi logo" class="mx-auto w-full max-w-[200px]" />
         </div>
-      </aside>
+        <nav class="space-y-4">
+          <a href="IndexAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-home w-5 h-5 text-white"></i>
+            <span class="font-medium">Inicio</span>
+          </a>
+          <a href="GestionCuatrimestres.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-calendar-alt w-5 h-5 text-white"></i>
+            <span class="font-medium">Cuatrimestres</span>
+          </a>
+          <a href="GestionCarreras.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-graduation-cap w-5 h-5 text-white"></i>
+            <span class="font-medium">Gestion de carreras</span>
+          </a>
+          <a href="RegistroGrupos.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-users w-5 h-5 text-white"></i>
+            <span class="font-medium">Grupos</span>
+          </a>
+          <a href="RegistroUsuarios.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user-plus w-5 h-5 text-white"></i>
+            <span class="font-medium">Registros</span>
+          </a>
+          <a href="MateriasAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-book-open w-5 h-5 text-white"></i>
+            <span class="font-medium">Materias</span>
+          </a>
+          <a href="CalificacionesIndex.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-pencil w-5 h-5 text-white"></i>
+            <span class="font-medium">Calificaciones</span>
+          </a>
+          <a href="UsuariosAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fa-solid fa-user w-5 h-5 text-white"></i>
+            <span class="font-medium">Usuarios</span>
+          </a>
+          <a href="ConfiguracionAdmin.html"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#1b2b23] transition-all duration-300">
+            <i class="fas fa-cog w-5 h-5 text-white"></i>
+            <span class="font-medium">Configuración</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
 
-      <!-- Contenido principal -->
-      <main class="flex-1 p-6 md:p-10 flex flex-col">
-        <!-- Encabezado -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center flex-wrap gap-4">
-            <h2 class="text-3xl font-bold">Grupos</h2>
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 md:p-10 flex flex-col">
+      <!-- Encabezado -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <h2 class="text-3xl font-bold">Grupos</h2>
         </div>
         <hr class="mt-4 border-[#D1D5DB]" />
-    </div>
-    
-    <div class="flex justify-end mb-8">
-        <button id="btn-agregar-materia" type="button" class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 gap-2 flex items-center">
-            <i class="fa-solid fa-plus"></i>
-            Agregar Grupo
+      </div>
+
+      <div class="flex justify-end mb-8">
+        <button id="btn-agregar-materia" type="button"
+          class="bg-[#2D3E34] text-white px-6 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200 gap-2 flex items-center">
+          <i class="fa-solid fa-plus"></i>
+          Agregar Grupo
         </button>
-    </div>
+      </div>
 
-        <!-- Tabla de materias -->
-        <div class="bg-white rounded-lg shadow p-6">
-          <table class="min-w-full">
-            <thead class="bg-[#2D3E34] text-white">
-              <tr>
-                <th class="align py-3 px-4 text-left">Grupo</th>
-                <th class="align py-3 px-4 text-left">Acciones</th>
-              </tr>
-            </thead>
-            <tbody class="text-[#2D3E34]">
-            </tbody>
-          </table>
+      <!-- Tabla de materias -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <table class="min-w-full">
+          <thead class="bg-[#2D3E34] text-white">
+            <tr>
+              <th class="align py-3 px-4 text-left">Grupo</th>
+              <th class="align py-3 px-4 text-left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#2D3E34]">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal de registro de grupo -->
+      <div id="modal-grupo"
+        class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+          <button type="button" onclick="document.getElementById('modal-grupo').classList.add('hidden')"
+            class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
+            &times;
+          </button>
+          <h3 id="modal-title" class="text-xl font-bold mb-4">Agregar Grupo</h3>
+          <form id="form-grupo" class="flex flex-col gap-4">
+            <input type="hidden" id="id_grupo_edit" />
+            <div>
+              <label class="block font-semibold mb-1">Nombre del grupo:</label>
+              <input id="nombre_grupo" placeholder="Ej. 4A" type="text"
+                class="border border-gray-300 rounded px-3 py-1 w-full" required />
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Carrera:</label>
+              <select id="id_carrera" class="border border-gray-300 rounded px-3 py-1 w-full" required>
+                <option value="">Selecciona una carrera</option>
+                <option value="1">TIDSM</option>
+                <option value="2">AIRB</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Asignar tutor (opcional):</label>
+              <select id="tutor_profesor" class="border border-gray-300 rounded px-3 py-1 w-full">
+                <option value="">No asignar tutor</option>
+              </select>
+            </div>
+            <div class="flex justify-center mt-2">
+              <button type="submit"
+                class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
+        <!-- Conócenos -->
+        <div class="flex flex-col items-start w-full md:w-auto">
+          <h4 class="font-semibold underline">Conócenos</h4>
+          <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52
+              (247) 47-25-300</a></p>
+          <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx"
+              class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
         </div>
 
-        <!-- Modal de registro de grupo -->
-        <div id="modal-grupo" class="fixed inset-0 bg-[#2226] backdrop-blur-sm items-center flex justify-center z-50 hidden">
-          <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button type="button" onclick="document.getElementById('modal-grupo').classList.add('hidden')"
-              class="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl">
-              &times;
-            </button>
-            <h3 id="modal-title" class="text-xl font-bold mb-4">Agregar Grupo</h3>
-            <form id="form-grupo" class="flex flex-col gap-4">
-              <input type="hidden" id="id_grupo_edit" />
-              <div>
-                <label class="block font-semibold mb-1">Nombre del grupo:</label>
-                <input id="nombre_grupo" placeholder="Ej. 4A" type="text" class="border border-gray-300 rounded px-3 py-1 w-full" required />
-            </div>
-              <div>
-                <label class="block font-semibold mb-1">Carrera:</label>
-                <select id="id_carrera" class="border border-gray-300 rounded px-3 py-1 w-full" required>
-                  <option value="">Selecciona una carrera</option>
-                  <option value="1">TIDSM</option>
-                  <option value="2">AIRB</option>
-                </select>
-              </div>
-              <div>
-                <label class="block font-semibold mb-1">Asignar tutor (opcional):</label>
-                <select id="tutor_profesor" class="border border-gray-300 rounded px-3 py-1 w-full">
-                  <option value="">No asignar tutor</option>
-                </select>
-              </div>
-              <div class="flex justify-center mt-2">
-                <button type="submit" class="bg-[#2D3E34] text-white px-8 py-2 rounded-md text-lg hover:bg-[#F4A300] transition duration-200">
-                  Guardar
-                </button>
-              </div>
-            </form>
+        <!-- Síguenos -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Síguenos</h4>
+          <div class="flex gap-4 text-2xl">
+            <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i
+                class="fab fa-whatsapp"></i></a>
           </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="mt-auto border-t pt-6 text-sm flex flex-col md:flex-row justify-between md:items-center items-start text-[#2D3E34] gap-6 px-6 md:px-10 pb-10 bg-white">
-          <!-- Conócenos -->
-          <div class="flex flex-col items-start w-full md:w-auto">
-            <h4 class="font-semibold underline">Conócenos</h4>
-              <p><i class="fas fa-phone mr-2"></i>Teléfono: <a href="tel:+52474725300" class="hover:text-[#F4A300]">+52 (247) 47-25-300</a></p>
-              <p><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:contacto@uttlaxcala.edu.mx" class="hover:text-[#F4A300]">contacto@uttlaxcala.edu.mx</a></p>
-          </div>
+        <!-- Ubicación -->
+        <div class="flex flex-col items-start md:items-center w-full md:w-auto">
+          <h4 class="font-semibold underline mb-2">Ubicación</h4>
+          <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener"
+            class="text-3xl hover:text-[#F4A300]">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="ml-2 text-base">Ver en Google Maps</span>
+          </a>
+        </div>
+      </footer>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('modal-grupo');
+        const btnAgregar = document.getElementById('btn-agregar-materia');
 
-          <!-- Síguenos -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Síguenos</h4>
-            <div class="flex gap-4 text-2xl">
-              <a href="https://www.facebook.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://twitter.com/UTTLAXCALA" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-twitter"></i></a>
-              <a href="https://wa.me/5212474725300" target="_blank" rel="noopener" class="hover:text-[#F4A300]"><i class="fab fa-whatsapp"></i></a>
-            </div>
-          </div>
+        if (modal) modal.classList.add('hidden');
+        if (btnAgregar) {
+          btnAgregar.addEventListener('click', function () {
+            // Open modal in create mode
+            document.getElementById('modal-title').textContent = 'Agregar Grupo';
+            document.getElementById('id_grupo_edit').value = '';
+            document.getElementById('form-grupo').reset();
+            modal.classList.remove('hidden');
+          });
+        }
 
-          <!-- Ubicación -->
-          <div class="flex flex-col items-start md:items-center w-full md:w-auto">
-            <h4 class="font-semibold underline mb-2">Ubicación</h4>
-            <a href="https://maps.app.goo.gl/RkmhJ141DRooR8HU9" target="_blank" rel="noopener" class="text-3xl hover:text-[#F4A300]">
-              <i class="fas fa-map-marker-alt"></i>
-              <span class="ml-2 text-base">Ver en Google Maps</span>
-            </a>
-          </div>
-        </footer>
-      </main>
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            const modal = document.getElementById('modal-grupo');
-            const btnAgregar = document.getElementById('btn-agregar-materia');
-            
-      if(modal) modal.classList.add('hidden');
-      if(btnAgregar) {
-        btnAgregar.addEventListener('click', function () {
-          // Open modal in create mode
-          document.getElementById('modal-title').textContent = 'Agregar Grupo';
-          document.getElementById('id_grupo_edit').value = '';
-          document.getElementById('form-grupo').reset();
-          modal.classList.remove('hidden');
-        });
-      }
+        cargarGrupos();
+        // Cargar lista de carreras para el select
+        cargarCarreras();
+        // Cargar lista de profesores para el select de tutor
+        cargarProfesores();
 
-            cargarGrupos();
-            // Cargar lista de profesores para el select de tutor
-            cargarProfesores();
+        const form = document.getElementById("form-grupo");
+        if (form) {
+          form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const data = {
+              nombre_grupo: document.getElementById("nombre_grupo").value,
+              id_carrera: parseInt(document.getElementById("id_carrera").value)
+            };
 
-            const form = document.getElementById("form-grupo");
-            if(form) {
-                form.addEventListener("submit", async function(e) {
-                    e.preventDefault();
-                    const data = {
-                        nombre_grupo: document.getElementById("nombre_grupo").value,
-                        id_carrera: parseInt(document.getElementById("id_carrera").value)
-                    };
-                    
-                    try {
-                        const res = await fetch("http://localhost:5000/api/grupos/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(data)
-                        });
-                // determine create or update based on hidden id
-                const editIdEl = document.getElementById('id_grupo_edit');
-                const editId = editIdEl && editIdEl.value ? parseInt(editIdEl.value, 10) : null;
-                if (!editId) {
-                    if (res.ok) {
-                      const nuevo = await res.json();
-                      // Si el usuario seleccionó un profesor para tutor, intentar asignarlo
-                      const tutorSelect = document.getElementById('tutor_profesor');
-                      const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
-                      if (idProfesor && nuevo && nuevo.id_grupo) {
-                        try {
-                        const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ id_profesor: idProfesor, id_grupo: nuevo.id_grupo })
-                        });
-                        if (!assignRes.ok && assignRes.status === 409) {
-                          const err = await assignRes.json().catch(()=>({}));
-                          alert('Grupo creado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
-                        }
-                        } catch (e) {
-                        console.error('Error de red al asignar tutor:', e);
-                        alert('Grupo creado pero error de red al asignar tutor');
-                        }
-                      }
-                      modal.classList.add("hidden");
-                      this.reset();
-                      cargarGrupos();
-                    } else {
-                            const error = await res.json();
-                            alert(error.error || "Error al guardar grupo");
-                        }
-                } else {
-                  // Update flow: send PUT
-                  try {
-                    const putRes = await fetch(`http://localhost:5000/api/grupos/${editId}`, {
-                      method: 'PUT',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(data)
-                    });
-                    if (putRes.ok) {
-                      // After update, optionally assign tutor if selected
-                      const tutorSelect = document.getElementById('tutor_profesor');
-                      const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
-                      if (idProfesor) {
-                        try {
-                          const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ id_profesor: idProfesor, id_grupo: editId })
-                          });
-                          if (!assignRes.ok && assignRes.status === 409) {
-                            const err = await assignRes.json().catch(()=>({}));
-                            alert('Grupo actualizado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
-                          }
-                        } catch (e) {
-                          console.error('Error al asignar tutor tras update:', e);
-                        }
-                      }
-                      modal.classList.add('hidden');
-                      document.getElementById('form-grupo').reset();
-                      cargarGrupos();
-                    } else {
-                      const err = await putRes.json().catch(()=>({}));
-                      alert(err.error || 'Error al actualizar');
-                    }
-                  } catch (e) {
-                    console.error('Error en PUT grupo:', e);
-                    alert('Error de red al actualizar grupo');
-                  }
-                }
-                    } catch {
-                        alert("Error de red");
-                    }
+            const editIdEl = document.getElementById('id_grupo_edit');
+            const editId = editIdEl && editIdEl.value ? parseInt(editIdEl.value, 10) : null;
+
+            try {
+              if (editId) {
+                // Update flow: send PUT
+                const putRes = await fetch(`http://localhost:5000/api/grupos/${editId}`, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(data)
                 });
+
+                if (putRes.ok) {
+                  const tutorSelect = document.getElementById('tutor_profesor');
+                  const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
+
+                  try {
+                    // Siempre intenta eliminar la asignación anterior.
+                    // Si no existe, la API devolverá un 404, que podemos ignorar.
+                    const deleteRes = await fetch(`http://localhost:5000/api/tutorias/grupo/${editId}`, { method: 'DELETE' });
+
+                    if (!deleteRes.ok && deleteRes.status !== 404) {
+                      // Si la eliminación falla por una razón que no sea "no encontrado", informa del error.
+                      console.error('Error al intentar eliminar la tutoría anterior.');
+                    }
+
+                    if (idProfesor) {
+                      // Si se seleccionó un nuevo tutor, crea la nueva asignación.
+                      const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id_profesor: idProfesor, id_grupo: editId })
+                      });
+
+                      if (!assignRes.ok) {
+                        const err = await assignRes.json().catch(() => ({}));
+                        alert('Grupo actualizado, pero no se pudo asignar el nuevo tutor: ' + (err.error || 'Error desconocido'));
+                      }
+                    }
+                    // Si idProfesor es nulo, la eliminación fue suficiente.
+                  } catch (e) {
+                    console.error('Error al actualizar la tutoría:', e);
+                    alert('Grupo actualizado, pero hubo un error de red al gestionar la tutoría.');
+                  }
+
+                  modal.classList.add('hidden');
+                  document.getElementById('form-grupo').reset();
+                  cargarGrupos();
+                } else {
+                  const err = await putRes.json().catch(() => ({}));
+                  alert(err.error || 'Error al actualizar');
+                }
+              } else {
+                // Create flow: send POST
+                const res = await fetch("http://localhost:5000/api/grupos/", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                  const nuevo = await res.json();
+                  const tutorSelect = document.getElementById('tutor_profesor');
+                  const idProfesor = tutorSelect && tutorSelect.value ? parseInt(tutorSelect.value, 10) : null;
+                  if (idProfesor && nuevo && nuevo.id_grupo) {
+                    try {
+                      const assignRes = await fetch('http://localhost:5000/api/tutorias/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id_profesor: idProfesor, id_grupo: nuevo.id_grupo })
+                      });
+                      if (!assignRes.ok && assignRes.status === 409) {
+                        const err = await assignRes.json().catch(() => ({}));
+                        alert('Grupo creado pero no se pudo asignar el tutor: ' + (err.error || 'Ya tiene tutor'));
+                      }
+                    } catch (e) {
+                      console.error('Error de red al asignar tutor:', e);
+                      alert('Grupo creado pero error de red al asignar tutor');
+                    }
+                  }
+                  modal.classList.add("hidden");
+                  this.reset();
+                  cargarGrupos();
+                } else {
+                  const error = await res.json();
+                  alert(error.error || "Error al guardar grupo");
+                }
+              }
+            } catch {
+              alert("Error de red");
             }
           });
+        }
+      });
 
-          async function cargarGrupos() {
-            const tbody = document.querySelector("tbody");
-            tbody.innerHTML = "";
-            try {
-                const res = await fetch("http://localhost:5000/api/grupos/");
-                const grupos = await res.json();
-                if (grupos && grupos.length) {
-                    grupos.forEach(grupo => {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
+      async function cargarGrupos() {
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = "";
+        try {
+          const res = await fetch("http://localhost:5000/api/grupos/");
+          const grupos = await res.json();
+          if (grupos && grupos.length) {
+            grupos.forEach(grupo => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
                                 <td class="py-2 px-4">${grupo.nombre_grupo} - ${grupo.nombre_carrera}</td>
                                 <td class="py-2 px-4">
                                   <button onclick="editarGrupo(${grupo.id_grupo})" class="bg-yellow-400 text-white px-3 py-1 rounded mr-2">Editar</button>
                                   <button onclick="eliminarGrupo(${grupo.id_grupo})" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
                                 </td>
                             `;
-                            tbody.appendChild(tr);
-                        });
-                } else {
-                    tbody.innerHTML = "<tr><td colspan='2'>No se encontraron grupos</td></tr>";
-                }
-            } catch (e) {
-                tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
-            }
+              tbody.appendChild(tr);
+            });
+          } else {
+            tbody.innerHTML = "<tr><td colspan='2'>No se encontraron grupos</td></tr>";
+          }
+        } catch (e) {
+          tbody.innerHTML = "<tr><td colspan='2'>Error al cargar grupos</td></tr>";
+        }
+      }
+
+      // Abrir modal con datos para editar un grupo
+      async function editarGrupo(id) {
+        try {
+          // Cargar datos del grupo
+          const resGrupo = await fetch(`http://localhost:5000/api/grupos/${id}`);
+          if (!resGrupo.ok) throw new Error('No se encontró el grupo');
+          const grupo = await resGrupo.json();
+
+          // Cargar datos del tutor actual (si existe)
+          const resTutor = await fetch(`http://localhost:5000/api/tutorias/grupo/${id}`);
+          let idTutorActual = '';
+          if (resTutor.ok) {
+            const tutor = await resTutor.json();
+            idTutorActual = tutor.id_profesor;
           }
 
-          // Abrir modal con datos para editar un grupo
-          async function editarGrupo(id) {
-            try {
-              const res = await fetch(`http://localhost:5000/api/grupos/${id}`);
-              if (!res.ok) throw new Error('No se encontró grupo');
-              const grupo = await res.json();
-              document.getElementById('modal-title').textContent = 'Editar Grupo';
-              document.getElementById('id_grupo_edit').value = grupo.id_grupo;
-              document.getElementById('nombre_grupo').value = grupo.nombre_grupo;
-              document.getElementById('id_carrera').value = grupo.id_carrera;
-              // Si quieres mantener el tutor select, no lo tocamos aquí (se puede dejar en blanco o cargar el tutor actual en una mejora)
-              document.getElementById('modal-grupo').classList.remove('hidden');
-            } catch (e) {
-              console.error('Error al cargar grupo para editar:', e);
-              alert('No se pudo cargar el grupo para editar');
-            }
-          }
+          // Llenar el formulario
+          document.getElementById('modal-title').textContent = 'Editar Grupo';
+          document.getElementById('id_grupo_edit').value = grupo.id_grupo;
+          document.getElementById('nombre_grupo').value = grupo.nombre_grupo;
+          document.getElementById('id_carrera').value = grupo.id_carrera;
+          document.getElementById('tutor_profesor').value = idTutorActual; // Establecer el tutor actual
 
-          // Eliminar grupo
-          async function eliminarGrupo(id) {
-            if (!confirm('¿Eliminar este grupo? Esta acción no se puede deshacer.')) return;
-            try {
-              const res = await fetch(`http://localhost:5000/api/grupos/${id}`, { method: 'DELETE' });
-              if (res.ok) {
-                cargarGrupos();
-              } else {
-                const err = await res.json().catch(()=>({}));
-                alert(err.error || 'No se pudo eliminar el grupo');
-              }
-            } catch (e) {
-              console.error('Error al eliminar grupo:', e);
-              alert('Error de red al eliminar grupo');
-            }
-          }
+          document.getElementById('modal-grupo').classList.remove('hidden');
+        } catch (e) {
+          console.error('Error al cargar grupo para editar:', e);
+          alert('No se pudo cargar la información del grupo para editar.');
+        }
+      }
 
-          async function cargarProfesores() {
-            const select = document.getElementById('tutor_profesor');
-            if (!select) return;
-            select.innerHTML = '<option value="">No asignar tutor</option>';
-            try {
-              const res = await fetch('http://localhost:5000/api/profesores/');
-              if (!res.ok) throw new Error('Error al obtener profesores');
-              const profesores = await res.json();
-              profesores.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.id_profesor || p.id;
-                option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''} (${p.no_empleado || ''})`;
-                select.appendChild(option);
-              });
-            } catch (e) {
-              console.error('No se pudieron cargar profesores:', e);
-              select.innerHTML = '<option value="">Error al cargar profesores</option>';
-            }
+      // Eliminar grupo
+      async function eliminarGrupo(id) {
+        if (!confirm('¿Eliminar este grupo? Esta acción no se puede deshacer.')) return;
+        try {
+          const res = await fetch(`http://localhost:5000/api/grupos/${id}`, { method: 'DELETE' });
+          if (res.ok) {
+            cargarGrupos();
+          } else {
+            const err = await res.json().catch(() => ({}));
+            alert(err.error || 'No se pudo eliminar el grupo');
           }
-        </script>
-    </div>
-  </body>
+        } catch (e) {
+          console.error('Error al eliminar grupo:', e);
+          alert('Error de red al eliminar grupo');
+        }
+      }
+
+      async function cargarProfesores() {
+        const select = document.getElementById('tutor_profesor');
+        if (!select) return;
+        select.innerHTML = '<option value="">No asignar tutor</option>';
+        try {
+          const res = await fetch('http://localhost:5000/api/profesores/');
+          if (!res.ok) throw new Error('Error al obtener profesores');
+          const profesores = await res.json();
+          profesores.forEach(p => {
+            const option = document.createElement('option');
+            option.value = p.id_profesor || p.id;
+            option.textContent = `${p.nombre} ${p.ap_P || ''} ${p.ap_M || ''} (${p.no_empleado || ''})`;
+            select.appendChild(option);
+          });
+        } catch (e) {
+          console.error('No se pudieron cargar profesores:', e);
+          select.innerHTML = '<option value="">Error al cargar profesores</option>';
+        }
+      }
+
+      async function cargarCarreras() {
+        const select = document.getElementById('id_carrera');
+        if (!select) return;
+        select.innerHTML = '<option value="">Selecciona una carrera</option>'; // Limpiar opciones estáticas
+        try {
+          const res = await fetch('http://localhost:5000/api/carreras/');
+          if (!res.ok) throw new Error('Error al obtener carreras');
+          const carreras = await res.json();
+          carreras.forEach(carrera => {
+            const option = document.createElement('option');
+            option.value = carrera.id_carrera;
+            option.textContent = carrera.nombre_carrera;
+            select.appendChild(option);
+          });
+        } catch (e) {
+          console.error('No se pudieron cargar las carreras:', e);
+          select.innerHTML = '<option value="">Error al cargar carreras</option>';
+        }
+      }
+    </script>
+  </div>
+</body>
+
 </html>
